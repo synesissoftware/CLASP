@@ -1,0 +1,134 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "clasp.core"=..\..\projects\clasp.core\vc6\clasp.core.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "test.component.usage.resources.C"=..\component\test.component.usage.resources.C\vc6\test.component.usage.resources.C.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name clasp.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test.unit.clasp++"=".\test.unit.clasp++\vc6\test.unit.clasp++.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name clasp.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test.unit.custom_types"=.\test.unit.custom_types\vc6\test.unit.custom_types.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name clasp.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test.unit.main.exceptions"=.\test.unit.main.exceptions\vc6\test.unit.main.exceptions.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name clasp.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test.unit.main.programname.1"=.\test.unit.main.programname.1\vc6\test.unit.main.programname.1.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name clasp.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test.unit.parseapi.bitflags"=.\test.unit.parseapi.bitflags\vc6\test.unit.parseapi.bitflags.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name clasp.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test.unit.parseapi.findflagoroption"=.\test.unit.parseapi.findflagoroption\vc6\test.unit.parseapi.findflagoroption.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name clasp.core
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+
