@@ -50,11 +50,13 @@ clasp.vc9.sln
 *.lib
 *.ncb
 *.o
+*.???_obj
 *.obj
 *.opensdf
 *.opt
 *.out
 *.pch
+*.pdb
 *.scc
 *.sbr
 *.sdf
