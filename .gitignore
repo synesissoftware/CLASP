@@ -35,6 +35,7 @@ vc9/
 # files (by name)
 
 .svnignore
+.svnignore-at-root
 
 clasp.vc9.sln
 
