@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     13th September 2014
+ * Updated:     28th September 2015
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2008-2014, Matthew Wilson
+ * Copyright (c) 2008-2015, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -191,6 +191,11 @@ clasp_find_replacement_field_(
 
     for(i = 0; i != n; ++i)
     {
+        if(NULL == *fields[i])
+        {
+            continue;
+        }
+        else
         if(s_unknownIdentifier == *fields[i])
         {
             continue;
