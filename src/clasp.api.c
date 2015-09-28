@@ -4,7 +4,7 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     19th March 2015
+ * Updated:     28th Septembers 2015
  *
  * Home:        http://stlsoft.org/
  *
@@ -2268,23 +2268,36 @@ clasp_checkAllFlags(
         flags = &flags_;
     }
 
+    /* For every argument ... */
+
     { size_t i; for(i = 0; i != args->numFlags; ++i)
     {
         clasp_argument_t const* const arg = args->flags + i;
+
+        /* ... that is not used ... */
 
         if(!clasp_argumentIsUsed_(args, arg))
         {
             { size_t j; for(j = 0; CLASP_ARGTYPE_INVALID != aliases[j].type; ++j)
             {
+                /* ... see if there is a flag alias ... */
+
                 if(CLASP_ARGTYPE_FLAG == aliases[j].type)
                 {
+                    /* ... with a corresponding name ... */
+
                     if(0 == clasp_strcmp_(arg->resolvedName.ptr, aliases[j].mappedArgument))
                     {
-                        *flags |= aliases[j].bitFlags;
-
                         clasp_useArgument(args, arg);
 
-                        break;
+                        /* ... and a non-0 bitFlags member. */
+
+                        if(0 != aliases[j].bitFlags)
+                        {
+                            *flags |= aliases[j].bitFlags;
+
+                            break;
+                        }
                     }
                 }
             }}
