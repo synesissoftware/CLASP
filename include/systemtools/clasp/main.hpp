@@ -4,11 +4,11 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     23rd August 2015
+ * Updated:     23rd November 2016
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2010-2015, Matthew Wilson
+ * Copyright (c) 2010-2016, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MINOR     4
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_REVISION  1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      31
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_REVISION  2
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      32
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -330,7 +330,7 @@ invoke(
         STLSOFT_LEAD_VER >= 0x010a0113)
         programName = platformstl_ns_qual(get_executable_name_from_path)(argv[0]).ptr;
 # else
-        programName = argv[0]
+        programName = argv[0];
 # endif
     }
 
