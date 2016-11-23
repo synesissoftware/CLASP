@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     28th September 2015
+ * Updated:     24th November 2016
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2016, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -124,20 +124,6 @@ LoadStringA(
 /* /////////////////////////////////////////////////////////////////////////
  * Helper functions
  */
-
-static
-size_t
-clasp_count_aliases_(
-    clasp_alias_t const* aliases
-)
-{
-    size_t n = 0;
-
-    for(; CLASP_ARGTYPE_INVALID != aliases->type; ++aliases, ++n)
-    {}
-
-    return n;
-}
 
 static
 long
@@ -491,7 +477,7 @@ clasp_invoke_body_new_(
 )
 {
     clasp_alias_t       aliases_[CLASP_MAX_ALIASES_ + 1];
-    size_t const        n = clasp_count_aliases_(aliases);
+    size_t const        n = clasp_countAliases_(aliases);
 
     if( 0 != n &&
         n <= CLASP_MAX_ALIASES_)

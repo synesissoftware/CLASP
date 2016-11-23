@@ -75,9 +75,9 @@
 
 #define CLASP_VER_MAJOR         0
 #define CLASP_VER_MINOR         11
-#define CLASP_VER_REVISION      4
+#define CLASP_VER_REVISION      5
 
-#define CLASP_VER               0x000b0104
+#define CLASP_VER               0x000b0105
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
