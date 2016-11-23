@@ -477,7 +477,7 @@ clasp_invoke_body_new_(
 )
 {
     clasp_alias_t       aliases_[CLASP_MAX_ALIASES_ + 1];
-    size_t const        n = clasp_countAliases_(aliases);
+    size_t const        n = clasp_countAliases(aliases);
 
     if( 0 != n &&
         n <= CLASP_MAX_ALIASES_)
