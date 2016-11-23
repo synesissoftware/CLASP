@@ -4,11 +4,11 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     23rd November 2016
+ * Updated:     24th November 2016
  *
  * Home:        http://synesis.com.au/software
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2016, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,8 +55,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    8
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     67
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 3
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     68
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -75,9 +75,9 @@
 
 #define CLASP_VER_MAJOR         0
 #define CLASP_VER_MINOR         11
-#define CLASP_VER_REVISION      3
+#define CLASP_VER_REVISION      4
 
-#define CLASP_VER               0x000b0103
+#define CLASP_VER               0x000b0104
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes

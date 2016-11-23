@@ -4,11 +4,11 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     28th Septembers 2015
+ * Updated:     24th Septembers 2016
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2016, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -2429,10 +2429,11 @@ CLASP_CALL(size_t) clasp_countAliases(clasp_alias_t const* aliases)
 {
     size_t n = 0;
 
-    CLASP_ASSERT(NULL != aliases);
-
-    for(; CLASP_ARGTYPE_INVALID != aliases->type; ++aliases, ++n)
-    {}
+    if(NULL != aliases)
+    {
+        for(; CLASP_ARGTYPE_INVALID != aliases->type; ++aliases, ++n)
+        {}
+    }
 
     return n;
 }
