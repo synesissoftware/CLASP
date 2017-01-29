@@ -4,7 +4,7 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     24th Septembers 2016
+ * Updated:     19th October 2016
  *
  * Home:        http://stlsoft.org/
  *
@@ -2429,11 +2429,10 @@ CLASP_CALL(size_t) clasp_countAliases(clasp_alias_t const* aliases)
 {
     size_t n = 0;
 
-    if(NULL != aliases)
-    {
-        for(; CLASP_ARGTYPE_INVALID != aliases->type; ++aliases, ++n)
-        {}
-    }
+    CLASP_ASSERT(NULL != aliases);
+
+    for(; CLASP_ARGTYPE_INVALID != aliases->type; ++aliases, ++n)
+    {}
 
     return n;
 }
