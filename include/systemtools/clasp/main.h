@@ -4,7 +4,7 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     21st August 2015
+ * Updated:     13th October 2015
  *
  * Home:        http://stlsoft.org/
  *
@@ -52,9 +52,9 @@
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MAJOR     1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MINOR     0
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_REVISION  7
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      10
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MINOR     1
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_REVISION  1
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      11
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -74,6 +74,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef CLASP_USE_WIDE_STRINGS
+# include <wchar.h>
+#endif /* CLASP_USE_WIDE_STRINGS */
+
 /* /////////////////////////////////////////////////////////////////////////
  * Functions
  */
@@ -82,9 +86,9 @@ static
 int
 clasp_main_invoke(
     int                                 argc
-,   char**                              argv
+,   clasp_char_t**                      argv
 ,   int (*                              pfnMain)(clasp_arguments_t const* args)
-,   char const*                         programName
+,   clasp_char_t const*                 programName
 ,   clasp_alias_t const*                aliases
 ,   unsigned                            flags
 ,   clasp_diagnostic_context_t const*   ctxt
@@ -92,7 +96,7 @@ clasp_main_invoke(
 {
     clasp_arguments_t const* args;
 
-    int r = clasp_parseArguments(flags, argc, (char const* const*)argv, aliases, ctxt, &args);
+    int r = clasp_parseArguments(flags, argc, (clasp_char_t const* const*)argv, aliases, ctxt, &args);
 
     if(r != 0)
     {
@@ -103,7 +107,11 @@ clasp_main_invoke(
 # endif
 #endif
 
+#ifdef CLASP_USE_WIDE_STRINGS
+        wchar_t const* const e = _wcserror(r);
+#else /* ? CLASP_USE_WIDE_STRINGS */
         char const* const e = strerror(r);
+#endif /* CLASP_USE_WIDE_STRINGS */
 
 #if defined(_MSC_VER)
 # if _MSC_VER >= 1400
@@ -113,7 +121,7 @@ clasp_main_invoke(
 
         if(NULL == programName)
         {
-            programName = "process";
+            programName = CLASP_LITERAL_STRING("process");
         }
 
         /* Diagnostic logging */

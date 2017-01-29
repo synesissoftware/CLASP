@@ -4,11 +4,11 @@
  * Purpose:     C++ layer for the CLASP library.
  *
  * Created:     31st July 2008
- * Updated:     13th July 2015
+ * Updated:     27th January 2017
  *
  * Home:        http://synesis.com.au/software
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2017, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,9 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MINOR    7
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     49
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MINOR    8
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_REVISION 1
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     50
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -67,6 +68,9 @@
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
+#if _STLSOFT_VER < 0x010982ff
+# error This requires STLSoft 1.9.130 or later
+#endif
 #ifdef CLASP_USE_WIDE_STRINGS
 # include <stlsoft/conversion/char_conversions.hpp>
 #endif /* CLASP_USE_WIDE_STRINGS */
@@ -75,6 +79,12 @@
 #include <stlsoft/meta/is_numeric_type.hpp>
 #include <stlsoft/meta/is_pointer_type.hpp>
 #include <stlsoft/shims/access/string/std/c_string.h>
+#if 0
+#elif 0 ||\
+      defined(STLSOFT_COMPILER_IS_GCC) || \
+      0
+# include <stlsoft/shims/access/string.hpp>
+#endif
 
 #include <stdexcept>
 #include <string>

@@ -188,6 +188,7 @@ static void test_1_0()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(1, args->argc);
 
+
         clasp::releaseArguments(args);
     }
 }
@@ -218,6 +219,7 @@ static void test_1_1()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(2, args->argc);
+
 
         clasp::releaseArguments(args);
     }
@@ -251,6 +253,7 @@ static void test_1_2()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
 
+
         clasp::releaseArguments(args);
     }
 }
@@ -282,6 +285,7 @@ static void test_1_3()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
+
 
         clasp::releaseArguments(args);
     }
@@ -315,6 +319,7 @@ static void test_1_4()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(4, args->argc);
+
 
         clasp::releaseArguments(args);
     }
@@ -350,6 +355,7 @@ static void test_1_5()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
+
 
         clasp::releaseArguments(args);
     }
@@ -403,6 +409,7 @@ static void test_1_6()
         clasp::check_flag(args, "--y-argument", &flags, TEST_1_6_DOUBLE_Y, 0);
 
         XTESTS_TEST_INTEGER_EQUAL(TEST_1_6_SINGLE_X | TEST_1_6_SINGLE_Y | TEST_1_6_DOUBLE_X, flags);
+
 
         clasp::releaseArguments(args);
     }
@@ -499,6 +506,7 @@ static void test_1_10()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
+
 
         clasp::releaseArguments(args);
     }
@@ -598,6 +606,7 @@ static void test_1_15()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
 
+
         clasp::releaseArguments(args);
     }
 }
@@ -675,6 +684,7 @@ static void test_2_01()
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
+
         clasp::releaseArguments(args);
     }
 }
@@ -738,6 +748,7 @@ static void test_2_02(void)
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
+
         clasp::releaseArguments(args);
     }
 }
@@ -799,6 +810,7 @@ static void test_2_03(void)
         XTESTS_TEST_BOOLEAN_FALSE(v);
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
+
 
         clasp::releaseArguments(args);
     }
@@ -863,6 +875,7 @@ static void test_2_04(void)
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
+
         clasp::releaseArguments(args);
     }
 }
@@ -924,6 +937,7 @@ static void test_2_05(void)
         XTESTS_TEST_BOOLEAN_FALSE(v);
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
+
 
         clasp::releaseArguments(args);
     }

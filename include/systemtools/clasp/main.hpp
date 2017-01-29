@@ -4,11 +4,11 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     23rd November 2016
+ * Updated:     26th January 2017
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2010-2016, Matthew Wilson
+ * Copyright (c) 2010-2017, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MINOR     4
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_REVISION  2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      32
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_REVISION  3
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      33
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -149,13 +149,13 @@ inline
 int
 invoke_(
     int                                 argc
-,   char const* const*                  argv
+,   clasp_char_t const* const*          argv
 ,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
-,   char const*                         programName
+,   clasp_char_t const*                 programName
 ,   clasp::alias_t const*               aliases
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt
-,   char const*                         usageHelpSuffix
+,   clasp_char_t const*                 usageHelpSuffix
 )
 {
     /* Using declarations */
@@ -288,13 +288,13 @@ inline
 int
 invoke(
     int                                 argc
-,   char const* const*                  argv
+,   clasp_char_t const* const*          argv
 ,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
-,   char const*                         programName
+,   clasp_char_t const*                 programName
 ,   clasp::alias_t const*               aliases
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
-,   char const*                         usageHelpSuffix =   NULL
+,   clasp_char_t const*                 usageHelpSuffix =   NULL
 )
 {
     if( NULL != programName &&

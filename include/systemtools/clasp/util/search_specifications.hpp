@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        systemtools/util/search_specifications.hpp
+ * File:        systemtools/clasp/util/search_specifications.hpp
  *
  * Purpose:     Utility class for processing search specifications.
  *
  * Created:     20th May 2010
- * Updated:     21st July 2015
+ * Updated:     1st September 2015
  *
  * Home:        http://stlsoft.org/
  *
@@ -39,43 +39,43 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-/** \file systemtools/clasp.hpp
+/** \file systemtools/clasp/util/search_specifications.hpp
  *
  * \brief [C++-only] Utility class for processing search specifications.
  */
 
-#ifndef SYSTEMTOOLS_INCL_SYSTEMTOOLS_UTIL_HPP_SEARCH_SPECIFICATIONS
-#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_UTIL_HPP_SEARCH_SPECIFICATIONS
+#ifndef SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS
+#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS
 
 /* /////////////////////////////////////////////////////////////////////////
  * Version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR     1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR     6
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION  3
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      15
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR     1
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR     6
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION  4
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      16
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
  * Includes
  */
 
-/* CLASP Header Files */
+/* CLASP header files */
 #include <systemtools/clasp/clasp.hpp>
 
-/* recls Header Files */
+/* recls header files */
 #include <recls/recls.hpp>
 
-/* STLSoft Header Files */
+/* STLSoft header files */
 #include <platformstl/filesystem/path.hpp>
 #include <platformstl/filesystem/filesystem_traits.hpp>
 
 #include <stlsoft/shims/access/string/fwd.h>
 #include <stlsoft/shims/access/string/std/basic_string.hpp>
 
-/* Standard Header Files */
+/* Standard header files */
 #include <algorithm>
 #include <string>
 #include <utility>
@@ -250,9 +250,12 @@ private:
 
     element_is_::element_type type = element_is_::elementIsUnknown;
 
+    static clasp_char_t const   dot1[]  =   { '.', '\0' };
+    static clasp_char_t const   dot2[]  =   { '.', '.', '\0' };
+
     // Is dots directory?
-    if( "." == element ||
-        ".." == element)
+    if( dot1 == element ||
+        dot2 == element)
     {
       type = element_is_::elementIsDirectory;
     }
@@ -481,6 +484,6 @@ private: // Fields
 
 /* ////////////////////////////////////////////////////////////////////// */
 
-#endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_UTIL_HPP_SEARCH_SPECIFICATIONS */
+#endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS */
 
 /* ///////////////////////////// end of file //////////////////////////// */
