@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     19th March 2015
+ * Updated:     19th October 2016
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2009-2015, Synesis Software Pty Ltd.
+ *              Copyright (c) 2009-2016, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -91,6 +91,13 @@ namespace
     static void test_2_10(void);
     static void test_2_11(void);
     static void test_2_12(void);
+    static void test_2_13(void);
+    static void test_2_14(void);
+    static void test_2_15(void);
+    static void test_2_16(void);
+    static void test_2_17(void);
+    static void test_2_18(void);
+    static void test_2_19(void);
 
 } // anonymous namespace
 
@@ -144,6 +151,13 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_2_10);
         XTESTS_RUN_CASE(test_2_11);
         XTESTS_RUN_CASE(test_2_12);
+        XTESTS_RUN_CASE(test_2_13);
+        XTESTS_RUN_CASE(test_2_14);
+        XTESTS_RUN_CASE(test_2_15);
+        XTESTS_RUN_CASE(test_2_16);
+        XTESTS_RUN_CASE(test_2_17);
+        XTESTS_RUN_CASE(test_2_18);
+        XTESTS_RUN_CASE(test_2_19);
 
         XTESTS_PRINT_RESULTS();
 
@@ -949,25 +963,395 @@ static void test_2_06(void)
 
 static void test_2_07(void)
 {
+    static clasp::alias_t const Aliases[] =
+    {
+        CLASP_OPTION("-m", "--multi-opt", NULL, NULL),
+
+        CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    char* argv[] =
+    {
+        "arg0",
+        "-m",
+        "v1",
+        "--multi-opt=v2",
+        "-m",
+        "v3",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+
+    if(0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        char const* v1;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--multi-opt", &v1, NULL));
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v1", v1);
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--multi-opt", &v1, NULL));
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v1", v1);
+
+        char const* v2;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--multi-opt", &v2, NULL));
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v2", v2);
+
+        char const* v3;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--multi-opt", &v3, NULL));
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v3", v3);
+
+        char const* v_;
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--multi-opt", &v_, NULL));
+
+
+        clasp::releaseArguments(args);
+    }
 }
 
 static void test_2_08(void)
 {
+    static clasp::alias_t const Aliases[] =
+    {
+        CLASP_OPTION("-l", "--length", NULL, NULL),
+
+        CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    char* argv[] =
+    {
+        "arg0",
+        "--length=1",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+
+    if(0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        int         length_i;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_i, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(1, length_i);
+
+        unsigned    length_u;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_u, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(1u, length_u);
+
+        size_t      length_s;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_s, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(1u, length_s);
+
+
+        clasp::releaseArguments(args);
+    }
 }
 
 static void test_2_09(void)
 {
+    static clasp::alias_t const Aliases[] =
+    {
+        CLASP_OPTION("-l", "--length", NULL, NULL),
+
+        CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    char* argv[] =
+    {
+        "arg0",
+        "--length=1",
+        "--length=2",
+        "--length=3",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+
+    if(0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        int         length_1;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(1, length_1);
+
+        int         length_2;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(2, length_2);
+
+        int         length_3;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(3, length_3);
+
+        int         v_;
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+
+
+        clasp::releaseArguments(args);
+    }
 }
 
 static void test_2_10(void)
 {
+    static clasp::alias_t const Aliases[] =
+    {
+        CLASP_OPTION("-l", "--length", NULL, NULL),
+
+        CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    char* argv[] =
+    {
+        "arg0",
+        "--length=1",
+        "--length=2",
+        "--length=3",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+
+    if(0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        unsigned    length_1;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(1u, length_1);
+
+        unsigned    length_2;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(2u, length_2);
+
+        unsigned    length_3;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(3u, length_3);
+
+        unsigned    v_;
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+
+
+        clasp::releaseArguments(args);
+    }
 }
 
 static void test_2_11(void)
 {
+    static clasp::alias_t const Aliases[] =
+    {
+        CLASP_OPTION("-l", "--length", NULL, NULL),
+
+        CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    char* argv[] =
+    {
+        "arg0",
+        "--length=1.1",
+        "--length=2.2",
+        "--length=3.3",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+
+    if(0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        double  length_1;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_FLOATINGPOINT_EQUAL(1.1, length_1);
+
+        double  length_2;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_FLOATINGPOINT_EQUAL(2.2, length_2);
+
+        double  length_3;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_FLOATINGPOINT_EQUAL(3.3, length_3);
+
+        double  v_;
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+
+
+        clasp::releaseArguments(args);
+    }
 }
 
 static void test_2_12(void)
+{
+    static clasp::alias_t const Aliases[] =
+    {
+        CLASP_OPTION("-l", "--length", NULL, NULL),
+
+        CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    char* argv[] =
+    {
+        "arg0",
+        "--length=1",
+        "--length=2",
+        "--length=3",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+
+    if(0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        size_t  length_1;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(1u, length_1);
+
+        size_t  length_2;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(2u, length_2);
+
+        size_t  length_3;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(3u, length_3);
+
+        size_t  v_;
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+
+
+        clasp::releaseArguments(args);
+    }
+}
+
+static void test_2_13(void)
+{
+    static clasp::alias_t const Aliases[] =
+    {
+        CLASP_OPTION("-l", "--length", NULL, NULL),
+
+        CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    char* argv[] =
+    {
+        "arg0",
+        "--length=1",
+        "--length=2",
+        "--length=3",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+
+    if(0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        long        length_1;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(1, length_1);
+
+        long        length_2;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(2, length_2);
+
+        long        length_3;
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_INTEGER_EQUAL(3, length_3);
+
+        long        v_;
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+
+
+        clasp::releaseArguments(args);
+    }
+}
+
+static void test_2_14(void)
+{
+}
+
+static void test_2_15(void)
+{
+}
+
+static void test_2_16(void)
+{
+}
+
+static void test_2_17(void)
+{
+}
+
+static void test_2_18(void)
+{
+}
+
+static void test_2_19(void)
 {
 }
 

@@ -54,9 +54,9 @@
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    8
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 8
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     73
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    9
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 1
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     74
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -74,10 +74,10 @@
  */
 
 #define CLASP_VER_MAJOR         0
-#define CLASP_VER_MINOR         11
-#define CLASP_VER_REVISION      10
+#define CLASP_VER_MINOR         13
+#define CLASP_VER_REVISION      1
 
-#define CLASP_VER               0x000b0aff
+#define CLASP_VER               0x000d01ff
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -871,6 +871,20 @@ CLASP_CALL(void)
 clasp_useArgument(
     clasp_arguments_t const*  args
 ,   clasp_argument_t const*   usedArg
+);
+
+/** Indicates whether the given argument is marked as used.
+ *
+ * \retval 0 The argument is not marked as used
+ * \retval !0 The argument is marked as used
+ *
+ * \pre NULL != args
+ * \pre NULL != usedArg
+ */
+CLASP_CALL(int)
+clasp_argumentIsUsed(
+    clasp_arguments_t const*    args
+,   clasp_argument_t const*     arg
 );
 
 /** Indicates whether a given set of command-line arguments contains the

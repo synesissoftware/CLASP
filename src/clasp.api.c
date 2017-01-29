@@ -2196,6 +2196,15 @@ int clasp_useArgument_(
     return wasUsed;
 }
 
+CLASP_CALL(int)
+clasp_argumentIsUsed(
+    clasp_arguments_t const*    args
+,   clasp_argument_t const*     arg
+)
+{
+    return clasp_argumentIsUsed_(args, arg);
+}
+
 int clasp_argumentIsUsed_(
     clasp_arguments_t const*    args
 ,   clasp_argument_t const*     arg
