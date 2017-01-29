@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage (FILE) facilities.
  *
  * Created:     4th June 2008
- * Updated:     25th November 2016
+ * Updated:     1st August 2015
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2008-2016, Matthew Wilson
+ * Copyright (c) 2008-2015, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -463,8 +463,6 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
         info_.usage = CLASP_LITERAL_("[ ... options ... ] <arg1> [ ... <argN>]");
 
         clasp_show_header_by_FILE(ctxt, &info_, aliases);
-
-        return;
     }
 
     clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->summary);
