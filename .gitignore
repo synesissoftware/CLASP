@@ -6,6 +6,7 @@
 _internal/
 
 bin/
+ipch/
 lib/
 
 include/shwild/
@@ -44,6 +45,7 @@ clasp.vc9.sln
 *~
 *.a
 *.app
+*.aps
 *.dll
 *.dylib
 *.exe
@@ -58,6 +60,7 @@ clasp.vc9.sln
 *.out
 *.pch
 *.pdb
+*.rar
 *.scc
 *.sbr
 *.sdf
@@ -65,4 +68,5 @@ clasp.vc9.sln
 *.suo
 *.vcproj.user
 *.vcxproj.user
+*.zip
 
