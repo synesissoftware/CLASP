@@ -28,7 +28,7 @@
 #include <string.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Compatibility
+ * compatibility
  */
 
 #if defined(_MSC_VER) && \

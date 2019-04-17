@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test component header file include(s)
+ * test component header file include(s)
  */
 
 #include <systemtools/clasp/clasp.h>
@@ -39,7 +39,7 @@
 #include <string.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Compatibility
+ * compatibility
  */
 
 #if defined(_MSC_VER) && \
@@ -49,7 +49,7 @@
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
- * Forward declarations
+ * forward declarations
  */
 
 static void test_1_0(void);
@@ -74,7 +74,7 @@ static void test_1_18(void);
 static void test_1_19(void);
 
 /* /////////////////////////////////////////////////////////////////////////
- * Main
+ * main
  */
 
 int main(int argc, char **argv)
@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test function implementations
+ * test function implementations
  */
 
 static void test_1_0()

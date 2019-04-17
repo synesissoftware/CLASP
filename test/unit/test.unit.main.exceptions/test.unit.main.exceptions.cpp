@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test component header file include(s)
+ * test component header file include(s)
  */
 
 static char const* Test_programName;
@@ -59,7 +59,7 @@ static FILE* Test_stderr;
 #include <stdlib.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Forward declarations
+ * forward declarations
  */
 
 namespace
@@ -89,7 +89,7 @@ namespace
 } // anonymous namespace
 
 /* /////////////////////////////////////////////////////////////////////////
- * Main
+ * main
  */
 
 namespace
@@ -147,7 +147,7 @@ int main(int argc, char **argv)
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test function implementations
+ * test function implementations
  */
 
 namespace

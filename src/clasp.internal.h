@@ -54,7 +54,7 @@
 #include <string.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Language agnosticism
+ * language agnosticism
  */
 
 #ifndef stlsoft_static_cast
@@ -84,7 +84,7 @@
 #endif /* __cplusplus */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Diagnostics and contract enforcement
+ * diagnostics and contract enforcement
  */
 
 #ifndef CLASP_ASSERT
@@ -119,7 +119,7 @@ clasp_diagnostic_context_from_args_(
 );
 
 /* /////////////////////////////////////////////////////////////////////////
- * Memory
+ * memory
  */
 
 void* clasp_malloc_(clasp_diagnostic_context_t const* ctxt, size_t cb);
@@ -131,7 +131,7 @@ void* CLASP_CALLCONV clasp_stock_realloc_(void* context, void* pv, size_t cb);
 void CLASP_CALLCONV clasp_stock_free_(void* context, void* pv);
 
 /* /////////////////////////////////////////////////////////////////////////
- * Argument-control
+ * argument-control
  */
 
 /*
@@ -161,7 +161,7 @@ int clasp_useArgument_(
 );
 
 /* /////////////////////////////////////////////////////////////////////////
- * Character encoding abstraction
+ * character encoding abstraction
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
@@ -187,7 +187,7 @@ int clasp_useArgument_(
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
- * String
+ * string
  */
 
 clasp_char_t* clasp_strdup_(clasp_diagnostic_context_t const* ctxt, clasp_char_t const* s);

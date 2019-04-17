@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Preprocessor feature control and compatibility
+ * preprocessor feature control and compatibility
  */
 
 #ifndef _WIN32
@@ -29,7 +29,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test component header file include(s)
+ * test component header file include(s)
  */
 
 #include <systemtools/clasp/clasp.h>
@@ -60,7 +60,7 @@
 #endif /* _MSC_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Forward declarations
+ * forward declarations
  */
 
 static void test_header_with_LLLLL(void);
@@ -123,7 +123,7 @@ static int teardown(void* param);
 static void* setupParam = NULL;
 
 /* /////////////////////////////////////////////////////////////////////////
- * Main
+ * main
  */
 
 static
@@ -225,7 +225,7 @@ int main_(int argc, char **argv)
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test function implementations
+ * test function implementations
  */
 
 static int setup(void* param)

@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test component header file include(s)
+ * test component header file include(s)
  */
 
 #include <systemtools/clasp/util/searchspecs.h>
@@ -48,7 +48,7 @@
 #endif /* _MSC_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Forward declarations
+ * forward declarations
  */
 
 static void test_1_0(void);
@@ -107,7 +107,7 @@ static int teardown(void* param);
 static void* setupParam = NULL;
 
 /* /////////////////////////////////////////////////////////////////////////
- * Main
+ * main
  */
 
 static
@@ -201,7 +201,7 @@ int main_(int argc, char **argv)
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test function implementations
+ * test function implementations
  */
 
 static int setup(void* param)
@@ -524,7 +524,7 @@ static void test_1_49()
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test component source file include(s)
+ * test component source file include(s)
  */
 
 #include <../src/searchspecs/searchspecs.c>

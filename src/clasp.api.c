@@ -70,7 +70,7 @@
 #include <stdlib.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Notes
+ * notes
  */
 
 /*
@@ -2431,7 +2431,7 @@ clasp_checkValue(
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Output API
+ * output API
  */
 
 CLASP_CALL(size_t) clasp_countAliases(clasp_alias_t const* aliases)

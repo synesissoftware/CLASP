@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test component header file include(s)
+ * test component header file include(s)
  */
 
 #include <systemtools/clasp/clasp.hpp>
@@ -39,7 +39,7 @@
 #include <string.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Compatibility
+ * compatibility
  */
 
 #if defined(_MSC_VER) && \
@@ -49,7 +49,7 @@
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
- * Forward declarations
+ * forward declarations
  */
 
 static void test_parse_Colour();
@@ -74,7 +74,7 @@ static void test_1_18();
 static void test_1_19();
 
 /* /////////////////////////////////////////////////////////////////////////
- * Main
+ * main
  */
 
 int main(int argc, char **argv)
@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Custom types
+ * custom types
  */
 
 enum Colour
@@ -148,7 +148,7 @@ parse_Colour(
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test function implementations
+ * test function implementations
  */
 
 using ::clasp::arguments_t;

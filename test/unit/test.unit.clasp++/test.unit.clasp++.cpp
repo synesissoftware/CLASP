@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test component header file include(s)
+ * test component header file include(s)
  */
 
 #include <systemtools/clasp/clasp.hpp>
@@ -40,7 +40,7 @@
 #include <stdlib.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Compatibility
+ * compatibility
  */
 
 #if defined(_MSC_VER) && \
@@ -51,7 +51,7 @@
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
- * Forward declarations
+ * forward declarations
  */
 
 namespace
@@ -102,7 +102,7 @@ namespace
 } // anonymous namespace
 
 /* /////////////////////////////////////////////////////////////////////////
- * Main
+ * main
  */
 
 int main(int argc, char **argv)
@@ -168,7 +168,7 @@ int main(int argc, char **argv)
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Test function implementations
+ * test function implementations
  */
 
 namespace

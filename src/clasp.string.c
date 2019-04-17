@@ -54,7 +54,7 @@
 #include <string.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Compatibility
+ * compatibility
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS

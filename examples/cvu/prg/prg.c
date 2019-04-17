@@ -29,7 +29,7 @@
 #include <string.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Compatibility
+ * compatibility
  */
 
 #if defined(_MSC_VER) && \
@@ -39,7 +39,7 @@
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
- * Globals
+ * globals
  */
 
 static clasp_alias_t const ALIASES[] =
