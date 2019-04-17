@@ -4,11 +4,11 @@
  * Purpose:     CLASP string facilities.
  *
  * Created:     4th June 2008
- * Updated:     21st August 2015
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,7 +45,7 @@
 #define _CRT_NON_CONFORMING_WCSTOK
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include "clasp.internal.h"
@@ -64,7 +64,7 @@
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////
- * Helper functions
+ * helper functions
  */
 
 clasp_char_t*
@@ -324,3 +324,4 @@ clasp_strtok_wblank_r_(
  */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -4,11 +4,11 @@
  * Purpose:     CLASP diagnostics facilities.
  *
  * Created:     4th June 2008
- * Updated:     27th January 2012
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2012, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include "clasp.internal.h"
@@ -50,7 +50,7 @@
 #include <string.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Helper functions
+ * helper functions
  */
 
 static
@@ -167,3 +167,4 @@ clasp_diagnostic_context_t const* clasp_verify_context_(clasp_diagnostic_context
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

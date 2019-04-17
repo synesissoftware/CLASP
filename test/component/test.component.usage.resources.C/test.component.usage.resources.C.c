@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.component.usage.resources project.
  *
  * Created:     7th March 2012
- * Updated:     26th September 2014
+ * Updated:     18th April 2019
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2012-2014, Synesis Software Pty Ltd.
+ *              Copyright (c) 2012-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -37,7 +37,7 @@
 #include "resource.h"
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* SystemTools::CLASP header files */
@@ -1374,3 +1374,4 @@ static void test_1_49()
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

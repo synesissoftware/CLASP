@@ -4,11 +4,11 @@
  * Purpose:     Implementation file for the prg example project.
  *
  * Created:     8th December 2011
- * Updated:     26th September 2014
+ * Updated:     18th April 2019
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2011-2014, Synesis Software Pty Ltd.
+ *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -17,7 +17,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* SystemTools::CLASP header files */
@@ -174,3 +174,4 @@ int main(int argc, char** argv)
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

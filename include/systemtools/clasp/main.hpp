@@ -4,11 +4,11 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     26th January 2017
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2017, Matthew Wilson
+ * Copyright (c) 2010-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,18 +48,18 @@
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_HPP_MAIN
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MINOR     4
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_REVISION  3
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      33
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      34
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #ifndef __cplusplus
@@ -106,7 +106,7 @@
 #include <stdlib.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Namespace
+ * namespace
  */
 
 namespace clasp
@@ -115,7 +115,7 @@ namespace main
 {
 
 /* /////////////////////////////////////////////////////////////////////////
- * Typedefs
+ * typedefs
  */
 
 #ifdef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
@@ -133,11 +133,11 @@ namespace main
 #endif /* SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Typedefs
+ * typedefs
  */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Implementation functions
+ * implementation functions
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
@@ -243,7 +243,7 @@ invoke_(
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Functions
+ * functions
  */
 
 /** Parses the command-line (specified in \c argc and \c argv) and invokes
@@ -343,14 +343,21 @@ invoke(
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Namespace
+ * namespace
  */
 
 } /* namespace main */
 } /* namespace clasp */
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_HPP_MAIN */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

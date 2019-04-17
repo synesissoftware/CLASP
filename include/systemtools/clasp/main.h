@@ -4,11 +4,11 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     13th October 2015
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2015, Matthew Wilson
+ * Copyright (c) 2010-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,18 +47,18 @@
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_MAIN
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MINOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_REVISION  1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      11
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      12
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #ifdef __cplusplus
@@ -79,7 +79,7 @@
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Functions
+ * functions
  */
 
 static
@@ -144,8 +144,15 @@ clasp_main_invoke(
     }
 }
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_MAIN */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

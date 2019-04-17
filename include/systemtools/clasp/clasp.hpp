@@ -4,11 +4,11 @@
  * Purpose:     C++ layer for the CLASP library.
  *
  * Created:     31st July 2008
- * Updated:     27th January 2017
+ * Updated:     18th April 2019
  *
- * Home:        http://synesis.com.au/software
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2017, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,18 +48,18 @@
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_HPP_CLASP
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MINOR    9
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     55
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     57
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* CLASP header files */
@@ -89,20 +89,20 @@
 #include <string>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Namespace
+ * namespace
  */
 
 namespace clasp
 {
 
 /* /////////////////////////////////////////////////////////////////////////
- * Typedefs
+ * typedefs
  */
 
 typedef std::basic_string<clasp_char_t>     clasp_string_t;
 
 /* /////////////////////////////////////////////////////////////////////////
- * Exception classes
+ * exception classes
  */
 
 /// Root class for all CLASP exceptions
@@ -245,17 +245,19 @@ public: // Construction
 };
 
 /* /////////////////////////////////////////////////////////////////////////
- * Exceptions implementation
+ * exceptions implementation
  */
 
-inline /* virtual */ clasp_exception::~clasp_exception() stlsoft_throw_0() /* = 0 */
+inline /* virtual */
+clasp_exception::~clasp_exception() stlsoft_throw_0() /* = 0 */
 {}
 
-inline /* virtual */ argument_exception::~argument_exception() stlsoft_throw_0() /* = 0 */
+inline /* virtual */
+argument_exception::~argument_exception() stlsoft_throw_0() /* = 0 */
 {}
 
 /* /////////////////////////////////////////////////////////////////////////
- * Implementation
+ * implementation
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
@@ -2447,12 +2449,18 @@ verify_all_options_used(
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * Namespace
+ * namespace
  */
 
 } /* namespace clasp */
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_HPP_CLASP */
 

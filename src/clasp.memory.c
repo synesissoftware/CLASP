@@ -4,11 +4,11 @@
  * Purpose:     CLASP memory facilities.
  *
  * Created:     4th June 2008
- * Updated:     6th December 2011
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2011, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include "clasp.internal.h"
@@ -47,7 +47,7 @@
 #include <stdlib.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Helper functions
+ * helper functions
  */
 
 void* CLASP_CALLCONV clasp_stock_malloc_(void* context, size_t cb)
@@ -89,3 +89,4 @@ void clasp_free_(clasp_diagnostic_context_t const* ctxt, void* pv)
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

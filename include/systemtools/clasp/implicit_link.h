@@ -4,11 +4,11 @@
  * Purpose:     Implicit linking for CLASP
  *
  * Created:     31st July 2008
- * Updated:     21st August 2015
+ * Updated:     18th April 2019
  *
- * Home:        http://systemtools.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2015, Matthew Wilson and Synesis Software
+ * Copyright (c) 2008-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,18 +48,18 @@
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_IMPLICIT_LINK
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_IMPLICIT_LINK_MAJOR    1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_IMPLICIT_LINK_MINOR    4
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_IMPLICIT_LINK_REVISION 1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_IMPLICIT_LINK_EDIT     13
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_IMPLICIT_LINK_EDIT     14
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #ifndef SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
@@ -67,14 +67,14 @@
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Macros and definitions
+ * macros and definitions
  */
 
 #define CLASP_STRINGIZE_(x)     #x
 #define CLASP_STRINGIZE(x)      CLASP_STRINGIZE_(x)
 
 /* /////////////////////////////////////////////////////////////////////////
- * Architecture discrimination
+ * architecture discrimination
  */
 
 #ifdef CLASP_ARCH_IS_X86_
@@ -102,7 +102,7 @@
 #endif /* _M_?? */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Implicit linking
+ * implicit linking
  */
 
 #if defined(_WIN32) || \
@@ -346,8 +346,15 @@
 
 #endif /* Win-32 || Win-64 */
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_IMPLICIT_LINK */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

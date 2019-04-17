@@ -4,13 +4,13 @@
  * Purpose:     Implicit link file for the test.unit.main.programname.1 project.
  *
  * Created:     9th March 2013
- * Updated:     12th September 2014
+ * Updated:     18th April 2019
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2013-2014, Synesis Software Pty Ltd.
+ *              Copyright (c) 2013-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* recls header files */
@@ -29,3 +29,4 @@
 #include <xtests/implicit_link.h>
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

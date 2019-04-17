@@ -4,11 +4,11 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     19th October 2016
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2016, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include "clasp.internal.h"
@@ -86,7 +86,7 @@ For two reasons, we can only call recls *once* for each wildcard argument:
  */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Compiler warning suppression
+ * compiler warning suppression
  */
 
 #if defined(_MSC_VER) && \
@@ -95,7 +95,7 @@ For two reasons, we can only call recls *once* for each wildcard argument:
 #endif /* VC++ and _DEBUG */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Constants and definitions
+ * constants and definitions
  */
 
 #define CLASP_EXPANDEDARGS_ADDITIONAL       (20)
@@ -104,19 +104,19 @@ For two reasons, we can only call recls *once* for each wildcard argument:
 #define CLASP_SECTION_MAX_                  (1000)
 
 /* /////////////////////////////////////////////////////////////////////////
- * Internal flags
+ * internal flags
  */
 
 #define CLASP_ARG_F_USED_       (0x0002)
 
 /* /////////////////////////////////////////////////////////////////////////
- * Macros
+ * macros
  */
 
 #define CLASP_STRING_NULL_OR_EMPTY_(s)      (NULL == (s) || '\0' == 0[(s)])
 
 /* /////////////////////////////////////////////////////////////////////////
- * Helper functions
+ * helper functions
  */
 
 static
@@ -2447,3 +2447,4 @@ CLASP_CALL(size_t) clasp_countAliases(clasp_alias_t const* aliases)
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -4,13 +4,13 @@
  * Purpose:     Implicit link file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     12th September 2014
+ * Updated:     18th April 2019
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2009-2014, Synesis Software Pty Ltd.
+ *              Copyright (c) 2009-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -19,7 +19,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* SystemTools::CLASP header files */
@@ -39,3 +39,4 @@
 #endif /* OS */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

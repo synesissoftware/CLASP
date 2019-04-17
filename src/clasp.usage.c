@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     28th September 2015
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include "clasp.internal.h"
@@ -50,7 +50,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Constants
+ * constants
  */
 
 #define CLASP_MAX_ALIASES_      (511)
@@ -58,7 +58,7 @@
 static clasp_char_t const s_unknownIdentifier[] = { '@', 'u', 'n', 'k', 'n', 'o', 'w', 'n', '-', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'e', 'r', '@', '\0' };
 
 /* /////////////////////////////////////////////////////////////////////////
- * External declarations
+ * external declarations
  */
 
 #if defined(WIN32) || \
@@ -122,7 +122,7 @@ LoadStringA(
 #endif /* WIN32 || WIN64 */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Helper functions
+ * helper functions
  */
 
 static
@@ -915,3 +915,4 @@ CLASP_CALL(int) clasp_show_version(
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

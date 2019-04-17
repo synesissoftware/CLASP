@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.unit.usage_width project.
  *
  * Created:     3rd April 2014
- * Updated:     1st August 2015
+ * Updated:     18th April 2019
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2014-2015, Synesis Software Pty Ltd.
+ *              Copyright (c) 2014-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -25,7 +25,7 @@
 #include <systemtools/clasp/clasp.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* xTests header files */
@@ -372,3 +372,4 @@ static void test_1_19()
 } // anonymous namespace
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

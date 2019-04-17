@@ -4,11 +4,11 @@
  * Purpose:     CLASP internal common header.
  *
  * Created:     4th June 2008
- * Updated:     21st August 2015
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include <systemtools/clasp/clasp.h>
@@ -287,3 +287,4 @@ clasp_strtok_wblank_r_(
 );
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

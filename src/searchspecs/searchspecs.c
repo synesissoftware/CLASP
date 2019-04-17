@@ -4,11 +4,11 @@
  * Purpose:     The CLASP::Util::SearchSpecs library API.
  *
  * Created:     8th March 2012
- * Updated:     8th March 2012
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2012, Matthew Wilson
+ * Copyright (c) 2012-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include <systemtools/clasp/util/searchspecs.h>
@@ -49,7 +49,7 @@
 #include <stdlib.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Helper functions
+ * helper functions
  */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -91,3 +91,4 @@ clasp_util_searchSpecs_load(
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -4,11 +4,11 @@
  * Purpose:     Utility class for processing search specifications.
  *
  * Created:     20th May 2010
- * Updated:     1st September 2015
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2015, Matthew Wilson
+ * Copyright (c) 2010-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,18 +48,18 @@
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR     6
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION  4
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      16
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      17
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* CLASP header files */
@@ -82,14 +82,14 @@
 #include <vector>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Namespace
+ * namespace
  */
 
 namespace clasp
 {
 
 /* /////////////////////////////////////////////////////////////////////////
- * Classes
+ * classes
  */
 
 class search_specifications
@@ -477,13 +477,20 @@ private: // Fields
 };
 
 /* /////////////////////////////////////////////////////////////////////////
- * Namespace
+ * namespace
  */
 
 } /* namespace clasp */
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

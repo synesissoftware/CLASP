@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     19th October 2016
+ * Updated:     18th April 2019
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2009-2016, Synesis Software Pty Ltd.
+ *              Copyright (c) 2009-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -25,7 +25,7 @@
 #include <systemtools/clasp/clasp.hpp>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* xTests header files */
@@ -1359,3 +1359,4 @@ static void test_2_19(void)
 } // anonymous namespace
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

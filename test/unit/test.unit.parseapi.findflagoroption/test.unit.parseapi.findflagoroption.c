@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.unit.parseapi.findflagoroption project.
  *
  * Created:     11th December 2011
- * Updated:     12th September 2014
+ * Updated:     18th April 2019
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2011-2014, Synesis Software Pty Ltd.
+ *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -25,7 +25,7 @@
 #include <systemtools/clasp/clasp.h>
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 /* xTests header files */
@@ -378,3 +378,4 @@ static void test_1_19()
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

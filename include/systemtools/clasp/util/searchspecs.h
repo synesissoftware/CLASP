@@ -4,11 +4,11 @@
  * Purpose:     The CLASP::Util::SearchSpecs library API.
  *
  * Created:     7th March 2012
- * Updated:     9th March 2013
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2012, Matthew Wilson
+ * Copyright (c) 2012-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,18 +48,18 @@
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_UTIL_H_SEARCHSPECS
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_H_SEARCHSPECS_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_H_SEARCHSPECS_MINOR     0
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_H_SEARCHSPECS_REVISION  1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_H_SEARCHSPECS_EDIT      2
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_H_SEARCHSPECS_EDIT      3
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include <systemtools/clasp/clasp.h>
@@ -115,8 +115,15 @@ clasp_util_searchSpecs_release(
     clasp_util_searchspecs_t const*     searchspecs
 );
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_UTIL_H_SEARCHSPECS */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -4,11 +4,11 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     29th January 2017
+ * Updated:     18th April 2019
  *
- * Home:        http://synesis.com.au/software
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2017, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,7 @@
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    9
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     74
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     75
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -1524,8 +1524,15 @@ namespace stlsoft
 
 #endif /* __cplusplus */
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

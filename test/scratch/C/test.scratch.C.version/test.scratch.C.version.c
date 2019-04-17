@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.scratch.C.version project.
  *
  * Created:     6th December 2011
- * Updated:     12th September 2014
+ * Updated:     18th April 2019
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2011-2014, Synesis Software Pty Ltd.
+ *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -191,3 +191,4 @@ if(0 != n)
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

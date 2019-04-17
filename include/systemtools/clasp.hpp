@@ -4,11 +4,11 @@
  * Purpose:     C++ layer for the CLASP library.
  *
  * Created:     31st January 2014
- * Updated:     4th April 2014
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2014, Matthew Wilson
+ * Copyright (c) 2014-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,25 +48,32 @@
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_HPP_CLASP
 
 /* /////////////////////////////////////////////////////////////////////////
- * Version information
+ * version information
  */
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_MAJOR    1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_MINOR    0
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_REVISION 1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_EDIT     2
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_EDIT     3
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include <systemtools/clasp/clasp.hpp>
 #include <systemtools/clasp/main.hpp>
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
+
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_HPP_CLASP */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -4,11 +4,11 @@
  * Purpose:     CLASP core facilities.
  *
  * Created:     4th June 2008
- * Updated:     6th December 2011
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2011, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,3 +40,4 @@
 static void* s_dummy;
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

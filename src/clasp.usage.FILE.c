@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage (FILE) facilities.
  *
  * Created:     4th June 2008
- * Updated:     1st August 2015
+ * Updated:     18th April 2019
  *
- * Home:        http://stlsoft.org/
+ * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2015, Matthew Wilson
+ * Copyright (c) 2008-2019, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * Includes
+ * includes
  */
 
 #include "clasp.internal.h"
@@ -69,7 +69,7 @@ clasp_strcat_X_(clasp_char_t* s1, clasp_char_t const* s2)
 #endif /* _MSC_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
- * Helper functions
+ * helper functions
  */
 
 static
@@ -757,3 +757,4 @@ print_plain:
 }
 
 /* ///////////////////////////// end of file //////////////////////////// */
+
