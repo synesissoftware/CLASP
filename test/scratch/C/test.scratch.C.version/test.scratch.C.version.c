@@ -137,7 +137,7 @@ int main(int argc, char** argv)
 #else
         {
 clasp_argument_t const* arg;
-size_t nSkip = 0;
+unsigned nSkip = 0;
 size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, ALIASES, &arg, nSkip);
 if(0 != n)
 {
@@ -169,7 +169,7 @@ if(0 != n)
 #else
         {
 clasp_argument_t const* arg;
-size_t nSkip = 0;
+unsigned nSkip = 0;
 size_t const n = clasp_reportUnusedValues(args, &arg, nSkip);
 if(0 != n)
 {

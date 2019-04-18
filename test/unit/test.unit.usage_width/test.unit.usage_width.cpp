@@ -134,7 +134,7 @@ namespace
     ,   int                     showBlanksBetweenItems
     )
     {
-        using namespace ::xtests::cpp;
+        using namespace ::xtests::cpp::util;
 
         temp_file   temp(temp_file::DeleteOnOpen | temp_file::DeleteOnClose);
         FILE*       stm = ::fopen(temp.c_str(), "w");

@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:        implicit_link.cpp
  *
- * Purpose:     Implicit link file for the XXXX project.
+ * Purpose:     Implicit link file for the test.unit.usage_width project.
  *
  * Created:     3rd April 2014
  * Updated:     18th April 2019

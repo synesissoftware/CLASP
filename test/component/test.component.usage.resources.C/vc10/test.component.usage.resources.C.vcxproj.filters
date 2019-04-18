@@ -9,27 +9,6 @@
       <UniqueIdentifier>{01e07b8e-0904-46e4-8f25-2f9d0072044c}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
-    <Filter Include="Header Files\STLSoft Header Files">
-      <UniqueIdentifier>{45a112e8-c7f1-4ab6-9d42-febb6e6749bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\STLSoft Header Files\STLSoft">
-      <UniqueIdentifier>{2b124148-53be-453d-b552-aed566a660d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\STLSoft Header Files\PlatformSTL">
-      <UniqueIdentifier>{b7606d8f-7800-4dd2-8307-43ec1e1366a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\STLSoft Header Files\WinSTL">
-      <UniqueIdentifier>{79a38bc4-4100-4fc1-9aef-c7d2351e9694}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\recls Header Files">
-      <UniqueIdentifier>{5fbef828-5cbf-4a73-8712-05111ee764f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\SystemTools::CLASP Header Files">
-      <UniqueIdentifier>{a50e8836-6559-48c5-8986-b622cf9a0be3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\xTests Header Files">
-      <UniqueIdentifier>{a7e4cc6c-cc39-472b-a28c-1d275da3730d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{931e0a3b-2cbd-4147-b58b-4a96b35bef98}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
@@ -44,97 +23,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\test.component.usage.resources.rc">
-      <Filter>Source Files</Filter>
-    </ResourceCompile>
+    <ClInclude Include="..\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(STLSOFT_1_10)\include\stlsoft\memory\auto_buffer.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\stlsoft\shims\access\string\std\c_string.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT_1_10)\include\stlsoft\quality\contract.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT_1_10)\include\stlsoft\quality\cover.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\stlsoft\shims\access\string\fwd.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\stlsoft\internal\head_version.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT_1_10)\include\stlsoft\internal\lead_version.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\stlsoft\internal\cccap\msvc.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\stlsoft\internal\cccap\obsolete.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\stlsoft\stlsoft.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT_1_10)\include\stlsoft\stlsoft_1_10.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT_1_10)\include\stlsoft\string\string_slice.h">
-      <Filter>Header Files\STLSoft Header Files\STLSoft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\platformstl\platformstl.h">
-      <Filter>Header Files\STLSoft Header Files\PlatformSTL</Filter>
-    </ClInclude>
-    <ClInclude Include="$(STLSOFT)\include\winstl\winstl.h">
-      <Filter>Header Files\STLSoft Header Files\WinSTL</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\compiler.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\compiler_msvc.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\implicit_link.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\language.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\platform.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\platform_types.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\recls.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\recls_filesize.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\recls_time.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\retcodes.h">
-      <Filter>Header Files\recls Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\include\systemtools\clasp\clasp.h">
-      <Filter>Header Files\SystemTools::CLASP Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\include\systemtools\clasp\implicit_link.h">
-      <Filter>Header Files\SystemTools::CLASP Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(XTESTS_C_ROOT)\include\xtests\implicit_link.h">
-      <Filter>Header Files\xTests Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(XTESTS_C_ROOT)\include\xtests\xtests.h">
-      <Filter>Header Files\xTests Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ResourceCompile Include="..\test.component.usage.resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

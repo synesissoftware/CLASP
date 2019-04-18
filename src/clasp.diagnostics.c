@@ -89,8 +89,13 @@ void CLASP_CALLCONV clasp_default_log_fn_(
     }
 }
 
-
-void CLASP_LOG_PRINTF(clasp_diagnostic_context_t const* ctxt, int severityIndex, clasp_char_t const* fmt, ...)
+void
+CLASP_LOG_PRINTF(
+    clasp_diagnostic_context_t const*   ctxt
+,   int                                 severityIndex
+,   clasp_char_t const*                 fmt
+,   ...
+)
 {
     if(NULL != ctxt->pfnLog)
     {
@@ -104,7 +109,12 @@ void CLASP_LOG_PRINTF(clasp_diagnostic_context_t const* ctxt, int severityIndex,
     }
 }
 
-clasp_diagnostic_context_t const* clasp_verify_context_(clasp_diagnostic_context_t const* ctxt, clasp_diagnostic_context_t* local, int* r)
+clasp_diagnostic_context_t const*
+clasp_verify_context_(
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_diagnostic_context_t*         local
+,   int*                                r
+)
 {
     CLASP_ASSERT(NULL != local);
     CLASP_ASSERT(NULL != r);

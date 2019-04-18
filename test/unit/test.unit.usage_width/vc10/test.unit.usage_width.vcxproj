@@ -51,8 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>test.component.usage.resources.C</ProjectName>
-    <ProjectGuid>{94CFC4AF-7EB4-444e-AF51-D5967D6D6207}</ProjectGuid>
+    <ProjectName>test.unit.usage_width</ProjectName>
+    <ProjectGuid>{FA14AB8A-DEA9-4ee6-9D71-7D1E0A99CA6D}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
@@ -97,7 +97,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)projects/vcprops/CLASP.test.xTests.props" Condition="exists('$(SolutionDir)projects/vcprops/CLASP.test.xTests.props')" Label="CmpfsStandardProperties" />
-    <Import Project="$(SolutionDir)projects/vcprops/CLASP.no-PCH.props" Condition="exists('$(SolutionDir)projects/vcprops/CLASP.no-PCH.props')" Label="CmpfsStandardProperties" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -131,7 +130,6 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
     <ClCompile>
-      <DisableSpecificWarnings>4204;4100;4221;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
     </Link>
@@ -164,13 +162,14 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\implicit_link.c" />
-    <ClCompile Include="..\test.component.usage.resources.C.c" />
+    <ClCompile Include="$(ProjectDir)../implicit_link.cpp" />
+    <ClCompile Include="$(ProjectDir)../pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(ProjectDir)../test.unit.usage_width.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\test.component.usage.resources.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\resource.h" />
+    <ClInclude Include="$(ProjectDir)../pch.hpp" />
+    <ClInclude Include="$(ProjectDir)../_dev_pragmatics_/warnings.msvc.10+.h" />
   </ItemGroup>
 </Project>

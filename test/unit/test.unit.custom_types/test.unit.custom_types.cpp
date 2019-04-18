@@ -190,7 +190,7 @@ static void test_1_1()
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
 
-    Colour              clr;
+    Colour              clr = Colour(0);
 
     XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, ""));
     XTESTS_TEST_ENUM_EQUAL(Yellow, clr);
