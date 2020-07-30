@@ -56,8 +56,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    11
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     80
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 2
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     81
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -1485,39 +1485,40 @@ namespace clasp
     }
 
 
-    /** A generic inserter function for clasp_argument_t into output streams
-     *
-     */
-    template <typename T_stm>
-    T_stm&
-    operator <<(
-        T_stm&                  stm
-    ,   clasp_argument_t const& arg
-    )
-    {
-        switch (arg.type)
-        {
-        case CLASP_ARGTYPE_FLAG:
-
-            std << arg.resolvedName;
-            break;
-        case CLASP_ARGTYPE_OPTION:
-
-            std << arg.resolvedName << clasp_char_t('=') << arg.value;
-            break;
-        case CLASP_ARGTYPE_VALUE:
-
-            std << arg.value;
-            break;
-        }
-
-        stm.write(sl.ptr, sl.len);
-
-        return stm;
-    }
-
-
 } /* namespace clasp */
+
+
+/** A generic inserter function for clasp_argument_t into output streams
+ *
+ */
+template <typename T_stm>
+T_stm&
+operator <<(
+	T_stm&                  stm
+,   clasp_argument_t const& arg
+)
+{
+	switch (arg.type)
+	{
+	case CLASP_ARGTYPE_FLAG:
+
+		stm << arg.resolvedName;
+		break;
+	case CLASP_ARGTYPE_OPTION:
+
+		stm << arg.resolvedName << clasp_char_t('=') << arg.value;
+		break;
+	case CLASP_ARGTYPE_VALUE:
+
+		stm << arg.value;
+		break;
+	default:
+
+		break;
+	}
+
+	return stm;
+}
 
 
 # ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
