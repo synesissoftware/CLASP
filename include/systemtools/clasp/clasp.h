@@ -4,11 +4,11 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     30th July 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,9 +20,10 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Software nor the names
- *   of any contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ * - Neither the names of Matthew Wilson and Synesis Information Systems nor
+ *   the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -54,9 +55,9 @@
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    9
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     76
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    11
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 1
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     80
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -74,10 +75,10 @@
  */
 
 #define CLASP_VER_MAJOR         0
-#define CLASP_VER_MINOR         13
-#define CLASP_VER_REVISION      2
+#define CLASP_VER_MINOR         14
+#define CLASP_VER_REVISION      0
 
-#define CLASP_VER               0x000d02ff
+#define CLASP_VER               0x000e00ff
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -85,6 +86,9 @@
 
 #include <stddef.h> /* size_t */
 #include <stdarg.h> /* for logging function pointer */
+#ifdef __cplusplus
+# include <string.h>
+#endif
 
 /* /////////////////////////////////////////////////////////////////////////
  * documentation
@@ -188,15 +192,19 @@
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
 # if defined(_WIN32) && \
      (  defined(UNICODE) || \
         defined(_UNICODE))
+
 #  if defined(_UNICODE) && \
       !defined(UNICODE)
+
 #   error (Windows:) _UNICODE defined and UNICODE not defined is not supported: define CLASP_USE_WIDE_STRINGS for special circumstances
 #  endif /* _UNICODE && !UNICODE */
 #  if defined(UNICODE) && \
       !defined(_UNICODE)
+
 #   error (Windows:) UNICODE defined and _UNICODE not defined is not supported: define CLASP_USE_WIDE_STRINGS for special circumstances
 #  endif /* UNICODE && !_UNICODE */
 # endif /* _WIN32 && UNICODE && _UNICODE */
@@ -207,22 +215,28 @@
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
 typedef wchar_t     clasp_char_t;
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
 typedef char        clasp_char_t;
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 #ifdef CLASP_USE_WIDE_STRINGS
-# define CLASP_LITERAL_STRING_(x)           L ## #x
-# define CLASP_LITERAL_STRING(x)            CLASP_LITERAL_STRING_(x)
+
+# define CLASP_LITERAL_STRING_(x)                           L ## #x
+# define CLASP_LITERAL_STRING(x)                            CLASP_LITERAL_STRING_(x)
 #else /* ? CLASP_USE_WIDE_STRINGS */
-# define CLASP_LITERAL_STRING(x)            x
+
+# define CLASP_LITERAL_STRING(x)                            x
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 
 #ifdef __cplusplus
+
 struct clasp_slice_t;
 #else /* ? __cplusplus */
+
 typedef struct clasp_slice_t clasp_slice_t;
 #endif /* __cplusplus */
 
@@ -248,6 +262,7 @@ struct clasp_slice_t
     clasp_char_t const* ptr;
 
 #ifdef __cplusplus
+
 public:
     static
     clasp_slice_t
@@ -365,6 +380,20 @@ operator >=(
     return 0 >= clasp_slice_t_cmp(&lhs, rhs);
 }
 
+/** A generic inserter function for clasp_slice_t into output streams
+ *
+ */
+template <typename T_stm>
+T_stm&
+operator <<(
+    T_stm&                  stm
+,   clasp_slice_t const&    sl
+)
+{
+    stm.write(sl.ptr, sl.len);
+
+    return stm;
+}
 #endif /* __cplusplus */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -531,9 +560,11 @@ typedef struct clasp_alias_t clasp_alias_t;
 
 
 #ifdef __cplusplus
-# define CLASP_ARGTYPE_CAST_(N)     (clasp_argtype_t(N))
+
+# define CLASP_ARGTYPE_CAST_(N)                             (clasp_argtype_t(N))
 #else /* ? __cplusplus */
-# define CLASP_ARGTYPE_CAST_(N)     ((clasp_argtype_t)(N))
+
+# define CLASP_ARGTYPE_CAST_(N)                             ((clasp_argtype_t)(N))
 #endif /* __cplusplus */
 
 /** \def CLASP_SECTION(N)
@@ -626,6 +657,7 @@ struct clasp_diagnostic_context_t
     void*               param;  /*!< user-specified parameter */
 
 #ifdef __cplusplus
+
 public: /** Construction */
     clasp_diagnostic_context_t()
     {
@@ -1020,6 +1052,7 @@ clasp_checkValue(
 
 
 #ifdef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
+
 /** Indicates whether the given variable points to an argument that
  * represents a treated hyphen.
  *
@@ -1037,7 +1070,8 @@ clasp_valueIsTreatedHyphen(
     clasp_argument_t const*     arg
 );
 #else /* ? SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
-# define clasp_valueIsTreatedHyphen(a)      (0 != (a)->givenName.len)
+
+# define clasp_valueIsTreatedHyphen(a)                      (0 != (a)->givenName.len)
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -1400,8 +1434,10 @@ namespace clasp
 {
 
 # ifdef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
+
 #  include "./internal/shim_macros.h"
 # else /* ? SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
+
 #  include <systemtools/clasp/internal/shim_macros.h>
 # endif /* SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
@@ -1448,6 +1484,39 @@ namespace clasp
         clasp_releaseArguments(args);
     }
 
+
+    /** A generic inserter function for clasp_argument_t into output streams
+     *
+     */
+    template <typename T_stm>
+    T_stm&
+    operator <<(
+        T_stm&                  stm
+    ,   clasp_argument_t const& arg
+    )
+    {
+        switch (arg.type)
+        {
+        case CLASP_ARGTYPE_FLAG:
+
+            std << arg.resolvedName;
+            break;
+        case CLASP_ARGTYPE_OPTION:
+
+            std << arg.resolvedName << clasp_char_t('=') << arg.value;
+            break;
+        case CLASP_ARGTYPE_VALUE:
+
+            std << arg.value;
+            break;
+        }
+
+        stm.write(sl.ptr, sl.len);
+
+        return stm;
+    }
+
+
 } /* namespace clasp */
 
 
@@ -1455,10 +1524,39 @@ namespace clasp
 
 namespace stlsoft
 {
+#ifdef CLASP_USE_WIDE_STRINGS
+
+    inline size_t c_str_len_w(clasp_alias_t const& s)
+    {
+        return NULL == s.mappedArgument ? 0 : ::wcslen(s.mappedArgument);
+    }
+#else /* ? CLASP_USE_WIDE_STRINGS */
+
+    inline size_t c_str_len_a(clasp_alias_t const& s)
+    {
+        return NULL == s.mappedArgument ? 0 : ::strlen(s.mappedArgument);
+    }
+#endif /* CLASP_USE_WIDE_STRINGS */
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
+    inline wchar_t const* c_str_data_w(clasp_alias_t const& s)
+#else /* ? CLASP_USE_WIDE_STRINGS */
+
+    inline char const* c_str_data_a(clasp_alias_t const& s)
+#endif /* CLASP_USE_WIDE_STRINGS */
+    {
+        return s.mappedArgument;
+    }
+
+
+
+
+#ifdef CLASP_USE_WIDE_STRINGS
+
     inline size_t c_str_len_w(clasp_slice_t const& s)
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
     inline size_t c_str_len_a(clasp_slice_t const& s)
 #endif /* CLASP_USE_WIDE_STRINGS */
     {
@@ -1466,8 +1564,10 @@ namespace stlsoft
     }
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
     inline wchar_t const* c_str_data_w(clasp_slice_t const& s)
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
     inline char const* c_str_data_a(clasp_slice_t const& s)
 #endif /* CLASP_USE_WIDE_STRINGS */
     {
@@ -1475,8 +1575,10 @@ namespace stlsoft
     }
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
     inline wchar_t const* c_str_ptr_w(clasp_slice_t const& s)
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
     inline char const* c_str_ptr_a(clasp_slice_t const& s)
 #endif /* CLASP_USE_WIDE_STRINGS */
     {
@@ -1486,34 +1588,44 @@ namespace stlsoft
     inline size_t c_str_len(clasp_slice_t const& s)
     {
 #ifdef CLASP_USE_WIDE_STRINGS
+
         return c_str_len_w(s);
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
         return c_str_len_a(s);
 #endif /* CLASP_USE_WIDE_STRINGS */
     }
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
     inline wchar_t const* c_str_ptr(clasp_slice_t const& s)
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
     inline char const* c_str_ptr(clasp_slice_t const& s)
 #endif /* CLASP_USE_WIDE_STRINGS */
     {
 #ifdef CLASP_USE_WIDE_STRINGS
+
         return c_str_ptr_w(s);
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
         return c_str_ptr_a(s);
 #endif /* CLASP_USE_WIDE_STRINGS */
     }
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
     inline wchar_t const* c_str_data(clasp_slice_t const& s)
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
     inline char const* c_str_data(clasp_slice_t const& s)
 #endif /* CLASP_USE_WIDE_STRINGS */
     {
 #ifdef CLASP_USE_WIDE_STRINGS
+
         return c_str_data_w(s);
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
         return c_str_data_a(s);
 #endif /* CLASP_USE_WIDE_STRINGS */
     }
