@@ -97,7 +97,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "DebugNoRecls"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(SYSTEMTOOLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
+# ADD BASE CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(SYSTEMTOOLS_ROOT)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
 # ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /D "CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS" /FR /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
@@ -107,7 +107,7 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"$(SYSTEMTOOLS_ROOT)/lib" /libpath:"$(STLSOFT_1_10)" /libpath:"$(RECLS_ROOT)/lib" /libpath:"$(XTESTS_C_ROOT)/lib"
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"$(SYSTEMTOOLS_ROOT)/lib" /libpath:"$(RECLS_ROOT)/lib" /libpath:"$(XTESTS_C_ROOT)/lib"
 # ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"../../../../lib" /libpath:"$(RECLS_ROOT)/lib" /libpath:"$(XTESTS_C_ROOT)/lib" /libpath:"$(UNIXEM)/lib"
 
 !ELSEIF  "$(CFG)" == "test.unit.clasp++ - Win32 Debug pseudoUNIX"
@@ -124,7 +124,7 @@ LINK32=link.exe
 # PROP Intermediate_Dir "DebugUnix"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(SYSTEMTOOLS_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
+# ADD BASE CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(SYSTEMTOOLS_ROOT)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
 # ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "UNIX" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /D "_STLSOFT_FORCE_ANY_COMPILER" /FR /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
@@ -134,7 +134,7 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"$(SYSTEMTOOLS_ROOT)/lib" /libpath:"$(STLSOFT_1_10)" /libpath:"$(RECLS_ROOT)/lib" /libpath:"$(XTESTS_C_ROOT)/lib"
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"$(SYSTEMTOOLS_ROOT)/lib" /libpath:"$(RECLS_ROOT)/lib" /libpath:"$(XTESTS_C_ROOT)/lib"
 # ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept /libpath:"../../../../lib" /libpath:"$(RECLS_ROOT)/lib" /libpath:"$(XTESTS_C_ROOT)/lib" /libpath:"$(UNIXEM)/lib"
 
 !ENDIF 
@@ -172,11 +172,11 @@ SOURCE="$(STLSOFT)\include\stlsoft\memory\allocator_base.hpp"
 # End Source File
 # Begin Source File
 
-SOURCE="$(STLSOFT)\include\stlsoft\memory\allocator_features.hpp"
+SOURCE="$(STLSOFT)\include\stlsoft\memory\util\allocator_features.hpp"
 # End Source File
 # Begin Source File
 
-SOURCE="$(STLSOFT)\include\stlsoft\memory\allocator_selector.hpp"
+SOURCE="$(STLSOFT)\include\stlsoft\memory\util\allocator_selector.hpp"
 # End Source File
 # Begin Source File
 
@@ -200,14 +200,6 @@ SOURCE="$(STLSOFT)\include\stlsoft\meta\capabilities.hpp"
 # End Source File
 # Begin Source File
 
-SOURCE="$(STLSOFT)\include\stlsoft\std\cbase_.hpp"
-# End Source File
-# Begin Source File
-
-SOURCE="$(STLSOFT)\include\stlsoft\conversion\char_conversions.hpp"
-# End Source File
-# Begin Source File
-
 SOURCE="$(STLSOFT)\include\stlsoft\string\char_traits.hpp"
 # End Source File
 # Begin Source File
@@ -220,11 +212,15 @@ SOURCE="$(STLSOFT)\include\stlsoft\util\constraints.hpp"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT)\include\stlsoft\quality\contract.h"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\error\conversion_error.hpp"
 # End Source File
 # Begin Source File
 
-SOURCE="$(STLSOFT)\include\stlsoft\std\cstdlib.hpp"
+SOURCE="$(STLSOFT)\include\stlsoft\quality\cover.h"
 # End Source File
 # Begin Source File
 
@@ -248,7 +244,35 @@ SOURCE="$(STLSOFT)\include\stlsoft\internal\head_version.h"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT)\include\stlsoft\conversion\integer_to_string\integer_to_decimal_string.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\conversion\integer_to_string\integer_to_hexadecimal_string.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\conversion\integer_to_string\integer_to_octal_string.hpp"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\conversion\integer_to_string.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\conversion\integer_to_string\integer_to_string.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\limits\integral_format_width_limits.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\limits\integral_limits.h"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\limits\integral_limits.hpp"
 # End Source File
 # Begin Source File
 
@@ -268,6 +292,10 @@ SOURCE="$(STLSOFT)\include\stlsoft\meta\is_same_type.hpp"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT)\include\stlsoft\meta\is_signed_type.hpp"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\util\std\iterator_helper.hpp"
 # End Source File
 # Begin Source File
@@ -277,6 +305,14 @@ SOURCE="$(STLSOFT)\include\stlsoft\internal\lead_version.h"
 # Begin Source File
 
 SOURCE="$(STLSOFT)\include\stlsoft\util\std\library_discriminator.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\exception\library_identifier_provider.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\diagnostics\LibraryIdentifier.h"
 # End Source File
 # Begin Source File
 
@@ -296,7 +332,19 @@ SOURCE="$(STLSOFT)\include\stlsoft\internal\cccap\obsolete.h"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT)\include\stlsoft\exception\out_of_memory_exception.hpp"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\algorithms\pod.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\exception\project_identifier_provider.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\diagnostics\ProjectIdentifier.h"
 # End Source File
 # Begin Source File
 
@@ -332,6 +380,10 @@ SOURCE="$(STLSOFT)\include\stlsoft\util\size_traits.hpp"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT)\include\stlsoft\exception\status_code_provider.hpp"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\util\std_swap.hpp"
 # End Source File
 # Begin Source File
@@ -344,12 +396,36 @@ SOURCE="$(STLSOFT)\include\stlsoft\shims\access\string.hpp"
 # End Source File
 # Begin Source File
 
+SOURCE="$(STLSOFT)\include\stlsoft\string\string_slice.h"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\shims\access\string\std\time.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\conversion\truncation_cast.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\conversion\truncation_test.hpp"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\stlsoft\shims\access\string\std\type_info.hpp"
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\stlsoft\meta\yesno.hpp"
 # End Source File
 # End Group
 # Begin Group "PlatformSTL"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\platformstl\filesystem\path_functions.h"
+# End Source File
 # Begin Source File
 
 SOURCE="$(STLSOFT)\include\platformstl\platformstl.h"
@@ -364,6 +440,10 @@ SOURCE="$(STLSOFT)\include\unixstl\synch\util\features.h"
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\..\..\..\..\..\..\unixem\1.12\include\unixem\implicit_link.h
+# End Source File
+# Begin Source File
+
 SOURCE="$(STLSOFT)\include\unixstl\unixstl.h"
 # End Source File
 # End Group
@@ -373,6 +453,10 @@ SOURCE="$(STLSOFT)\include\unixstl\unixstl.h"
 # Begin Source File
 
 SOURCE="$(STLSOFT)\include\winstl\winstl.h"
+# End Source File
+# Begin Source File
+
+SOURCE="$(STLSOFT)\include\winstl\api\winstl_win32_winnt_.h"
 # End Source File
 # End Group
 # End Group
