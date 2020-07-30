@@ -4,11 +4,11 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     18th April 2019
+ * Updated:     30th July 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2019, Matthew Wilson
+ * Copyright (c) 2010-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -19,9 +19,10 @@
  * - Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the names of
- *   any contributors may be used to endorse or promote products derived from
- *   this software without specific prior written permission.
+ * - Neither the names of Matthew Wilson and Synesis Information Systems nor
+ *   the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -53,8 +54,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MINOR     1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_REVISION  1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      12
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_REVISION  2
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      13
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -79,6 +80,107 @@
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 /* /////////////////////////////////////////////////////////////////////////
+ * compatibility
+ */
+
+#ifndef CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS
+
+# ifdef CLASP_USE_WIDE_STRINGS
+
+#  if 0
+#  elif defined(_MSC_VER) && \
+        _MSC_VER < 1600
+
+#   define CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS
+#  else
+
+#   define CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS
+#  endif
+# endif
+#endif
+
+#ifdef CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS
+# ifndef _WIN32
+#  undef CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS
+# endif
+#endif
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes - 2
+ */
+
+/* STLSoft header files */
+
+#ifdef CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS
+
+# include <winstl/error/error_functions.h>
+#endif
+
+/* /////////////////////////////////////////////////////////////////////////
+ * implementation
+ */
+
+#ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
+
+# ifdef CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS
+
+#  ifdef CLASP_USE_WIDE_STRINGS
+
+#   define clasp_main_internal_strerror_(en)                winstl_C_format_message_strerror_w((en))
+static
+void
+clasp_main_internal_freeerror_(wchar_t const* es)
+{
+    winstl_C_format_message_free_buff_w((wchar_t*)es);
+}
+#  else /* ? CLASP_USE_WIDE_STRINGS */
+
+#   define clasp_main_internal_strerror_(en)                winstl_C_format_message_strerror_a((en))
+#   define clasp_main_internal_freeerror_(es)               winstl_C_format_message_free_buff_a((es))
+#  endif /* CLASP_USE_WIDE_STRINGS */
+# else /* ? CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS */
+
+#  if defined(_MSC_VER) && \
+      _MSC_VER >= 1400
+
+static
+#   ifdef CLASP_USE_WIDE_STRINGS
+
+wchar_t*
+#   else /* ? CLASP_USE_WIDE_STRINGS */
+
+char*
+#   endif /* CLASP_USE_WIDE_STRINGS */
+clasp_main_internal_strerror_(int en)
+{
+#   pragma warning(push)
+#   pragma warning(disable : 4996)
+
+#   ifdef CLASP_USE_WIDE_STRINGS
+
+    return _wcserror(en);
+#   else /* ? CLASP_USE_WIDE_STRINGS */
+
+    return strerror(en);
+#   endif /* CLASP_USE_WIDE_STRINGS */
+#   pragma warning(pop)
+}
+#   define clasp_main_internal_freeerror_(es)               ((void)0)
+#  else
+
+#   ifdef CLASP_USE_WIDE_STRINGS
+
+#    define clasp_main_internal_strerror_(en)               wcserror((en))
+#   else /* ? CLASP_USE_WIDE_STRINGS */
+
+#    define clasp_main_internal_strerror_(en)               strerror((en))
+#   endif /* CLASP_USE_WIDE_STRINGS */
+#   define clasp_main_internal_freeerror_(es)               ((void)0)
+#  endif
+# endif /* CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS */
+#endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
+
+/* /////////////////////////////////////////////////////////////////////////
  * functions
  */
 
@@ -100,24 +202,7 @@ clasp_main_invoke(
 
     if(r != 0)
     {
-#if defined(_MSC_VER)
-# if _MSC_VER >= 1400
-#  pragma warning(push)
-#  pragma warning(disable : 4996)
-# endif
-#endif
-
-#ifdef CLASP_USE_WIDE_STRINGS
-        wchar_t const* const e = _wcserror(r);
-#else /* ? CLASP_USE_WIDE_STRINGS */
-        char const* const e = strerror(r);
-#endif /* CLASP_USE_WIDE_STRINGS */
-
-#if defined(_MSC_VER)
-# if _MSC_VER >= 1400
-#  pragma warning(pop)
-# endif
-#endif
+        clasp_char_t const* const e = clasp_main_internal_strerror_(r);
 
         if(NULL == programName)
         {
@@ -131,6 +216,8 @@ clasp_main_invoke(
 
         /* Contingent report */
         fprintf(stderr, "%s: could not start program: arguments parsing failed: %s\n", programName, e);
+
+        clasp_main_internal_freeerror_(e);
 
         return EXIT_FAILURE;
     }
