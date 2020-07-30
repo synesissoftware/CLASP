@@ -4,13 +4,13 @@
  * Purpose:     Implicit link file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     18th April 2019
+ * Updated:     30th July 2020
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2009-2019, Synesis Software Pty Ltd.
+ *              Copyright (c) 2009-2020, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -33,8 +33,9 @@
 
 /* UNIXem header files */
 #include <platformstl/platformstl.h>
-#if defined(platformstl_OS_IS_UNIX) && \
+#if defined(PLATFORMSTL_OS_IS_UNIX) && \
     defined(_WIN32)
+
 # include <unixem/implicit_link.h>
 #endif /* OS */
 

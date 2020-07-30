@@ -4,7 +4,7 @@
  * Purpose:     Implementation file for the test.component.searchspecs.C project.
  *
  * Created:     12th September 2014
- * Updated:     18th April 2019
+ * Updated:     16th October 2019
  *
  * Status:      Wizard-generated
  *
@@ -121,6 +121,8 @@ int main(int argc, char **argv)
     _CrtMemState    memState;
 
     _CrtMemCheckpoint(&memState);
+
+    STLSOFT_SUPPRESS_UNUSED(memState);
 #endif /* _MSC_VER */
 
     r = main_(argc, argv);
@@ -221,7 +223,7 @@ static int teardown(void* param)
 static
 int
 load_helper_(
-    char const* /* const */*                    strings
+    char const* /* const */*            strings
 ,   int                                 flags
 ,   clasp_char_t const*                 defaultDirectory
 ,   clasp_char_t const*                 defaultPatterns
@@ -238,13 +240,13 @@ load_helper_(
         ++numValues;
     }}
 
-    if(0 != STLSOFT_C_AUTO_BUFFER_ALLOCATE(values, numValues))
+    if(0 != STLSOFT_C_AUTO_BUFFER_RESIZE(values, numValues))
     {
         return ENOMEM;
     }
     else
     {
-        static const clasp_slice_t emptySlice;
+        static const clasp_slice_t emptySlice = { 0 };
 
         int r;
 

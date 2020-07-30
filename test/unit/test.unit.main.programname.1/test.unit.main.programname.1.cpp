@@ -191,6 +191,8 @@ static void run_test_(
                     ,   flags
                     );
 
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_NOT_EQUAL(0, r));
+
     ::fflush(Test_stderr);
     ::fclose(Test_stderr);
 
@@ -336,7 +338,7 @@ static void test_1_3()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: required option is not found: --unknown"
+    ,   "test_1_0: invalid command-line: required option is not found: --unknown"
     );
 }
 

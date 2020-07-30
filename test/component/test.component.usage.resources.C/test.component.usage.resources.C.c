@@ -4,7 +4,7 @@
  * Purpose:     Implementation file for the test.component.usage.resources project.
  *
  * Created:     7th March 2012
- * Updated:     18th April 2019
+ * Updated:     17th October 2019
  *
  * Status:      Wizard-generated
  *
@@ -291,7 +291,7 @@ clasp_showBodyIntoMemory(
     for(n = 0; NULL != aliases->mappedArgument; ++aliases)
     {
         if( NULL != aliases->name &&
-            '\0' != aliases->name)
+            '\0' != aliases->name[0])
         {
             int n = sprintf(p, "%.*s%s\n", tabWidth, ws, aliases->name);
 
@@ -299,7 +299,7 @@ clasp_showBodyIntoMemory(
         }
 
         if( NULL != aliases->mappedArgument &&
-            '\0' != aliases->mappedArgument)
+            '\0' != aliases->mappedArgument[0])
         {
             int n = sprintf(p, "%.*s%s\n", tabWidth, ws, aliases->mappedArgument);
 
@@ -307,7 +307,7 @@ clasp_showBodyIntoMemory(
         }
 
         if( NULL != aliases->help &&
-            '\0' != aliases->help)
+            '\0' != aliases->help[0])
         {
             int n = sprintf(p, "%.*s%s\n", 2 * tabWidth, ws, aliases->help);
 

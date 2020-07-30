@@ -4,7 +4,7 @@
  * Purpose:     Implicit link file for the test.unit.main.programname.1 project.
  *
  * Created:     9th March 2013
- * Updated:     18th April 2019
+ * Updated:     16th October 2019
  *
  * Status:      Wizard-generated
  *
@@ -21,6 +21,9 @@
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
+
+/* SystemTools::CLASP header files */
+#include <systemtools/clasp/implicit_link.h>
 
 /* recls header files */
 #include <recls/implicit_link.h>

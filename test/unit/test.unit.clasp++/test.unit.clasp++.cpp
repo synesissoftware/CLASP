@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     18th April 2019
+ * Updated:     30th July 2020
  *
  * Status:      Wizard-generated
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2009-2019, Synesis Software Pty Ltd.
+ *              Copyright (c) 2009-2020, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -45,6 +45,7 @@
 
 #if defined(_MSC_VER) && \
     _MSC_VER >= 1400
+
 # pragma warning(push)
 # pragma warning(disable : 4702)
 # pragma warning(disable : 4996)
@@ -201,6 +202,7 @@ static void test_1_0()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(1, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -211,7 +213,7 @@ static void test_1_1()
 {
     char* argv[] =
     {
-        "arg0",
+        "/dir0/arg0",
         "abc",
         NULL,
     };
@@ -233,6 +235,7 @@ static void test_1_1()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(2, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -243,7 +246,11 @@ static void test_1_2()
 {
     char* argv[] =
     {
-        "arg0",
+#ifdef _WIN32
+        "C:\\dir0\\arg0.exe",
+#else
+        "/dir0/arg0",
+#endif
         "abc",
         "-x",
         NULL,
@@ -266,6 +273,7 @@ static void test_1_2()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -299,6 +307,7 @@ static void test_1_3()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -333,6 +342,7 @@ static void test_1_4()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(4, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -369,6 +379,7 @@ static void test_1_5()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -413,6 +424,7 @@ static void test_1_6()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
         int flags = 0;
 
@@ -469,6 +481,7 @@ static void test_1_7()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
         int flags = 0;
 
@@ -520,6 +533,7 @@ static void test_1_10()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -576,6 +590,7 @@ static void test_1_14()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
         int flags = 0;
 
@@ -619,6 +634,7 @@ static void test_1_15()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -698,6 +714,8 @@ static void test_2_01()
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
 
         clasp::releaseArguments(args);
     }
@@ -762,6 +780,8 @@ static void test_2_02(void)
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
 
         clasp::releaseArguments(args);
     }
@@ -824,6 +844,8 @@ static void test_2_03(void)
         XTESTS_TEST_BOOLEAN_FALSE(v);
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
+
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);
@@ -889,6 +911,8 @@ static void test_2_04(void)
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
 
         clasp::releaseArguments(args);
     }
@@ -952,6 +976,8 @@ static void test_2_05(void)
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
 
         clasp::releaseArguments(args);
     }
@@ -992,7 +1018,7 @@ static void test_2_07(void)
     }
     else
     {
-        char const* v1;
+        char const* v1 = ss_nullptr_k;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--multi-opt", &v1, NULL));
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v1", v1);
@@ -1000,19 +1026,22 @@ static void test_2_07(void)
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--multi-opt", &v1, NULL));
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v1", v1);
 
-        char const* v2;
+        char const* v2 = ss_nullptr_k;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--multi-opt", &v2, NULL));
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v2", v2);
 
-        char const* v3;
+        char const* v3 = ss_nullptr_k;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--multi-opt", &v3, NULL));
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v3", v3);
 
-        char const* v_;
+        char const* v_ = ss_nullptr_k;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--multi-opt", &v_, NULL));
+
+
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
 
         clasp::releaseArguments(args);

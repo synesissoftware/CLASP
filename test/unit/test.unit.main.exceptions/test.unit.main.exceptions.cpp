@@ -4,7 +4,7 @@
  * Purpose:     Implementation file for the test.unit.main.exceptions project.
  *
  * Created:     7th March 2013
- * Updated:     18th April 2019
+ * Updated:     16th October 2019
  *
  * Status:      Wizard-generated
  *
@@ -67,6 +67,7 @@ namespace
 
     static void test_1_0(void);
     static void test_1_1(void);
+    static void test_1_1_unrecognised(void);
     static void test_1_2(void);
     static void test_1_3(void);
     static void test_1_4(void);
@@ -119,6 +120,7 @@ int main(int argc, char **argv)
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
+        XTESTS_RUN_CASE(test_1_1_unrecognised);
         XTESTS_RUN_CASE(test_1_2);
         XTESTS_RUN_CASE(test_1_3);
         XTESTS_RUN_CASE(test_1_4);
@@ -155,11 +157,12 @@ namespace
 
 #define RUN_TEST(argc, argv, pfnMain, png, pna, al, fl, el0)    \
                                                                 \
-        run_test_(__FILE__, __LINE__, (argc), (argv), (pfnMain), (png), (pna), (al), (fl), (el0))
+        run_test_(__FILE__, __LINE__, XTESTS_GET_FUNCTION_(), (argc), (argv), (pfnMain), (png), (pna), (al), (fl), (el0))
 
 static void run_test_(
     char const*                 file
 ,   int                         line
+,   char const*                 function
 ,   int                         argc
 ,   char const* const* const    argv
 ,   int (STLSOFT_CDECL*         pfnMain)(clasp::arguments_t const* args)
@@ -191,20 +194,29 @@ static void run_test_(
                     ,   flags
                     );
 
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_NOT_EQUAL(0, r));
+
     ::fflush(Test_stderr);
     ::fclose(Test_stderr);
 
     platformstl::file_lines     lines(Test_path);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(1u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL(expectedLine0, lines[0]);
+    if (!XTESTS_NS_C_QUAL(xTests_hasRequiredConditionFailed()))
+    {
+        XTESTS_REQUIRE(XTESTS_NS_CPP_QUAL(xtests_test_integer(file, line, function, "", 1u, lines.size(), XTESTS_NS_C_QUAL(xtestsComparisonEqual))));
+    }
+
+    if (!XTESTS_NS_C_QUAL(xTests_hasRequiredConditionFailed()))
+    {
+        XTESTS_NS_C_QUAL(xtests_testMultibyteStrings)(file, line, function, "", expectedLine0, lines[0], XTESTS_NS_C_QUAL(xtestsComparisonEqual));
+    }
 }
 
 static void test_1_0()
 {
     static char const* const args[] =
     {
-        "program-path",
+        "program-path-1.0",
 
         NULL
     };
@@ -249,7 +261,7 @@ static void test_1_0()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: required option is not found: --unknown"
+    ,   "program-path-1.0: invalid command-line: required option is not found: --unknown"
     );
 }
 
@@ -257,7 +269,7 @@ static void test_1_1()
 {
     static char const* const args[] =
     {
-        "program-path",
+        "program-path-1.1",
 
         "--x",
 
@@ -302,7 +314,65 @@ static void test_1_1()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: unrecognised argument: --x"
+    ,   "program-path-1.1: invalid command-line: unused argument: --x"
+    );
+}
+
+static void test_1_1_unrecognised()
+{
+    static char const* const args[] =
+    {
+        "program-path-1.1",
+
+        "--x",
+
+        NULL
+    };
+
+    static clasp::alias_t const s_specifications[] =
+    {
+      CLASP_ALIAS_ARRAY_TERMINATOR
+    };
+
+    struct main_
+    {
+        static
+        int
+        fn(
+            clasp::arguments_t const* args
+        )
+        {
+            try
+            {
+                clasp::verify_all_flags_and_options_are_recognised(args, s_specifications);
+                XTESTS_TEST_FAIL("should not get here");
+            }
+            catch(std::bad_alloc&)
+            {
+                throw;
+            }
+            catch(clasp::unrecognised_argument_exception&)
+            {
+                XTESTS_TEST_PASSED();
+                throw;
+            }
+            catch(std::exception&)
+            {
+                XTESTS_TEST_FAIL("should not get here");
+                throw;
+            }
+
+            return EXIT_FAILURE;
+        }
+    };
+
+    RUN_TEST(
+        int(STLSOFT_NUM_ELEMENTS(args) - 1), args
+    ,   &main_::fn
+    ,   NULL, NULL
+    ,   s_specifications
+    ,   0
+    ,   "program-path-1.1: invalid command-line: unrecognised argument: --x"
     );
 }
 
@@ -310,7 +380,7 @@ static void test_1_2()
 {
     static char const* const args[] =
     {
-        "program-path",
+        "program-path-1.2",
 
         "--opt=",
 
@@ -357,7 +427,7 @@ static void test_1_2()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: value is missing for option: --opt"
+    ,   "program-path-1.2: invalid command-line: value is missing for option: --opt"
     );
 }
 
@@ -365,7 +435,7 @@ static void test_1_3()
 {
     static char const* const args[] =
     {
-        "program-path",
+        "program-path-1.3",
 
         "--opt=abc",
 
@@ -412,7 +482,7 @@ static void test_1_3()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: value is not an integer for option: --opt"
+    ,   "program-path-1.3: invalid command-line: value is not an integer for option: --opt"
     );
 }
 
@@ -420,7 +490,7 @@ static void test_1_4()
 {
     static char const* const args[] =
     {
-        "program-path",
+        "program-path-1.4",
 
         "--opt=-1",
 
@@ -449,7 +519,7 @@ static void test_1_4()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: value may not be negative for option: --opt"
+    ,   "program-path-1.4: invalid command-line: value may not be negative for option: --opt"
     );
 }
 
@@ -461,7 +531,7 @@ static void test_1_6()
 {
     static char const* const args[] =
     {
-        "program-path",
+        "program-path-1.6",
 
         "--opt-real-1=-1.1",
         "--opt-real-2=-2.2abc",
@@ -524,7 +594,7 @@ static void test_1_6()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: value is not a real number for option: --opt-real-2"
+    ,   "program-path-1.6: invalid command-line: value is not a real number for option: --opt-real-2"
     );
 }
 
