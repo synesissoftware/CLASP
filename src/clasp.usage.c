@@ -4,7 +4,7 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     17th October 2019
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -362,7 +362,7 @@ clasp_invoke_header_expand_usage_(
     {
         /* usage is specified, begins with a punctuation character, and has length >= 2 */
 
-        clasp_char_t const          sep =   usage++[0]; // NOTE: moved past usage[0]
+        clasp_char_t const          sep =   usage++[0]; /* NOTE: moved past usage[0] */
         size_t const                le_ =   clasp_strlen_(usage);
         clasp_char_t const* const   l_s =   clasp_strnexrchr_(usage, le_, sep);
 
