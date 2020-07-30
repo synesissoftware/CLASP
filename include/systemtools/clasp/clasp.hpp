@@ -4,7 +4,7 @@
  * Purpose:     C++ layer for the CLASP library.
  *
  * Created:     31st July 2008
- * Updated:     18th April 2019
+ * Updated:     17th October 2019
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -53,9 +53,9 @@
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MAJOR    2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MINOR    9
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     57
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MINOR    10
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_REVISION 1
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     61
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -67,16 +67,20 @@
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
-#if _STLSOFT_VER < 0x010982ff
-# error This requires STLSoft 1.9.130 or later
+#if _STLSOFT_VER < 0x010984ff
+# error This requires STLSoft 1.9.132 or later
 #endif
 #ifdef CLASP_USE_WIDE_STRINGS
 # include <stlsoft/conversion/char_conversions.hpp>
 #endif /* CLASP_USE_WIDE_STRINGS */
 #include <stlsoft/conversion/integer_to_string.hpp>
+#include <stlsoft/conversion/truncation_cast.hpp>
 #include <stlsoft/meta/is_integral_type.hpp>
 #include <stlsoft/meta/is_numeric_type.hpp>
 #include <stlsoft/meta/is_pointer_type.hpp>
+#include <stlsoft/meta/is_same_type.hpp>
+#include <stlsoft/meta/is_signed_type.hpp>
+#include <stlsoft/meta/yesno.hpp>
 #include <stlsoft/shims/access/string/std/c_string.h>
 #if 0
 #elif 0 ||\
@@ -164,8 +168,10 @@ private:
             m.append(1u, ':');
             m.append(1u, ' ');
 #ifdef CLASP_USE_WIDE_STRINGS
+
             m.append(stlsoft::w2m(optionName));
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
             m.append(optionName);
 #endif /* CLASP_USE_WIDE_STRINGS */
 
@@ -280,8 +286,10 @@ namespace ximpl
         static int call(wchar_t const* s)
         {
 #ifdef STLSOFT_STD_CSTDLIB_WTOI_SUPPORTED
+
             return ::_wtoi(s);
 #else /* ? STLSOFT_STD_CSTDLIB_WTOI_SUPPORTED */
+
             return static_cast<int>(::wcstol(s, NULL, 0));
 #endif /* STLSOFT_STD_CSTDLIB_WTOI_SUPPORTED */
         }
@@ -296,8 +304,10 @@ namespace ximpl
         static long call(wchar_t const* s)
         {
 #ifdef STLSOFT_STD_CSTDLIB_WTOL_SUPPORTED
+
             return ::_wtol(s);
 #else /* ? STLSOFT_STD_CSTDLIB_WTOL_SUPPORTED */
+
             return ::wcstol(s, NULL, 0);
 #endif /* STLSOFT_STD_CSTDLIB_WTOL_SUPPORTED */
         }
@@ -337,8 +347,6 @@ namespace ximpl
     struct integer_conversion_traits_<int>
     {
     public:
-        enum { allowNegatives = 1 };
-
         static int convert(clasp_char_t const* str)
         {
             return atoi_helper::call(str);
@@ -346,12 +354,11 @@ namespace ximpl
     };
 
 #ifdef _WIN64
+
     STLSOFT_TEMPLATE_SPECIALISATION
     struct integer_conversion_traits_<unsigned>
     {
     public:
-        enum { allowNegatives = 1 };
-
         static unsigned convert(clasp_char_t const* str)
         {
             return atol_helper::call(str);
@@ -363,8 +370,6 @@ namespace ximpl
     struct integer_conversion_traits_<long>
     {
     public:
-        enum { allowNegatives = 1 };
-
         static int convert(clasp_char_t const* str)
         {
             return atol_helper::call(str);
@@ -375,13 +380,13 @@ namespace ximpl
     struct integer_conversion_traits_<size_t>
     {
     public:
-        enum { allowNegatives = 0 };
-
         static size_t convert(clasp_char_t const* str)
         {
             return atoul_helper::call(str);
         }
     };
+
+
 
     struct boolean_conversion_traits_
     {
@@ -391,14 +396,14 @@ namespace ximpl
 
             if(NULL == wasStrictlyCorrect)
             {
-              wasStrictlyCorrect = &wasStrictlyCorrect_;
+                wasStrictlyCorrect = &wasStrictlyCorrect_;
             }
 
             *wasStrictlyCorrect = false;
 
             if(0 == str.len)
             {
-              return true;
+                return true;
             }
 
             *wasStrictlyCorrect = true;
@@ -408,16 +413,20 @@ namespace ximpl
                 /* Affirmative */
                 case    'Y':
                 case    'y':
+
                     switch(str.ptr[1])
                     {
                         case    '\0':
+
                             return true;
                         case    'E':
                         case    'e':
+
                             switch(str.ptr[2])
                             {
                                 case    'S':
                                 case    's':
+
                                     if('\0' == str.ptr[3])
                                     {
                                         return true;
@@ -429,20 +438,25 @@ namespace ximpl
                     break;
                 case    'T':
                 case    't':
+
                     switch(str.ptr[1])
                     {
                         case    '\0':
+
                             return true;
                         case    'R':
                         case    'r':
+
                             switch(str.ptr[2])
                             {
                                 case    'U':
                                 case    'u':
+
                                     switch(str.ptr[3])
                                     {
                                         case    'E':
                                         case    'e':
+
                                             if('\0' == str.ptr[4])
                                             {
                                                 return true;
@@ -458,12 +472,15 @@ namespace ximpl
                 /* Negative */
                 case    'N':
                 case    'n':
+
                     switch(str.ptr[1])
                     {
                         case    '\0':
+
                             return false;
                         case    'O':
                         case    'o':
+
                             if('\0' == str.ptr[2])
                             {
                                 return false;
@@ -473,24 +490,30 @@ namespace ximpl
                     break;
                 case    'F':
                 case    'f':
+
                     switch(str.ptr[1])
                     {
                         case    '\0':
+
                             return false;
                         case    'A':
                         case    'a':
+
                             switch(str.ptr[2])
                             {
                                 case    'L':
                                 case    'l':
+
                                     switch(str.ptr[3])
                                     {
                                         case    'S':
                                         case    's':
+
                                             switch(str.ptr[4])
                                             {
                                                 case    'E':
                                                 case    'e':
+
                                                     if('\0' == str.ptr[5])
                                                     {
                                                         return false;
@@ -503,6 +526,7 @@ namespace ximpl
                     break;
 
                 default:
+
                     break;
             }
 
@@ -617,7 +641,8 @@ namespace ximpl
                 switch(arg.value.ptr[0])
                 {
                     case    '-':
-                        throw_invalid_option_value_exception_if_<0 != integer_conversion_traits_<I>::allowNegatives>("value may not be negative for option", optionName);
+
+                        throw_invalid_option_value_exception_if_<0 == stlsoft::is_signed_type<I>::value>("value may not be negative for option", optionName);
                         break;
                     case    '0':
                     case    '1':
@@ -630,9 +655,12 @@ namespace ximpl
                     case    '8':
                     case    '9':
                     case    '+':
+
                         *result = integer_conversion_traits_<I>::convert(arg.value.ptr);
+
                         return true;
                     default:
+
                         throw_invalid_option_value_exception_("value is not an integer for option", optionName);
                         break;
                 }
@@ -672,7 +700,8 @@ namespace ximpl
                     switch(arg.value.ptr[0])
                     {
                         case    '-':
-                            throw_invalid_option_value_exception_if_<0 != integer_conversion_traits_<I>::allowNegatives>("value may not be negative for option", optionName);
+
+                            throw_invalid_option_value_exception_if_<0 == stlsoft::is_signed_type<I>::value>("value may not be negative for option", optionName);
                             break;
                         case    '0':
                         case    '1':
@@ -685,9 +714,12 @@ namespace ximpl
                         case    '8':
                         case    '9':
                         case    '+':
+
                             *result = integer_conversion_traits_<I>::convert(arg.value.ptr);
+
                             return;
                         default:
+
                             throw_invalid_option_value_exception_("value is not an integer for option", optionName);
                             break;
                     }
@@ -908,6 +940,7 @@ namespace ximpl
                 clasp_useArgument(args, &arg);
 
                 *result = arg.value.ptr;
+
                 return true;
             }
         }}
@@ -972,7 +1005,10 @@ namespace ximpl
             {
                 clasp_useArgument(args, &arg);
 
-                defaultValue = arg.value.ptr;
+                if (0 != arg.value.len)
+                {
+                    defaultValue = arg.value.ptr;
+                }
 
                 break;
             }
@@ -990,6 +1026,324 @@ namespace ximpl
 
         return false;
     }
+
+    template <typename R>
+    inline
+    bool
+    check_option_fn_defaultIsR_(
+        clasp_arguments_t const*    args
+    ,   clasp_char_t const*         optionName
+    ,   size_t                      optionNameLen
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   R*                          result
+    ,   R const&                    defaultValue
+    )
+    {
+        clasp_char_t const* v = NULL;
+
+        { for(size_t i = 0; i != args->numOptions; ++i)
+        {
+            clasp_argument_t const& arg = args->options[i];
+
+            if( arg.resolvedName.len == optionNameLen &&
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+            {
+                clasp_useArgument(args, &arg);
+
+                if (0 != arg.value.len)
+                {
+                    v = arg.value.ptr;
+                }
+
+                break;
+            }
+        }}
+
+        if(NULL != v)
+        {
+            return
+            (*pfn)(
+                param
+            ,   v
+            ,   result
+            );
+        }
+        else
+        {
+            *result = defaultValue;
+        }
+
+        return false;
+    }
+
+
+
+
+    template<
+        typename R
+    >
+    bool
+    check_option_with_fn_default_is_same_type_(
+        stlsoft::yes_type
+    ,   clasp_arguments_t const*    args
+    ,   clasp_char_t const*         optionName
+    ,   size_t                      optionNameLen
+    ,   R*                          result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   R const&                    defaultValue
+    );
+
+    template<
+        typename R1
+    ,   typename S2
+    >
+    bool
+    check_option_with_fn_default_is_same_type_(
+        stlsoft::no_type
+    ,   clasp_arguments_t const*    args
+    ,   clasp_char_t const*         optionName
+    ,   size_t                      optionNameLen
+    ,   R1*                         result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R1*                 result
+                                    )
+    ,   void*                       param
+    ,   S2 const&                   defaultValue
+    );
+
+
+
+    // 4. D is an instance of a type that can be interpreted as a string
+    template<
+        typename S
+    ,   typename R
+    ,   typename D
+    >
+    bool
+    check_option_D_maybe_integral_(
+        ::stlsoft::no_type
+    ,   clasp_arguments_t const*    args
+    ,   S const&                    optionName
+    ,   R*                          result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   D const&                    defaultValue
+    )
+    {
+        return
+        check_option_fn_defaultIsString_(
+            args
+        ,   stlsoft::c_str_data(optionName)
+        ,   stlsoft::c_str_len(optionName)
+        ,   pfn
+        ,   param
+        ,   result
+        ,   stlsoft::c_str_ptr_null(defaultValue)
+        );
+    }
+
+    // 3. Integers - D is an integer type, R is an integer type
+    template<
+        typename S
+    ,   typename R
+    ,   typename D
+    >
+    bool
+    check_option_D_maybe_integral_(
+        ::stlsoft::yes_type
+    ,   clasp_arguments_t const*    args
+    ,   S const&                    optionName
+    ,   R*                          result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   D const&                    defaultValue
+    )
+    {
+        return
+        check_option_fn_defaultIsR_(
+            args
+        ,   stlsoft::c_str_data(optionName)
+        ,   stlsoft::c_str_len(optionName)
+        ,   pfn
+        ,   param
+        ,   result
+        ,   stlsoft::truncation_cast<R>(defaultValue)
+        );
+    }
+
+    //  3, or 4
+    template<
+        typename S
+    ,   typename R
+    ,   typename D
+    >
+    bool
+    check_option_D_maybe_literal_string_(
+        ::stlsoft::no_type
+    ,   clasp_arguments_t const*    args
+    ,   S const&                    optionName
+    ,   R*                          result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   D const&                    defaultValue
+    )
+    {
+        typedef ::stlsoft::is_integral_type<R>  iit_R_t;
+        typedef ::stlsoft::is_integral_type<D>  iit_D_t;
+
+        enum
+        {
+            is_integral = (0 != iit_R_t::value) && (0 != iit_D_t::value)
+        };
+
+        typedef ::stlsoft::value_to_yesno_type<is_integral>::type   is_integral_t;
+
+        return
+        check_option_D_maybe_integral_(
+            is_integral_t()
+        ,   args
+        ,   optionName
+        ,   result
+        ,   pfn
+        ,   param
+        ,   defaultValue
+        );
+    }
+
+    // 2. D is character string literal
+    template<
+        typename S
+    ,   typename R
+    ,   typename D
+    >
+    bool
+    check_option_D_maybe_literal_string_(
+        ::stlsoft::yes_type
+    ,   clasp_arguments_t const*    args
+    ,   S const&                    optionName
+    ,   R*                          result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   D const&                    defaultValue
+    )
+    {
+        return
+        check_option_fn_defaultIsString_(
+        ,   args
+        ,   stlsoft::c_str_data(optionName)
+        ,   stlsoft::c_str_len(optionName)
+        ,   pfn
+        ,   param
+        ,   result
+        ,   stlsoft::c_str_ptr_null(defaultValue)
+        )
+    }
+
+    //  2, or 3, or 4
+    template<
+        typename S
+    ,   typename R
+    ,   typename D
+    >
+    bool
+    check_option_maybe_R_and_D_maybe_same_type_(
+        ::stlsoft::no_type
+    ,   clasp_arguments_t const*    args
+    ,   S const&                    optionName
+    ,   R*                          result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   D const&                    defaultValue
+    )
+    {
+        typedef ::stlsoft::is_same_type<char*, D>           ist_1_t;
+        typedef ::stlsoft::is_same_type<char const*, D>     ist_2_t;
+
+        enum
+        {
+            is_char_literal = (0 != ist_1_t::value) + (0 != ist_2_t::value)
+        };
+
+        typedef ::stlsoft::value_to_yesno_type<is_char_literal>::type   is_literal_string_t;
+
+        return
+        check_option_D_maybe_literal_string_<S, R, D>(
+            is_literal_string_t()
+        ,   args
+        ,   optionName
+        ,   result
+        ,   pfn
+        ,   param
+        ,   defaultValue
+        );
+    }
+
+    // 1. Same type - DT == RT
+    template<
+        typename S
+    ,   typename R
+    ,   typename D
+    >
+    bool
+    check_option_maybe_R_and_D_maybe_same_type_(
+        ::stlsoft::yes_type
+    ,   clasp_arguments_t const*    args
+    ,   S const&                    optionName
+    ,   R*                          result
+    ,   bool                      (*pfn)(
+                                        void*               param
+                                    ,   clasp_char_t const* parsedValue
+                                    ,   R*                  result
+                                    )
+    ,   void*                       param
+    ,   D const&                    defaultValue
+    )
+    {
+        return
+        check_option_fn_defaultIsR_(
+            args
+        ,   stlsoft::c_str_data(optionName)
+        ,   stlsoft::c_str_len(optionName)
+        ,   pfn
+        ,   param
+        ,   result
+        ,   defaultValue
+        );
+    }
+
+
 
     inline
     void
@@ -1072,6 +1426,7 @@ namespace ximpl
     }
 
 #ifdef _WIN64
+
     inline
     void
     require_option_dispatch_(
@@ -1286,9 +1641,8 @@ namespace ximpl
         return NULL;
     }
 
-
-
 #if 0
+
     inline
     bool
     check_flags_option_(
@@ -1302,7 +1656,6 @@ namespace ximpl
     {
     }
 #endif /* 0 */
-
 } /* namespace ximpl */
 
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
@@ -1337,7 +1690,13 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1367,10 +1726,17 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 #ifdef _WIN64
+
 /** Checks whether the given option exists, and elicits its value if so; if
  * not, sets the result to be the given default value
  *
@@ -1397,7 +1763,13 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1427,7 +1799,13 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 #endif
 
@@ -1457,7 +1835,13 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1487,7 +1871,13 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists, and elicits its value if so; if
@@ -1516,7 +1906,13 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1546,7 +1942,13 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_integer_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_integer_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists, and elicits its value if so; if
@@ -1575,7 +1977,12 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_real_(args, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_real_(
+        args
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1605,7 +2012,13 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_real_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_real_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists, and elicits its value if so; if
@@ -1634,9 +2047,34 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_boolean_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue, NULL);
+    return ::clasp::ximpl::check_option_boolean_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    ,   NULL
+    );
 }
 
+/** Checks whether the given option exists and has a specified value, and
+ * elicits its value if so; if it does not exist, or does not have a value,
+ * then the appropriate default is used
+ *
+ * \param args Non-mutating pointer to the arguments structure, obtained
+ *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ * \param optionName Name of the option. Must be of a type which may be
+ *   interpreted as a string. May not be NULL or empty
+ * \param result Pointer to a variable into which to write the result, if
+ *   found, or the default value, if not. May not be NULL
+ * \param optionNotSpecifiedDefaultValue The default value to be written
+ *   into <code>*result</code> if the named option does not exist
+ * \param valueNotSpecifiedDefaultValue The default value to be written
+ *   into <code>*result</code> if the named option does not have a value
+ *
+ * \pre (NULL != args)
+ * \pre (NULL != result)
+ */
 template <typename S>
 bool
 check_option(
@@ -1649,7 +2087,14 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_boolean_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, optionNotSpecifiedDefaultValue, &valueNotSpecifiedDefaultValue);
+    return ::clasp::ximpl::check_option_boolean_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   optionNotSpecifiedDefaultValue
+    ,   &valueNotSpecifiedDefaultValue
+    );
 }
 
 
@@ -1671,7 +2116,15 @@ check_flags_option(
 
     bool givenValue;
 
-    if(!::clasp::ximpl::check_option_boolean_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), &givenValue, false, NULL))
+    if(!::clasp::ximpl::check_option_boolean_(
+            args
+        ,   false
+        ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+        ,   &givenValue
+        ,   false
+        ,   NULL
+        )
+    )
     {
         *result = (~flagValue & *result) | defaultValue;
 
@@ -1705,7 +2158,15 @@ check_flags_option(
 
     bool givenValue;
 
-    if(!::clasp::ximpl::check_option_boolean_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), &givenValue, false, NULL))
+    if(!::clasp::ximpl::check_option_boolean_(
+            args
+        ,   false
+        ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+        ,   &givenValue
+        ,   false
+        ,   NULL
+        )
+    )
     {
         return false;
     }
@@ -1750,7 +2211,13 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_cstring_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_cstring_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1780,7 +2247,13 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_cstring_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, defaultValue);
+    return ::clasp::ximpl::check_option_cstring_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   defaultValue
+    );
 }
 
 
@@ -1808,7 +2281,13 @@ check_option(
 
     static clasp_char_t const defaultValue[1] = { '\0' };
 
-    return ::clasp::ximpl::check_option_string_t_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue));
+    return ::clasp::ximpl::check_option_string_t_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue)
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1836,7 +2315,13 @@ check_next_option(
 
     static clasp_char_t const defaultValue[1] = { '\0' };
 
-    return ::clasp::ximpl::check_option_string_t_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue));
+    return ::clasp::ximpl::check_option_string_t_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue)
+    );
 }
 
 /** Checks whether the given option exists, and elicits its value if so; if
@@ -1865,7 +2350,13 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_string_t_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue));
+    return ::clasp::ximpl::check_option_string_t_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue)
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1895,7 +2386,13 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_string_t_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue));
+    return ::clasp::ximpl::check_option_string_t_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue)
+    );
 }
 
 /** Checks whether the given option exists, and elicits its value if so; if
@@ -1924,7 +2421,13 @@ check_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_string_t_(args, false, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue));
+    return ::clasp::ximpl::check_option_string_t_(
+        args
+    ,   false
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue)
+    );
 }
 
 /** Checks whether the given option exists in one of the as-yet unused
@@ -1954,7 +2457,13 @@ check_next_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_option_string_t_(args, true, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue));
+    return ::clasp::ximpl::check_option_string_t_(
+        args
+    ,   true
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(defaultValue), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(defaultValue)
+    );
 }
 
 /** Evaluates whether a flag (or a boolean option) is specified, and
@@ -1985,7 +2494,13 @@ check_flag(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::check_flag_(args, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name), bitmask, onValue, offValue);
+    return ::clasp::ximpl::check_flag_(
+        args
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name)
+    ,   bitmask
+    ,   onValue
+    ,   offValue
+    );
 }
 
 /** Evaluates whether a flag (or a boolean option) is specified, and
@@ -2011,7 +2526,13 @@ check_flag(
 ,   int                         onValue
 )
 {
-    return check_flag(args, name, bitmask, onValue, onValue);
+    return check_flag(
+        args
+    ,   name
+    ,   bitmask
+    ,   onValue
+    ,   onValue
+    );
 }
 
 /** Evaluates whether a flag (or a boolean option) is specified, and
@@ -2038,7 +2559,13 @@ check_flag(
 
     bool    dummy_;
     int     bitmask =   0;
-    bool    b       =   ::clasp::ximpl::check_flag_(args, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name), &bitmask, 1, 0);
+    bool    b       =   ::clasp::ximpl::check_flag_(
+                            args
+                        ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name)
+                        ,   &bitmask
+                        ,   1
+                        ,   0
+                        );
 
     if(NULL == flagVar)
     {
@@ -2071,7 +2598,11 @@ flag_specified(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::flag_specified_(args, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name), markUsedIfFound);
+    return ::clasp::ximpl::flag_specified_(
+        args
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name)
+    ,   markUsedIfFound
+    );
 }
 
 /** Obtains a pointer to the flag or option with the given name, if it
@@ -2096,7 +2627,11 @@ find_flag_or_option(
 {
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    return ::clasp::ximpl::find_flag_or_option_(args, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name), after);
+    return ::clasp::ximpl::find_flag_or_option_(
+        args
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(name), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(name)
+    ,   after
+    );
 }
 
 // The following functions allow for optional (check) retrieval of an option
@@ -2132,6 +2667,11 @@ find_flag_or_option(
  * \param defaultValue The default value to be written into
  *   <code>*result</code> if the named option does not exist
  *
+ * \return Indicates whether the given value, or the default value, is a
+ *   valid value, as indicated by a \c true return from \c pfn
+ * \retval true The given value, or the default value, is a valid value
+ * \retval false Neither the given value nor the default value is valid
+ *
  * \pre (NULL != args)
  * \pre (NULL != result)
  * \pre (NULL != pfn)
@@ -2161,15 +2701,20 @@ check_option(
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
     SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_();
 
-    return ::clasp::ximpl::check_option_fn_defaultIsString_(
-                args
-            ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName)
-            ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
-            ,   pfn
-            ,   param
-            ,   result
-            ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_null_(defaultValue)
-            );
+    enum { types_are_same = stlsoft::is_same_type<D, R>::value };
+
+    typedef ss_typename_type_k stlsoft::value_to_yesno_type<types_are_same>::type   same_type_t;
+
+    return
+    ximpl::check_option_maybe_R_and_D_maybe_same_type_(
+        same_type_t()
+    ,   args
+    ,   optionName
+    ,   result
+    ,   pfn
+    ,   param
+    ,   defaultValue
+    );
 }
 
 
@@ -2209,7 +2754,13 @@ require_option(
 
     typedef ss_typename_type_k ::stlsoft::is_numeric_type<R>::type      numeric_t_;
 
-    ::clasp::ximpl::require_option_dispatch_(numeric_t_(), args, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, NULL);
+    ::clasp::ximpl::require_option_dispatch_(
+        numeric_t_()
+    ,   args
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   NULL
+    );
 }
 
 /** Searches for the required option and provides its value, or throws an
@@ -2247,7 +2798,13 @@ require_option(
 
     typedef ss_typename_type_k ::stlsoft::is_numeric_type<R>::type      numeric_t_;
 
-    ::clasp::ximpl::require_option_dispatch_(numeric_t_(), args, SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName), result, missingMessage);
+    ::clasp::ximpl::require_option_dispatch_(
+        numeric_t_()
+    ,   args
+    ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
+    ,   result
+    ,   missingMessage
+    );
 }
 
 
