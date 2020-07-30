@@ -6,7 +6,7 @@
 #           on Win32
 #
 # Created:	4th June 2008
-# Updated:	8th August 2012
+# Updated:	16th October 2019
 #
 ############################################################################
 
@@ -41,7 +41,7 @@ endif
 ########################################
 # Project & compiler version
 
-COMP_TAG = gcc42
+COMP_TAG = gcc34
 ARCH_TAG =
 OS_TAG = unix
 PROJ_TAG = systemtools.clasp
