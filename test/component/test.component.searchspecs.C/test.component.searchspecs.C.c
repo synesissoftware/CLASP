@@ -29,7 +29,7 @@
  * includes
  */
 
-/* SystemTools::CLASP header files */
+/* CLASP header files */
 #include <clasp/clasp.h>
 
 /* xTests header files */

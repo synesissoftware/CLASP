@@ -143,11 +143,11 @@ SOURCE="$(STLSOFT)\include\winstl\winstl.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE="$(CLASP_ROOT)\include\systemtools\clasp\clasp.h"
+SOURCE="$(CLASP_ROOT)\include\clasp\clasp.h"
 # End Source File
 # Begin Source File
 
-SOURCE="$(CLASP_ROOT)\include\systemtools\clasp\implicit_link.h"
+SOURCE="$(CLASP_ROOT)\include\clasp\implicit_link.h"
 # End Source File
 # End Group
 # Begin Group "xTests Header Files"
@@ -164,7 +164,7 @@ SOURCE="$(XTESTS_C_ROOT)\include\xtests\xtests.h"
 # End Group
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\util\searchspecs.h
+SOURCE=..\..\..\..\include\clasp\util\searchspecs.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

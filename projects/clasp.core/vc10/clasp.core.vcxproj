@@ -193,11 +193,8 @@
     <ClInclude Include="..\..\..\include\clasp\clasp.h" />
     <ClInclude Include="..\..\..\include\clasp\implicit_link.h" />
     <ClInclude Include="..\..\..\include\clasp\main.h" />
-    <ClInclude Include="..\..\..\include\systemtools\clasp\clasp.h" />
-    <ClInclude Include="..\..\..\include\systemtools\clasp\implicit_link.h" />
-    <ClInclude Include="..\..\..\include\systemtools\clasp\main.h" />
-    <ClInclude Include="..\..\..\include\systemtools\clasp\internal\shim_macros.h" />
-    <ClInclude Include="..\..\..\include\systemtools\clasp\util\searchspecs.h" />
+    <ClInclude Include="..\..\..\include\clasp\internal\shim_macros.h" />
+    <ClInclude Include="..\..\..\include\clasp\util\searchspecs.h" />
     <ClInclude Include="..\..\..\src\clasp.internal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

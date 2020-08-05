@@ -11,17 +11,11 @@
     <Filter Include="Header Files\include\clasp">
       <UniqueIdentifier>{fe147870-ff62-4fd4-9467-4a3e13667de9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\systemtools">
-      <UniqueIdentifier>{34DFE94F-EC0D-4f9c-AA1F-326262CF7F70}</UniqueIdentifier>
+    <Filter Include="Header Files\include\clasp\internal">
+      <UniqueIdentifier>{9A38D497-E9FE-4284-8D5A-7F951CAC9BB6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\include\systemtools\clasp">
-      <UniqueIdentifier>{9D677F3E-A8F3-4cec-95A5-E91527BD20BD}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\include\systemtools\clasp\internal">
-      <UniqueIdentifier>{B80C88B2-AC33-4af1-82A2-274E04D8EEF3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\include\systemtools\clasp\util">
-      <UniqueIdentifier>{D03309CD-B1F7-47d8-8F9B-49CD7D3532A8}</UniqueIdentifier>
+    <Filter Include="Header Files\include\clasp\util">
+      <UniqueIdentifier>{E367A945-5BDC-4cb5-A47C-596949D06A6E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Implementation Files">
       <UniqueIdentifier>{D235CB96-B7A2-46AC-B7DC-310587E1D366}</UniqueIdentifier>
@@ -71,20 +65,11 @@
     <ClInclude Include="..\..\..\include\clasp\main.h">
       <Filter>Header Files\include\clasp</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\systemtools\clasp\clasp.h">
-      <Filter>Header Files\include\systemtools\clasp</Filter>
+    <ClInclude Include="..\..\..\include\clasp\internal\shim_macros.h">
+      <Filter>Header Files\include\clasp\internal</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\systemtools\clasp\implicit_link.h">
-      <Filter>Header Files\include\systemtools\clasp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\systemtools\clasp\main.h">
-      <Filter>Header Files\include\systemtools\clasp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\systemtools\clasp\internal\shim_macros.h">
-      <Filter>Header Files\include\systemtools\clasp\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\systemtools\clasp\util\searchspecs.h">
-      <Filter>Header Files\include\systemtools\clasp\util</Filter>
+    <ClInclude Include="..\..\..\include\clasp\util\searchspecs.h">
+      <Filter>Header Files\include\clasp\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

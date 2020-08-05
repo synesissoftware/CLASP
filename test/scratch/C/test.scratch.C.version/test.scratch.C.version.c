@@ -19,7 +19,7 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-/* SystemTools::CLASP header files */
+/* CLASP header files */
 #include <clasp/clasp.h>
 
 /* Standard C header files */

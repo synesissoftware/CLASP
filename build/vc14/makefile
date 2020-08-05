@@ -1,12 +1,12 @@
 ############################################################################
 # File: 	makefile
 #
-# Purpose:	Makefile for the SystemTools::CLASP project,
+# Purpose:	Makefile for the CLASP project,
 #           for the Visual C++ 14.0 compiler,
 #           on Win32
 #
 # Created:	3rd August 2020
-# Updated:	3rd August 2020
+# Updated:	5th August 2020
 #
 ############################################################################
 
@@ -83,7 +83,7 @@ RM		=   del /f
 # 2 : debug / release / test	:	D / M / T	=> NOTE: Test not currently provided
 # 
 
-TARGET_LIB_CORE_ROOT_ = systemtools.clasp.0.core
+TARGET_LIB_CORE_ROOT_ = $(PROJ_TAG).0.core
 
 CORE_LIB_BASE_ = $(PROJ_LIB_DIR)\$(TARGET_LIB_CORE_ROOT_).$(COMP_TAG)$(ARCH_TAG)__CONFIGURATION__.lib
 

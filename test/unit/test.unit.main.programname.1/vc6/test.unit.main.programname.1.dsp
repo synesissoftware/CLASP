@@ -439,15 +439,15 @@ SOURCE="$(RECLS_ROOT)\include\recls\internal\retcodes.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\clasp.h
+SOURCE=..\..\..\..\include\clasp\clasp.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\clasp.hpp
+SOURCE=..\..\..\..\include\clasp\clasp.hpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\main.hpp
+SOURCE=..\..\..\..\include\clasp\main.hpp
 # End Source File
 # End Group
 # Begin Group "xTests Header Files"

@@ -21,7 +21,7 @@
  * includes
  */
 
-/* SystemTools::CLASP header files */
+/* CLASP header files */
 #include <clasp/main.h>
 
 /* Standard C header files */

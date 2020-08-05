@@ -4,7 +4,7 @@
  * Purpose:     Implicit link file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     2nd August 2020
+ * Updated:     5th August 2020
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -13,7 +13,7 @@
  * includes
  */
 
-/* SystemTools::CLASP header files */
+/* CLASP header files */
 #include <clasp/implicit_link.h>
 
 /* xTests header files */

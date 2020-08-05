@@ -385,11 +385,11 @@ SOURCE="$(RECLS_ROOT)\include\recls\internal\retcodes.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\clasp.h
+SOURCE=..\..\..\..\include\clasp\clasp.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\implicit_link.h
+SOURCE=..\..\..\..\include\clasp\implicit_link.h
 # End Source File
 # End Group
 # Begin Group "xTests Header Files"

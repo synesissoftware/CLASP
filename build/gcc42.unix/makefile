@@ -1,12 +1,12 @@
 ############################################################################
 # File: 	makefile
 #
-# Purpose:	Makefile for the SystemTools::CLASP project,
+# Purpose:	Makefile for the CLASP project,
 #           for the GCC 4.2 compiler,
 #           on UNIX
 #
 # Created:	4th June 2008
-# Updated:	16th August 2015
+# Updated:	5th August 2020
 #
 ############################################################################
 
@@ -66,7 +66,7 @@ CFLAGS_MMR = $(CFLAGS_MSR) -D_REENTRANT
 # 2 : debug / release / test    :   D / M / T   => NOTE: Test not currently provided
 # 
 
-TARGET_LIB_CORE_ROOT_ = libsystemtools.clasp.0.core
+TARGET_LIB_CORE_ROOT_ = lib$(PROJ_TAG).0.core
 
 TARGET_LIB_CORE_MSD = $(PROJ_LIB_DIR)/$(TARGET_LIB_CORE_ROOT_).$(COMP_TAG).debug.a
 TARGET_LIB_CORE_MSR = $(PROJ_LIB_DIR)/$(TARGET_LIB_CORE_ROOT_).$(COMP_TAG).a
