@@ -22,9 +22,11 @@ src/xtests/
 Debug/
 DebugMt/
 DebugDll/
+DebugUnix/
 Release/
 ReleaseMt/
 ReleaseDll/
+ReleaseUnix/
 
 x64/
 Win32/
