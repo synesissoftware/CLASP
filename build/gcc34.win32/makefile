@@ -6,17 +6,16 @@
 #           on Win32
 #
 # Created:	4th June 2008
-# Updated:	16th October 2019
+# Updated:	3rd August 2020
 #
 ############################################################################
 
 
 ############################################################################
-# Environment check
+# environment check
 #
-
-# If you want to build without recls, you must define CLASP_NO_RECLS to the
-# make process, e.g. "nmake CLASP_NO_RECLS=1 build"
+# * to build without recls support make with the symbol CLASP_NO_RECLS
+#   defined, e.g. "> nmake CLASP_NO_RECLS=1 build"
 
 ifdef CLASP_NO_RECLS
  message
@@ -28,18 +27,14 @@ else
  endif # !RECLS_ROOT
 endif
 
-#!ifndef STLSOFT
-#!error STLSOFT must be defined
-#!endif # !STLSOFT
+############################################################################
+# pseudo-targets
 
 ############################################################################
-# Pseudo-targets
-
-############################################################################
-# Symbols
+# symbols
 
 ########################################
-# Project & compiler version
+# project & compiler version
 
 COMP_TAG = gcc34
 ARCH_TAG =
@@ -48,12 +43,12 @@ PROJ_TAG = systemtools.clasp
 PROJ_VER_MAJOR = 0
 
 ########################################
-# Testing verbosity
+# testing verbosity
 
 TEST_VERBOSITY		=	2
 
 ########################################
-# Directories
+# directories
 
 PROJ_ROOT_DIR = ..\..
 PROJ_INC_DIR = $(PROJ_ROOT_DIR)\include
@@ -67,9 +62,9 @@ vpath %.h $(PROJ_SRC_DIR)
 ########################################
 # tools
 
+AR		=   ar
 CC		=	mingw32-gcc
 CPPC	=	mingw32-g++
-AR		=   ar
 LD		=   ld
 RC		=   rc
 

@@ -2,10 +2,10 @@
 # File: 	makefile
 #
 # Purpose:	Makefile for the SystemTools::CLASP project,
-#           for the Visual C++ 11.0 compiler,
-#           on Win-64 (x64)
+#           for the Visual C++ 15.0 compiler,
+#           on Win32
 #
-# Created:	4th June 2008
+# Created:	3rd August 2020
 # Updated:	3rd August 2020
 #
 ############################################################################
@@ -38,9 +38,9 @@
 ########################################
 # project & compiler version
 
-COMP_TAG			=	vc11
+COMP_TAG			=	vc15
 CLASP_MAKE_VC_NO_ST	=	1
-ARCH_TAG			=	.x64
+ARCH_TAG			=	
 OS_TAG				=	
 PROJ_TAG			=	systemtools.clasp
 PROJ_VER_MAJOR		=	0

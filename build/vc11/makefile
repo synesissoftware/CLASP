@@ -6,17 +6,16 @@
 #           on Win32
 #
 # Created:	4th June 2008
-# Updated:	3rd August 2015
+# Updated:	3rd August 2020
 #
 ############################################################################
 
 
 ############################################################################
-# Environment check
+# environment check
 #
-
-# If you want to build without recls, you must define CLASP_NO_RECLS to the
-# make process, e.g. "nmake CLASP_NO_RECLS=1 build"
+# * to build without recls support make with the symbol CLASP_NO_RECLS
+#   defined, e.g. "> nmake CLASP_NO_RECLS=1 build"
 
 !ifdef CLASP_NO_RECLS
 ! message
@@ -28,20 +27,16 @@
 ! endif # !RECLS_ROOT
 !endif
 
-#!ifndef STLSOFT
-#!error STLSOFT must be defined
-#!endif # !STLSOFT
-
 ############################################################################
-# Pseudo-targets
+# pseudo-targets
 
 #.SILENT:
 
 ############################################################################
-# Symbols
+# symbols
 
 ########################################
-# Project & compiler version
+# project & compiler version
 
 COMP_TAG			=	vc11
 CLASP_MAKE_VC_NO_ST	=	1
@@ -51,12 +46,12 @@ PROJ_TAG			=	systemtools.clasp
 PROJ_VER_MAJOR		=	0
 
 ########################################
-# Testing verbosity
+# testing verbosity
 
 TEST_VERBOSITY		=	2
 
 ########################################
-# Directories
+# directories
 
 PROJ_ROOT_DIR = ..\..
 PROJ_INC_DIR = $(PROJ_ROOT_DIR)\include
@@ -67,9 +62,9 @@ PROJ_BIN_DIR = $(PROJ_ROOT_DIR)\bin
 ########################################
 # tools
 
+AR		=   lib -nologo
 CC		=	$(CC) -nologo
 CPPC	=	$(CPP) -nologo
-AR		=   lib -nologo
 LD		=   link -nologo
 RC		=   rc
 
@@ -90,7 +85,7 @@ RM		=   del /f
 
 TARGET_LIB_CORE_ROOT_ = systemtools.clasp.0.core
 
-CORE_LIB_BASE_ = $(PROJ_LIB_DIR)\$(TARGET_LIB_CORE_ROOT_).$(COMP_TAG)__CONFIGURATION__.lib
+CORE_LIB_BASE_ = $(PROJ_LIB_DIR)\$(TARGET_LIB_CORE_ROOT_).$(COMP_TAG)$(ARCH_TAG)__CONFIGURATION__.lib
 
 !ifndef CLASP_MAKE_VC_NO_ST
 CORE_LIB_CORE_MSD = $(CORE_LIB_BASE_:__CONFIGURATION__=.debug)
@@ -213,7 +208,7 @@ compile:\
 	$(OBJS)\
 	\
 
-CLEAN_OBJ_COMMAND=-if exist *.__MODIFIER__obj $(RM) $(RM_ARGS) *.__MODIFIER__obj
+CLEAN_OBJ_COMMAND=-if exist *.__MODIFIER__obj $(RM) *.__MODIFIER__obj
 
 
 clean:\
@@ -222,8 +217,8 @@ clean:\
 	\
 
 clean.objs:
-	@-if exist *.obj $(RM) $(RM_ARGS) *.obj
-	@-if exist *.pdb $(RM) $(RM_ARGS) *.pdb
+	@-if exist *.obj $(RM) *.obj
+	@-if exist *.pdb $(RM) *.pdb
 !ifndef CLASP_MAKE_VC_NO_ST
 	@$(CLEAN_OBJ_COMMAND:__MODIFIER__=msd_)
 	@$(CLEAN_OBJ_COMMAND:__MODIFIER__=msr_)
@@ -243,25 +238,25 @@ clean.objs:
 
 clean.libs:
 !ifndef CLASP_MAKE_VC_NO_ST
-	@-if exist $(CORE_LIB_CORE_MSD) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_MSD)
-	@-if exist $(CORE_LIB_CORE_MSR) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_MSR)
+	@-if exist $(CORE_LIB_CORE_MSD) $(RM) $(CORE_LIB_CORE_MSD)
+	@-if exist $(CORE_LIB_CORE_MSR) $(RM) $(CORE_LIB_CORE_MSR)
 !endif # CLASP_MAKE_VC_NO_ST
-	@-if exist $(CORE_LIB_CORE_MMD) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_MMD)
-	@-if exist $(CORE_LIB_CORE_MMR) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_MMR)
-	@-if exist $(CORE_LIB_CORE_MDD) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_MDD)
-	@-if exist $(CORE_LIB_CORE_MDR) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_MDR)
+	@-if exist $(CORE_LIB_CORE_MMD) $(RM) $(CORE_LIB_CORE_MMD)
+	@-if exist $(CORE_LIB_CORE_MMR) $(RM) $(CORE_LIB_CORE_MMR)
+	@-if exist $(CORE_LIB_CORE_MDD) $(RM) $(CORE_LIB_CORE_MDD)
+	@-if exist $(CORE_LIB_CORE_MDR) $(RM) $(CORE_LIB_CORE_MDR)
 !ifndef CLASP_MAKE_VC_NO_ST
-	@-if exist $(CORE_LIB_CORE_WSD) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_WSD)
-	@-if exist $(CORE_LIB_CORE_WSR) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_WSR)
+	@-if exist $(CORE_LIB_CORE_WSD) $(RM) $(CORE_LIB_CORE_WSD)
+	@-if exist $(CORE_LIB_CORE_WSR) $(RM) $(CORE_LIB_CORE_WSR)
 !endif # CLASP_MAKE_VC_NO_ST
-	@-if exist $(CORE_LIB_CORE_WMD) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_WMD)
-	@-if exist $(CORE_LIB_CORE_WMR) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_WMR)
-	@-if exist $(CORE_LIB_CORE_WDD) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_WDD)
-	@-if exist $(CORE_LIB_CORE_WDR) $(RM) $(RM_ARGS) $(CORE_LIB_CORE_WDR)
+	@-if exist $(CORE_LIB_CORE_WMD) $(RM) $(CORE_LIB_CORE_WMD)
+	@-if exist $(CORE_LIB_CORE_WMR) $(RM) $(CORE_LIB_CORE_WMR)
+	@-if exist $(CORE_LIB_CORE_WDD) $(RM) $(CORE_LIB_CORE_WDD)
+	@-if exist $(CORE_LIB_CORE_WDR) $(RM) $(CORE_LIB_CORE_WDR)
 
 
 ########################################
-# Pseudo-targets
+# pseudo-targets
 
 # need parentheses, otherwise subsequent commands (via && or &) will be taken as THEN of IF
 CHECK_LIB_DIR	=	-(if not exist $(PROJ_LIB_DIR)\NUL mkdir $(PROJ_LIB_DIR))
@@ -326,21 +321,18 @@ CC_THREADING_WMR=-MT
 CC_THREADING_WDD=-MDd
 CC_THREADING_WDR=-MD
 
-CC_ARGS_COMMON=\
- -WX\
- -W4\
- \
+CC_ARGS_COMMON=
+CC_ARGS_COMMON=$(CC_ARGS_COMMON) -WX
+CC_ARGS_COMMON=$(CC_ARGS_COMMON) -W4
 
-CC_ARGS_DEBUG=\
- $(CC_ARGS_COMMON)\
- -Od\
- -Zi\
- \
+CC_ARGS_DEBUG=
+CC_ARGS_DEBUG=$(CC_ARGS_DEBUG) $(CC_ARGS_COMMON)
+CC_ARGS_DEBUG=$(CC_ARGS_DEBUG) -Od
+CC_ARGS_DEBUG=$(CC_ARGS_DEBUG) -Zi
 
-CC_ARGS_RELEASE=\
- $(CC_ARGS_COMMON)\
- -Ox\
- \
+CC_ARGS_RELEASE=
+CC_ARGS_RELEASE=$(CC_ARGS_RELEASE) $(CC_ARGS_COMMON)
+CC_ARGS_RELEASE=$(CC_ARGS_RELEASE) -Ox
 
 !ifndef CLASP_MAKE_VC_NO_ST
 CC_ARGS_MSD=$(CC_THREADING_MSD) $(CC_ARGS_DEBUG)

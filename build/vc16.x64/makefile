@@ -2,10 +2,10 @@
 # File: 	makefile
 #
 # Purpose:	Makefile for the SystemTools::CLASP project,
-#           for the Visual C++ 11.0 compiler,
+#           for the Visual C++ 16.0 compiler,
 #           on Win-64 (x64)
 #
-# Created:	4th June 2008
+# Created:	3rd August 2020
 # Updated:	3rd August 2020
 #
 ############################################################################
@@ -38,7 +38,7 @@
 ########################################
 # project & compiler version
 
-COMP_TAG			=	vc11
+COMP_TAG			=	vc16
 CLASP_MAKE_VC_NO_ST	=	1
 ARCH_TAG			=	.x64
 OS_TAG				=	
@@ -452,3 +452,4 @@ $(CORE_LIB_CORE_WDR):	$(CORE_OBJS_WDR)	;	$(CHECK_LIB_DIR)	&&	$(AR) $(AR_ARGS_WDR
 
 
 ################################ end of file ###############################
+

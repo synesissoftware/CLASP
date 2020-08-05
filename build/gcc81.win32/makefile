@@ -6,41 +6,45 @@
 #           on Win32
 #
 # Created:	16th October 2019
-# Updated:	17th October 2019
+# Updated:	3rd August 2020
 #
 ############################################################################
 
 
 ############################################################################
-# Environment check
+# environment check
 #
+# * to build without recls support make with the symbol CLASP_NO_RECLS
+#   defined, e.g. "> make CLASP_NO_RECLS=1 build"
 
+ifndef CLASP_NO_RECLS
 ifndef RECLS_ROOT
 $(error RECLS_ROOT must be defined)
 endif # !RECLS_ROOT
+endif # !CLASP_NO_RECLS
 
 ############################################################################
-# Pseudo-targets
+# pseudo-targets
 
 ############################################################################
-# Symbols
+# symbols
 
 ########################################
-# Project & compiler version
+# project & compiler version
 
 COMP_TAG = gcc81
 ARCH_TAG =	
-OS_TAG = unix
+OS_TAG = 
 PROJ_TAG = systemtools.clasp
 PROJ_VER_MAJOR = 0
 
 ########################################
-# Testing verbosity
+# testing verbosity
 
 TEST_VERBOSITY = 2
 
 ########################################
-# Directories
+# directories
 
 PROJ_ROOT_DIR = ../..
 PROJ_INC_DIR = $(PROJ_ROOT_DIR)/include
@@ -54,29 +58,32 @@ vpath %.h $(PROJ_SRC_DIR)
 ########################################
 # tools
 
-AR = ar
-CC = gcc
+AR		=	ar
+CC		=	gcc
 
-CLASP_CC_COMMON_INCLUDES =\
- -I $(PROJ_INC_DIR)\
- -I $(RECLS_ROOT)/include\
- \
+CP		=	cp
+MKDIR	=	mkdir -p
+MV		=	mv
+RM		=	rm -f
 
-CLASP_CC_COMMON_DEFINES =\
- -DWIN32\
- \
+CLASP_CC_COMMON_INCLUDES=
+CLASP_CC_COMMON_INCLUDES+=-I $(PROJ_INC_DIR)
+ifndef CLASP_NO_RECLS
+CLASP_CC_COMMON_INCLUDES+=-I "$(RECLS_ROOT)/include"
+endif # !CLASP_NO_RECLS
 
-CLASP_CC_COMMON_FLAGS =\
- -Wall\
- -Werror\
- -Wno-unused-but-set-variable\
- -Wno-unused-function\
- -Wno-unused-variable\
- \
+CLASP_CC_COMMON_DEFINES=
+CLASP_CC_COMMON_DEFINES+=-DWIN32
+ifdef CLASP_NO_RECLS
+CLASP_CC_COMMON_DEFINES+=-DCLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS
+endif # CLASP_NO_RECLS
 
-CLASP_CC_COMMON_WARNINGS =\
- \
- \
+CLASP_CC_COMMON_FLAGS=
+CLASP_CC_COMMON_FLAGS+=-Wall
+CLASP_CC_COMMON_FLAGS+=-Werror
+CLASP_CC_COMMON_FLAGS+=-Wno-unused-but-set-variable
+CLASP_CC_COMMON_FLAGS+=-Wno-unused-function
+CLASP_CC_COMMON_FLAGS+=-Wno-unused-variable
 
 CLASP_CC_COMMON_CFLAGS =\
  $(CLASP_CC_COMMON_INCLUDES)\
@@ -95,10 +102,13 @@ CFLAGS_CC_COMMON_CFLAGS_RELEASE =\
  -DNDEBUG\
  \
 
-CFLAGS_MSD = $(CFLAGS_CC_COMMON_CFLAGS_DEBUG)   -DUSE_THREAD=0 -DUSE_OPENMP=0
-CFLAGS_MSR = $(CFLAGS_CC_COMMON_CFLAGS_RELEASE) -DUSE_THREAD=0 -DUSE_OPENMP=0
-CFLAGS_MMD = $(CFLAGS_CC_COMMON_CFLAGS_DEBUG)   -D_REENTRANT -DUSE_THREAD=1 -DUSE_OPENMP=1
-CFLAGS_MMR = $(CFLAGS_CC_COMMON_CFLAGS_RELEASE) -D_REENTRANT -DUSE_THREAD=1 -DUSE_OPENMP=1
+CFLAGS_ST_=-DUSE_THREAD=0 -DUSE_OPENMP=0
+CFLAGS_MT_=-D_REENTRANT -DUSE_THREAD=1 -DUSE_OPENMP=1
+
+CFLAGS_MSD = $(CFLAGS_CC_COMMON_CFLAGS_DEBUG)   $(CFLAGS_ST_)
+CFLAGS_MSR = $(CFLAGS_CC_COMMON_CFLAGS_RELEASE) $(CFLAGS_ST_)
+CFLAGS_MMD = $(CFLAGS_CC_COMMON_CFLAGS_DEBUG)   $(CFLAGS_MT_)
+CFLAGS_MMR = $(CFLAGS_CC_COMMON_CFLAGS_RELEASE) $(CFLAGS_MT_)
 
 ########################################
 # symbols
@@ -162,23 +172,23 @@ compile:\
 	\
 
 clean:
-	@rm -f $(OBJS)
-	@rm -f $(LIBS)
+	@$(RM) $(OBJS)
+	@$(RM) $(LIBS)
 
 $(TARGET_LIB_CORE_MSD):	$(OBJS_MSD)
-	@IF NOT EXIST $(PROJ_LIB_DIR) MKDIR $(PROJ_LIB_DIR)
+	@$(MKDIR) $(PROJ_LIB_DIR)
 	$(AR) -crs $@ $^
 
 $(TARGET_LIB_CORE_MSR):	$(OBJS_MSR)
-	@IF NOT EXIST $(PROJ_LIB_DIR) MKDIR $(PROJ_LIB_DIR)
+	@$(MKDIR) $(PROJ_LIB_DIR)
 	$(AR) -crs $@ $^
 
 $(TARGET_LIB_CORE_MMD):	$(OBJS_MMD)
-	@IF NOT EXIST $(PROJ_LIB_DIR) MKDIR $(PROJ_LIB_DIR)
+	@$(MKDIR) $(PROJ_LIB_DIR)
 	$(AR) -crs $@ $^
 
 $(TARGET_LIB_CORE_MMR):	$(OBJS_MMR)
-	@IF NOT EXIST $(PROJ_LIB_DIR) MKDIR $(PROJ_LIB_DIR)
+	@$(MKDIR) $(PROJ_LIB_DIR)
 	$(AR) -crs $@ $^
 
 $(OBJS_MSD): %.$(OBJS_SYM_MSD_).o: %.c
