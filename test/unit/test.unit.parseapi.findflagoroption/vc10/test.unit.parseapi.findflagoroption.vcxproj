@@ -51,8 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>test.unit.parseapi.findflagoroption</ProjectName>
     <ProjectGuid>{C2FC6F2C-8B84-40be-8D52-F62A61D12B97}</ProjectGuid>
+    <ProjectName>test.unit.parseapi.findflagoroption</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

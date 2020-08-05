@@ -4,36 +4,38 @@
  * Purpose:     CLASP string facilities.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     5th August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * modification, are permitted provided that the following conditions are
+ * met:
  *
- * - Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * - Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the names of
- *   any contributors may be used to endorse or promote products derived from
- *   this software without specific prior written permission.
+ * - Redistributions of source code must retain the above copyright notice,
+ *   this list of conditions and the following disclaimer.
+ * - Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in the
+ *   documentation and/or other materials provided with the distribution.
+ * - Neither the name(s) of Matthew Wilson and Synesis Information Systems
+ *   nor the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -76,7 +78,7 @@ clasp_strdup_(
     size_t          len     =   clasp_strlen_(s);
     clasp_char_t*   newS    =   (clasp_char_t*)clasp_malloc_(ctxt, (1 + len) * sizeof(clasp_char_t));
 
-    if(NULL != newS)
+    if (NULL != newS)
     {
         memcpy(newS, s, (1 + len) * sizeof(clasp_char_t));
     }
@@ -92,7 +94,7 @@ clasp_strdup_raw_(
     size_t          len     =   clasp_strlen_(s);
     clasp_char_t*   newS    =   (clasp_char_t*)malloc((1 + len) * sizeof(clasp_char_t));
 
-    if(NULL != newS)
+    if (NULL != newS)
     {
         memcpy(newS, s, (1 + len) * sizeof(clasp_char_t));
     }
@@ -133,9 +135,9 @@ clasp_strcount_(
 
     CLASP_ASSERT(NULL != s);
 
-    for(; '\0' != *s; ++s)
+    for (; '\0' != *s; ++s)
     {
-        if(c == *s)
+        if (c == *s)
         {
             ++count;
         }
@@ -164,9 +166,9 @@ clasp_strncount_(
 
     CLASP_ASSERT(NULL != s);
 
-    for(; 0 != n && '\0' != *s; --n, ++s)
+    for (; 0 != n && '\0' != *s; --n, ++s)
     {
-        if(c == *s)
+        if (c == *s)
         {
             ++count;
         }
@@ -191,13 +193,13 @@ clasp_strnrchr_(
 {
     CLASP_ASSERT(NULL != s || 0 == n);
 
-    if(0 != n)
+    if (0 != n)
     {
         clasp_char_t const* p = &s[n - 1];
 
-        for(;; --p)
+        for (;; --p)
         {
-            if(c == *p)
+            if (c == *p)
             {
                 return (clasp_char_t*)p;
             }
@@ -223,13 +225,13 @@ clasp_strnexrchr_(
 {
     CLASP_ASSERT(NULL != s || 0 == n);
 
-    if(0 != n)
+    if (0 != n)
     {
         clasp_char_t const* p = &s[n - 1];
 
-        for(;; --p)
+        for (;; --p)
         {
-            if(c != *p)
+            if (c != *p)
             {
                 return (clasp_char_t*)p;
             }
@@ -260,7 +262,7 @@ clasp_strtok_r_(
     {
         tok = clasp_strtok_wblank_r_(s, delim, savectxt);
     }
-    while(NULL != tok && '\0' == *tok);
+    while (NULL != tok && '\0' == *tok);
 
 #else
     tok = clasp_strtok_(s, delim);
@@ -289,7 +291,7 @@ clasp_strtok_wblank_r_(
     CLASP_ASSERT(NULL != delim);
     CLASP_ASSERT(NULL != savectxt);
 
-    if(NULL != s)
+    if (NULL != s)
     {
         size_t const    len =   clasp_strlen_(s);
         clasp_char_t*   end =   s + len + 1;
@@ -306,9 +308,9 @@ clasp_strtok_wblank_r_(
         tok = (clasp_char_t*)savectxt->p0;
     }
 
-    for(p = tok; savectxt->p1 != p; ++p)
+    for (p = tok; savectxt->p1 != p; ++p)
     {
-        if(NULL != clasp_strchr_(delim, *p))
+        if (NULL != clasp_strchr_(delim, *p))
         {
             savectxt->p0 = p + 1;
             *p = '\0';

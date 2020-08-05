@@ -51,8 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>test.unit.parseapi.bitflags</ProjectName>
     <ProjectGuid>{6A488362-77C0-4d8d-9FF8-5AE7AE4EA95B}</ProjectGuid>
+    <ProjectName>test.unit.parseapi.bitflags</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

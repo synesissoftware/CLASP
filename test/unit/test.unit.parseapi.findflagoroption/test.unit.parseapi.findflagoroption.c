@@ -4,12 +4,13 @@
  * Purpose:     Implementation file for the test.unit.parseapi.findflagoroption project.
  *
  * Created:     11th December 2011
- * Updated:     18th April 2019
+ * Updated:     5th August 2020
  *
  * Status:      Wizard-generated
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -22,7 +23,7 @@
  * test component header file include(s)
  */
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -84,7 +85,7 @@ int main(int argc, char **argv)
 
   XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-  if(XTESTS_START_RUNNER("test.unit.parseapi.findflagoroption", verbosity))
+  if (XTESTS_START_RUNNER("test.unit.parseapi.findflagoroption", verbosity))
   {
     XTESTS_RUN_CASE(test_1_0);
     XTESTS_RUN_CASE(test_1_1);
@@ -131,7 +132,7 @@ static void test_1_0()
   clasp_arguments_t const*  args;
   int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-  if(0 != cr)
+  if (0 != cr)
   {
     XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
   }
@@ -159,7 +160,7 @@ static void test_1_1()
   clasp_arguments_t const*  args;
   int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-  if(0 != cr)
+  if (0 != cr)
   {
     XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
   }
@@ -196,7 +197,7 @@ static void test_1_2()
   clasp_arguments_t const*  args;
   int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-  if(0 != cr)
+  if (0 != cr)
   {
     XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
   }
@@ -226,7 +227,7 @@ static void test_1_3()
   clasp_arguments_t const*  args;
   int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-  if(0 != cr)
+  if (0 != cr)
   {
     XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
   }
@@ -261,7 +262,7 @@ static void test_1_4()
   clasp_arguments_t const*  args;
   int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-  if(0 != cr)
+  if (0 != cr)
   {
     XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
   }
@@ -300,7 +301,7 @@ static void test_1_5()
   clasp_arguments_t const*  args;
   int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-  if(0 != cr)
+  if (0 != cr)
   {
     XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
   }

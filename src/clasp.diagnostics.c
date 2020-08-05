@@ -4,36 +4,38 @@
  * Purpose:     CLASP diagnostics facilities.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     5th August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * modification, are permitted provided that the following conditions are
+ * met:
  *
- * - Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * - Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the names of
- *   any contributors may be used to endorse or promote products derived from
- *   this software without specific prior written permission.
+ * - Redistributions of source code must retain the above copyright notice,
+ *   this list of conditions and the following disclaimer.
+ * - Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in the
+ *   documentation and/or other materials provided with the distribution.
+ * - Neither the name(s) of Matthew Wilson and Synesis Information Systems
+ *   nor the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -63,12 +65,12 @@ void CLASP_CALLCONV clasp_default_log_fn_(
 {
     ((void)context);
 
-    if(severity >= 0)
+    if (severity >= 0)
     {
         clasp_char_t  fmt_[1025];
         size_t const  n = clasp_strlen_(fmt);
 
-        if(n + 1 < (sizeof(fmt_) / sizeof(fmt_[0])))
+        if (n + 1 < (sizeof(fmt_) / sizeof(fmt_[0])))
         {
             memcpy(fmt_, fmt, sizeof(clasp_char_t) * n);
             fmt_[n + 0] = '\n';
@@ -82,7 +84,7 @@ void CLASP_CALLCONV clasp_default_log_fn_(
 #else /* ? CLASP_USE_WIDE_STRINGS */
         vfprintf(stderr, fmt, args);
 #endif /* CLASP_USE_WIDE_STRINGS */
-        if(fmt != fmt_)
+        if (fmt != fmt_)
         {
             fputs("\n", stderr);
         }
@@ -97,7 +99,7 @@ CLASP_LOG_PRINTF(
 ,   ...
 )
 {
-    if(NULL != ctxt->pfnLog)
+    if (NULL != ctxt->pfnLog)
     {
         va_list args;
 
@@ -135,7 +137,7 @@ clasp_verify_context_(
     /* Check the context, and ensure that it specifies all the
      * memory functions, or none of them
      */
-    if(NULL != ctxt)
+    if (NULL != ctxt)
     {
         int n = 0;
 
@@ -143,7 +145,7 @@ clasp_verify_context_(
         n += (NULL != ctxt->pfnRealloc);
         n += (NULL != ctxt->pfnFree);
 
-        if( 0 != n &&
+        if (0 != n &&
             3 != n)
         {
             *r = EINVAL;
@@ -155,14 +157,14 @@ clasp_verify_context_(
 
         local->context       =   NULL;
 
-        if(NULL != ctxt->pfnMalloc)
+        if (NULL != ctxt->pfnMalloc)
         {
             local->pfnMalloc        =   ctxt->pfnMalloc;
             local->pfnRealloc       =   ctxt->pfnRealloc;
             local->pfnFree          =   ctxt->pfnFree;
         }
 
-        if(NULL != ctxt->pfnLog)
+        if (NULL != ctxt->pfnLog)
         {
             local->pfnLog           =   ctxt->pfnLog;
             local->severities[0]    =   ctxt->severities[0];

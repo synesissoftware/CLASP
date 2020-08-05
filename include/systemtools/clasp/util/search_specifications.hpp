@@ -4,11 +4,11 @@
  * Purpose:     Utility class for processing search specifications.
  *
  * Created:     20th May 2010
- * Updated:     18th April 2019
+ * Updated:     5th August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2019, Matthew Wilson
+ * Copyright (c) 2010-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,9 +20,10 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Software nor the names
- *   of any contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ * - Neither the names of Matthew Wilson and Synesis Information Systems nor
+ *   the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -54,8 +55,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR     6
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION  4
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      17
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION  5
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      18
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -63,7 +64,7 @@
  */
 
 /* CLASP header files */
-#include <systemtools/clasp/clasp.hpp>
+#include <clasp/clasp.hpp>
 
 /* recls header files */
 #include <recls/recls.hpp>
@@ -164,7 +165,7 @@ public:
   {
     search_specifications specs;
 
-    { for(size_t i = 0; i != args->numValues; ++i)
+    { for (size_t i = 0; i != args->numValues; ++i)
     {
       clasp_argument_t const& value = args->values[i];
 
@@ -226,13 +227,13 @@ private:
     {
       traits_type_::stat_data_type sd;
 
-      if(!traits_type_::stat(path, &sd))
+      if (!traits_type_::stat(path, &sd))
       {
         return elementIsUnknown;
       }
       else
       {
-        if(traits_type_::is_directory(&sd))
+        if (traits_type_::is_directory(&sd))
         {
           return elementIsDirectory;
         }
@@ -254,40 +255,40 @@ private:
     static clasp_char_t const   dot2[]  =   { '.', '.', '\0' };
 
     // Is dots directory?
-    if( dot1 == element ||
+    if (dot1 == element ||
         dot2 == element)
     {
       type = element_is_::elementIsDirectory;
     }
     // Contains path separator?
-    else if(element.end() != std::find_if(element.begin(), element.end(), is_path_separator))
+    else if (element.end() != std::find_if(element.begin(), element.end(), is_path_separator))
     {
       type = element_is_::elementIsPatterns;
     }
     // Contains wildcard character?
-    else if(element.end() != std::find_if(element.begin(), element.end(), is_wildcard_character))
+    else if (element.end() != std::find_if(element.begin(), element.end(), is_wildcard_character))
     {
       type = element_is_::elementIsPatterns;
     }
     // Has trailing path-name separator
-    else if(traits_type_::is_path_name_separator(element[element.size() - 1u]))
+    else if (traits_type_::is_path_name_separator(element[element.size() - 1u]))
     {
       type = element_is_::elementIsDirectory;
     }
     // 
-    else if(traits_type_::is_path_absolute(element.c_str()) ||
+    else if (traits_type_::is_path_absolute(element.c_str()) ||
             traits_type_::is_path_rooted(element.c_str()))
     {
       type = element_is_::directory(element.c_str());
     }
 
-    if(element_is_::elementIsUnknown == type)
+    if (element_is_::elementIsUnknown == type)
     {
       // Remaining determinations based on existence (or lack of) of entries
 
       typedef platformstl::basic_path<char_type> path_t;
 
-      if(!m_specifications.empty())
+      if (!m_specifications.empty())
       {
         specification_type const& current = m_specifications.back();
 
@@ -300,7 +301,7 @@ private:
         type = element_is_::directory(fullPath1.c_str());
       }
 
-      if(element_is_::elementIsUnknown == type)
+      if (element_is_::elementIsUnknown == type)
       {
         // No current directory, so go from current directory
         path_t fullPath0(".");
@@ -313,11 +314,11 @@ private:
       }
     }
 
-    if(element_is_::elementIsUnknown == type)
+    if (element_is_::elementIsUnknown == type)
     {
       return false;
     }
-    else if(element_is_::elementIsDirectory == type)
+    else if (element_is_::elementIsDirectory == type)
     {
       // A new directory
 
@@ -355,11 +356,11 @@ public:
 
     // A pattern
 
-    if( isEmpty &&
+    if (isEmpty &&
         m_defaultDirectory.empty())
     {
       m_commonPatterns.reserve(m_commonPatterns.length() + 1 + element.length());
-      if(!m_commonPatterns.empty())
+      if (!m_commonPatterns.empty())
       {
         m_commonPatterns += '|';
       }
@@ -369,7 +370,7 @@ public:
     {
       try
       {
-        if(isEmpty)
+        if (isEmpty)
         {
           // A new directory
           m_specifications.push_back(std::make_pair(m_defaultDirectory, m_commonPatterns));
@@ -377,10 +378,10 @@ public:
 
         string_type& patterns = m_specifications.back().second;
 
-        if(element != patterns)
+        if (element != patterns)
         {
           patterns.reserve(patterns.length() + 1 + element.length());
-          if(!m_specifications.back().second.empty())
+          if (!m_specifications.back().second.empty())
           {
             m_specifications.back().second += '|';
           }
@@ -389,7 +390,7 @@ public:
       }
       catch(...)
       {
-        if(isEmpty)
+        if (isEmpty)
         {
           m_specifications.erase(m_specifications.begin(), m_specifications.end());
         }
@@ -406,11 +407,11 @@ public:
    */
   void apply_default_patterns(string_type const& defaultPatterns)
   {
-    { for(specifications_type_::iterator i = m_specifications.begin(); i != m_specifications.end(); ++i)
+    { for (specifications_type_::iterator i = m_specifications.begin(); i != m_specifications.end(); ++i)
     {
       string_type& patterns = (*i).second;
 
-      if(patterns.empty())
+      if (patterns.empty())
       {
         patterns = defaultPatterns;
       }

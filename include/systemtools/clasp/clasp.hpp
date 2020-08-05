@@ -4,11 +4,11 @@
  * Purpose:     C++ layer for the CLASP library.
  *
  * Created:     31st July 2008
- * Updated:     17th October 2019
+ * Updated:     5th August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,9 +20,10 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Software nor the names
- *   of any contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ * - Neither the names of Matthew Wilson and Synesis Information Systems nor
+ *   the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -54,8 +55,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_MINOR    10
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_REVISION 1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     61
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_REVISION 2
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_CLASP_EDIT     63
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -63,7 +64,7 @@
  */
 
 /* CLASP header files */
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -153,7 +154,7 @@ private:
     ,   string_type const&          optionName
     )
     {
-        if(optionName.empty())
+        if (optionName.empty())
         {
             return message;
         }
@@ -394,27 +395,27 @@ namespace ximpl
         {
             bool  wasStrictlyCorrect_;
 
-            if(NULL == wasStrictlyCorrect)
+            if (NULL == wasStrictlyCorrect)
             {
                 wasStrictlyCorrect = &wasStrictlyCorrect_;
             }
 
             *wasStrictlyCorrect = false;
 
-            if(0 == str.len)
+            if (0 == str.len)
             {
                 return true;
             }
 
             *wasStrictlyCorrect = true;
 
-            switch(str.ptr[0])
+            switch (str.ptr[0])
             {
                 /* Affirmative */
                 case    'Y':
                 case    'y':
 
-                    switch(str.ptr[1])
+                    switch (str.ptr[1])
                     {
                         case    '\0':
 
@@ -422,12 +423,12 @@ namespace ximpl
                         case    'E':
                         case    'e':
 
-                            switch(str.ptr[2])
+                            switch (str.ptr[2])
                             {
                                 case    'S':
                                 case    's':
 
-                                    if('\0' == str.ptr[3])
+                                    if ('\0' == str.ptr[3])
                                     {
                                         return true;
                                     }
@@ -439,7 +440,7 @@ namespace ximpl
                 case    'T':
                 case    't':
 
-                    switch(str.ptr[1])
+                    switch (str.ptr[1])
                     {
                         case    '\0':
 
@@ -447,17 +448,17 @@ namespace ximpl
                         case    'R':
                         case    'r':
 
-                            switch(str.ptr[2])
+                            switch (str.ptr[2])
                             {
                                 case    'U':
                                 case    'u':
 
-                                    switch(str.ptr[3])
+                                    switch (str.ptr[3])
                                     {
                                         case    'E':
                                         case    'e':
 
-                                            if('\0' == str.ptr[4])
+                                            if ('\0' == str.ptr[4])
                                             {
                                                 return true;
                                             }
@@ -473,7 +474,7 @@ namespace ximpl
                 case    'N':
                 case    'n':
 
-                    switch(str.ptr[1])
+                    switch (str.ptr[1])
                     {
                         case    '\0':
 
@@ -481,7 +482,7 @@ namespace ximpl
                         case    'O':
                         case    'o':
 
-                            if('\0' == str.ptr[2])
+                            if ('\0' == str.ptr[2])
                             {
                                 return false;
                             }
@@ -491,7 +492,7 @@ namespace ximpl
                 case    'F':
                 case    'f':
 
-                    switch(str.ptr[1])
+                    switch (str.ptr[1])
                     {
                         case    '\0':
 
@@ -499,22 +500,22 @@ namespace ximpl
                         case    'A':
                         case    'a':
 
-                            switch(str.ptr[2])
+                            switch (str.ptr[2])
                             {
                                 case    'L':
                                 case    'l':
 
-                                    switch(str.ptr[3])
+                                    switch (str.ptr[3])
                                     {
                                         case    'S':
                                         case    's':
 
-                                            switch(str.ptr[4])
+                                            switch (str.ptr[4])
                                             {
                                                 case    'E':
                                                 case    'e':
 
-                                                    if('\0' == str.ptr[5])
+                                                    if ('\0' == str.ptr[5])
                                                     {
                                                         return false;
                                                     }
@@ -554,7 +555,7 @@ namespace ximpl
     {
         char const* defaultMessage = "required option is not found";
 
-        if( NULL != missingMessage &&
+        if (NULL != missingMessage &&
             '\0' != missingMessage[0])
         {
             defaultMessage  =   missingMessage;
@@ -573,7 +574,7 @@ namespace ximpl
     {
         char const* defaultMessage = "value is missing for option";
 
-        if( NULL != missingMessage &&
+        if (NULL != missingMessage &&
             '\0' != missingMessage[0])
         {
             defaultMessage  =   missingMessage;
@@ -623,22 +624,22 @@ namespace ximpl
     ,   I const&                    defaultValue
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( ignoreUsed &&
+            if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
             {
                 continue;
             }
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                switch(arg.value.ptr[0])
+                switch (arg.value.ptr[0])
                 {
                     case    '-':
 
@@ -682,22 +683,22 @@ namespace ximpl
     ,   char const*                 missingMessage
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                if(0 == arg.value.len)
+                if (0 == arg.value.len)
                 {
                     throw_missing_option_value_exception_(optionName, missingMessage);
                 }
                 else
                 {
-                    switch(arg.value.ptr[0])
+                    switch (arg.value.ptr[0])
                     {
                         case    '-':
 
@@ -741,22 +742,22 @@ namespace ximpl
     ,   double const&               defaultValue
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( ignoreUsed &&
+            if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
             {
                 continue;
             }
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                if(0 == arg.value.len)
+                if (0 == arg.value.len)
                 {
                     break;
                 }
@@ -765,7 +766,7 @@ namespace ximpl
                     clasp_char_t*   endptr;
                     double          res = strtod_helper::call(arg.value.ptr, &endptr);
 
-                    if( NULL != endptr &&
+                    if (NULL != endptr &&
                         endptr != arg.value.ptr + arg.value.len)
                     {
                         throw_invalid_option_value_exception_("value is not a real number for option", optionName);
@@ -793,16 +794,16 @@ namespace ximpl
     ,   char const*                 missingMessage
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                if(0 == arg.value.len)
+                if (0 == arg.value.len)
                 {
                     throw_missing_option_value_exception_(optionName, missingMessage);
                 }
@@ -811,7 +812,7 @@ namespace ximpl
                     clasp_char_t*   endptr;
                     double          res = strtod_helper::call(arg.value.ptr, &endptr);
 
-                    if( NULL != endptr &&
+                    if (NULL != endptr &&
                         endptr != arg.value.ptr + arg.value.len)
                     {
                         throw_invalid_option_value_exception_("value is not a real number for option", optionName);
@@ -837,16 +838,16 @@ namespace ximpl
     ,   char const*                 missingMessage
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                if(0 == arg.value.len)
+                if (0 == arg.value.len)
                 {
                     throw_missing_option_value_exception_(optionName, missingMessage);
                 }
@@ -874,17 +875,17 @@ namespace ximpl
     ,   bool const*                 valueNotSpecifiedDefaultValue
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( ignoreUsed &&
+            if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
             {
                 continue;
             }
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
@@ -893,12 +894,12 @@ namespace ximpl
 
                 *result = boolean_conversion_traits_::convert(arg.value, &wasStrictlyCorrect);
 
-                if( *result &&
+                if (*result &&
                     !wasStrictlyCorrect)
                 {
                     // This means that no value was specified
 
-                    if(NULL != valueNotSpecifiedDefaultValue)
+                    if (NULL != valueNotSpecifiedDefaultValue)
                     {
                         *result = *valueNotSpecifiedDefaultValue;
                     }
@@ -924,17 +925,17 @@ namespace ximpl
     ,   clasp_char_t const*         defaultValue
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( ignoreUsed &&
+            if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
             {
                 continue;
             }
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
@@ -967,7 +968,7 @@ namespace ximpl
         clasp_char_t const* p;
         bool const          r = check_option_cstring_(args, ignoreUsed, optionName, optionNameLen, &p, defaultValue);
 
-        if(r)
+        if (r)
         {
             clasp_string_t(SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(p), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(p)).swap(result);
         }
@@ -996,25 +997,25 @@ namespace ximpl
     ,   clasp_char_t const*         defaultValue
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                if (0 != arg.value.len)
-                {
-                    defaultValue = arg.value.ptr;
-                }
+				if (0 != arg.value.len)
+				{
+					defaultValue = arg.value.ptr;
+				}
 
                 break;
             }
         }}
 
-        if(NULL != defaultValue)
+        if (NULL != defaultValue)
         {
             return
             (*pfn)(
@@ -1046,25 +1047,25 @@ namespace ximpl
     {
         clasp_char_t const* v = NULL;
 
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                if (0 != arg.value.len)
-                {
-                    v = arg.value.ptr;
-                }
+				if (0 != arg.value.len)
+				{
+					v = arg.value.ptr;
+				}
 
                 break;
             }
         }}
 
-        if(NULL != v)
+        if (NULL != v)
         {
             return
             (*pfn)(
@@ -1355,11 +1356,11 @@ namespace ximpl
     ,   char const*               missingMessage
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
@@ -1386,16 +1387,16 @@ namespace ximpl
     ,   char const*                 missingMessage
     )
     {
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
 
-                if(0 == arg.value.len)
+                if (0 == arg.value.len)
                 {
                     throw_missing_option_value_exception_(optionName, missingMessage);
                 }
@@ -1534,11 +1535,11 @@ namespace ximpl
 
 
         // 1. check flags first
-        { for(size_t i = 0; i != args->numFlags; ++i)
+        { for (size_t i = 0; i != args->numFlags; ++i)
         {
             clasp_argument_t const& arg = args->flags[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
@@ -1550,11 +1551,11 @@ namespace ximpl
         }}
 
         // 2. check options, but be strict about the values
-        { for(size_t i = 0; i != args->numOptions; ++i)
+        { for (size_t i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const& arg = args->options[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
@@ -1562,13 +1563,13 @@ namespace ximpl
                 bool wasStrictlyCorrect;
                 bool result = boolean_conversion_traits_::convert(arg.value, &wasStrictlyCorrect);
 
-                if( !result &&
+                if (!result &&
                     !wasStrictlyCorrect)
                 {
                     throw_invalid_option_value_exception_("option value must be a boolean", optionName);
                 }
 
-                if(result)
+                if (result)
                 {
                     *bitmask |= onValue;
                 }
@@ -1595,14 +1596,14 @@ namespace ximpl
     ,   bool                        markUsedIfFound
     )
     {
-        { for(size_t i = 0; i != args->numFlags; ++i)
+        { for (size_t i = 0; i != args->numFlags; ++i)
         {
             clasp_argument_t const& arg = args->flags[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
-                if(markUsedIfFound)
+                if (markUsedIfFound)
                 {
                     clasp_useArgument(args, &arg);
                 }
@@ -1625,11 +1626,11 @@ namespace ximpl
     {
         STLSOFT_ASSERT(NULL == after || (after >= &args->flagsAndOptions[0] && after < &args->flagsAndOptions[0] + args->numFlagsAndOptions));
 
-        { for(size_t i = (NULL == after) ? 0u : (after - &args->flagsAndOptions[0]); i != args->numFlagsAndOptions; ++i)
+        { for (size_t i = (NULL == after) ? 0u : (after - &args->flagsAndOptions[0]); i != args->numFlagsAndOptions; ++i)
         {
             clasp_argument_t const& arg = args->flagsAndOptions[i];
 
-            if( arg.resolvedName.len == optionNameLen &&
+            if (arg.resolvedName.len == optionNameLen &&
                 0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
             {
                 clasp_useArgument(args, &arg);
@@ -2116,7 +2117,7 @@ check_flags_option(
 
     bool givenValue;
 
-    if(!::clasp::ximpl::check_option_boolean_(
+    if (!::clasp::ximpl::check_option_boolean_(
             args
         ,   false
         ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
@@ -2132,7 +2133,7 @@ check_flags_option(
     }
     else
     {
-        if(givenValue)
+        if (givenValue)
         {
             *result = *result | flagValue;
         }
@@ -2158,7 +2159,7 @@ check_flags_option(
 
     bool givenValue;
 
-    if(!::clasp::ximpl::check_option_boolean_(
+    if (!::clasp::ximpl::check_option_boolean_(
             args
         ,   false
         ,   SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(optionName), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(optionName)
@@ -2172,7 +2173,7 @@ check_flags_option(
     }
     else
     {
-        if(givenValue)
+        if (givenValue)
         {
             *result = *result | flagValue;
         }
@@ -2567,7 +2568,7 @@ check_flag(
                         ,   0
                         );
 
-    if(NULL == flagVar)
+    if (NULL == flagVar)
     {
         flagVar = &dummy_;
     }
@@ -2701,9 +2702,9 @@ check_option(
     SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_();
     SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_();
 
-    enum { types_are_same = stlsoft::is_same_type<D, R>::value };
+	enum { types_are_same = stlsoft::is_same_type<D, R>::value };
 
-    typedef ss_typename_type_k stlsoft::value_to_yesno_type<types_are_same>::type   same_type_t;
+	typedef ss_typename_type_k stlsoft::value_to_yesno_type<types_are_same>::type	same_type_t;
 
     return
     ximpl::check_option_maybe_R_and_D_maybe_same_type_(
@@ -2830,7 +2831,7 @@ check_value(
     STLSOFT_ASSERT(NULL != args);
     STLSOFT_ASSERT(NULL != pslice);
 
-    if(index < args->numValues)
+    if (index < args->numValues)
     {
         pslice->ptr =   args->values[index].value.ptr;
         pslice->len =   args->values[index].value.len;
@@ -2872,7 +2873,7 @@ check_value(
 
     size_t dummy_;
 
-    if(NULL == plen)
+    if (NULL == plen)
     {
         plen = &dummy_;
     }
@@ -2925,12 +2926,12 @@ use_flag_or_option(
 }
 
 /** Verifies that all flags and options are known, by reference to the given
- * \c aliases parameter
+ * \c specifications parameter
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param aliases A pointer to a properly-formed alias array. May not be
- *   NULL.
+ * \param specifications A pointer to a properly-formed specification array.
+ *   May not be NULL.
  *
  * \exception clasp::unrecognised_argument_exception Thrown if an argument is
  *   unrecognised
@@ -2939,13 +2940,13 @@ inline
 void
 verify_all_flags_and_options_are_recognised(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 )
 {
     clasp_argument_t const* firstUnrecognisedArg;
-    size_t const            n = clasp_reportUnrecognisedFlagsAndOptions(args, aliases, &firstUnrecognisedArg, 0);
+    size_t const            n = clasp_reportUnrecognisedFlagsAndOptions(args, specifications, &firstUnrecognisedArg, 0);
 
-    if(0u != n)
+    if (0u != n)
     {
         static char const s_prefix[] = "unrecognised argument(s)";
 
@@ -2976,7 +2977,7 @@ verify_all_flags_and_options_used(
     clasp_argument_t const* firstUnusedArg;
     size_t const            n = clasp_reportUnusedFlagsAndOptions(args, &firstUnusedArg, 0);
 
-    if(0u != n)
+    if (0u != n)
     {
         static char const s_prefix[] = "unused argument(s)";
 

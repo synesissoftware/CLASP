@@ -51,8 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>test.unit.usage_width</ProjectName>
     <ProjectGuid>{FA14AB8A-DEA9-4ee6-9D71-7D1E0A99CA6D}</ProjectGuid>
+    <ProjectName>test.unit.usage_width</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

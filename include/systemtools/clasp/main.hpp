@@ -4,11 +4,11 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     18th April 2019
+ * Updated:     5th August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2019, Matthew Wilson
+ * Copyright (c) 2010-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,9 +20,10 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Software nor the names
- *   of any contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ * - Neither the names of Matthew Wilson and Synesis Information Systems nor
+ *   the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -54,8 +55,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_MINOR     4
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_REVISION  3
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      34
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_REVISION  4
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_HPP_MAIN_EDIT      36
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -68,11 +69,11 @@
 
 /* CLASP header files */
 #if 1
-# include <systemtools/clasp/clasp.hpp>
+# include <clasp/clasp.hpp>
 # else
   /* TODO: separate out CLASP C++ */
-# include <systemtools/clasp/clasp.h>
-# include <systemtools/clasp/clasp/exceptions.hpp>
+# include <clasp/clasp.h>
+# include <clasp/clasp/exceptions.hpp>
 #endif
 
 /* Pantheios header files */
@@ -152,7 +153,7 @@ invoke_(
 ,   clasp_char_t const* const*          argv
 ,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
 ,   clasp_char_t const*                 programName
-,   clasp::alias_t const*               aliases
+,   clasp::alias_t const                specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt
 ,   clasp_char_t const*                 usageHelpSuffix
@@ -181,9 +182,9 @@ invoke_(
 
     clasp::arguments_t const* clargs;
 
-    int r = clasp::parseArguments(flags, argc, argv, aliases, ctxt, &clargs);
+    int r = clasp::parseArguments(flags, argc, argv, specifications, ctxt, &clargs);
 
-    if(r != 0)
+    if (r != 0)
     {
         stlsoft::error_desc e(r);
 
@@ -223,7 +224,7 @@ invoke_(
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
 
             /* Contingent report */
-            if( NULL != usageHelpSuffix &&
+            if (NULL != usageHelpSuffix &&
                 '\0' != usageHelpSuffix[0])
             {
                 ::fprintf(stderr, "%s: invalid command-line: %s; %s\n", programName, x.what(), usageHelpSuffix);
@@ -255,7 +256,7 @@ invoke_(
  * \param pfnMain Caller-supplied CLASP main function that will be invoked
  * \param programName Specifies the name of the program, which will be
  *   inferred heuristically if NULL or empty
- * \param aliases Pointer to an aliases array that will be passed to
+ * \param specifications Pointer to an specifications array that will be passed to
  *   clasp::parseArguments()
  * \param flags Flags that will be passed to clasp::parseArguments()
  * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
@@ -291,20 +292,20 @@ invoke(
 ,   clasp_char_t const* const*          argv
 ,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
 ,   clasp_char_t const*                 programName
-,   clasp::alias_t const*               aliases
+,   clasp::alias_t const                specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
 ,   clasp_char_t const*                 usageHelpSuffix =   NULL
 )
 {
-    if( NULL != programName &&
+    if (NULL != programName &&
         '\0' == programName[0])
     {
         programName = NULL;
     }
 
 #ifdef CLASP_MAIN_DEFAULT_PROGRAM_NAME
-    if(NULL == programName)
+    if (NULL == programName)
     {
         programName = CLASP_MAIN_DEFAULT_PROGRAM_NAME;
     }
@@ -313,7 +314,7 @@ invoke(
 #if !defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     defined(PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS) && \
     PANTHEIOS_VER >= 0x010001d6
-    if(NULL == programName)
+    if (NULL == programName)
     {
 # ifndef PANTHEIOS_NO_NAMESPACE
         using pantheios::pantheios_getProcessIdentity;
@@ -323,7 +324,7 @@ invoke(
     }
 #endif
 
-    if(NULL == programName)
+    if (NULL == programName)
     {
 #if (STLSOFT_LEAD_VER >= 0x010a0000) && \
     (   !defined(CLASP_USE_WIDE_STRINGS) || \
@@ -334,12 +335,12 @@ invoke(
 # endif
     }
 
-    if(NULL == programName)
+    if (NULL == programName)
     {
         programName = argv[0];
     }
 
-    return ximpl::invoke_(argc, argv, pfnMain, programName, aliases, flags, ctxt, usageHelpSuffix);
+    return ximpl::invoke_(argc, argv, pfnMain, programName, specifications, flags, ctxt, usageHelpSuffix);
 }
 
 /* /////////////////////////////////////////////////////////////////////////

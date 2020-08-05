@@ -4,10 +4,11 @@
  * Purpose:     Implementation file for the prg example project.
  *
  * Created:     8th December 2011
- * Updated:     18th April 2019
+ * Updated:     5th August 2020
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -21,7 +22,7 @@
  */
 
 /* SystemTools::CLASP header files */
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 /* Standard C header files */
 #include <stdio.h>
@@ -42,7 +43,7 @@
  * globals
  */
 
-static clasp_alias_t const ALIASES[] =
+static clasp_specification_t const SPECIFICATIONS[] =
 {
   /* Filtering behaviour flags/options */
 
@@ -80,7 +81,7 @@ static clasp_alias_t const ALIASES[] =
   CLASP_FLAG(NULL,    "--help",                         "show this help and quit"),
   CLASP_FLAG(NULL,    "--version",                      "show version and quit"),
 
-  CLASP_ALIAS_ARRAY_TERMINATOR
+  CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -91,9 +92,9 @@ int main(int argc, char** argv)
 {
   unsigned const            cflags  = 0;
   clasp_arguments_t const*  args;
-  int const                 cr      = clasp_parseArguments(cflags, argc, argv, ALIASES, NULL, &args);
+  int const                 cr      = clasp_parseArguments(cflags, argc, argv, SPECIFICATIONS, NULL, &args);
 
-  if(cr != 0)
+  if (cr != 0)
   {
     fprintf(stderr, "failed to initialise : %s (%d)\n", strerror(cr), cr);
 
@@ -101,11 +102,11 @@ int main(int argc, char** argv)
   }
   else
   {
-    if(clasp_flagIsSpecified(args, "--help"))
+    if (clasp_flagIsSpecified(args, "--help"))
     {
       clasp_show_usage(
         NULL
-      , ALIASES
+      , SPECIFICATIONS
       , "prg"
       , "SystemTools (http://systemtools.sourceforge.net/)"
       , "Copyright Matthew Wilson"
@@ -123,7 +124,7 @@ int main(int argc, char** argv)
     {
       puts("");
       printf("flags:\t%lu\n", args->numFlags);
-      { size_t i; for(i = 0; i != args->numFlags; ++i)
+      { size_t i; for (i = 0; i != args->numFlags; ++i)
       {
           clasp_argument_t const* const flag = args->flags + i;
 
@@ -135,7 +136,7 @@ int main(int argc, char** argv)
       puts("");
       printf("options:\t%lu\n", args->numOptions);
 
-      { size_t i; for(i = 0; i != args->numOptions; ++i)
+      { size_t i; for (i = 0; i != args->numOptions; ++i)
       {
           clasp_argument_t const* const option = args->options + i;
 
@@ -147,7 +148,7 @@ int main(int argc, char** argv)
       puts("");
       printf("values:\t%lu\n", args->numValues);
 
-      { size_t i; for(i = 0; i != args->numValues; ++i)
+      { size_t i; for (i = 0; i != args->numValues; ++i)
       {
           clasp_argument_t const* const value = args->values + i;
 
