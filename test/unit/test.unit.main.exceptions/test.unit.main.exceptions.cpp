@@ -4,12 +4,13 @@
  * Purpose:     Implementation file for the test.unit.main.exceptions project.
  *
  * Created:     7th March 2013
- * Updated:     16th October 2019
+ * Updated:     5th August 2020
  *
  * Status:      Wizard-generated
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2013-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -34,7 +35,7 @@ static FILE* Test_stderr;
 #endif
 #define stderr  Test_stderr
 
-#include <systemtools/clasp/main.hpp>
+#include <clasp/main.hpp>
 
 #undef stderr
 #ifdef CLASP_Test_stderr_was_defined
@@ -116,7 +117,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER_WITH_SETUP_FNS("test.unit.main.exceptions", verbosity, setup, teardown, Test_path))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.unit.main.exceptions", verbosity, setup, teardown, Test_path))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -160,23 +161,23 @@ namespace
         run_test_(__FILE__, __LINE__, XTESTS_GET_FUNCTION_(), (argc), (argv), (pfnMain), (png), (pna), (al), (fl), (el0))
 
 static void run_test_(
-    char const*                 file
-,   int                         line
-,   char const*                 function
-,   int                         argc
-,   char const* const* const    argv
-,   int (STLSOFT_CDECL*         pfnMain)(clasp::arguments_t const* args)
-,   char const*                 programNameGlobal
-,   char const*                 programNameArgument
-,   clasp::alias_t const*       aliases
-,   unsigned                    flags
-,   char const*                 expectedLine0
+    char const*                     file
+,   int                             line
+,   char const*                     function
+,   int                             argc
+,   char const* const* const        argv
+,   int (STLSOFT_CDECL*             pfnMain)(clasp::arguments_t const* args)
+,   char const*                     programNameGlobal
+,   char const*                     programNameArgument
+,   clasp::specification_t const    specifications[]
+,   unsigned                        flags
+,   char const*                     expectedLine0
 )
 {
     Test_programName    =   programNameGlobal;
     Test_stderr         =   ::fopen(Test_path, "w");
 
-    if(NULL == Test_stderr)
+    if (NULL == Test_stderr)
     {
         int const e = errno;
 
@@ -190,7 +191,7 @@ static void run_test_(
                     ,   argv
                     ,   pfnMain
                     ,   programNameArgument
-                    ,   aliases
+                    ,   specifications
                     ,   flags
                     );
 
@@ -329,9 +330,9 @@ static void test_1_1_unrecognised()
         NULL
     };
 
-    static clasp::alias_t const s_specifications[] =
+    static clasp::specification_t const s_specifications[] =
     {
-      CLASP_ALIAS_ARRAY_TERMINATOR
+      CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     struct main_

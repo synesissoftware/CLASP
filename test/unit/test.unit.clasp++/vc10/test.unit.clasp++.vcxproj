@@ -51,8 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>test.unit.clasp++</ProjectName>
     <ProjectGuid>{4D9C70F2-81AE-496b-A742-6F2CB1D50A3C}</ProjectGuid>
+    <ProjectName>test.unit.clasp++</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

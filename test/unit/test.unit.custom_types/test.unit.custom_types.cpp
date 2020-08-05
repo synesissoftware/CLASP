@@ -4,12 +4,13 @@
  * Purpose:     Implementation file for the test.unit.custom_types project.
  *
  * Created:     12th September 2014
- * Updated:     17th October 2019
+ * Updated:     5th August 2020
  *
  * Status:      Wizard-generated
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2014-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -22,7 +23,7 @@
  * test component header file include(s)
  */
 
-#include <systemtools/clasp/clasp.hpp>
+#include <clasp/clasp.hpp>
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -91,7 +92,7 @@ int main(int argc, char **argv)
 
   XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-  if(XTESTS_START_RUNNER("test.unit.custom_types", verbosity))
+  if (XTESTS_START_RUNNER("test.unit.custom_types", verbosity))
   {
     XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_C_style_string);
     XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_std_string);
@@ -151,9 +152,9 @@ parse_Colour(
 ,   Colour*         result
 )
 {
-#define PARSE_ENTRY_(s, v)  else if(0 == ::strcmp(s, parsedValue)) { *result = Colour_##v; return true; }
+#define PARSE_ENTRY_(s, v)  else if (0 == ::strcmp(s, parsedValue)) { *result = Colour_##v; return true; }
 
-    if(0) {}
+    if (0) {}
     PARSE_ENTRY_("black", Black)
     PARSE_ENTRY_("blue", Blue)
     PARSE_ENTRY_("green", Green)
@@ -224,7 +225,7 @@ static void test_parse_Colour_missing_option_default_C_style_string()
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
 
-    Colour              clr;
+    Colour              clr = Colour();
 
     XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "yellow"));
     XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
@@ -245,7 +246,7 @@ static void test_parse_Colour_missing_option_default_std_string()
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
 
-    Colour              clr;
+    Colour              clr = Colour();
 
     XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("yellow")));
     XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
@@ -268,7 +269,7 @@ static void test_parse_Colour_missing_option_default_UDT()
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
 
-    Colour              clr;
+    Colour              clr = Colour();
 
     XTESTS_TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, Colour_Yellow));
     XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
@@ -292,7 +293,7 @@ static void test_parse_Colour_missing_option_value_default_C_style_string()
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
 
-    Colour              clr;
+    Colour              clr = Colour();
 
     XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "yellow"));
     XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
@@ -315,7 +316,7 @@ static void test_parse_Colour_missing_option_value_default_std_string()
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
 
-    Colour              clr;
+    Colour              clr = Colour();
 
     XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("yellow")));
     XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
@@ -340,7 +341,7 @@ static void test_parse_Colour_missing_option_value_default_UDT()
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
 
-    Colour              clr;
+    Colour              clr = Colour();
 
     XTESTS_TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, Colour_Yellow));
     XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);

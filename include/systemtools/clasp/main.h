@@ -4,7 +4,7 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     30th July 2020
+ * Updated:     5th August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -54,8 +54,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_MINOR     1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_REVISION  2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      13
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_REVISION  3
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_MAIN_EDIT      15
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@
 #endif /* __cplusplus */
 
 /* CLASP header files */
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 /* Standard C header files */
 #include <errno.h>
@@ -191,20 +191,20 @@ clasp_main_invoke(
 ,   clasp_char_t**                      argv
 ,   int (*                              pfnMain)(clasp_arguments_t const* args)
 ,   clasp_char_t const*                 programName
-,   clasp_alias_t const*                aliases
+,   clasp_alias_t const                 specifications[]
 ,   unsigned                            flags
 ,   clasp_diagnostic_context_t const*   ctxt
 )
 {
     clasp_arguments_t const* args;
 
-    int r = clasp_parseArguments(flags, argc, (clasp_char_t const* const*)argv, aliases, ctxt, &args);
+    int r = clasp_parseArguments(flags, argc, (clasp_char_t const* const*)argv, specifications, ctxt, &args);
 
-    if(r != 0)
+    if (r != 0)
     {
         clasp_char_t const* const e = clasp_main_internal_strerror_(r);
 
-        if(NULL == programName)
+        if (NULL == programName)
         {
             programName = CLASP_LITERAL_STRING("process");
         }

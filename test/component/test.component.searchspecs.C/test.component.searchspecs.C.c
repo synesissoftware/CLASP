@@ -4,12 +4,13 @@
  * Purpose:     Implementation file for the test.component.searchspecs.C project.
  *
  * Created:     12th September 2014
- * Updated:     16th October 2019
+ * Updated:     5th August 2020
  *
  * Status:      Wizard-generated
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2014-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -22,14 +23,14 @@
  * test component header file include(s)
  */
 
-#include <systemtools/clasp/util/searchspecs.h>
+#include <clasp/util/searchspecs.h>
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
 
 /* SystemTools::CLASP header files */
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 /* xTests header files */
 #include <xtests/xtests.h>
@@ -141,7 +142,7 @@ int main_(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.searchspecs.C", verbosity, setup, teardown, setupParam))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.searchspecs.C", verbosity, setup, teardown, setupParam))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -235,12 +236,12 @@ load_helper_(
     STLSOFT_C_AUTO_BUFFER_DECLARE(clasp_argument_t, 10, values);
 
 
-    { char const** s; for(s = strings; NULL != *s; ++s)
+    { char const** s; for (s = strings; NULL != *s; ++s)
     {
         ++numValues;
     }}
 
-    if(0 != STLSOFT_C_AUTO_BUFFER_RESIZE(values, numValues))
+    if (0 != STLSOFT_C_AUTO_BUFFER_RESIZE(values, numValues))
     {
         return ENOMEM;
     }
@@ -250,7 +251,7 @@ load_helper_(
 
         int r;
 
-        { size_t i; for(i = 0; i != numValues; ++i)
+        { size_t i; for (i = 0; i != numValues; ++i)
         {
             clasp_argument_t* const value   =   &values.ptr[i];
             char const* const       string  =   strings[i];
@@ -288,7 +289,7 @@ static void test_1_0()
             ,   &searchspecs
             );
 
-    if(ENOMEM == r)
+    if (ENOMEM == r)
     {
         XTESTS_TEST_FAIL("out of memory");
     }
@@ -319,7 +320,7 @@ static void test_1_1()
             ,   &searchspecs
             );
 
-    if(ENOMEM == r)
+    if (ENOMEM == r)
     {
         XTESTS_TEST_FAIL("out of memory");
     }

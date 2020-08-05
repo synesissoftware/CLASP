@@ -4,12 +4,13 @@
  * Purpose:     Implementation file for the test.scratch.C.version project.
  *
  * Created:     6th December 2011
- * Updated:     18th April 2019
+ * Updated:     5th August 2020
  *
  * Status:      Wizard-generated
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -19,7 +20,7 @@
 
 
 /* SystemTools::CLASP header files */
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 /* Standard C header files */
 #include <errno.h>
@@ -39,14 +40,14 @@
 
 /* ////////////////////////////////////////////////////////////////////// */
 
-static clasp_alias_t const ALIASES[] =
+static clasp_specification_t const SPECIFICATIONS[] =
 {
     CLASP_FLAG(NULL,    "--help",           "show usage and quit"),
     CLASP_FLAG("-v",    "--version",        "show version and quit"),
 
     CLASP_OPTION("-o",  "--output-file",    "specify the output-file", ""),
 
-    CLASP_ALIAS_ARRAY_TERMINATOR
+    CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -57,9 +58,9 @@ int main(int argc, char** argv)
 {
     clasp_arguments_t const* args;
 
-    int cr = clasp_parseArguments(0, argc, argv, ALIASES, 0, &args);
+    int cr = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, 0, &args);
 
-    if(cr < 0)
+    if (cr < 0)
     {
         fprintf(stderr, "failed to parse arguments : %s (%d)\n", strerror(errno), errno);
 
@@ -70,7 +71,7 @@ int main(int argc, char** argv)
         puts("");
         printf("flags:\t%lu\n", args->numFlags);
 
-        { size_t i; for(i = 0; i != args->numFlags; ++i)
+        { size_t i; for (i = 0; i != args->numFlags; ++i)
         {
             clasp_argument_t const* const flag = args->flags + i;
 
@@ -81,7 +82,7 @@ int main(int argc, char** argv)
         puts("");
         printf("options:\t%lu\n", args->numOptions);
 
-        { size_t i; for(i = 0; i != args->numOptions; ++i)
+        { size_t i; for (i = 0; i != args->numOptions; ++i)
         {
             clasp_argument_t const* const option = args->options + i;
 
@@ -92,7 +93,7 @@ int main(int argc, char** argv)
         puts("");
         printf("values:\t%lu\n", args->numValues);
 
-        { size_t i; for(i = 0; i != args->numValues; ++i)
+        { size_t i; for (i = 0; i != args->numValues; ++i)
         {
             clasp_argument_t const* const value = args->values + i;
 
@@ -102,18 +103,18 @@ int main(int argc, char** argv)
 
         /* Now "use" the flags/options as we would in a real program */
 
-        if(clasp_flagIsSpecified(args, "--help"))
+        if (clasp_flagIsSpecified(args, "--help"))
         {
             ; /* show usage */
         }
-        if(clasp_flagIsSpecified(args, "--version"))
+        if (clasp_flagIsSpecified(args, "--version"))
         {
             ; /* show version */
         }
         {
             clasp_argument_t const* const ofile = clasp_findFlagOrOption(args, "--output-file", 0);
 
-            if(NULL != ofile)
+            if (NULL != ofile)
             {
                 ; /* do something with output file */
             }
@@ -121,10 +122,10 @@ int main(int argc, char** argv)
 
         /* now check for unrecognised arguments */
 #if 0
-        if(0 != clasp_reportUnrecognisedFlagsAndOptions(args, ALIASES, NULL, 0))
+        if(0 != clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, NULL, 0))
         {
             clasp_argument_t const* unrecognisedArg;
-            size_t const            n     = clasp_reportUnrecognisedFlagsAndOptions(args, ALIASES, &unrecognisedArg, 0);
+            size_t const            n     = clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &unrecognisedArg, 0);
             size_t                  nSkip = 0;
 
             fprintf(stderr, "%lu unrecognised argument(s):\n", n);
@@ -132,13 +133,13 @@ int main(int argc, char** argv)
             {
                 fprintf(stderr, "\tunrecognised argument: %s\n", args->argv[unrecognisedArg->cmdLineIndex]);
 
-            } while(0 != clasp_reportUnrecognisedFlagsAndOptions(args, ALIASES, &unrecognisedArg, ++nSkip));
+            } while (0 != clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &unrecognisedArg, ++nSkip));
         }
 #else
         {
 clasp_argument_t const* arg;
 unsigned nSkip = 0;
-size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, ALIASES, &arg, nSkip);
+size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &arg, nSkip);
 if(0 != n)
 {
   fprintf(stderr, "%lu unrecognised argument(s):\n", n);
@@ -146,14 +147,14 @@ if(0 != n)
   {
     fprintf(stderr, "\tunrecognised argument: %s\n", args->argv[arg->cmdLineIndex]);
 
-  } while(0 != clasp_reportUnrecognisedFlagsAndOptions(args, ALIASES, &arg, ++nSkip));
+  } while (0 != clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &arg, ++nSkip));
 }
         }
 #endif
 
         /* now check for unused arguments */
 #if 0
-        if(0 != clasp_reportUnusedFlagsAndOptions(args, NULL, 0))
+        if (0 != clasp_reportUnusedFlagsAndOptions(args, NULL, 0))
         {
             clasp_argument_t const* unusedArg;
             size_t const            n     = clasp_reportUnusedFlagsAndOptions(args, &unusedArg, 0);
@@ -164,20 +165,20 @@ if(0 != n)
             {
                 fprintf(stderr, "\tunused argument: %s\n", args->argv[unusedArg->cmdLineIndex]);
 
-            } while(0 != clasp_reportUnusedFlagsAndOptions(args, &unusedArg, ++nSkip));
+            } while (0 != clasp_reportUnusedFlagsAndOptions(args, &unusedArg, ++nSkip));
         }
 #else
         {
 clasp_argument_t const* arg;
 unsigned nSkip = 0;
 size_t const n = clasp_reportUnusedValues(args, &arg, nSkip);
-if(0 != n)
+if (0 != n)
 {
   fprintf(stderr, "%lu unused argument(s):\n", n);
   do
   {
     fprintf(stderr, "\tunused argument: %s\n", args->argv[arg->cmdLineIndex]);
-  } while(0 != clasp_reportUnusedValues(args, &arg, ++nSkip));
+  } while (0 != clasp_reportUnusedValues(args, &arg, ++nSkip));
 }
 
         }

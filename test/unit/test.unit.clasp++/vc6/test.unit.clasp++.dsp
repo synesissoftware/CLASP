@@ -45,7 +45,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /YX /FD /c
-# ADD CPP /nologo /W3 /WX /GR /GX /O2 /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_CONSOLE" /YX /FD /c
+# ADD CPP /nologo /W3 /WX /GR /GX /O2 /I "$(XTESTS_C_ROOT)/include" /I "../../../../include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_CONSOLE" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0xc09 /d "NDEBUG" /d "_AFXDLL"
@@ -71,7 +71,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /YX /FD /GZ /c
-# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
+# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(XTESTS_C_ROOT)/include" /I "../../../../include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0xc09 /d "_DEBUG" /d "_AFXDLL"
@@ -98,7 +98,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(SYSTEMTOOLS_ROOT)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
-# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /D "CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS" /FR /YX /FD /GZ /c
+# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(XTESTS_C_ROOT)/include" /I "../../../../include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /D "CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS" /FR /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0xc09 /d "_DEBUG"
@@ -125,7 +125,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(SYSTEMTOOLS_ROOT)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
-# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "UNIX" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /D "_STLSOFT_FORCE_ANY_COMPILER" /FR /YX /FD /GZ /c
+# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(XTESTS_C_ROOT)/include" /I "../../../../include" /I "$(RECLS_ROOT)/include" /I "$(STLSOFT)/include" /I "$(UNIXEM)/include" /D "UNIX" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /D "_STLSOFT_FORCE_ANY_COMPILER" /FR /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0xc09 /d "_DEBUG"
@@ -396,10 +396,6 @@ SOURCE="$(STLSOFT)\include\stlsoft\shims\access\string.hpp"
 # End Source File
 # Begin Source File
 
-SOURCE="$(STLSOFT)\include\stlsoft\string\string_slice.h"
-# End Source File
-# Begin Source File
-
 SOURCE="$(STLSOFT)\include\stlsoft\shims\access\string\std\time.hpp"
 # End Source File
 # Begin Source File
@@ -424,10 +420,6 @@ SOURCE="$(STLSOFT)\include\stlsoft\meta\yesno.hpp"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE="$(STLSOFT)\include\platformstl\filesystem\path_functions.h"
-# End Source File
-# Begin Source File
-
 SOURCE="$(STLSOFT)\include\platformstl\platformstl.h"
 # End Source File
 # End Group
@@ -437,10 +429,6 @@ SOURCE="$(STLSOFT)\include\platformstl\platformstl.h"
 # Begin Source File
 
 SOURCE="$(STLSOFT)\include\unixstl\synch\util\features.h"
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\..\..\..\..\..\..\..\unixem\1.12\include\unixem\implicit_link.h
 # End Source File
 # Begin Source File
 
@@ -477,6 +465,10 @@ SOURCE="$(RECLS_ROOT)\include\recls\implicit_link.h"
 # End Source File
 # Begin Source File
 
+SOURCE="$(RECLS_ROOT)\include\xtests\implicit_link.h"
+# End Source File
+# Begin Source File
+
 SOURCE="$(RECLS_ROOT)\include\recls\internal\language.h"
 # End Source File
 # Begin Source File
@@ -507,17 +499,33 @@ SOURCE="$(RECLS_ROOT)\include\recls\internal\retcodes.h"
 
 SOURCE="$(RECLS_ROOT)\include\recls\unix.h"
 # End Source File
+# Begin Source File
+
+SOURCE="$(RECLS_ROOT)\include\xtests\xtests.h"
+# End Source File
 # End Group
 # Begin Group "SystemTools::CLASP Header Files"
 
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=..\..\..\..\include\clasp\clasp.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\..\include\systemtools\clasp\clasp.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\..\include\clasp\clasp.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\..\include\systemtools\clasp\clasp.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\..\include\clasp\implicit_link.h
 # End Source File
 # Begin Source File
 
@@ -531,6 +539,10 @@ SOURCE=..\..\..\..\include\systemtools\clasp\internal\shim_macros.h
 # Begin Group "UNIXem Header Files"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE="$(UNIXEM)\include\unixem\implicit_link.h"
+# End Source File
 # Begin Source File
 
 SOURCE="$(UNIXEM)\include\unistd.h"
@@ -556,10 +568,6 @@ SOURCE="$(XTESTS_C_ROOT)\include\xtests\implicit_link.h"
 SOURCE="$(XTESTS_C_ROOT)\include\xtests\xtests.h"
 # End Source File
 # End Group
-# End Group
-# Begin Group "Resource Files"
-
-# PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # End Group
 # End Target
 # End Project

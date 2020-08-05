@@ -220,10 +220,6 @@ SOURCE="$(RECLS_ROOT)\include\recls\unix.h"
 
 SOURCE=..\..\..\include\systemtools\clasp\clasp.h
 # End Source File
-# Begin Source File
-
-SOURCE=..\..\..\include\systemtools\clasp\internal\clasp.h
-# End Source File
 # End Group
 # Begin Group "UNIXem Header Files"
 

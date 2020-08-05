@@ -4,7 +4,7 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     30th July 2020
+ * Updated:     5th August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -56,8 +56,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    11
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     81
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 3
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     85
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -76,9 +76,11 @@
 
 #define CLASP_VER_MAJOR         0
 #define CLASP_VER_MINOR         14
-#define CLASP_VER_REVISION      0
+#define CLASP_VER_PATCH         0
+#define CLASP_VER_REVISION      CLASP_VER_PATCH
+#define CLASP_VER_AB            40
 
-#define CLASP_VER               0x000e00ff
+#define CLASP_VER               0x000e0040
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -176,6 +178,31 @@
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 
+#ifndef CLASP_OBSOLETE
+
+# if 0
+# elif 0 || \
+       defined(__GNUC__) || \
+       defined(__clang__) || \
+       0
+
+#  define CLASP_DEPRECATED_(msg)        __attribute__((deprecated))
+# elif defined(_MSC_VER) && \
+     (   _MSC_VER >= 1500 || \
+         (   _MSC_VER >= 1400 && \
+             defined(_MSC_FULL_VER) && \
+             _MSC_FULL_VER >= 140050320))
+
+#  define CLASP_DEPRECATED_(msg)        __declspec(deprecated(msg))
+# else
+
+#  define CLASP_DEPRECATED_(msg)        /* */
+# endif
+#else
+
+# define CLASP_DEPRECATED_(msg)         /* */
+#endif /* CLASP_OBSOLETE */
+
 /* /////////////////////////////////////////////////////////////////////////
  * basic types
  */
@@ -186,8 +213,8 @@
  *
  * NOTE: as of 0.11, the automatic discrimination of wide-string builds on
  * Windows is removed, because it is more common (and standards-conforming)
- * to use a multibyte main - int main(int argc, char** argv) - than the wide
- * main - int _wmain(int argc, wchar_t** argv). If you wish to use a wide
+ * to use a multibyte main - int main(int argc, char* argv[]) - than the wide
+ * main - int _wmain(int argc, wchar_t* argv[]). If you wish to use a wide
  * main, and therefore wide CLASP, you must define CLASP_USE_WIDE_STRINGS.
  */
 
@@ -231,6 +258,10 @@ typedef char        clasp_char_t;
 # define CLASP_LITERAL_STRING(x)                            x
 #endif /* CLASP_USE_WIDE_STRINGS */
 
+
+/* /////////////////////////////////////
+ * clasp_slice_t
+ */
 
 #ifdef __cplusplus
 
@@ -453,17 +484,17 @@ typedef enum clasp_argtype_t clasp_argtype_t;
  */
 struct clasp_argument_t
 {
-    clasp_slice_t               resolvedName;       /*!< The resolved name of the argument, based on the aliases, or the given name if no matching alias */
+    clasp_slice_t               resolvedName;       /*!< The resolved name of the argument, based on the specifications, or the given name if no matching alias */
     clasp_slice_t               givenName;          /*!< The actual name of the argument given */
     clasp_slice_t               value;              /*!< The value, if any */
     clasp_argtype_t             type;               /*!< The type: CLASP_ARGTYPE_VALUE, CLASP_ARGTYPE_OPTION, or CLASP_ARGTYPE_FLAG */
     int                         cmdLineIndex;       /*!< The index of the argument with the original command-line */
     int                         numGivenHyphens;    /*!< The number of hyphens present in the original argument */
-    int                         aliasIndex;         /*!< The index of the matching alias, if any; otherwise -1 */
+    int                         aliasIndex;         /*!< The index of the matching specification, if any; otherwise -1 */
     int                         flags;              /*!< Internal use only */
 };
 #ifndef __cplusplus
-typedef struct clasp_argument_t clasp_argument_t;
+typedef struct clasp_argument_t         clasp_argument_t;
 #endif /* !__cplusplus */
 
 /** Structure returned to the caller of clasp_parseArguments(), providing
@@ -487,11 +518,11 @@ struct clasp_arguments_t
     clasp_slice_t               programName;        /*!< The program name, deduced from argv[0] */
 };
 #ifndef __cplusplus
-typedef struct clasp_arguments_t clasp_arguments_t;
+typedef struct clasp_arguments_t        clasp_arguments_t;
 #endif /* !__cplusplus */
 
-/** Structure that defines an alias for a short option or flag; also used
- *   to define help information for all flags and options
+/** Structure that defines a specification for a short option or flag; also
+ *   used to define help information for all flags and options
  *
  * \note Specifying an entry whose <code>type</code> field has the
  *   value <code>-1</code> terminates the array
@@ -503,15 +534,15 @@ struct clasp_alias_t
     clasp_char_t const* mappedArgument;   /*!< The long option name. May contain a value, e.g. "--width=10", which will be used as a default */
     clasp_char_t const* help;             /*!< Help information for the argument */
     clasp_char_t const* valueSet;         /*!< char-separated list of options; first char is separator; if separator is trailing, indicates value may also be any-other-value */
-    int                 bitFlags;         /*!< The bit flags associated with the alias (if it is a flag) */
+    int                 bitFlags;         /*!< The bit flags associated with the specification (if it is a flag) */
 };
 #ifndef __cplusplus
-typedef struct clasp_alias_t clasp_alias_t;
+typedef struct clasp_alias_t            clasp_alias_t;
 #endif /* !__cplusplus */
 
 /** \def CLASP_FLAG(alias, mappedArgument, help)
  *
- * Defines a flag alias in the aliases array.
+ * Defines a flag specification in the specification array.
  *
  * \param alias The flag alias, e.g. "-i"
  * \param mappedArgument The flag mapped argument / full name, e.g. "--ignore-case"
@@ -522,7 +553,7 @@ typedef struct clasp_alias_t clasp_alias_t;
 
 /** \def CLASP_BIT_FLAG(alias, mappedArgument, bitFlags, help)
  *
- * Defines a bit-flag alias in the aliases array.
+ * Defines a bit-flag specification in the specification array.
  *
  * \param alias The flag alias, e.g. "-i"
  * \param mappedArgument The flag mapped argument / full name, e.g. "--ignore-case"
@@ -541,7 +572,7 @@ typedef struct clasp_alias_t clasp_alias_t;
 
 /** \def CLASP_OPTION(alias, mappedArgument, help, valueSet)
  *
- * Defines a option alias in the aliases array.
+ * Defines a option specification in the specification array.
  *
  * \param alias The option alias, e.g. "-i"
  * \param mappedArgument The option mapped argument / full name, e.g. "--verbosity"
@@ -595,11 +626,17 @@ typedef struct clasp_alias_t clasp_alias_t;
  */
 # define CLASP_GAP_SECTION(sectionLabel)                      { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
 
+/** \def CLASP_SPECIFICATION_ARRAY_TERMINATOR
+ *
+ * Terminates an array of specifications
+ */
+# define CLASP_SPECIFICATION_ARRAY_TERMINATOR                 { CLASP_ARGTYPE_INVALID, NULL, NULL, NULL, NULL, 0 }
+
 /** \def CLASP_ALIAS_ARRAY_TERMINATOR
  *
- * Terminates an array of aliases
+ * [DEPRECATED] Instead use CLASP_SPECIFICATION_ARRAY_TERMINATOR
  */
-# define CLASP_ALIAS_ARRAY_TERMINATOR                         { CLASP_ARGTYPE_INVALID, NULL, NULL, NULL, NULL, 0 }
+# define CLASP_ALIAS_ARRAY_TERMINATOR                         CLASP_SPECIFICATION_ARRAY_TERMINATOR
 
 /** Log function prototype. */
 typedef void (CLASP_CALLCONV *clasp_log_fn_t)(
@@ -720,8 +757,8 @@ public: /** Construction */
  * \param argc The <code>argc</code> argument passed to main(). Must be 1 or
  *   more; undefined behaviour otherwise
  * \param argv The <code>argv</code>
- * \param aliases Variable-length array of clasp_alias_t entries that define
- *   the aliases used in parsing. May be \c NULL
+ * \param specifications Variable-length array of clasp_specification_t
+ *   entries that define the specifications used in parsing. May be \c NULL
  * \param args Receives a pointer to the parsed results structure
  *
  * \return An error code indicating the status of the function
@@ -733,12 +770,12 @@ public: /** Construction */
  */
 CLASP_CALL(int)
 clasp_parseArguments(
-    unsigned                          flags
-,   int                               argc
-,   clasp_char_t const* const*        argv
-,   clasp_alias_t const*              aliases
-,   clasp_diagnostic_context_t const* ctxt
-,   clasp_arguments_t const**         args
+    unsigned                            flags
+,   int                                 argc
+,   clasp_char_t const* const           argv[]
+,   clasp_alias_t const                 specifications[]
+,   clasp_diagnostic_context_t const*   ctxt
+,   clasp_arguments_t const**           args
 );
 
 /** Releases all resources associated with the command-line
@@ -750,22 +787,22 @@ clasp_parseArguments(
  */
 CLASP_CALL(void)
 clasp_releaseArguments(
-    clasp_arguments_t const* args
+    clasp_arguments_t const*            args
 );
 
 /** Reports how many flags/options are not recognised relative to the
- * given \c aliases array, and returns a pointer to the \c nSkip'th
+ * given \c specifications array, and returns a pointer to the \c nSkip'th
  * unrecognised instance.
  *
  * \pre NULL != args
- * \pre NULL != aliases
+ * \pre NULL != specifications
  */
 CLASP_CALL(size_t)
 clasp_reportUnrecognisedFlagsAndOptions(
-    clasp_arguments_t const*  args
-,   clasp_alias_t const*      aliases
-,   clasp_argument_t const**  nextUnrecognisedArg
-,   unsigned                  nSkip /* = 0 */
+    clasp_arguments_t const*    args
+,   clasp_alias_t const         specifications[]
+,   clasp_argument_t const**    nextUnrecognisedArg
+,   unsigned                    nSkip /* = 0 */
 );
 
 /** Reports how many flags arguments were not used by the
@@ -965,7 +1002,7 @@ clasp_checkFlag(
  * value into the given \c bitFlags variable.
  *
  * \param args Pointer to the clasp_arguments_t instance.
- * \param aliases Pointer to the alias array
+ * \param specifications Pointer to the specification array
  * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
  *   not NULL, it is assumed to be initialised.
  *
@@ -976,12 +1013,12 @@ clasp_checkFlag(
  * \note All flags found will be marked as used.
  *
  * \pre NULL != args
- * \pre NULL != aliases
+ * \pre NULL != specifications
  */
 CLASP_CALL(int)
 clasp_checkAllFlags(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 ,   int*                        bitFlags
 );
 
@@ -989,7 +1026,7 @@ clasp_checkAllFlags(
  * \c bitFlags value into the given \c bitFlags variable.
  *
  * \param args Pointer to the clasp_arguments_t instance.
- * \param aliases Pointer to the alias array
+ * \param specifications Pointer to the specification array
  * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
  *   not NULL, it is assumed to be initialised.
  *
@@ -1000,12 +1037,12 @@ clasp_checkAllFlags(
  * \note All flags found will be marked as used.
  *
  * \pre NULL != args
- * \pre NULL != aliases
+ * \pre NULL != specifications
  */
 CLASP_CALL(int)
 clasp_checkAllMatchingFlags(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 ,   int                         bitMask
 ,   int*                        bitFlags
 );
@@ -1228,7 +1265,7 @@ typedef struct clasp_usageinfo_t clasp_usageinfo_t;
 
 CLASP_CALL(int) clasp_showUsage(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 ,   clasp_char_t const*         toolName    /* "rcp" */
 ,   clasp_char_t const*         summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
 ,   clasp_char_t const*         copyright   /* "Copyright (c) XXXX. All rights reserved" */
@@ -1237,8 +1274,8 @@ CLASP_CALL(int) clasp_showUsage(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
+,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -1248,7 +1285,7 @@ CLASP_CALL(int) clasp_showUsage(
 
 CLASP_CALL(int) clasp_showHeader(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 ,   clasp_char_t const*         toolName
 ,   clasp_char_t const*         summary
 ,   clasp_char_t const*         copyright
@@ -1257,7 +1294,7 @@ CLASP_CALL(int) clasp_showHeader(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -1276,8 +1313,8 @@ CLASP_CALL(int) clasp_showHeader(
  */
 CLASP_CALL(int) clasp_showBody(
     clasp_arguments_t const*    args
-,   clasp_alias_t const*        aliases
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   clasp_alias_t const         specifications[]
+,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -1291,19 +1328,32 @@ CLASP_CALL(int) clasp_showVersion(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                        (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                       param
 ,   int                         flags
 );
 
 
-/** Evaluates the number of aliases in the array
+/** Evaluates the number of specifications in the array
  *
  * \ingroup group__clasp__api_usage
  *
- * \param aliases Pointer to the alias array
+ * \param specifications Pointer to the specification array
  */
-CLASP_CALL(size_t) clasp_countAliases(clasp_alias_t const* aliases);
+CLASP_CALL(size_t)
+clasp_countSpecifications(
+    clasp_alias_t const         specifications[]
+);
+
+/** [DEPRECATED]
+ *
+ * \deprecated Instead use clasp_countSpecifications()
+ */
+CLASP_DEPRECATED_("clasp_countAliases() is deprecated and will be removed in a future release; use clasp_countSpecifications() instead")
+CLASP_CALL(size_t)
+clasp_countAliases(
+    clasp_alias_t const         specifications[]
+);
 
 
 /**  Stock function that shows version to a <code>FILE*</code>
@@ -1311,7 +1361,7 @@ CLASP_CALL(size_t) clasp_countAliases(clasp_alias_t const* aliases);
 CLASP_CALL(void) clasp_showVersionByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 );
 
 /**  Stock function that shows header to a <code>FILE*</code>
@@ -1319,7 +1369,7 @@ CLASP_CALL(void) clasp_showVersionByFILE(
 CLASP_CALL(void) clasp_showHeaderByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 );
 
 /**  Stock function that shows body to a <code>FILE*</code>
@@ -1327,17 +1377,20 @@ CLASP_CALL(void) clasp_showHeaderByFILE(
 CLASP_CALL(void) clasp_showBodyByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const*        aliases
+,   clasp_alias_t const         specifications[]
 );
 
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 
 /** [DEPRECATED]
+ *
+ * \deprecated Instead use clasp_showUsage()
  */
+CLASP_DEPRECATED_("clasp_show_usage() is deprecated and will be removed in a future release; use clasp_showUsage() instead")
 CLASP_CALL(int) clasp_show_usage(
     clasp_diagnostic_context_t const*   ctxt
-,   clasp_alias_t const*                aliases
+,   clasp_alias_t const                 specifications[]
 ,   clasp_char_t const*                 toolName    /* "rcp" */
 ,   clasp_char_t const*                 summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
 ,   clasp_char_t const*                 copyright   /* "Copyright (c) XXXX. All rights reserved" */
@@ -1346,8 +1399,8 @@ CLASP_CALL(int) clasp_show_usage(
 ,   int                                 major
 ,   int                                 minor
 ,   int                                 revision
-,   void                                (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-,   void                                (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                                (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
+,   void                                (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                               param
 ,   int                                 flags
 ,   int                                 consoleWidth
@@ -1356,10 +1409,13 @@ CLASP_CALL(int) clasp_show_usage(
 );
 
 /** [DEPRECATED]
+ *
+ * \deprecated Instead use clasp_showHeader()
  */
+CLASP_DEPRECATED_("clasp_show_header() is deprecated and will be removed in a future release; use clasp_showHeader() instead")
 CLASP_CALL(int) clasp_show_header(
     clasp_diagnostic_context_t const*   ctxt
-,   clasp_alias_t const*                aliases
+,   clasp_alias_t const                 specifications[]
 ,   clasp_char_t const*                 toolName
 ,   clasp_char_t const*                 summary
 ,   clasp_char_t const*                 copyright
@@ -1368,17 +1424,20 @@ CLASP_CALL(int) clasp_show_header(
 ,   int                                 major
 ,   int                                 minor
 ,   int                                 revision
-,   void                                (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                                (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                               param
 ,   int                                 flags
 );
 
 /** [DEPRECATED]
+ *
+ * \deprecated Instead use clasp_showBody()
  */
+CLASP_DEPRECATED_("clasp_show_body() is deprecated and will be removed in a future release; use clasp_showBody() instead")
 CLASP_CALL(int) clasp_show_body(
     clasp_diagnostic_context_t const*   ctxt
-,   clasp_alias_t const*                aliases
-,   void                                (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   clasp_alias_t const                 specifications[]
+,   void                                (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                               param
 ,   int                                 flags
 ,   int                                 consoleWidth
@@ -1387,41 +1446,53 @@ CLASP_CALL(int) clasp_show_body(
 );
 
 /** [DEPRECATED]
+ *
+ * \deprecated Instead use clasp_showVersion()
  */
+CLASP_DEPRECATED_("clasp_show_version() is deprecated and will be removed in a future release; use clasp_showVersion() instead")
 CLASP_CALL(int) clasp_show_version(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_char_t const*                 toolName
 ,   int                                 major
 ,   int                                 minor
 ,   int                                 revision
-,   void                                (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                                (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const[] )
 ,   void*                               param
 ,   int                                 flags
 );
 
 
 /** [DEPRECATED] Stock function that shows version to a <code>FILE*</code>
+ *
+ * \deprecated Instead use clasp_showVersionByFILE()
  */
+CLASP_DEPRECATED_("clasp_show_version_by_FILE() is deprecated and will be removed in a future release; use clasp_showVersionByFILE() instead")
 CLASP_CALL(void) clasp_show_version_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
-,   clasp_alias_t const*                aliases
+,   clasp_alias_t const                 specifications[]
 );
 
 /** [DEPRECATED] Stock function that shows header to a <code>FILE*</code>
+ *
+ * \deprecated Instead use clasp_showHeaderByFILE()
  */
+CLASP_DEPRECATED_("clasp_show_header_by_FILE() is deprecated and will be removed in a future release; use clasp_showHeaderByFILE() instead")
 CLASP_CALL(void) clasp_show_header_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
-,   clasp_alias_t const*                aliases
+,   clasp_alias_t const                 specifications[]
 );
 
 /** [DEPRECATED] Stock function that shows body to a <code>FILE*</code>
+ *
+ * \deprecated Instead use clasp_showBodyByFILE()
  */
+CLASP_DEPRECATED_("clasp_show_body_by_FILE() is deprecated and will be removed in a future release; use clasp_showBodyByFILE() instead")
 CLASP_CALL(void) clasp_show_body_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
-,   clasp_alias_t const*                aliases
+,   clasp_alias_t const                 specifications[]
 );
 
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
@@ -1452,13 +1523,13 @@ namespace clasp
     parseArguments(
         unsigned                          flags
     ,   int                               argc
-    ,   clasp_char_t**                    argv
-    ,   alias_t const*                    aliases
+    ,   clasp_char_t*                     argv[]
+    ,   alias_t const                     specifications[]
     ,   clasp_diagnostic_context_t const* ctxt
     ,   arguments_t const**               args
     )
     {
-        return clasp_parseArguments(flags, argc, argv, aliases, ctxt, args);
+        return clasp_parseArguments(flags, argc, argv, specifications, ctxt, args);
     }
 
     inline
@@ -1466,13 +1537,13 @@ namespace clasp
     parseArguments(
         unsigned                          flags
     ,   int                               argc
-    ,   clasp_char_t const* const*        argv
-    ,   alias_t const*                    aliases
+    ,   clasp_char_t const* const         argv[]
+    ,   alias_t const                     specifications[]
     ,   clasp_diagnostic_context_t const* ctxt
     ,   arguments_t const**               args
     )
     {
-        return clasp_parseArguments(flags, argc, argv, aliases, ctxt, args);
+        return clasp_parseArguments(flags, argc, argv, specifications, ctxt, args);
     }
 
     inline

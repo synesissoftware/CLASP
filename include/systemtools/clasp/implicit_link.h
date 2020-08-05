@@ -65,7 +65,7 @@
  */
 
 #ifndef SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
-# include <systemtools/clasp/clasp.h>
+# include <clasp/clasp.h>
 #endif /* !SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP */
 
 /* /////////////////////////////////////////////////////////////////////////

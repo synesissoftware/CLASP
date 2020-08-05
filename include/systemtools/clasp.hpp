@@ -4,11 +4,11 @@
  * Purpose:     C++ layer for the CLASP library.
  *
  * Created:     31st January 2014
- * Updated:     18th April 2019
+ * Updated:     2nd August 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2014-2019, Matthew Wilson
+ * Copyright (c) 2014-2020, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,9 +20,10 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Software nor the names
- *   of any contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ * - Neither the names of Matthew Wilson and Synesis Information Systems nor
+ *   the names of any contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written
+ *   permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -54,8 +55,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_MAJOR    1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_MINOR    0
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_REVISION 1
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_EDIT     3
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_REVISION 2
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_EDIT     4
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////

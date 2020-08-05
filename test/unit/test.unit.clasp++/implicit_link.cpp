@@ -4,16 +4,7 @@
  * Purpose:     Implicit link file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     30th July 2020
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2009-2020, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Updated:     2nd August 2020
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -23,7 +14,7 @@
  */
 
 /* SystemTools::CLASP header files */
-#include <systemtools/clasp/implicit_link.h>
+#include <clasp/implicit_link.h>
 
 /* xTests header files */
 #include <xtests/implicit_link.h>

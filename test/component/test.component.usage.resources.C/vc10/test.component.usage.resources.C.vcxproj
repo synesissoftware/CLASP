@@ -51,8 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>test.component.usage.resources.C</ProjectName>
     <ProjectGuid>{94CFC4AF-7EB4-444e-AF51-D5967D6D6207}</ProjectGuid>
+    <ProjectName>test.component.usage.resources.C</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">

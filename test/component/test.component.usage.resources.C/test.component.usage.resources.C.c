@@ -4,12 +4,13 @@
  * Purpose:     Implementation file for the test.component.usage.resources project.
  *
  * Created:     7th March 2012
- * Updated:     17th October 2019
+ * Updated:     5th August 2020
  *
  * Status:      Wizard-generated
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2012-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -32,7 +33,7 @@
  * test component header file include(s)
  */
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 #include "resource.h"
 
@@ -41,7 +42,7 @@
  */
 
 /* SystemTools::CLASP header files */
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 /* xTests header files */
 #include <xtests/xtests.h>
@@ -159,7 +160,7 @@ int main_(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.usage.resources.C", verbosity, setup, teardown, setupParam))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.usage.resources.C", verbosity, setup, teardown, setupParam))
     {
         XTESTS_RUN_CASE(test_header_with_LLLLL);
         XTESTS_RUN_CASE(test_header_with_RRRRR);
@@ -248,14 +249,14 @@ void
 clasp_showHeaderIntoMemory(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const*        aliases
+,   clasp_specification_t const specifications[]
 )
 {
     stlsoft_C_string_slice_a_t* const   sl  =   info->param;
     char* const                         p   =   (char*)sl->ptr;
 
     STLSOFT_SUPPRESS_UNUSED(args);
-    STLSOFT_SUPPRESS_UNUSED(aliases);
+    STLSOFT_SUPPRESS_UNUSED(specifications);
 
     sprintf(
             p
@@ -277,7 +278,7 @@ void
 clasp_showBodyIntoMemory(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const*        aliases
+,   clasp_specification_t const specifications[]
 )
 {
     stlsoft_C_string_slice_a_t* const   sl          =   info->param;
@@ -288,28 +289,28 @@ clasp_showBodyIntoMemory(
 
     STLSOFT_SUPPRESS_UNUSED(args);
 
-    for(n = 0; NULL != aliases->mappedArgument; ++aliases)
+    for (n = 0; NULL != specifications->mappedArgument; ++specifications)
     {
-        if( NULL != aliases->name &&
-            '\0' != aliases->name[0])
+        if (NULL != specifications->name &&
+            '\0' != specifications->name[0])
         {
-            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, aliases->name);
+            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, specifications->name);
 
             p += n;
         }
 
-        if( NULL != aliases->mappedArgument &&
-            '\0' != aliases->mappedArgument[0])
+        if (NULL != specifications->mappedArgument &&
+            '\0' != specifications->mappedArgument[0])
         {
-            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, aliases->mappedArgument);
+            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, specifications->mappedArgument);
 
             p += n;
         }
 
-        if( NULL != aliases->help &&
-            '\0' != aliases->help[0])
+        if (NULL != specifications->help &&
+            '\0' != specifications->help[0])
         {
-            int n = sprintf(p, "%.*s%s\n", 2 * tabWidth, ws, aliases->help);
+            int n = sprintf(p, "%.*s%s\n", 2 * tabWidth, ws, specifications->help);
 
             p += n;
         }
@@ -328,7 +329,7 @@ static void test_header_with_LLLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -374,7 +375,7 @@ static void test_header_with_RRRRR()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -420,7 +421,7 @@ static void test_header_with_RLLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -466,7 +467,7 @@ static void test_header_with_LRLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -512,7 +513,7 @@ static void test_header_with_LLLRL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -558,7 +559,7 @@ static void test_header_with_rLLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -604,7 +605,7 @@ static void test_header_with_LLrLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -650,7 +651,7 @@ static void test_header_with_LLLLr()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -696,7 +697,7 @@ static void test_header_with_rRRRR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -742,7 +743,7 @@ static void test_header_with_RrRRR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -788,7 +789,7 @@ static void test_header_with_RRrRR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -834,7 +835,7 @@ static void test_header_with_RRRrR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -880,7 +881,7 @@ static void test_header_with_RRRRr(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -920,10 +921,10 @@ static void test_1_9()
 
 static void test_body_1()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
@@ -935,7 +936,7 @@ static void test_body_1()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -946,7 +947,7 @@ static void test_body_1()
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -965,11 +966,11 @@ static void test_body_1()
 
 static void test_body_2()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "shows this help and terminates"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
@@ -981,7 +982,7 @@ static void test_body_2()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -992,7 +993,7 @@ static void test_body_2()
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1011,11 +1012,11 @@ static void test_body_2()
 
 static void test_body_3()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "@"STLSOFT_STRINGIZE(IDS_USAGE_HELP)"@"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
@@ -1027,7 +1028,7 @@ static void test_body_3()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -1038,7 +1039,7 @@ static void test_body_3()
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1057,12 +1058,12 @@ static void test_body_3()
 
 static void test_body_4()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "@usage@"),
         CLASP_FLAG(NULL, "--version", "@"STLSOFT_STRINGIZE(IDS_USAGE_VERSION)"@"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
@@ -1074,7 +1075,7 @@ static void test_body_4()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -1085,7 +1086,7 @@ static void test_body_4()
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1104,12 +1105,12 @@ static void test_body_4()
 
 static void test_body_5()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "@"STLSOFT_STRINGIZE(IDS_USAGE_HELP)"@"),
         CLASP_FLAG(NULL, "--version", "@usage@"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
@@ -1121,7 +1122,7 @@ static void test_body_5()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -1132,7 +1133,7 @@ static void test_body_5()
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1169,7 +1170,7 @@ static void test_expanded_usage_1()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
@@ -1215,7 +1216,7 @@ static void test_expanded_usage_2()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }

@@ -4,13 +4,14 @@
  * Purpose:     Implementation file for the test.unit.clasp++ project.
  *
  * Created:     16th July 2009
- * Updated:     30th July 2020
+ * Updated:     5th August 2020
  *
  * Status:      Wizard-generated
  *
- * License:     (Licensed under the Synesis Software Open License)
+ * License:     BSD (3-clause)
  *
- *              Copyright (c) 2009-2020, Synesis Software Pty Ltd.
+ *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2009-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -22,7 +23,7 @@
  * test component header file include(s)
  */
 
-#include <systemtools/clasp/clasp.hpp>
+#include <clasp/clasp.hpp>
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -81,6 +82,7 @@ namespace
 
 
     static void test_2_01(void);
+    static void test_2_01_c(void);
     static void test_2_02(void);
     static void test_2_03(void);
     static void test_2_04(void);
@@ -103,6 +105,12 @@ namespace
 } // anonymous namespace
 
 /* /////////////////////////////////////////////////////////////////////////
+ * globals
+ */
+
+clasp_diagnostic_context_t const*   s_ctxt;
+
+/* /////////////////////////////////////////////////////////////////////////
  * main
  */
 
@@ -111,9 +119,26 @@ int main(int argc, char **argv)
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;
 
+    struct stub
+    {
+        static void CLASP_CALLCONV function(
+            void*                /* context */
+        ,   int                  /* severity */
+        ,   clasp_char_t const*  /* fmt */
+        ,   va_list              /* args */
+        )
+        {}
+    };
+
+    clasp_diagnostic_context_t  ctxt;
+
+    ctxt.pfnLog = &stub::function;
+
+    s_ctxt = &ctxt;
+
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER("test.unit.clasp++", verbosity))
+    if (XTESTS_START_RUNNER("test.unit.clasp++", verbosity))
     {
 #if 0
         XTESTS_RUN_CASE(test_2_04);
@@ -141,6 +166,7 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_19);
 
         XTESTS_RUN_CASE(test_2_01);
+        XTESTS_RUN_CASE(test_2_01_c);
         XTESTS_RUN_CASE(test_2_02);
         XTESTS_RUN_CASE(test_2_03);
         XTESTS_RUN_CASE(test_2_04);
@@ -188,9 +214,9 @@ static void test_1_0()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -221,9 +247,9 @@ static void test_1_1()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -259,9 +285,9 @@ static void test_1_2()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -293,9 +319,9 @@ static void test_1_3()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -328,9 +354,9 @@ static void test_1_4()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -365,9 +391,9 @@ static void test_1_5()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -410,9 +436,9 @@ static void test_1_6()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -465,9 +491,9 @@ static void test_1_7()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -519,9 +545,9 @@ static void test_1_10()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -574,9 +600,9 @@ static void test_1_14()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -620,9 +646,9 @@ static void test_1_15()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, NULL, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -660,11 +686,11 @@ static void test_1_19()
 
 static void test_2_01()
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_FLAG("-v", "--version", NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -680,9 +706,9 @@ static void test_2_01()
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -721,15 +747,86 @@ static void test_2_01()
     }
 }
 
+static void test_2_01_c()
+{
+    clasp::specification_t const    Alias_Flag_Version  =   CLASP_FLAG("-v", "--version", NULL);
+
+    static clasp::specification_t Specifications[] =
+    {
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR, // Some older compilers can't pass in the specification_t instance here, so ...
+
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
+    };
+
+    Specifications[0] = Alias_Flag_Version; // ... it is assigned here
+
+    char* argv[] =
+    {
+        "arg0",
+        "-v",
+        "--boolopt1=true",
+        "--boolopt2=false",
+        "--boolopt3",
+        NULL,
+    };
+
+    arguments_t const*  args;
+    int r;
+
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
+
+    if (0 != r)
+    {
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+    }
+    else
+    {
+        bool    v;
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--nonexistant"));
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_flag(args, "--nonexistant", &v));
+        XTESTS_TEST_BOOLEAN_FALSE(v);
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--version"));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_flag(args, "--version", &v));
+        XTESTS_TEST_BOOLEAN_TRUE(v);
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, Alias_Flag_Version));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_flag(args, Alias_Flag_Version, &v));
+        XTESTS_TEST_BOOLEAN_TRUE(v);
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--boolopt1"));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--boolopt1", &v, false));
+        XTESTS_TEST_BOOLEAN_TRUE(v);
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_flag(args, "--boolopt1", &v));
+        XTESTS_TEST_BOOLEAN_TRUE(v);
+
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--boolopt2"));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--boolopt2", &v, true));
+        XTESTS_TEST_BOOLEAN_FALSE(v);
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--boolopt2", &v, false));
+        XTESTS_TEST_BOOLEAN_FALSE(v);
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_flag(args, "--boolopt2", &v));
+        XTESTS_TEST_BOOLEAN_FALSE(v);
+
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
+
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+
+        clasp::releaseArguments(args);
+    }
+}
+
 static void test_2_02(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_FLAG("-v", "--version", NULL),
 
         CLASP_OPTION("-b", "--boolopt2", NULL, "|true|false"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -746,9 +843,9 @@ static void test_2_02(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -789,13 +886,13 @@ static void test_2_02(void)
 
 static void test_2_03(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_FLAG("-v", "--version", NULL),
 
         CLASP_OPTION(NULL, "--boolopt2", NULL, "|true|false"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -811,9 +908,9 @@ static void test_2_03(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -854,13 +951,13 @@ static void test_2_03(void)
 
 static void test_2_04(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_FLAG("-v", "--version", NULL),
 
         CLASP_OPTION(NULL, "--boolopt2", NULL, "|true|false"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -877,9 +974,9 @@ static void test_2_04(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -920,13 +1017,13 @@ static void test_2_04(void)
 
 static void test_2_05(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_FLAG("-v", "--version", NULL),
 
         CLASP_OPTION(NULL, "--boolopt2", NULL, "|true|false"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -942,9 +1039,9 @@ static void test_2_05(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -989,11 +1086,11 @@ static void test_2_06(void)
 
 static void test_2_07(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_OPTION("-m", "--multi-opt", NULL, NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -1010,9 +1107,9 @@ static void test_2_07(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -1050,11 +1147,11 @@ static void test_2_07(void)
 
 static void test_2_08(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_OPTION("-l", "--length", NULL, NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -1067,9 +1164,9 @@ static void test_2_08(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -1097,11 +1194,11 @@ static void test_2_08(void)
 
 static void test_2_09(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_OPTION("-l", "--length", NULL, NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -1116,9 +1213,9 @@ static void test_2_09(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -1150,11 +1247,11 @@ static void test_2_09(void)
 
 static void test_2_10(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_OPTION("-l", "--length", NULL, NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -1169,9 +1266,9 @@ static void test_2_10(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -1203,11 +1300,11 @@ static void test_2_10(void)
 
 static void test_2_11(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_OPTION("-l", "--length", NULL, NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -1222,9 +1319,9 @@ static void test_2_11(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -1256,11 +1353,11 @@ static void test_2_11(void)
 
 static void test_2_12(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_OPTION("-l", "--length", NULL, NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -1275,9 +1372,9 @@ static void test_2_12(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }
@@ -1309,11 +1406,11 @@ static void test_2_12(void)
 
 static void test_2_13(void)
 {
-    static clasp::alias_t const Aliases[] =
+    static clasp::specification_t const Specifications[] =
     {
         CLASP_OPTION("-l", "--length", NULL, NULL),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     char* argv[] =
@@ -1328,9 +1425,9 @@ static void test_2_13(void)
     arguments_t const*  args;
     int r;
 
-    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Aliases, NULL, &args);
+    r = clasp::parseArguments(0, STLSOFT_NUM_ELEMENTS(argv) - 1, argv, Specifications, s_ctxt, &args);
 
-    if(0 != r)
+    if (0 != r)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
     }

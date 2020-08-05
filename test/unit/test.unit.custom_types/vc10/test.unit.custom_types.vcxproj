@@ -51,8 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>test.unit.custom_types</ProjectName>
     <ProjectGuid>{93D67B82-D378-4d59-8DFB-D59CC3315B4F}</ProjectGuid>
+    <ProjectName>test.unit.custom_types</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
