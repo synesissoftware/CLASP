@@ -4,7 +4,7 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     5th August 2020
+ * Updated:     28th September 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -173,7 +173,7 @@ clasp_find_id_(
 
 static
 int
-clasp_find_replacement_field_(
+clasp_find_replacement_usage_field_(
     clasp_usageinfo_t*      usageinfo
 ,   clasp_char_t const***   ppp
 ,   int*                    isNumber
@@ -463,7 +463,7 @@ clasp_invoke_header_new_(
     int                     isNumber;
     clasp_char_t const**    pp;
 
-    if (clasp_find_replacement_field_(&usageInfo_, &pp, &isNumber))
+    if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
     {
         clasp_char_t buff[4096];
 
@@ -539,6 +539,29 @@ clasp_invoke_version_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
+    clasp_usageinfo_t       usageInfo_  =   *usageinfo;
+    int                     isNumber;
+    clasp_char_t const**    pp;
+
+    if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
+    {
+        clasp_char_t buff[4096];
+
+        CLASP_ASSERT(NULL != pp);
+
+        if (!isNumber)
+        {
+            *pp = s_unknownIdentifier;
+        }
+        else
+        if (!clasp_replace_field_from_resource_(NULL /* args->argv[0] */, pp, buff, sizeof(buff) / sizeof(buff[0])))
+        {
+            *pp = s_unknownIdentifier;
+        }
+
+        return clasp_invoke_version_new_(pfnVersion, args, &usageInfo_, specifications);
+    }
+
     (*pfnVersion)(args, usageinfo, specifications);
 
     return 0;
