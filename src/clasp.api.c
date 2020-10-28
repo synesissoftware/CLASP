@@ -4,7 +4,7 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     5th August 2020
+ * Updated:     2nd October 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -163,7 +163,9 @@ struct clasp_expanded_args_t
 
 #ifdef CLASP_CMDLINE_ARGS_USE_RECLS
 
-static int RECLS_CALLCONV_DEFAULT clasp_recls_callback(
+static
+int
+RECLS_CALLCONV_DEFAULT clasp_recls_callback(
     recls_info_t                hEntry
 ,   recls_process_fn_param_t    param
 )
@@ -206,7 +208,12 @@ static int RECLS_CALLCONV_DEFAULT clasp_recls_callback(
 #endif /* CLASP_CMDLINE_ARGS_USE_RECLS */
 
 
-static int compare_clasp_argument_t_(clasp_argument_t const* lhs, clasp_argument_t const* rhs)
+static
+int
+compare_clasp_argument_t_(
+    clasp_argument_t const* lhs
+,   clasp_argument_t const* rhs
+)
 {
     if (lhs->type == rhs->type)
     {
@@ -264,7 +271,12 @@ static int compare_clasp_argument_t_(clasp_argument_t const* lhs, clasp_argument
     }
 }
 
-static int compare_clasp_argument_t(void const* lhs, void const* rhs)
+static
+int
+compare_clasp_argument_t(
+    void const* lhs
+,   void const* rhs
+)
 {
     return compare_clasp_argument_t_(stlsoft_static_cast(clasp_argument_t const*, lhs), stlsoft_static_cast(clasp_argument_t const*, rhs));
 }
@@ -427,7 +439,9 @@ static clasp_bool_t clasp_is_recognised_option_or_flag_(clasp_alias_t const* spe
 }
 #endif /* 0 */
 
-static clasp_bool_t clasp_check_alias_duplicates_(
+static
+clasp_bool_t
+clasp_check_alias_duplicates_(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_alias_t const                 specifications[]
 )
@@ -535,7 +549,9 @@ clasp_identify_programName_(
  * total amount of memory required when the given arguments are parsed, with
  * respect to the given flags and specifications
  */
-static int clasp_calculate_sizes_(
+static
+int
+clasp_calculate_sizes_(
     unsigned                    flags
 ,   int                         argc
 ,   clasp_char_t const* const*  argv
@@ -962,7 +978,13 @@ clasp_slice_create(
     return slice->len;
 }
 
-static clasp_char_t const* clasp_add_string_to_area_(clasp_char_t** current, clasp_char_t const* s, size_t len)
+static
+clasp_char_t const*
+clasp_add_string_to_area_(
+    clasp_char_t**      current
+,   clasp_char_t const* s
+,   size_t              len
+)
 {
     clasp_char_t const* const original = *current;
 
@@ -974,7 +996,12 @@ static clasp_char_t const* clasp_add_string_to_area_(clasp_char_t** current, cla
     return original;
 }
 
-static clasp_char_t const* clasp_add_char_to_area_(clasp_char_t** current, clasp_char_t ch)
+static
+clasp_char_t const*
+clasp_add_char_to_area_(
+    clasp_char_t**  current
+,   clasp_char_t    ch
+)
 {
     clasp_char_t const* const original = *current;
 
@@ -984,7 +1011,12 @@ static clasp_char_t const* clasp_add_char_to_area_(clasp_char_t** current, clasp
     return original;
 }
 
-static clasp_char_t const* clasp_add_flag_to_area_(clasp_char_t** current, clasp_char_t ch)
+static
+clasp_char_t const*
+clasp_add_flag_to_area_(
+    clasp_char_t**  current
+,   clasp_char_t    ch
+)
 {
     clasp_char_t const* const original = *current;
 
@@ -1048,7 +1080,9 @@ CLASP_CALL(void) clasp_init_diagnostic_context(
     dc->param           =   param;
 }
 
-static int clasp_parseArguments_NoWild_(
+static
+int
+clasp_parseArguments_NoWild_(
     unsigned                            flags
 ,   int                                 argc
 ,   clasp_char_t const* const*          argv
@@ -1316,7 +1350,9 @@ cleanup:
 #endif /* CLASP_CMDLINE_ARGS_USE_RECLS */
 }
 
-static int clasp_parseArguments_NoWild_(
+static
+int
+clasp_parseArguments_NoWild_(
     unsigned                            flags
 ,   int                                 argc
 ,   clasp_char_t const* const*          argv
