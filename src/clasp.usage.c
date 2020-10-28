@@ -4,7 +4,7 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     5th August 2020
+ * Updated:     2nd October 2020
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -49,7 +49,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-
 
 /* /////////////////////////////////////////////////////////////////////////
  * constants
@@ -575,8 +574,8 @@ CLASP_CALL(int) clasp_showUsage(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -622,8 +621,8 @@ CLASP_CALL(int) clasp_show_usage(
 , int                               major
 , int                               minor
 , int                               revision
-, void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 , int                               consoleWidth
@@ -678,7 +677,7 @@ CLASP_CALL(int) clasp_showHeader(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -721,7 +720,7 @@ CLASP_CALL(int) clasp_show_header(
 , int                               major
 , int                               minor
 , int                               revision
-, void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 )
@@ -762,7 +761,7 @@ CLASP_CALL(int) clasp_show_header(
 CLASP_CALL(int) clasp_showBody(
     clasp_arguments_t const*    args
 ,   clasp_alias_t const*        specifications
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -797,7 +796,7 @@ CLASP_CALL(int) clasp_showBody(
 CLASP_CALL(int) clasp_show_body(
   clasp_diagnostic_context_t const* ctxt
 , clasp_alias_t const*              specifications
-, void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 , int                               consoleWidth
@@ -845,7 +844,7 @@ CLASP_CALL(int) clasp_showVersion(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 )
@@ -880,7 +879,7 @@ CLASP_CALL(int) clasp_show_version(
 , int                               major
 , int                               minor
 , int                               revision
-, void                              (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 )
