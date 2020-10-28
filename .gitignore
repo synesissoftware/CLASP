@@ -40,6 +40,8 @@ vc9/
 .svnignore
 .svnignore-at-root
 
+sh.exe.stackdump
+
 clasp.vc9.sln
 
 # files (by pattern)
