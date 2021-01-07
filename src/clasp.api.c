@@ -4,11 +4,11 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     5th August 2020
+ * Updated:     8th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2020, Matthew Wilson
+ * Copyright (c) 2008-2021, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,8 +20,8 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems nor
- *   the names of any contributors may be used to endorse or promote
+ * - Neither the name(s) of Matthew Wilson and Synesis Information Systems
+ *   nor the names of any contributors may be used to endorse or promote
  *   products derived from this software without specific prior written
  *   permission.
  *
@@ -970,16 +970,6 @@ static clasp_char_t const* clasp_add_string_to_area_(clasp_char_t** current, cla
     (*current)[len] = '\0';
 
     *current += (len + 1);
-
-    return original;
-}
-
-static clasp_char_t const* clasp_add_char_to_area_(clasp_char_t** current, clasp_char_t ch)
-{
-    clasp_char_t const* const original = *current;
-
-    *((*current)++) = ch;
-    *((*current)++) = '\0';
 
     return original;
 }

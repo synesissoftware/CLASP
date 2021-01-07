@@ -4,15 +4,15 @@
  * Purpose:     Implementation file for the prg example project.
  *
  * Created:     8th December 2011
- * Updated:     5th August 2020
+ * Updated:     8th January 2021
  *
  * License:     BSD (3-clause)
  *
- *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
- *              www:        http://www.synesis.com.au/software
+ *              www:        http://github.com/synesissoftware/CLASP
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -43,7 +43,7 @@
  * globals
  */
 
-static clasp_specification_t const SPECIFICATIONS[] =
+static clasp_specification_t const Specifications[] =
 {
   /* Filtering behaviour flags/options */
 
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
 {
   unsigned const            cflags  = 0;
   clasp_arguments_t const*  args;
-  int const                 cr      = clasp_parseArguments(cflags, argc, argv, SPECIFICATIONS, NULL, &args);
+  int const                 cr      = clasp_parseArguments(cflags, argc, argv, Specifications, NULL, &args);
 
   if (cr != 0)
   {
@@ -104,16 +104,16 @@ int main(int argc, char** argv)
   {
     if (clasp_flagIsSpecified(args, "--help"))
     {
-      clasp_show_usage(
+      clasp_showUsage(
         NULL
-      , SPECIFICATIONS
+      , Specifications
       , "prg"
       , "SystemTools (http://systemtools.sourceforge.net/)"
       , "Copyright Matthew Wilson"
       , "Exercises CLASP (C) for CVu"
       , "prg [... options ...] [<infile> | -] [<outfile> | -]"
       , 1, 0, 1 /* version: maj, min, rev */
-      , clasp_show_header_by_FILE, clasp_show_body_by_FILE, stdout
+      , clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
       , 0  /* flags */
       , 76 /* console width */
       , -2 /* indent size */
@@ -129,7 +129,7 @@ int main(int argc, char** argv)
           clasp_argument_t const* const flag = args->flags + i;
 
           /* Treat strings as slices {len+ptr} */
-          printf("flag-%02d:\t%.*s\t%.*s\n", i, (int)flag->givenName.len, flag->givenName.ptr, (int)flag->resolvedName.len, flag->resolvedName.ptr);
+          printf("flag-%02d:\t%.*s\t%.*s\n", (int)i, (int)flag->givenName.len, flag->givenName.ptr, (int)flag->resolvedName.len, flag->resolvedName.ptr);
       }}
 
 
@@ -141,7 +141,7 @@ int main(int argc, char** argv)
           clasp_argument_t const* const option = args->options + i;
 
           /* Treat strings as C-style strings */
-          printf("option-%02d:\t%s\t%s\t=\t%s\n", i, option->givenName.ptr, option->resolvedName.ptr, option->value.ptr);
+          printf("option-%02d:\t%s\t%s\t=\t%s\n", (int)i, option->givenName.ptr, option->resolvedName.ptr, option->value.ptr);
       }}
 
 
@@ -162,7 +162,7 @@ int main(int argc, char** argv)
 #else /* ? 0 */
 
           /* Treat strings as slices {len+ptr}*/
-          printf("value-%02d:\t%.*s\n", i, (int)value->value.len, value->value.ptr);
+          printf("value-%02d:\t%.*s\n", (int)i, (int)value->value.len, value->value.ptr);
 
 #endif /* 0 */
       }}

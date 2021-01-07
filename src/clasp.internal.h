@@ -4,11 +4,11 @@
  * Purpose:     CLASP internal common header.
  *
  * Created:     4th June 2008
- * Updated:     2nd August 2020
+ * Updated:     8th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2020, Matthew Wilson
+ * Copyright (c) 2008-2021, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
