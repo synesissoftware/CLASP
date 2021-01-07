@@ -3,6 +3,8 @@
 
 .svn/
 
+/_build/
+
 _internal/
 
 bin/
