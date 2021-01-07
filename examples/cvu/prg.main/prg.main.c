@@ -4,11 +4,11 @@
  * Purpose:     Implementation file for the prg.main example project.
  *
  * Created:     8th December 2011
- * Updated:     18th April 2019
+ * Updated:     8th January 2021
  *
  * License:     (Licensed under the Synesis Software Open License)
  *
- *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
+ *              Copyright (c) 2011-2021, Synesis Software, Synesis Information Systems
  *              All rights reserved.
  *
  *              www:        http://www.synesis.com.au/software
@@ -34,6 +34,7 @@
 
 #if defined(_MSC_VER) && \
     _MSC_VER >= 1400
+
 # pragma warning(push)
 # pragma warning(disable : 4996)
 #endif
@@ -117,7 +118,7 @@ int main1(clasp_arguments_t const* args)
         clasp_argument_t const* const flag = args->flags + i;
 
         /* Treat strings as slices {len+ptr} */
-        printf("flag-%02d:\t%.*s\t%.*s\n", i, (int)flag->givenName.len, flag->givenName.ptr, (int)flag->resolvedName.len, flag->resolvedName.ptr);
+        printf("flag-%02d:\t%.*s\t%.*s\n", (int)i, (int)flag->givenName.len, flag->givenName.ptr, (int)flag->resolvedName.len, flag->resolvedName.ptr);
     }}
 
 
@@ -129,7 +130,7 @@ int main1(clasp_arguments_t const* args)
         clasp_argument_t const* const option = args->options + i;
 
         /* Treat strings as C-style strings */
-        printf("option-%02d:\t%s\t%s\t=\t%s\n", i, option->givenName.ptr, option->resolvedName.ptr, option->value.ptr);
+        printf("option-%02d:\t%s\t%s\t=\t%s\n", (int)i, option->givenName.ptr, option->resolvedName.ptr, option->value.ptr);
     }}
 
 
@@ -150,7 +151,7 @@ int main1(clasp_arguments_t const* args)
 #else /* ? 0 */
 
         /* Treat strings as slices {len+ptr}*/
-        printf("value-%02d:\t%.*s\n", i, (int)value->value.len, value->value.ptr);
+        printf("value-%02d:\t%.*s\n", (int)i, (int)value->value.len, value->value.ptr);
 
 #endif /* 0 */
     }}
