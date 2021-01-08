@@ -302,7 +302,10 @@ struct clasp_arguments_x_t
 typedef struct clasp_arguments_x_t clasp_arguments_x_t;
 #endif /* !__cplusplus */
 
-clasp_arguments_x_t* clasp_argsx_from_args_(clasp_arguments_t const* args)
+clasp_arguments_x_t*
+clasp_argsx_from_args_(
+    clasp_arguments_t const* args
+)
 {
     CLASP_ASSERT(0 == offsetof(clasp_arguments_x_t, claspArgs));
 
@@ -320,14 +323,18 @@ clasp_diagnostic_context_from_args_(
 }
 
 #if 0
-static clasp_alias_t const* clasp_lookup_alias_len_(
+static
+clasp_alias_t const*
+clasp_lookup_alias_len_(
     clasp_alias_t const     specifications[]
 ,   clasp_char_t const*     arg
 ,   size_t                  cchArg
 ,   unsigned                flags
 );
 
-static clasp_alias_t const* clasp_lookup_alias_(
+static
+clasp_alias_t const*
+clasp_lookup_alias_(
     clasp_alias_t const     specifications[]
 ,   clasp_char_t const*     arg
 ,   unsigned                flags
@@ -346,7 +353,9 @@ static clasp_alias_t const* clasp_lookup_alias_(
  * \param cchArg Length of the argument
  * \param flags
  */
-static clasp_alias_t const* clasp_lookup_alias_len_(
+static
+clasp_alias_t const*
+clasp_lookup_alias_len_(
     clasp_alias_t const     specifications[]
 ,   clasp_char_t const*     arg
 ,   size_t                  cchArg
@@ -421,7 +430,12 @@ static clasp_alias_t const* clasp_lookup_alias_len_(
 }
 
 #if 0
-static clasp_bool_t clasp_is_recognised_option_or_flag_(clasp_alias_t const* specifications, clasp_char_t const* arg)
+static
+clasp_bool_t
+clasp_is_recognised_option_or_flag_(
+    clasp_alias_t const*    specifications
+,   clasp_char_t const*     arg
+)
 {
     if(NULL != specifications)
     {
@@ -927,7 +941,11 @@ clasp_calculate_sizes_(
     return 0;
 }
 
-CLASP_CALL(int) clasp_slice_t_cmp(clasp_slice_t const* slice, clasp_char_t const* str)
+CLASP_CALL(int)
+clasp_slice_t_cmp(
+    clasp_slice_t const*    slice
+,   clasp_char_t const*     str
+)
 {
     if (NULL == slice ||
         0 == slice->len)
