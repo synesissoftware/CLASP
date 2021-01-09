@@ -4,11 +4,11 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     2nd October 2020
+ * Updated:     9th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2020, Matthew Wilson
+ * Copyright (c) 2008-2021, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,8 +20,8 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems nor
- *   the names of any contributors may be used to endorse or promote
+ * - Neither the names of Matthew Wilson and Synesis Information Systems
+ *   nor the names of any contributors may be used to endorse or promote
  *   products derived from this software without specific prior written
  *   permission.
  *
@@ -1047,7 +1047,9 @@ clasp_add_flag_to_area_(
 
 static
 int
-clasp_is_valid_alias_section_range_(clasp_argtype_t t)
+clasp_is_valid_alias_section_range_(
+    clasp_argtype_t t
+)
 {
     int const i = stlsoft_static_cast(int, t);
 
@@ -1058,7 +1060,8 @@ clasp_is_valid_alias_section_range_(clasp_argtype_t t)
  * API functions
  */
 
-CLASP_CALL(void) clasp_init_diagnostic_context(
+CLASP_CALL(void)
+clasp_init_diagnostic_context(
     clasp_diagnostic_context_t* dc
 ,   void*                       context
 ,   clasp_malloc_fn_t           pfnMalloc
@@ -1111,7 +1114,8 @@ clasp_parseArguments_NoWild_(
 ,   clasp_arguments_t const**           args
 );
 
-CLASP_CALL(int) clasp_parseArguments(
+CLASP_CALL(int)
+clasp_parseArguments(
     unsigned                            flags
 ,   int                                 argc
 ,   clasp_char_t const* const*          argv
@@ -2045,7 +2049,10 @@ clasp_parseArguments_NoWild_(
     return 0;
 }}
 
-CLASP_CALL(void) clasp_releaseArguments(clasp_arguments_t const* args)
+CLASP_CALL(void)
+clasp_releaseArguments(
+    clasp_arguments_t const*    args
+)
 {
     clasp_arguments_x_t* argsx = clasp_argsx_from_args_(args);
 
@@ -2110,9 +2117,6 @@ unsigned flags = 0;
 
     return n;
 }
-
-
-
 
 static
 size_t clasp_report_unused_arguments_(

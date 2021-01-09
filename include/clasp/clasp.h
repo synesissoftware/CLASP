@@ -4,11 +4,11 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     5th August 2020
+ * Updated:     9th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2020, Matthew Wilson
+ * Copyright (c) 2008-2021, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,8 +20,8 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems nor
- *   the names of any contributors may be used to endorse or promote
+ * - Neither the names of Matthew Wilson and Synesis Information Systems
+ *   nor the names of any contributors may be used to endorse or promote
  *   products derived from this software without specific prior written
  *   permission.
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      0
 # define CLASP_VER_CLASP_H_CLASP_REVISION   1
-# define CLASP_VER_CLASP_H_CLASP_EDIT       86
+# define CLASP_VER_CLASP_H_CLASP_EDIT       87
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -161,19 +161,19 @@
 
 #if defined(__cplusplus) || \
     defined(CLASP_DOCUMENTATION_SKIP_SECTION)
-# define CLASP_EXTERN_C                 extern "C"
+# define CLASP_EXTERN_C                                     extern "C"
 #else /* ? __cplusplus */
-# define CLASP_EXTERN_C                 extern
+# define CLASP_EXTERN_C                                     extern
 #endif /* !__cplusplus */
 
 #if !defined(CLASP_CALLCONV)
 # define CLASP_CALLCONV
 #endif /* !CLASP_CALLCONV */
 
-#define CLASP_CALL(rt)                  CLASP_DECLSPEC CLASP_EXTERN_C rt CLASP_CALLCONV
+#define CLASP_CALL(rt)                                      CLASP_DECLSPEC CLASP_EXTERN_C rt CLASP_CALLCONV
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
-# define CLASP_CPP_CALL(rt)             CLASP_DECLSPEC extern "C++" rt CLASP_CALLCONV
+# define CLASP_CPP_CALL(rt)                                 CLASP_DECLSPEC extern "C++" rt CLASP_CALLCONV
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -242,10 +242,10 @@
 
 #ifdef CLASP_USE_WIDE_STRINGS
 
-typedef wchar_t     clasp_char_t;
+typedef wchar_t                                             clasp_char_t;
 #else /* ? CLASP_USE_WIDE_STRINGS */
 
-typedef char        clasp_char_t;
+typedef char                                                clasp_char_t;
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 #ifdef CLASP_USE_WIDE_STRINGS
@@ -256,7 +256,6 @@ typedef char        clasp_char_t;
 
 # define CLASP_LITERAL_STRING(x)                            x
 #endif /* CLASP_USE_WIDE_STRINGS */
-
 
 /* /////////////////////////////////////
  * clasp_slice_t
@@ -493,7 +492,7 @@ struct clasp_argument_t
     int                         flags;              /*!< Internal use only */
 };
 #ifndef __cplusplus
-typedef struct clasp_argument_t         clasp_argument_t;
+typedef struct clasp_argument_t                             clasp_argument_t;
 #endif /* !__cplusplus */
 
 /** Structure returned to the caller of clasp_parseArguments(), providing
@@ -517,7 +516,7 @@ struct clasp_arguments_t
     clasp_slice_t               programName;        /*!< The program name, deduced from argv[0] */
 };
 #ifndef __cplusplus
-typedef struct clasp_arguments_t        clasp_arguments_t;
+typedef struct clasp_arguments_t                            clasp_arguments_t;
 #endif /* !__cplusplus */
 
 /** Structure that defines a specification for a short option or flag; also
@@ -537,11 +536,11 @@ struct clasp_specification_t
 };
 #ifndef __cplusplus
 
-typedef struct clasp_specification_t    clasp_specification_t;
-typedef struct clasp_specification_t    clasp_alias_t;
+typedef struct clasp_specification_t                        clasp_specification_t;
+typedef struct clasp_specification_t                        clasp_alias_t;
 #else
 
-typedef clasp_specification_t           clasp_alias_t;
+typedef clasp_specification_t                               clasp_alias_t;
 #endif /* !__cplusplus */
 
 /** \def CLASP_FLAG(alias, mappedArgument, help)
@@ -1268,42 +1267,42 @@ typedef struct clasp_usageinfo_t clasp_usageinfo_t;
 
 
 CLASP_CALL(int) clasp_showUsage(
-    clasp_arguments_t const*    args
-,   clasp_specification_t const specifications[]
-,   clasp_char_t const*         toolName    /* "rcp" */
-,   clasp_char_t const*         summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
-,   clasp_char_t const*         copyright   /* "Copyright (c) XXXX. All rights reserved" */
-,   clasp_char_t const*         description /* "Recursively copies files" */
-,   clasp_char_t const*         usage       /* "rcp [ ... options ... ] <src-spec> <dest-spec>" */
-,   int                         major
-,   int                         minor
-,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
-,   void*                       param
-,   int                         flags
-,   int                         consoleWidth
-,   int                         tabSize
-,   int                         blanksBetweenItems
+    clasp_arguments_t const*        args
+,   clasp_specification_t const     specifications[]
+,   clasp_char_t const*             toolName    /* "rcp" */
+,   clasp_char_t const*             summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
+,   clasp_char_t const*             copyright   /* "Copyright (c) XXXX. All rights reserved" */
+,   clasp_char_t const*             description /* "Recursively copies files" */
+,   clasp_char_t const*             usage       /* "rcp [ ... options ... ] <src-spec> <dest-spec>" */
+,   int                             major
+,   int                             minor
+,   int                             revision
+,   void                          (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void                          (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void*                           param
+,   int                             flags
+,   int                             consoleWidth
+,   int                             tabSize
+,   int                             blanksBetweenItems
 );
 
 CLASP_CALL(int) clasp_showHeader(
-    clasp_arguments_t const*    args
-,   clasp_specification_t const specifications[]
-,   clasp_char_t const*         toolName
-,   clasp_char_t const*         summary
-,   clasp_char_t const*         copyright
-,   clasp_char_t const*         description
-,   clasp_char_t const*         usage
-,   int                         major
-,   int                         minor
-,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
-,   void*                       param
-,   int                         flags
-,   int                         consoleWidth
-,   int                         tabSize
-,   int                         blanksBetweenItems
+    clasp_arguments_t const*        args
+,   clasp_specification_t const     specifications[]
+,   clasp_char_t const*             toolName
+,   clasp_char_t const*             summary
+,   clasp_char_t const*             copyright
+,   clasp_char_t const*             description
+,   clasp_char_t const*             usage
+,   int                             major
+,   int                             minor
+,   int                             revision
+,   void                          (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void*                           param
+,   int                             flags
+,   int                             consoleWidth
+,   int                             tabSize
+,   int                             blanksBetweenItems
 );
 
 /**
@@ -1316,14 +1315,14 @@ CLASP_CALL(int) clasp_showHeader(
  * \param blanksBetweenItems The number of blank lines to insert between each item
  */
 CLASP_CALL(int) clasp_showBody(
-    clasp_arguments_t const*    args
-,   clasp_specification_t const specifications[]
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
-,   void*                       param
-,   int                         flags
-,   int                         consoleWidth
-,   int                         tabSize
-,   int                         blanksBetweenItems
+    clasp_arguments_t const*        args
+,   clasp_specification_t const     specifications[]
+,   void                          (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void*                           param
+,   int                             flags
+,   int                             consoleWidth
+,   int                             tabSize
+,   int                             blanksBetweenItems
 );
 
 CLASP_CALL(int) clasp_showVersion(
@@ -1332,7 +1331,7 @@ CLASP_CALL(int) clasp_showVersion(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void                      (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
 ,   void*                       param
 ,   int                         flags
 );
@@ -1403,8 +1402,8 @@ CLASP_CALL(int) clasp_show_usage(
 ,   int                                 major
 ,   int                                 minor
 ,   int                                 revision
-,   void                                (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
-,   void                                (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
 ,   void*                               param
 ,   int                                 flags
 ,   int                                 consoleWidth
@@ -1428,7 +1427,7 @@ CLASP_CALL(int) clasp_show_header(
 ,   int                                 major
 ,   int                                 minor
 ,   int                                 revision
-,   void                                (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
 ,   void*                               param
 ,   int                                 flags
 );
@@ -1441,7 +1440,7 @@ CLASP_DEPRECATED_("clasp_show_body() is deprecated and will be removed in a futu
 CLASP_CALL(int) clasp_show_body(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_specification_t const         specifications[]
-,   void                                (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
 ,   void*                               param
 ,   int                                 flags
 ,   int                                 consoleWidth
@@ -1460,7 +1459,7 @@ CLASP_CALL(int) clasp_show_version(
 ,   int                                 major
 ,   int                                 minor
 ,   int                                 revision
-,   void                                (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+,   void                              (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
 ,   void*                               param
 ,   int                                 flags
 );
