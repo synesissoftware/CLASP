@@ -232,7 +232,7 @@ clasp_find_replacement_usage_field_(
 static
 int
 clasp_replace_field_from_resource_(
-    char const*             argv0
+    clasp_char_t const*     argv0
 ,   clasp_char_t const**    pp
 ,   clasp_char_t*           buff
 ,   size_t                  cchBuff
@@ -472,7 +472,7 @@ clasp_invoke_header_new_(
             *pp = s_unknownIdentifier;
         }
         else
-        if (!clasp_replace_field_from_resource_(NULL /* args->argv[0] */, pp, buff, sizeof(buff) / sizeof(buff[0])))
+        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
         {
             *pp = s_unknownIdentifier;
         }
@@ -514,7 +514,7 @@ clasp_invoke_body_new_(
                 *pp = s_unknownIdentifier;
             }
             else
-            if (!clasp_replace_field_from_resource_(NULL /* args->argv[0] */, pp, buff, sizeof(buff) / sizeof(buff[0])))
+            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
             {
                 *pp = s_unknownIdentifier;
             }
@@ -552,7 +552,7 @@ clasp_invoke_version_new_(
             *pp = s_unknownIdentifier;
         }
         else
-        if (!clasp_replace_field_from_resource_(NULL /* args->argv[0] */, pp, buff, sizeof(buff) / sizeof(buff[0])))
+        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
         {
             *pp = s_unknownIdentifier;
         }

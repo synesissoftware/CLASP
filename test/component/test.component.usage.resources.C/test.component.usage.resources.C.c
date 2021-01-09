@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.component.usage.resources project.
  *
  * Created:     7th March 2012
- * Updated:     5th August 2020
+ * Updated:     9th January 2021
  *
  * Status:      Wizard-generated
  *
  * License:     BSD (3-clause)
  *
- *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2012-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -124,6 +124,12 @@ static int teardown(void* param);
 static void* setupParam = NULL;
 
 /* /////////////////////////////////////////////////////////////////////////
+ * globals
+ */
+
+char* s_argv0 = NULL;
+
+/* /////////////////////////////////////////////////////////////////////////
  * main
  */
 
@@ -157,6 +163,8 @@ int main_(int argc, char **argv)
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;
+
+    s_argv0 = argv[0];
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
@@ -321,7 +329,7 @@ static void test_header_with_LLLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -367,7 +375,7 @@ static void test_header_with_RRRRR()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -413,7 +421,7 @@ static void test_header_with_RLLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -459,7 +467,7 @@ static void test_header_with_LRLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -505,7 +513,7 @@ static void test_header_with_LLLRL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -551,7 +559,7 @@ static void test_header_with_rLLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -597,7 +605,7 @@ static void test_header_with_LLrLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -643,7 +651,7 @@ static void test_header_with_LLLLr()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -689,7 +697,7 @@ static void test_header_with_rRRRR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -735,7 +743,7 @@ static void test_header_with_RrRRR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -781,7 +789,7 @@ static void test_header_with_RRrRR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -827,7 +835,7 @@ static void test_header_with_RRRrR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -873,7 +881,7 @@ static void test_header_with_RRRRr(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -928,7 +936,7 @@ static void test_body_1()
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -974,7 +982,7 @@ static void test_body_2()
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1020,7 +1028,7 @@ static void test_body_3()
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1067,7 +1075,7 @@ static void test_body_4()
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1114,7 +1122,7 @@ static void test_body_5()
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1162,7 +1170,7 @@ static void test_expanded_usage_1()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1208,7 +1216,7 @@ static void test_expanded_usage_2()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
