@@ -54,9 +54,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
-# define CLASP_VER_CLASP_HPP_CLASP_MINOR    0
-# define CLASP_VER_CLASP_HPP_CLASP_REVISION 2
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     65
+# define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
+# define CLASP_VER_CLASP_HPP_CLASP_REVISION 0
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     66
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -2577,6 +2577,40 @@ check_flag(
 
     return b;
 }
+
+/** Checks arguments for all declared flags, combining their \c bitFlags
+ * value into the given \c bitFlags variable.
+ *
+ * \param args Pointer to the clasp_arguments_t instance.
+ * \param specifications Pointer to the specification array
+ * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
+ *   not NULL, it is assumed to be initialised.
+ *
+ * \return The OR-combination of <code>*bitFlags</code> (if given) and the
+ *   flag values of all declared flags in \c args
+ *
+ * \note If \c bitFlags is not \c NULL, it is assumed to be initialised (to
+ *   0, or a mask representing previous calculation), and bit-flags from any
+ *   found flag arguments will be OR'd into it.
+ *
+ * \note All flags found will be marked as used.
+ *
+ * \pre NULL != args
+ * \pre NULL != specifications
+ *
+ * \see clasp_checkAllFlags
+ */
+inline
+int
+check_all_flags(
+    clasp_arguments_t const*    args
+,   clasp_specification_t const specifications[]
+,   int*                        bitFlags  = NULL
+)
+{
+    return clasp_checkAllFlags(args, specifications, bitFlags);
+}
+
 
 /** Evaluates whether the named flag (or option) is specified, and
  * (optionally) marks it as used if so
