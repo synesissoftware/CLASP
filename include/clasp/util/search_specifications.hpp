@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR       0
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    1
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        20
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    2
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        21
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -65,9 +65,6 @@
 
 /* CLASP header files */
 #include <clasp/clasp.hpp>
-
-/* recls header files */
-#include <recls/recls.hpp>
 
 /* STLSoft header files */
 #include <platformstl/filesystem/path.hpp>
