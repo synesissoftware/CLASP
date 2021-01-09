@@ -2501,10 +2501,11 @@ clasp_countSpecifications(
 {
     size_t n = 0;
 
-    CLASP_ASSERT(NULL != specifications);
-
-    for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications, ++n)
-    {}
+    if (NULL != specifications)
+    {
+        for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications, ++n)
+        {}
+    }
 
     return n;
 }
