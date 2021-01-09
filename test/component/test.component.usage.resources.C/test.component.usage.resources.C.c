@@ -61,6 +61,15 @@
 #endif /* _MSC_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
+ * compatibility - 2
+ */
+
+#if !defined(_STLSOFT_VER) || \
+    _STLSOFT_VER < 0x010a019a
+# error Requires STLSoft 1.10.1 b26 or later
+#endif
+
+/* /////////////////////////////////////////////////////////////////////////
  * forward declarations
  */
 
@@ -260,7 +269,7 @@ clasp_showHeaderIntoMemory(
 ,   clasp_specification_t const specifications[]
 )
 {
-    stlsoft_C_string_slice_a_t* const   sl  =   info->param;
+    stlsoft_C_string_slice_m_t* const   sl  =   info->param;
     char* const                         p   =   (char*)sl->ptr;
 
     STLSOFT_SUPPRESS_UNUSED(args);
@@ -289,7 +298,7 @@ clasp_showBodyIntoMemory(
 ,   clasp_specification_t const specifications[]
 )
 {
-    stlsoft_C_string_slice_a_t* const   sl          =   info->param;
+    stlsoft_C_string_slice_m_t* const   sl          =   info->param;
     char*                               p           =   (char*)sl->ptr;
     size_t                              n;
     int                                 tabWidth    =   (info->assumedTabWidth < 0) ? -info->assumedTabWidth : 1;
@@ -344,7 +353,7 @@ static void test_header_with_LLLLL()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -390,7 +399,7 @@ static void test_header_with_RRRRR()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -436,7 +445,7 @@ static void test_header_with_RLLLL()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -482,7 +491,7 @@ static void test_header_with_LRLLL()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -528,7 +537,7 @@ static void test_header_with_LLLRL()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -574,7 +583,7 @@ static void test_header_with_rLLLL()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -620,7 +629,7 @@ static void test_header_with_LLrLL()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -666,7 +675,7 @@ static void test_header_with_LLLLr()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -712,7 +721,7 @@ static void test_header_with_rRRRR(void)
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -758,7 +767,7 @@ static void test_header_with_RrRRR(void)
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -804,7 +813,7 @@ static void test_header_with_RRrRR(void)
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -850,7 +859,7 @@ static void test_header_with_RRRrR(void)
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -896,7 +905,7 @@ static void test_header_with_RRRRr(void)
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -951,7 +960,7 @@ static void test_body_1()
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
@@ -997,7 +1006,7 @@ static void test_body_2()
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
@@ -1043,7 +1052,7 @@ static void test_body_3()
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
@@ -1090,7 +1099,7 @@ static void test_body_4()
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
@@ -1137,7 +1146,7 @@ static void test_body_5()
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
@@ -1185,7 +1194,7 @@ static void test_expanded_usage_1()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -1231,7 +1240,7 @@ static void test_expanded_usage_2()
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
