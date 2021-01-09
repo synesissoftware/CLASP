@@ -4,7 +4,7 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     9th January 2021
+ * Updated:     10th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -274,7 +274,11 @@
 #  define CLASP_PLATFORM_IS_WINDOWS
 # else /* ? platform */
 
+/* We do not enforce that a neutral / non-recognised platform is a problem,
+ * because the CLASP library does not rely on any platform-specifici
+ * features
 #  error Platform not (yet) recognised
+*/
 # endif /* platform */
 #endif /* !CLASP_OVERRIDE_PLATFORM */
 
