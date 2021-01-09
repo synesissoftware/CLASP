@@ -296,6 +296,10 @@ struct clasp_arguments_x_t
     clasp_diagnostic_context_t  ctxt;
     size_t                      cb;
     clasp_char_t*               stringsBase;
+    void*                       reserved0;
+    size_t                      reserved1;
+    void const*                 specifications;
+    size_t                      reserved2;
     clasp_argument_t            args[1];
 };
 #ifndef __cplusplus
@@ -1411,6 +1415,11 @@ clasp_parseArguments_NoWild_(
 
     memcpy(&argsx->ctxt, ctxt, sizeof(argsx->ctxt));
 
+    argsx->reserved0      = NULL;
+    argsx->reserved1      = 0;
+    argsx->specifications = specifications;
+    argsx->reserved2      = 0;
+
     argsx->claspArgs.numArguments       =   numArgs;
     argsx->claspArgs.arguments          =   NULL;
     argsx->claspArgs.numFlagsAndOptions =   0;
@@ -2075,7 +2084,14 @@ clasp_reportUnrecognisedFlagsAndOptions(
 
     clasp_argument_t const* nextUnrecognisedArg_;
 
-unsigned flags = 0;
+    unsigned flags = 0;
+
+    if (NULL == specifications)
+    {
+        clasp_arguments_x_t* argsx = clasp_argsx_from_args_(args);
+
+        specifications = (clasp_specification_t const*)argsx->specifications;
+    }
 
     CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != specifications);
@@ -2327,6 +2343,13 @@ clasp_checkAllFlags(
 )
 {
     int flags_ = 0;
+
+    if (NULL == specifications)
+    {
+        clasp_arguments_x_t* argsx = clasp_argsx_from_args_(args);
+
+        specifications = (clasp_specification_t const*)argsx->specifications;
+    }
 
     CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != specifications);
