@@ -125,15 +125,15 @@ For two reasons, we can only call recls *once* for each wildcard argument:
 static
 int
 clasp_evaluate_specification_index_(
-    clasp_alias_t const     specifications[]
-,   clasp_alias_t const*    alias
+    clasp_specification_t const     specifications[]
+,   clasp_specification_t const*    alias
 )
 {
     int const r = stlsoft_static_cast(int, alias - specifications);
 
 #if _DEBUG
-    int                     r2;
-    clasp_alias_t const*    a2;
+    int                             r2;
+    clasp_specification_t const*    a2;
 
     CLASP_ASSERT(NULL != specifications);
     CLASP_ASSERT(NULL != alias);
@@ -324,20 +324,20 @@ clasp_diagnostic_context_from_args_(
 
 #if 0
 static
-clasp_alias_t const*
+clasp_specification_t const*
 clasp_lookup_alias_len_(
-    clasp_alias_t const     specifications[]
-,   clasp_char_t const*     arg
-,   size_t                  cchArg
-,   unsigned                flags
+    clasp_specification_t const specifications[]
+,   clasp_char_t const*         arg
+,   size_t                      cchArg
+,   unsigned                    flags
 );
 
 static
-clasp_alias_t const*
+clasp_specification_t const*
 clasp_lookup_alias_(
-    clasp_alias_t const     specifications[]
-,   clasp_char_t const*     arg
-,   unsigned                flags
+    clasp_specification_t const specifications[]
+,   clasp_char_t const*         arg
+,   unsigned                    flags
 )
 {
     return clasp_lookup_alias_len_(specifications, arg, clasp_strlen_(arg), flags);
@@ -354,12 +354,12 @@ clasp_lookup_alias_(
  * \param flags
  */
 static
-clasp_alias_t const*
+clasp_specification_t const*
 clasp_lookup_alias_len_(
-    clasp_alias_t const     specifications[]
-,   clasp_char_t const*     arg
-,   size_t                  cchArg
-,   unsigned                flags
+    clasp_specification_t const specifications[]
+,   clasp_char_t const*         arg
+,   size_t                      cchArg
+,   unsigned                    flags
 )
 {
     ((void)flags);
@@ -370,7 +370,7 @@ clasp_lookup_alias_len_(
 
         /* search in the specifications */
 
-        { clasp_alias_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
+        { clasp_specification_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
         {
             if (NULL != alias->name)
             {
@@ -383,7 +383,7 @@ clasp_lookup_alias_len_(
 
         /* search in the mappedArgument(s), but only those that don't have default values */
 
-        { clasp_alias_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
+        { clasp_specification_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
         {
             if (NULL != alias->mappedArgument)
             {
@@ -406,7 +406,7 @@ clasp_lookup_alias_len_(
 
         /* search in the mappedArgument(s), but only those that do have default values */
 
-        { clasp_alias_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
+        { clasp_specification_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
         {
             if (NULL != alias->mappedArgument)
             {
@@ -433,8 +433,8 @@ clasp_lookup_alias_len_(
 static
 clasp_bool_t
 clasp_is_recognised_option_or_flag_(
-    clasp_alias_t const*    specifications
-,   clasp_char_t const*     arg
+    clasp_specification_t const specifications[]
+,   clasp_char_t const*         arg
 )
 {
     if(NULL != specifications)
@@ -457,16 +457,16 @@ static
 clasp_bool_t
 clasp_check_alias_duplicates_(
     clasp_diagnostic_context_t const*   ctxt
-,   clasp_alias_t const                 specifications[]
+,   clasp_specification_t const         specifications[]
 )
 {
     if(NULL != specifications)
     {
-        clasp_alias_t const* from = specifications;
+        clasp_specification_t const* from = specifications;
 
         { for (; CLASP_ARGTYPE_INVALID != from->type; ++from)
         {
-            clasp_alias_t const* to = from;
+            clasp_specification_t const* to = from;
 
             { for (++to; CLASP_ARGTYPE_INVALID != to->type; ++to)
             {
@@ -569,7 +569,7 @@ clasp_calculate_sizes_(
     unsigned                    flags
 ,   int                         argc
 ,   clasp_char_t const* const*  argv
-,   clasp_alias_t const         specifications[]
+,   clasp_specification_t const specifications[]
 ,   size_t*                     numArgs
 ,   size_t*                     cbStrings
 ,   size_t*                     cbTotal
@@ -644,7 +644,7 @@ clasp_calculate_sizes_(
 
                     if (NULL != equal1)
                     {
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal1 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal1 - arg), flags);
 
                         if (NULL != alias)
                         {
@@ -673,7 +673,7 @@ clasp_calculate_sizes_(
                     {
                         /* = sign not specified */
 
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias)
                         {
@@ -765,7 +765,7 @@ clasp_calculate_sizes_(
 
                     if (NULL != equal2)
                     {
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal2 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal2 - arg), flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -799,7 +799,7 @@ clasp_calculate_sizes_(
                     {
                         /* work out whether option or flag */
 
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias)
                         {
@@ -874,8 +874,8 @@ clasp_calculate_sizes_(
 
                             { size_t j; for (j = 1; '\0' != arg[j]; ++j)
                             {
-                                clasp_char_t            flag[3] = { '-', '?', '\0' };
-                                clasp_alias_t const*    flagAlias;
+                                clasp_char_t                    flag[3] = { '-', '?', '\0' };
+                                clasp_specification_t const*    flagAlias;
 
                                 flag[1]     =   arg[j];
                                 flagAlias   =   clasp_lookup_alias_len_(specifications, flag, 2u, flags);
@@ -1109,7 +1109,7 @@ clasp_parseArguments_NoWild_(
 ,   clasp_char_t const* const*          argv
 ,   int                                 originalArgc
 ,   clasp_char_t const* const*          originalArgv
-,   clasp_alias_t const                 specifications[]
+,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
 );
@@ -1119,7 +1119,7 @@ clasp_parseArguments(
     unsigned                            flags
 ,   int                                 argc
 ,   clasp_char_t const* const*          argv
-,   clasp_alias_t const                 specifications[]
+,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
 )
@@ -1144,7 +1144,7 @@ clasp_parseArguments(
      */
     if(NULL != specifications)
     {
-        { clasp_alias_t const* specification = specifications; for (; CLASP_ARGTYPE_INVALID != specification->type; ++specification)
+        { clasp_specification_t const* specification = specifications; for (; CLASP_ARGTYPE_INVALID != specification->type; ++specification)
         {
             if (CLASP_ARGTYPE_FLAG == specification->type)
             {
@@ -1380,7 +1380,7 @@ clasp_parseArguments_NoWild_(
 ,   clasp_char_t const* const*          argv
 ,   int                                 originalArgc
 ,   clasp_char_t const* const*          originalArgv
-,   clasp_alias_t const                 specifications[]
+,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
 )
@@ -1498,7 +1498,7 @@ clasp_parseArguments_NoWild_(
                     {
                         const size_t nameLen = stlsoft_static_cast(size_t, equal5 - arg);
 
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal5 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal5 - arg), flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -1537,7 +1537,7 @@ clasp_parseArguments_NoWild_(
                     {
                         /* = sign not specified */
 
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -1689,7 +1689,7 @@ clasp_parseArguments_NoWild_(
                     {
                         const size_t nameLen = stlsoft_static_cast(size_t, equal6 - arg);
 
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal6 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal6 - arg), flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -1751,7 +1751,7 @@ clasp_parseArguments_NoWild_(
                     {
                         /* work out whether option or flag */
 
-                        clasp_alias_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias)
                         {
@@ -1846,8 +1846,8 @@ clasp_parseArguments_NoWild_(
 
                             { size_t j; for (j = 1; '\0' != arg[j]; ++j)
                             {
-                                clasp_char_t            flag[3] = { '-', '?', '\0' };
-                                clasp_alias_t const*    flagAlias;
+                                clasp_char_t                    flag[3] = { '-', '?', '\0' };
+                                clasp_specification_t const*    flagAlias;
 
                                 flag[1]     =   arg[j];
                                 flagAlias   =   clasp_lookup_alias_len_(specifications, flag, 2u, flags);
@@ -2061,14 +2061,10 @@ clasp_releaseArguments(
     clasp_free_(&argsx->ctxt, argsx);
 }
 
-
-
-
-
 CLASP_CALL(size_t)
 clasp_reportUnrecognisedFlagsAndOptions(
     clasp_arguments_t const*    args
-,   clasp_alias_t const         specifications[]
+,   clasp_specification_t const specifications[]
 ,   clasp_argument_t const**    nextUnrecognisedArg
 ,   unsigned                    nSkip /* = 0 */
 )
@@ -2095,8 +2091,8 @@ unsigned flags = 0;
 
     for (i = 0; i != args->numFlagsAndOptions; ++i)
     {
-        clasp_argument_t const* const   arg     =   &args->flagsAndOptions[i];
-        clasp_alias_t const* const      alias   =   clasp_lookup_alias_len_(specifications, arg->resolvedName.ptr, arg->resolvedName.len, flags);
+        clasp_argument_t const* const       arg     =   &args->flagsAndOptions[i];
+        clasp_specification_t const* const  alias   =   clasp_lookup_alias_len_(specifications, arg->resolvedName.ptr, arg->resolvedName.len, flags);
 
         if (NULL == alias)
         {
@@ -2326,7 +2322,7 @@ clasp_checkFlag(
 CLASP_CALL(int)
 clasp_checkAllFlags(
     clasp_arguments_t const*    args
-,   clasp_alias_t const         specifications[]
+,   clasp_specification_t const specifications[]
 ,   int*                        flags
 )
 {
@@ -2382,7 +2378,7 @@ clasp_checkAllFlags(
 CLASP_CALL(int)
 clasp_checkAllMatchingFlags(
     clasp_arguments_t const*    args
-,   clasp_alias_t const         specifications[]
+,   clasp_specification_t const specifications[]
 ,   int                         bitMask
 ,   int*                        flags
 )
@@ -2500,7 +2496,7 @@ clasp_checkValue(
 
 CLASP_CALL(size_t)
 clasp_countSpecifications(
-    clasp_alias_t const specifications[]
+    clasp_specification_t const specifications[]
 )
 {
     size_t n = 0;
@@ -2515,7 +2511,7 @@ clasp_countSpecifications(
 
 CLASP_CALL(size_t)
 clasp_countAliases(
-    clasp_alias_t const specifications[]
+    clasp_specification_t const specifications[]
 )
 {
     return clasp_countSpecifications(specifications);
