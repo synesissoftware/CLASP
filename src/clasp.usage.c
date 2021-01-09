@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     5th August 2020
+ * Updated:     9th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2020, Matthew Wilson
+ * Copyright (c) 2008-2021, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,7 +20,7 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Information Systems
+ * - Neither the names of Matthew Wilson and Synesis Information Systems
  *   nor the names of any contributors may be used to endorse or promote
  *   products derived from this software without specific prior written
  *   permission.
@@ -49,7 +49,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-
 
 /* /////////////////////////////////////////////////////////////////////////
  * constants
@@ -99,6 +98,13 @@ GetModuleHandleA(
     char const* lpModuleName
 );
 
+extern
+void*
+CLASP_INTERNAL_STDCALL
+GetModuleHandleW(
+    wchar_t const* lpModuleName
+);
+
 # ifdef CLASP_USE_WIDE_STRINGS
 extern
 int
@@ -127,20 +133,6 @@ LoadStringA(
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
  */
-
-static
-size_t
-clasp_count_specifications_(
-    clasp_alias_t const* specifications
-)
-{
-    size_t n = 0;
-
-    for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications, ++n)
-    {}
-
-    return n;
-}
 
 static
 long
@@ -173,7 +165,7 @@ clasp_find_id_(
 
 static
 int
-clasp_find_replacement_field_(
+clasp_find_replacement_usage_field_(
     clasp_usageinfo_t*      usageinfo
 ,   clasp_char_t const***   ppp
 ,   int*                    isNumber
@@ -240,7 +232,7 @@ clasp_find_replacement_field_(
 static
 int
 clasp_replace_field_from_resource_(
-    char const*             argv0
+    clasp_char_t const*     argv0
 ,   clasp_char_t const**    pp
 ,   clasp_char_t*           buff
 ,   size_t                  cchBuff
@@ -249,7 +241,13 @@ clasp_replace_field_from_resource_(
 #if defined(WIN32) || \
     defined(WIN64)
 
+# ifdef CLASP_USE_WIDE_STRINGS
+
+    void* const     hinst   =   GetModuleHandleW(argv0);
+# else /* ? CLASP_USE_WIDE_STRINGS */
+
     void* const     hinst   =   GetModuleHandleA(argv0);
+# endif /* CLASP_USE_WIDE_STRINGS */
     long const      id      =   clasp_find_id_(*pp + 1);
     size_t const    n       =   (SetLastError(0), clasp_ext_LoadString(hinst, id, buff, (int)cchBuff));
     long const      e       =   GetLastError();
@@ -297,12 +295,12 @@ clasp_find_replacement_mappedArgument_(
             continue;
         }
         else
-        if(NULL == specifications->help)
+        if (NULL == specifications->help)
         {
             continue;
         }
         else
-        if(s_unknownIdentifier == specifications->help)
+        if (s_unknownIdentifier == specifications->help)
         {
             continue;
         }
@@ -463,7 +461,7 @@ clasp_invoke_header_new_(
     int                     isNumber;
     clasp_char_t const**    pp;
 
-    if (clasp_find_replacement_field_(&usageInfo_, &pp, &isNumber))
+    if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
     {
         clasp_char_t buff[4096];
 
@@ -474,7 +472,7 @@ clasp_invoke_header_new_(
             *pp = s_unknownIdentifier;
         }
         else
-        if (!clasp_replace_field_from_resource_(NULL /* args->argv[0] */, pp, buff, sizeof(buff) / sizeof(buff[0])))
+        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
         {
             *pp = s_unknownIdentifier;
         }
@@ -495,7 +493,7 @@ clasp_invoke_body_new_(
 )
 {
     clasp_alias_t       specifications_[CLASP_MAX_SPECIFICATIONS_ + 1];
-    size_t const        n = clasp_count_specifications_(specifications);
+    size_t const        n = clasp_countSpecifications(specifications);
 
     if (0 != n &&
         n <= CLASP_MAX_SPECIFICATIONS_)
@@ -505,7 +503,7 @@ clasp_invoke_body_new_(
 
         memcpy(specifications_, specifications, sizeof(clasp_alias_t) * (1 + n));
 
-        if(clasp_find_replacement_mappedArgument_(&specifications_[0], &pp, &isNumber))
+        if (clasp_find_replacement_mappedArgument_(&specifications_[0], &pp, &isNumber))
         {
             clasp_char_t buff[4096];
 
@@ -516,7 +514,7 @@ clasp_invoke_body_new_(
                 *pp = s_unknownIdentifier;
             }
             else
-            if (!clasp_replace_field_from_resource_(NULL /* args->argv[0] */, pp, buff, sizeof(buff) / sizeof(buff[0])))
+            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
             {
                 *pp = s_unknownIdentifier;
             }
@@ -539,6 +537,29 @@ clasp_invoke_version_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
+    clasp_usageinfo_t       usageInfo_  =   *usageinfo;
+    int                     isNumber;
+    clasp_char_t const**    pp;
+
+    if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
+    {
+        clasp_char_t buff[4096];
+
+        CLASP_ASSERT(NULL != pp);
+
+        if (!isNumber)
+        {
+            *pp = s_unknownIdentifier;
+        }
+        else
+        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
+        {
+            *pp = s_unknownIdentifier;
+        }
+
+        return clasp_invoke_version_new_(pfnVersion, args, &usageInfo_, specifications);
+    }
+
     (*pfnVersion)(args, usageinfo, specifications);
 
     return 0;
@@ -575,8 +596,8 @@ CLASP_CALL(int) clasp_showUsage(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -622,8 +643,8 @@ CLASP_CALL(int) clasp_show_usage(
 , int                               major
 , int                               minor
 , int                               revision
-, void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 , int                               consoleWidth
@@ -678,7 +699,7 @@ CLASP_CALL(int) clasp_showHeader(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -721,7 +742,7 @@ CLASP_CALL(int) clasp_show_header(
 , int                               major
 , int                               minor
 , int                               revision
-, void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 )
@@ -762,7 +783,7 @@ CLASP_CALL(int) clasp_show_header(
 CLASP_CALL(int) clasp_showBody(
     clasp_arguments_t const*    args
 ,   clasp_alias_t const*        specifications
-,   void                        (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 ,   int                         consoleWidth
@@ -797,7 +818,7 @@ CLASP_CALL(int) clasp_showBody(
 CLASP_CALL(int) clasp_show_body(
   clasp_diagnostic_context_t const* ctxt
 , clasp_alias_t const*              specifications
-, void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 , int                               consoleWidth
@@ -845,7 +866,7 @@ CLASP_CALL(int) clasp_showVersion(
 ,   int                         major
 ,   int                         minor
 ,   int                         revision
-,   void                        (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                      (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   void*                       param
 ,   int                         flags
 )
@@ -880,7 +901,7 @@ CLASP_CALL(int) clasp_show_version(
 , int                               major
 , int                               minor
 , int                               revision
-, void                              (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+, void                            (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 , void*                             param
 , int                               flags
 )

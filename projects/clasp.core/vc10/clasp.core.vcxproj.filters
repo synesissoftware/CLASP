@@ -17,6 +17,9 @@
     <Filter Include="Header Files\include\clasp\util">
       <UniqueIdentifier>{E367A945-5BDC-4cb5-A47C-596949D06A6E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\src">
+      <UniqueIdentifier>{BBE0F4DF-D5CD-4f3a-BDCB-4433182B119F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Implementation Files">
       <UniqueIdentifier>{D235CB96-B7A2-46AC-B7DC-310587E1D366}</UniqueIdentifier>
       <Extensions>c;cc;cpp;cxx;</Extensions>
@@ -71,10 +74,8 @@
     <ClInclude Include="..\..\..\include\clasp\util\searchspecs.h">
       <Filter>Header Files\include\clasp\util</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\_dev_pragmatics_\warnings.msvc.10+.h">
-      <Filter>Module Files\_dev_pragmatics_</Filter>
+    <ClInclude Include="..\..\..\src\clasp.internal.h">
+      <Filter>Header Files\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

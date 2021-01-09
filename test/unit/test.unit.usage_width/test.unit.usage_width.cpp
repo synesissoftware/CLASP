@@ -4,13 +4,13 @@
  * Purpose:     Implementation file for the test.unit.usage_width project.
  *
  * Created:     3rd April 2014
- * Updated:     5th August 2020
+ * Updated:     9th January 2021
  *
  * Status:      Wizard-generated
  *
  * License:     BSD (3-clause)
  *
- *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2014-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
@@ -52,7 +52,12 @@
 namespace
 {
 
+    static void test_null_specifications(void);
     static void test_empty_specifications(void);
+    static void test_single_flag(void);
+    static void test_single_option(void);
+    static void test_one_flag_one_option(void);
+    static void test_one_option_one_flag(void);
     static void test_single_flag_changing_positiveTabSizes(void);
     static void test_single_flag_changing_consoleWidths(void);
     static void test_1_3(void);
@@ -88,7 +93,12 @@ int main(int argc, char **argv)
 
     if (XTESTS_START_RUNNER("test.unit.usage_width", verbosity))
     {
+        XTESTS_RUN_CASE(test_null_specifications);
         XTESTS_RUN_CASE(test_empty_specifications);
+        XTESTS_RUN_CASE(test_single_flag);
+        XTESTS_RUN_CASE(test_single_option);
+        XTESTS_RUN_CASE(test_one_flag_one_option);
+        XTESTS_RUN_CASE(test_one_option_one_flag);
         XTESTS_RUN_CASE(test_single_flag_changing_positiveTabSizes);
         XTESTS_RUN_CASE(test_single_flag_changing_consoleWidths);
         XTESTS_RUN_CASE(test_1_3);
@@ -169,6 +179,19 @@ namespace
         }
     }
 
+
+static void test_null_specifications()
+{
+    clasp_specification_t const* const specifications = NULL;
+    int consoleWidth = 80;
+    int tabSize = 8;
+    int showBlanksBetweenItems = 0;
+
+    strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
+
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0u, lines.size()));
+}
+
 static void test_empty_specifications()
 {
     clasp_specification_t const specifications[] =
@@ -182,9 +205,97 @@ static void test_empty_specifications()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(2u, lines.size()));
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0u, lines.size()));
+}
+
+static void test_single_flag()
+{
+    clasp_specification_t const specifications[] =
+    {
+        CLASP_FLAG(NULL, "--flag1", "this is a flag"),
+
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
+    };
+    int consoleWidth            =   80;
+    int tabSize                 =   0;
+    int showBlanksBetweenItems  =   0;
+
+    strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
+
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
+}
+
+static void test_single_option()
+{
+    clasp_specification_t const specifications[] =
+    {
+        CLASP_OPTION(NULL, "--option1", "this is an option", ""),
+
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
+    };
+    int consoleWidth            =   80;
+    int tabSize                 =   0;
+    int showBlanksBetweenItems  =   0;
+
+    strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
+
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[2]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[3]);
+}
+
+static void test_one_flag_one_option()
+{
+    clasp_specification_t const specifications[] =
+    {
+        CLASP_FLAG(NULL, "--flag1", "this is a flag"),
+        CLASP_OPTION(NULL, "--option1", "this is an option", ""),
+
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
+    };
+    int consoleWidth            =   80;
+    int tabSize                 =   0;
+    int showBlanksBetweenItems  =   0;
+
+    strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
+
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags and options:", lines[0]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[4]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
+}
+
+static void test_one_option_one_flag()
+{
+    clasp_specification_t const specifications[] =
+    {
+        CLASP_OPTION(NULL, "--option1", "this is an option", ""),
+        CLASP_FLAG(NULL, "--flag1", "this is a flag"),
+
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
+    };
+    int consoleWidth            =   80;
+    int tabSize                 =   0;
+    int showBlanksBetweenItems  =   0;
+
+    strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
+
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags and options:", lines[0]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[2]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[3]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[4]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[5]);
 }
 
 static void test_single_flag_changing_positiveTabSizes()
@@ -202,7 +313,7 @@ static void test_single_flag_changing_positiveTabSizes()
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
@@ -212,7 +323,7 @@ static void test_single_flag_changing_positiveTabSizes()
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
         XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis is a flag", lines[3]);
@@ -222,7 +333,7 @@ static void test_single_flag_changing_positiveTabSizes()
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
         XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(5u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis is a", lines[3]);
@@ -233,7 +344,7 @@ static void test_single_flag_changing_positiveTabSizes()
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
         XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(5u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis is", lines[3]);
@@ -244,7 +355,7 @@ static void test_single_flag_changing_positiveTabSizes()
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
         XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis", lines[3]);
@@ -256,7 +367,7 @@ static void test_single_flag_changing_positiveTabSizes()
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
         XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(7u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis", lines[3]);
@@ -283,7 +394,7 @@ static void test_single_flag_changing_consoleWidths()
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
         XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL(" --flag1", lines[2]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  this is a flag", lines[3]);
@@ -293,7 +404,7 @@ static void test_single_flag_changing_consoleWidths()
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
         XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(5u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL(" --flag1", lines[2]);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  this is a", lines[3]);
@@ -368,7 +479,6 @@ static void test_1_18()
 static void test_1_19()
 {
 }
-
 
 } // anonymous namespace
 

@@ -9,10 +9,14 @@
 
   <ItemDefinitionGroup>
     <ClCompile>
+      <AdditionalIncludeDirectories Condition="'$(XTESTS_C_ROOT)' != '' AND exists('$(XTESTS_C_ROOT)/include')">$(XTESTS_C_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(STLSOFT)' != '' AND exists('$(STLSOFT)/include')">$(STLSOFT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 
       <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories Condition="'$(XTESTS_C_ROOT)' != '' AND exists('$(XTESTS_C_ROOT)/lib')">$(XTESTS_C_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
     <PostBuildEvent>
       <Command>"$(OutDir)$(TargetName)$(TargetExt)"</Command>
       <Message>Running unit-tests ...</Message>

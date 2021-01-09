@@ -4,37 +4,38 @@
  * Purpose:     CLASP usage (FILE) facilities.
  *
  * Created:     4th June 2008
- * Updated:     5th August 2020
+ * Updated:     8th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2020, Matthew Wilson
+ * Copyright (c) 2008-2021, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * modification, are permitted provided that the following conditions are
+ * met:
  *
- * - Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * - Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems nor
- *   the names of any contributors may be used to endorse or promote
+ * - Redistributions of source code must retain the above copyright notice,
+ *   this list of conditions and the following disclaimer.
+ * - Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in the
+ *   documentation and/or other materials provided with the distribution.
+ * - Neither the names of Matthew Wilson and Synesis Information Systems
+ *   nor the names of any contributors may be used to endorse or promote
  *   products derived from this software without specific prior written
  *   permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -390,6 +391,32 @@ static void clasp_show_split_option_help_limit_width_by_FILE_(
     }
 }
 
+static
+unsigned
+clasp_count_types_(
+    clasp_specification_t const     specifications[]
+,   clasp_argtype_t                 argType
+)
+{
+    unsigned n = 0;
+
+    if (NULL != specifications)
+    {
+        for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications)
+        {
+            if (argType == specifications->type)
+            {
+                ++n;
+            }
+        }
+    }
+
+    return n;
+}
+
+#define clasp_count_flags_(specifications)          clasp_count_types_((specifications), CLASP_ARGTYPE_FLAG)
+#define clasp_count_options_(specifications)        clasp_count_types_((specifications), CLASP_ARGTYPE_OPTION)
+
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
@@ -414,7 +441,7 @@ CLASP_CALL(void) clasp_show_version_by_FILE(
 )
 {
     FILE*                 stm         =   (FILE*)info->param;
-    clasp_char_t          fmt[]       =   CLASP_LITERAL_("%s%s%d.%d.%d\n");
+    clasp_char_t          fmt[]       =   CLASP_LITERAL_("%s%s%d.%d.%d.%d\n");
     clasp_char_t const*   tool_name;
     clasp_char_t const*   v_prefix;
 
@@ -437,11 +464,20 @@ CLASP_CALL(void) clasp_show_version_by_FILE(
         fmt[ 9] = '\n';
         fmt[10] = '\0';
     }
+    else
+    if (info->version.build < 0)
+    {
+        CLASP_ASSERT('.' == fmt[ 9]);
+        CLASP_ASSERT('.' == fmt[12]);
+
+        fmt[12] = '\n';
+        fmt[13] = '\0';
+    }
 
     ((void)specifications);
     ((void)ctxt);
 
-    clasp_fprintf_(stm, fmt, tool_name, v_prefix, info->version.major, info->version.minor, info->version.revision);
+    clasp_fprintf_(stm, fmt, tool_name, v_prefix, info->version.major, info->version.minor, info->version.revision, info->version.build);
 }
 
 
@@ -535,6 +571,8 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
     const size_t                numSpecifications   =   clasp_countSpecifications(specifications);
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
+    unsigned                    numFlags;
+    unsigned                    numOptions;
 
     unsigned const              flags               =   0;
 
@@ -554,7 +592,32 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
         return;
     }
 
-    clasp_fprintf_(stm, CLASP_LITERAL_("Options:\n"));
+    numFlags    =   clasp_count_flags_(specifications);
+    numOptions  =   clasp_count_options_(specifications);
+
+    if (0 == numFlags)
+    {
+        if (0 == numOptions)
+        {
+            return;
+        }
+        else
+        {
+            clasp_fprintf_(stm, CLASP_LITERAL_("Options:\n"));
+        }
+    }
+    else
+    {
+        if (0 == numOptions)
+        {
+            clasp_fprintf_(stm, CLASP_LITERAL_("Flags:\n"));
+        }
+        else
+        {
+            clasp_fprintf_(stm, CLASP_LITERAL_("Flags and options:\n"));
+        }
+    }
+
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
 
     { size_t i; for (i = 0; i != numSpecifications; ++i)

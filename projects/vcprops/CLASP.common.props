@@ -8,19 +8,27 @@
   <PropertyGroup>
 
     <CharacterSet>Multibyte</CharacterSet>
-    <IntDir>$(SolutionDir)build/$(Configuration)/$(Platform)/$(ProjectName)/</IntDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
     <LinkIncrementalDir>false</LinkIncrementalDir>
-    <OutDir>$(SolutionDir)build/$(Configuration)/$(Platform)/</OutDir>
+    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+  <PropertyGroup Condition="!$(Configuration.ToUpper().Contains('UNICODE'))">
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(Configuration.ToUpper().Contains('UNICODE'))">
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.ToUpper().Contains('DEBUG'))">
 
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(Configuration.Contains('Release'))">
+  <PropertyGroup Condition="$(Configuration.ToUpper().Contains('RELEASE'))">
 
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
@@ -50,7 +58,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="!$(Configuration.Contains('Unix')) AND !$(Configuration.Contains('UNIX'))">
+  <ItemDefinitionGroup Condition="!$(Configuration.ToUpper().Contains('UNIX'))">
     <ClCompile>
       <PreprocessorDefinitions>_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -65,18 +73,23 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Unix')) OR $(Configuration.Contains('UNIX'))">
+  <ItemDefinitionGroup Condition=" $(Configuration.ToUpper().Contains('UNIX'))">
     <ClCompile>
       <AdditionalIncludeDirectories Condition="exists('$(UNIXEM)/include')">$(UNIXEM)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="exists('$(PTHREADS_WIN32)/include')">$(PTHREADS_WIN32)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+
       <PreprocessorDefinitions>UNIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>_STLSOFT_FORCE_ANY_COMPILER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>_REENTRANT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+
       <UndefinePreprocessorDefinitions>WIN32;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>WIN64;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories Condition="exists('$(UNIXEM)/lib')">$(UNIXEM)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pThreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(UNIXEM)' != '' AND exists('$(UNIXEM)/lib')">$(UNIXEM)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PTHREADS_WIN32)' != '' AND exists('$(PTHREADS_WIN32)/lib/x64') AND '$(Platform)'=='x64'">$(PTHREADS_WIN32)/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PTHREADS_WIN32)' != '' AND exists('$(PTHREADS_WIN32)/lib/x86') AND '$(Platform)'=='Win32'">$(PTHREADS_WIN32)/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <PreprocessorDefinitions>UNIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -88,7 +101,6 @@
 
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/include')">$(JUSTTHREAD_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(RECLS_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 
       <BrowseInformation>true</BrowseInformation>
@@ -136,7 +148,6 @@
       <AdditionalDependencies>comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies>advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 
-      <AdditionalLibraryDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/lib')">$(JUSTTHREAD_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>$(RECLS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -151,7 +162,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('DEBUG'))">
     <ClCompile>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
@@ -163,6 +174,9 @@
       <SmallerTypeCheck>true</SmallerTypeCheck>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
+    <Link>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+    </Link>
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </Midl>
@@ -171,19 +185,19 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('DEBUG MULTITHREADED'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded DLL'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('DEBUG MULTITHREADED DLL'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('RELEASE'))">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -209,16 +223,28 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('RELEASE MULTITHREADED'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded DLL'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('RELEASE MULTITHREADED DLL'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
     </ClCompile>
+  </ItemDefinitionGroup>
+
+
+  <!-- JustThread (for VC++ 10 only) -->
+
+  <ItemDefinitionGroup Condition="($(MSBuildToolsVersion) >= '4.0') AND !($(MSBuildToolsVersion) > '5.0')">
+    <ClCompile>
+      <AdditionalIncludeDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/include')">$(JUSTTHREAD_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/lib')">$(JUSTTHREAD_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
 
 
@@ -274,6 +300,5 @@
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-
 
 </Project>

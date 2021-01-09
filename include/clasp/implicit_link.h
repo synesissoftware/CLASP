@@ -4,11 +4,11 @@
  * Purpose:     Implicit linking for CLASP
  *
  * Created:     31st July 2008
- * Updated:     5th August 2020
+ * Updated:     9th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2019-2020, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2021, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2008-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -21,8 +21,8 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems nor
- *   the names of any contributors may be used to endorse or promote
+ * - Neither the names of Matthew Wilson and Synesis Information Systems
+ *   nor the names of any contributors may be used to endorse or promote
  *   products derived from this software without specific prior written
  *   permission.
  *
@@ -56,8 +56,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_IMPLICIT_LINK_MAJOR      2
 # define CLASP_VER_CLASP_H_IMPLICIT_LINK_MINOR      0
-# define CLASP_VER_CLASP_H_IMPLICIT_LINK_REVISION   1
-# define CLASP_VER_CLASP_H_IMPLICIT_LINK_EDIT       18
+# define CLASP_VER_CLASP_H_IMPLICIT_LINK_REVISION   2
+# define CLASP_VER_CLASP_H_IMPLICIT_LINK_EDIT       19
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -133,109 +133,109 @@
 
   /* library basename */
 
-#  define CLASP_IMPL_LINK_LIBRARY_BASENAME          "systemtools.clasp"
+#  define CLASP_IMPL_LINK_LIBRARY_BASENAME                  "systemtools.clasp"
 
   /* major version */
 
-#  define CLASP_IMPL_LINK_MAJOR_VERSION             "." CLASP_STRINGIZE(CLASP_VER_MAJOR)
+#  define CLASP_IMPL_LINK_MAJOR_VERSION                     "." CLASP_STRINGIZE(CLASP_VER_MAJOR)
 
   /* module name */
 
-#  define CLASP_IMPL_LINK_MODULE_NAME               ".core"
+#  define CLASP_IMPL_LINK_MODULE_NAME                       ".core"
 
 #  ifdef CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS
-#   define CLASP_IMPL_LINK_RECLS_VARIANT            ".norecls"
+#   define CLASP_IMPL_LINK_RECLS_VARIANT                    ".norecls"
 #  else /* ? CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS */
-#   define CLASP_IMPL_LINK_RECLS_VARIANT            ""
+#   define CLASP_IMPL_LINK_RECLS_VARIANT                    ""
 #  endif /* CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS */
 
   /* compiler tag */
 
 #  if defined(__BORLANDC__)
 #   if __BORLANDC__ == 0x0550
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "bc55"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "bc55"
 #   elif (__BORLANDC__ == 0x0551)
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "bc551"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "bc551"
 #   elif (__BORLANDC__ == 0x0560)
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "bc56"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "bc56"
 #   elif (__BORLANDC__ == 0x0564)
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "bc564"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "bc564"
 #   elif (__BORLANDC__ == 0x0582)
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "bc582"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "bc582"
 #   elif (0x0590 == (__BORLANDC__ & 0xfff0))
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "bc59x"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "bc59x"
 #   elif (0x0610 == (__BORLANDC__ & 0xfff0))
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "bc61x"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "bc61x"
 #   else /* ? __BORLANDC__ */
 #    error Unrecognised value of __BORLANDC__
 #   endif /* __BORLANDC__ */
 
 /*
 #  elif defined(__DMC__)
-#   define CLASP_IMPL_LINK_COMPILER_NAME            "dm"
+#   define CLASP_IMPL_LINK_COMPILER_NAME                    "dm"
  */
 
 #  elif defined(__INTEL_COMPILER)
 #   if __INTEL_COMPILER == 600
-#    define   CLASP_IMPL_LINK_COMPILER_NAME         "icl6"
+#    define   CLASP_IMPL_LINK_COMPILER_NAME                 "icl6"
 #   elif __INTEL_COMPILER == 700
-#    define   CLASP_IMPL_LINK_COMPILER_NAME         "icl7"
+#    define   CLASP_IMPL_LINK_COMPILER_NAME                 "icl7"
 #   elif __INTEL_COMPILER == 800
-#    define   CLASP_IMPL_LINK_COMPILER_NAME         "icl8"
+#    define   CLASP_IMPL_LINK_COMPILER_NAME                 "icl8"
 #   elif __INTEL_COMPILER == 900
-#    define   CLASP_IMPL_LINK_COMPILER_NAME         "icl9"
+#    define   CLASP_IMPL_LINK_COMPILER_NAME                 "icl9"
 #   elif __INTEL_COMPILER == 1000
-#    define   CLASP_IMPL_LINK_COMPILER_NAME         "icl10"
+#    define   CLASP_IMPL_LINK_COMPILER_NAME                 "icl10"
 #   elif __INTEL_COMPILER == 1100
-#    define   CLASP_IMPL_LINK_COMPILER_NAME         "icl11"
+#    define   CLASP_IMPL_LINK_COMPILER_NAME                 "icl11"
 #   elif __INTEL_COMPILER == 1200
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "icl12"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "icl12"
 #   else /* ? __INTEL_COMPILER */
 #    error Intel C/C++ version not supported
 #   endif /* __INTEL_COMPILER */
 
 #  elif defined(__MWERKS__)
 #   if ((__MWERKS__ & 0xFF00) == 0x2400)
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "cw7"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "cw7"
 #   elif ((__MWERKS__ & 0xFF00) == 0x3000)
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "cw8"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "cw8"
 #   elif ((__MWERKS__ & 0xFF00) == 0x3200)
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "cw9"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "cw9"
 #   else /* ? __MWERKS__ */
 #    error CodeWarrior version not supported
 #   endif /* __MWERKS__ */
 
 #  elif defined(_MSC_VER)
 #   if _MSC_VER == 1000
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc4"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc4"
 #   elif _MSC_VER == 1020
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc42"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc42"
 #   elif _MSC_VER == 1100
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc5"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc5"
 #   elif _MSC_VER == 1200
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc6"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc6"
 #   elif _MSC_VER == 1300
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc7"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc7"
 #   elif _MSC_VER == 1310
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc71"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc71"
 #   elif _MSC_VER == 1400
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc8"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc8"
 #   elif _MSC_VER == 1500
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc9"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc9"
 #   elif _MSC_VER == 1600
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc10"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc10"
 #   elif _MSC_VER == 1700
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc11"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc11"
 #   elif _MSC_VER == 1800
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc12"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc12"
 #   elif _MSC_VER == 1900
-#    define CLASP_IMPL_LINK_COMPILER_NAME           "vc14"
+#    define CLASP_IMPL_LINK_COMPILER_NAME                   "vc14"
 #   elif _MSC_VER >= 1910
 #    if 0
 #    elif _MSC_VER < 1920
-#     define CLASP_IMPL_LINK_COMPILER_NAME          "vc15"
-#    elif _MSC_VER <= 1926
-#     define CLASP_IMPL_LINK_COMPILER_NAME          "vc16"
+#     define CLASP_IMPL_LINK_COMPILER_NAME                  "vc15"
+#    elif _MSC_VER <= 1928
+#     define CLASP_IMPL_LINK_COMPILER_NAME                  "vc16"
 #    else
 #     error Visual C++ version that is >= vc16 is not recognised
 #    endif
@@ -253,35 +253,35 @@
 #  if defined(_STLSOFT_FORCE_ANY_COMPILER) && \
       defined(CLASP_PLATFORM_IS_UNIX) && \
       defined(_WIN32)
-#   define CLASP_IMPL_LINK_OS_TAG                   ".unix"
+#   define CLASP_IMPL_LINK_OS_TAG                           ".unix"
 #  endif /* pseudo UNIX */
 
 #  if !defined(CLASP_IMPL_LINK_OS_TAG)
-#   define CLASP_IMPL_LINK_OS_TAG                   ""
+#   define CLASP_IMPL_LINK_OS_TAG                           ""
 #  endif /* !CLASP_IMPL_LINK_OS_TAG */
 
 
   /* architecture tag */
 
 #  if defined(CLASP_ARCH_IS_X86_)
-#   define CLASP_IMPL_LINK_ARCH_TAG                 ""
+#   define CLASP_IMPL_LINK_ARCH_TAG                         ""
 #  elif defined(CLASP_ARCH_IS_X64_)
-#   define CLASP_IMPL_LINK_ARCH_TAG                 ".x64"
+#   define CLASP_IMPL_LINK_ARCH_TAG                         ".x64"
 #  elif defined(CLASP_ARCH_IS_IA64_)
-#   define CLASP_IMPL_LINK_ARCH_TAG                 ".ia64"
+#   define CLASP_IMPL_LINK_ARCH_TAG                         ".ia64"
 #  endif /* arch */
 
 #  if !defined(CLASP_IMPL_LINK_ARCH_TAG)
-#   define CLASP_IMPL_LINK_ARCH_TAG                 ""
+#   define CLASP_IMPL_LINK_ARCH_TAG                         ""
 #  endif /* !CLASP_IMPL_LINK_ARCH_TAG */
 
 
   /* encoding tag */
 
 #  if defined(CLASP_USE_WIDE_STRINGS)
-#   define CLASP_IMPL_LINK_ENCODING_TAG             ".widestring"
+#   define CLASP_IMPL_LINK_ENCODING_TAG                     ".widestring"
 #  else /* ? CLASP_USE_WIDE_STRINGS */
-#   define CLASP_IMPL_LINK_ENCODING_TAG             ""
+#   define CLASP_IMPL_LINK_ENCODING_TAG                     ""
 #  endif /* CLASP_USE_WIDE_STRINGS */
 
 
@@ -292,39 +292,39 @@
       defined(_MT)
 #   if defined(_DLL) || \
        defined(__DLL)
-#    define CLASP_IMPL_LINK_THREADING_TAG           ".dll"
+#    define CLASP_IMPL_LINK_THREADING_TAG                   ".dll"
 #   else /* ? dll */
-#    define CLASP_IMPL_LINK_THREADING_TAG           ".mt"
+#    define CLASP_IMPL_LINK_THREADING_TAG                   ".mt"
 #   endif /* dll */
 #  else /* ? mt */
-#    define CLASP_IMPL_LINK_THREADING_TAG           ""
+#    define CLASP_IMPL_LINK_THREADING_TAG                   ""
 #  endif /* mt */
 
 
   /* NoX */
 
 #  if defined(CLASP_CF_NOX) && 0 /* CLASP is written in C, so is always NoX */
-#   define CLASP_IMPL_LINK_NOX_TYPE                 ".nox"
+#   define CLASP_IMPL_LINK_NOX_TYPE                         ".nox"
 #  else /* ? CLASP_CF_NOX */
-#   define CLASP_IMPL_LINK_NOX_TYPE                 ""
+#   define CLASP_IMPL_LINK_NOX_TYPE                         ""
 #  endif /* CLASP_CF_NOX */
 
 
   /* debug tag */
 
 #  if defined(CLASP_VARIANT_TEST)
-#   define CLASP_IMPL_LINK_DEBUG_TYPE               ".test"
+#   define CLASP_IMPL_LINK_DEBUG_TYPE                       ".test"
 #  elif !defined(NDEBUG) && \
         defined(_DEBUG)
-#   define CLASP_IMPL_LINK_DEBUG_TAG                ".debug"
+#   define CLASP_IMPL_LINK_DEBUG_TAG                        ".debug"
 #  else /* ? debug */
-#   define CLASP_IMPL_LINK_DEBUG_TAG                ""
+#   define CLASP_IMPL_LINK_DEBUG_TAG                        ""
 #  endif /* debug */
 
 
   /* suffix */
 
-#  define CLASP_IMPL_LINK_SUFFIX                    ".lib"
+#  define CLASP_IMPL_LINK_SUFFIX                            ".lib"
 
 
    /* Library name is:
