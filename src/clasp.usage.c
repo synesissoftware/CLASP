@@ -135,20 +135,6 @@ LoadStringA(
  */
 
 static
-size_t
-clasp_count_specifications_(
-    clasp_alias_t const* specifications
-)
-{
-    size_t n = 0;
-
-    for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications, ++n)
-    {}
-
-    return n;
-}
-
-static
 long
 clasp_find_id_(
     clasp_char_t const* p
@@ -507,7 +493,7 @@ clasp_invoke_body_new_(
 )
 {
     clasp_alias_t       specifications_[CLASP_MAX_SPECIFICATIONS_ + 1];
-    size_t const        n = clasp_count_specifications_(specifications);
+    size_t const        n = clasp_countSpecifications(specifications);
 
     if (0 != n &&
         n <= CLASP_MAX_SPECIFICATIONS_)
