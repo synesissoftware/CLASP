@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     2nd October 2020
+ * Updated:     9th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2020, Matthew Wilson
+ * Copyright (c) 2008-2021, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,7 +20,7 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Information Systems
+ * - Neither the names of Matthew Wilson and Synesis Information Systems
  *   nor the names of any contributors may be used to endorse or promote
  *   products derived from this software without specific prior written
  *   permission.
@@ -96,6 +96,13 @@ void*
 CLASP_INTERNAL_STDCALL
 GetModuleHandleA(
     char const* lpModuleName
+);
+
+extern
+void*
+CLASP_INTERNAL_STDCALL
+GetModuleHandleW(
+    wchar_t const* lpModuleName
 );
 
 # ifdef CLASP_USE_WIDE_STRINGS
@@ -248,7 +255,13 @@ clasp_replace_field_from_resource_(
 #if defined(WIN32) || \
     defined(WIN64)
 
+# ifdef CLASP_USE_WIDE_STRINGS
+
+    void* const     hinst   =   GetModuleHandleW(argv0);
+# else /* ? CLASP_USE_WIDE_STRINGS */
+
     void* const     hinst   =   GetModuleHandleA(argv0);
+# endif /* CLASP_USE_WIDE_STRINGS */
     long const      id      =   clasp_find_id_(*pp + 1);
     size_t const    n       =   (SetLastError(0), clasp_ext_LoadString(hinst, id, buff, (int)cchBuff));
     long const      e       =   GetLastError();
@@ -296,12 +309,12 @@ clasp_find_replacement_mappedArgument_(
             continue;
         }
         else
-        if(NULL == specifications->help)
+        if (NULL == specifications->help)
         {
             continue;
         }
         else
-        if(s_unknownIdentifier == specifications->help)
+        if (s_unknownIdentifier == specifications->help)
         {
             continue;
         }
@@ -504,7 +517,7 @@ clasp_invoke_body_new_(
 
         memcpy(specifications_, specifications, sizeof(clasp_alias_t) * (1 + n));
 
-        if(clasp_find_replacement_mappedArgument_(&specifications_[0], &pp, &isNumber))
+        if (clasp_find_replacement_mappedArgument_(&specifications_[0], &pp, &isNumber))
         {
             clasp_char_t buff[4096];
 
