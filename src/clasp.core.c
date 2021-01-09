@@ -4,7 +4,7 @@
  * Purpose:     CLASP core facilities.
  *
  * Created:     4th June 2008
- * Updated:     8th January 2021
+ * Updated:     10th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -39,7 +39,9 @@
  *
  * ////////////////////////////////////////////////////////////////////// */
 
-static void* s_dummy;
+void
+clasp_core_dummy_function_to_avoid_empty_TU_warning_(void)
+{}
 
 /* ///////////////////////////// end of file //////////////////////////// */
 
