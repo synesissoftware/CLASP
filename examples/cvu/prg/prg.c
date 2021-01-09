@@ -4,15 +4,15 @@
  * Purpose:     Implementation file for the prg example project.
  *
  * Created:     8th December 2011
- * Updated:     5th August 2020
+ * Updated:     10th January 2021
  *
  * License:     BSD (3-clause)
  *
- *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
- *              www:        http://www.synesis.com.au/software
+ *              www:        http://github.com/synesissoftware/CLASP
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -43,7 +43,7 @@
  * globals
  */
 
-static clasp_specification_t const SPECIFICATIONS[] =
+static clasp_specification_t const Specifications[] =
 {
   /* Filtering behaviour flags/options */
 
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
 {
   unsigned const            cflags  = 0;
   clasp_arguments_t const*  args;
-  int const                 cr      = clasp_parseArguments(cflags, argc, argv, SPECIFICATIONS, NULL, &args);
+  int const                 cr      = clasp_parseArguments(cflags, argc, argv, Specifications, NULL, &args);
 
   if (cr != 0)
   {
@@ -106,7 +106,7 @@ int main(int argc, char** argv)
     {
       clasp_show_usage(
         NULL
-      , SPECIFICATIONS
+      , Specifications
       , "prg"
       , "SystemTools (http://systemtools.sourceforge.net/)"
       , "Copyright Matthew Wilson"

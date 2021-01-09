@@ -4,17 +4,17 @@
  * Purpose:     Implementation file for the test.unit.parseapi.bitflags project.
  *
  * Created:     11th December 2011
- * Updated:     5th August 2020
+ * Updated:     10th January 2021
  *
  * Status:      Wizard-generated
  *
  * License:     BSD (3-clause)
  *
- *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
- *              www:        http://www.synesis.com.au/software
+ *              www:        http://github.com/synesissoftware/CLASP
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 
 static void test_1_0()
 {
-    clasp_specification_t SPECIFICATIONS[] =
+    clasp_specification_t Specifications[] =
     {
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
@@ -143,16 +143,16 @@ static void test_1_0()
     }
     else
     {
-        int const flagsAll  =   clasp_checkAllFlags(args, SPECIFICATIONS, NULL);
-        int const flagsAny  =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, ~(int)0, NULL);
-        int const flags0001 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0001, NULL);
-        int const flags0002 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0002, NULL);
-        int const flags0003 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0003, NULL);
-        int const flags0004 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0004, NULL);
-        int const flags0005 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0005, NULL);
-        int const flags0006 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0006, NULL);
-        int const flags0007 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0007, NULL);
-        int const flags0008 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0008, NULL);
+        int const flagsAll  =   clasp_checkAllFlags(args, Specifications, NULL);
+        int const flagsAny  =   clasp_checkAllMatchingFlags(args, Specifications, ~(int)0, NULL);
+        int const flags0001 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0001, NULL);
+        int const flags0002 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0002, NULL);
+        int const flags0003 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0003, NULL);
+        int const flags0004 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0004, NULL);
+        int const flags0005 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0005, NULL);
+        int const flags0006 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0006, NULL);
+        int const flags0007 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0007, NULL);
+        int const flags0008 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0008, NULL);
 
         XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAll);
         XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAny);
@@ -171,7 +171,7 @@ static void test_1_0()
 
 static void test_1_1()
 {
-    clasp_specification_t SPECIFICATIONS[] =
+    clasp_specification_t Specifications[] =
     {
         CLASP_BIT_FLAG(NULL, "-f", 0x0001, ""),
         CLASP_BIT_FLAG(NULL, "-g", 0x0002, ""),
@@ -196,16 +196,16 @@ static void test_1_1()
     }
     else
     {
-        int const flagsAll  =   clasp_checkAllFlags(args, SPECIFICATIONS, NULL);
-        int const flagsAny  =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, ~(int)0, NULL);
-        int const flags0001 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0001, NULL);
-        int const flags0002 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0002, NULL);
-        int const flags0003 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0003, NULL);
-        int const flags0004 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0004, NULL);
-        int const flags0005 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0005, NULL);
-        int const flags0006 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0006, NULL);
-        int const flags0007 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0007, NULL);
-        int const flags0008 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0008, NULL);
+        int const flagsAll  =   clasp_checkAllFlags(args, Specifications, NULL);
+        int const flagsAny  =   clasp_checkAllMatchingFlags(args, Specifications, ~(int)0, NULL);
+        int const flags0001 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0001, NULL);
+        int const flags0002 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0002, NULL);
+        int const flags0003 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0003, NULL);
+        int const flags0004 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0004, NULL);
+        int const flags0005 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0005, NULL);
+        int const flags0006 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0006, NULL);
+        int const flags0007 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0007, NULL);
+        int const flags0008 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0008, NULL);
 
         XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAll);
         XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAny);
@@ -224,7 +224,7 @@ static void test_1_1()
 
 static void test_1_2()
 {
-    clasp_specification_t SPECIFICATIONS[] =
+    clasp_specification_t Specifications[] =
     {
         CLASP_BIT_FLAG(NULL, "-f", 0x0001, ""),
         CLASP_BIT_FLAG(NULL, "-g", 0x0002, ""),
@@ -245,7 +245,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -253,7 +253,7 @@ static void test_1_2()
         }
         else
         {
-            int const flagsAll  =   clasp_checkAllFlags(args, SPECIFICATIONS, NULL);
+            int const flagsAll  =   clasp_checkAllFlags(args, Specifications, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0001, flagsAll);
 
@@ -263,7 +263,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -271,7 +271,7 @@ static void test_1_2()
         }
         else
         {
-            int const flagsAny  =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, ~(int)0, NULL);
+            int const flagsAny  =   clasp_checkAllMatchingFlags(args, Specifications, ~(int)0, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0001, flagsAny);
 
@@ -281,7 +281,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -289,7 +289,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0001 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0001, NULL);
+            int const flags0001 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0001, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0001);
 
@@ -299,7 +299,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -307,7 +307,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0002 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0002, NULL);
+            int const flags0002 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0002, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0002);
 
@@ -317,7 +317,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -325,7 +325,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0003 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0003, NULL);
+            int const flags0003 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0003, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0003);
 
@@ -335,7 +335,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -343,7 +343,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0004 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0004, NULL);
+            int const flags0004 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0004, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0004);
 
@@ -353,7 +353,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -361,7 +361,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0005 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0005, NULL);
+            int const flags0005 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0005, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0005);
 
@@ -371,7 +371,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -379,7 +379,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0006 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0006, NULL);
+            int const flags0006 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0006, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0006);
 
@@ -389,7 +389,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -397,7 +397,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0007 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0007, NULL);
+            int const flags0007 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0007, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0007);
 
@@ -407,7 +407,7 @@ static void test_1_2()
 
     {
         clasp_arguments_t const*  args;
-        int const                 cr   = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, NULL, &args);
+        int const                 cr   = clasp_parseArguments(0, argc, argv, Specifications, NULL, &args);
 
         if (0 != cr)
         {
@@ -415,7 +415,7 @@ static void test_1_2()
         }
         else
         {
-            int const flags0008 =   clasp_checkAllMatchingFlags(args, SPECIFICATIONS, 0x0008, NULL);
+            int const flags0008 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0008, NULL);
 
             XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0008);
 
