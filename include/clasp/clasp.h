@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      0
 # define CLASP_VER_CLASP_H_CLASP_REVISION   1
-# define CLASP_VER_CLASP_H_CLASP_EDIT       87
+# define CLASP_VER_CLASP_H_CLASP_EDIT       88
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -185,21 +185,21 @@
        defined(__clang__) || \
        0
 
-#  define CLASP_DEPRECATED_(msg)        __attribute__((deprecated))
+#  define CLASP_DEPRECATED_(msg)                            __attribute__((deprecated))
 # elif defined(_MSC_VER) && \
      (   _MSC_VER >= 1500 || \
          (   _MSC_VER >= 1400 && \
              defined(_MSC_FULL_VER) && \
              _MSC_FULL_VER >= 140050320))
 
-#  define CLASP_DEPRECATED_(msg)        __declspec(deprecated(msg))
+#  define CLASP_DEPRECATED_(msg)                            __declspec(deprecated(msg))
 # else
 
-#  define CLASP_DEPRECATED_(msg)        /* */
+#  define CLASP_DEPRECATED_(msg)                            /* */
 # endif
 #else
 
-# define CLASP_DEPRECATED_(msg)         /* */
+# define CLASP_DEPRECATED_(msg)                             /* */
 #endif /* CLASP_OBSOLETE */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -1009,9 +1009,12 @@ clasp_checkFlag(
  * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
  *   not NULL, it is assumed to be initialised.
  *
- * \note If \c bitFlags is not NULL, it is assumed to be initialised (whether
- *   to 0, or a mask representing previous calculation), and bit-flags from
- *   any found flag arguments will be OR'd into it.
+ * \return The OR-combination of <code>*bitFlags</code> (if given) and the
+ *   flag values of all declared flags in \c args
+ *
+ * \note If \c bitFlags is not \c NULL, it is assumed to be initialised (to
+ *   0, or a mask representing previous calculation), and bit-flags from any
+ *   found flag arguments will be OR'd into it.
  *
  * \note All flags found will be marked as used.
  *
@@ -1307,12 +1310,14 @@ CLASP_CALL(int) clasp_showHeader(
 
 /**
  *
- *
+ * \param args The arguments obtained from parsing the command-line
+ * \param specifications The specifications used in parsing the command-line
  * \param param User-defined parameter to be passed to \c pfnBody.
- * \param flags
+ * \param flags Flags that moderate the behaviour of the function
  * \param consoleWidth The width, in characters, of the console. Windows users may use the return value of <code>winstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries).
  * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character.
  * \param blanksBetweenItems The number of blank lines to insert between each item
+ *
  */
 CLASP_CALL(int) clasp_showBody(
     clasp_arguments_t const*        args
