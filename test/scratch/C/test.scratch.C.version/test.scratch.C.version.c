@@ -4,17 +4,17 @@
  * Purpose:     Implementation file for the test.scratch.C.version project.
  *
  * Created:     6th December 2011
- * Updated:     5th August 2020
+ * Updated:     10th January 2021
  *
  * Status:      Wizard-generated
  *
  * License:     BSD (3-clause)
  *
- *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
- *              www:        http://www.synesis.com.au/software
+ *              www:        http://github.com/synesissoftware/CLASP
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -40,7 +40,7 @@
 
 /* ////////////////////////////////////////////////////////////////////// */
 
-static clasp_specification_t const SPECIFICATIONS[] =
+static clasp_specification_t const Specifications[] =
 {
     CLASP_FLAG(NULL,    "--help",           "show usage and quit"),
     CLASP_FLAG("-v",    "--version",        "show version and quit"),
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 {
     clasp_arguments_t const* args;
 
-    int cr = clasp_parseArguments(0, argc, argv, SPECIFICATIONS, 0, &args);
+    int cr = clasp_parseArguments(0, argc, argv, Specifications, 0, &args);
 
     if (cr < 0)
     {
@@ -122,10 +122,10 @@ int main(int argc, char** argv)
 
         /* now check for unrecognised arguments */
 #if 0
-        if(0 != clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, NULL, 0))
+        if(0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, NULL, 0))
         {
             clasp_argument_t const* unrecognisedArg;
-            size_t const            n     = clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &unrecognisedArg, 0);
+            size_t const            n     = clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &unrecognisedArg, 0);
             size_t                  nSkip = 0;
 
             fprintf(stderr, "%lu unrecognised argument(s):\n", n);
@@ -133,13 +133,13 @@ int main(int argc, char** argv)
             {
                 fprintf(stderr, "\tunrecognised argument: %s\n", args->argv[unrecognisedArg->cmdLineIndex]);
 
-            } while (0 != clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &unrecognisedArg, ++nSkip));
+            } while (0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &unrecognisedArg, ++nSkip));
         }
 #else
         {
 clasp_argument_t const* arg;
 unsigned nSkip = 0;
-size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &arg, nSkip);
+size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &arg, nSkip);
 if(0 != n)
 {
   fprintf(stderr, "%lu unrecognised argument(s):\n", n);
@@ -147,7 +147,7 @@ if(0 != n)
   {
     fprintf(stderr, "\tunrecognised argument: %s\n", args->argv[arg->cmdLineIndex]);
 
-  } while (0 != clasp_reportUnrecognisedFlagsAndOptions(args, SPECIFICATIONS, &arg, ++nSkip));
+  } while (0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &arg, ++nSkip));
 }
         }
 #endif

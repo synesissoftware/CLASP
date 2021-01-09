@@ -4,7 +4,7 @@
  * Purpose:     Implementation file for the prg.main example project.
  *
  * Created:     8th December 2011
- * Updated:     8th January 2021
+ * Updated:     10th January 2021
  *
  * License:     BSD (3-clause)
  *

@@ -4,7 +4,7 @@
  * Purpose:     Implementation file for the test.unit.usage_width project.
  *
  * Created:     3rd April 2014
- * Updated:     9th January 2021
+ * Updated:     10th January 2021
  *
  * Status:      Wizard-generated
  *
@@ -14,7 +14,7 @@
  *              Copyright (c) 2014-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
- *              www:        http://www.synesis.com.au/software
+ *              www:        http://github.com/synesissoftware/CLASP
  *
  * ////////////////////////////////////////////////////////////////////// */
 

@@ -4,7 +4,7 @@
  * Purpose:     Implementation file for the prg example project.
  *
  * Created:     8th December 2011
- * Updated:     8th January 2021
+ * Updated:     10th January 2021
  *
  * License:     BSD (3-clause)
  *
@@ -157,7 +157,7 @@ int main(int argc, char** argv)
           static_assert(sizeof(int) == sizeof(size_t));
 
           /* Treat strings as slices {len+ptr} in non-portable way! */
-          printf("value-%02d:\t%.*s\n", i, value->value);
+          printf("value-%02d:\t%.*s\n", (int)i, value->value);
 
 #else /* ? 0 */
 

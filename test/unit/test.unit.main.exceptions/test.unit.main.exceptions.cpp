@@ -4,17 +4,17 @@
  * Purpose:     Implementation file for the test.unit.main.exceptions project.
  *
  * Created:     7th March 2013
- * Updated:     5th August 2020
+ * Updated:     10th January 2021
  *
  * Status:      Wizard-generated
  *
  * License:     BSD (3-clause)
  *
- *              Copyright (c) 2019-2020, Synesis Information Systems Pty Ltd.
+ *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
  *              Copyright (c) 2013-2019, Synesis Software Pty Ltd.
  *              All rights reserved.
  *
- *              www:        http://www.synesis.com.au/software
+ *              www:        http://github.com/synesissoftware/CLASP
  *
  * ////////////////////////////////////////////////////////////////////// */
 
