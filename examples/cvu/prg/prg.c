@@ -104,7 +104,7 @@ int main(int argc, char** argv)
   {
     if (clasp_flagIsSpecified(args, "--help"))
     {
-      clasp_show_usage(
+      clasp_showUsage(
         NULL
       , Specifications
       , "prg"

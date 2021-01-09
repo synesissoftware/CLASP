@@ -93,7 +93,7 @@ int main1(clasp_arguments_t const* args)
 {
   if (clasp_flagIsSpecified(args, "--help"))
   {
-    clasp_show_usage(
+    clasp_showUsage(
       NULL
     , Specifications
     , "prg.main"

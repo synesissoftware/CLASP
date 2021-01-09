@@ -4,7 +4,7 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     9th January 2021
+ * Updated:     10th January 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -1014,21 +1014,6 @@ clasp_add_string_to_area_(
     (*current)[len] = '\0';
 
     *current += (len + 1);
-
-    return original;
-}
-
-static
-clasp_char_t const*
-clasp_add_char_to_area_(
-    clasp_char_t**  current
-,   clasp_char_t    ch
-)
-{
-    clasp_char_t const* const original = *current;
-
-    *((*current)++) = ch;
-    *((*current)++) = '\0';
 
     return original;
 }
