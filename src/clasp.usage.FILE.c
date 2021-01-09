@@ -391,6 +391,32 @@ static void clasp_show_split_option_help_limit_width_by_FILE_(
     }
 }
 
+static
+unsigned
+clasp_count_types_(
+    clasp_specification_t const     specifications[]
+,   clasp_argtype_t                 argType
+)
+{
+    unsigned n = 0;
+
+    if (NULL != specifications)
+    {
+        for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications)
+        {
+            if (argType == specifications->type)
+            {
+                ++n;
+            }
+        }
+    }
+
+    return n;
+}
+
+#define clasp_count_flags_(specifications)          clasp_count_types_((specifications), CLASP_ARGTYPE_FLAG)
+#define clasp_count_options_(specifications)        clasp_count_types_((specifications), CLASP_ARGTYPE_OPTION)
+
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
@@ -536,6 +562,8 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
     const size_t                numSpecifications   =   clasp_countSpecifications(specifications);
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
+    unsigned                    numFlags;
+    unsigned                    numOptions;
 
     unsigned const              flags               =   0;
 
@@ -555,7 +583,32 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
         return;
     }
 
-    clasp_fprintf_(stm, CLASP_LITERAL_("Options:\n"));
+    numFlags    =   clasp_count_flags_(specifications);
+    numOptions  =   clasp_count_options_(specifications);
+
+    if (0 == numFlags)
+    {
+        if (0 == numOptions)
+        {
+            return;
+        }
+        else
+        {
+            clasp_fprintf_(stm, CLASP_LITERAL_("Options:\n"));
+        }
+    }
+    else
+    {
+        if (0 == numOptions)
+        {
+            clasp_fprintf_(stm, CLASP_LITERAL_("Flags:\n"));
+        }
+        else
+        {
+            clasp_fprintf_(stm, CLASP_LITERAL_("Flags and options:\n"));
+        }
+    }
+
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
 
     { size_t i; for (i = 0; i != numSpecifications; ++i)
