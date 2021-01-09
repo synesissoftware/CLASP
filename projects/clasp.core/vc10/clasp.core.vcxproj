@@ -9,20 +9,20 @@
       <Configuration>Debug Multithreaded</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Multithreaded pseudoUNIX|Win32">
-      <Configuration>Debug Multithreaded pseudoUNIX</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Multithreaded pseudoUNIX|x64">
-      <Configuration>Debug Multithreaded pseudoUNIX</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug Multithreaded DLL|Win32">
       <Configuration>Debug Multithreaded DLL</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug Multithreaded DLL|x64">
       <Configuration>Debug Multithreaded DLL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Multithreaded pseudoUNIX|Win32">
+      <Configuration>Debug Multithreaded pseudoUNIX</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Multithreaded pseudoUNIX|x64">
+      <Configuration>Debug Multithreaded pseudoUNIX</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release Multithreaded|Win32">
@@ -33,20 +33,20 @@
       <Configuration>Release Multithreaded</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Multithreaded pseudoUNIX|Win32">
-      <Configuration>Release Multithreaded pseudoUNIX</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Multithreaded pseudoUNIX|x64">
-      <Configuration>Release Multithreaded pseudoUNIX</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release Multithreaded DLL|Win32">
       <Configuration>Release Multithreaded DLL</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release Multithreaded DLL|x64">
       <Configuration>Release Multithreaded DLL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Multithreaded pseudoUNIX|Win32">
+      <Configuration>Release Multithreaded pseudoUNIX</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Multithreaded pseudoUNIX|x64">
+      <Configuration>Release Multithreaded pseudoUNIX</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -56,13 +56,15 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
+    <CharacterSet>MultiByte</CharacterSet>
     <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
+  <PropertyGroup Label="Configuration" Condition=" $(Configuration.ToUpper().Contains('DEBUG'))">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">
-    <UseDebugLibraries>true</UseDebugLibraries>
+  <PropertyGroup Label="Configuration" Condition="!$(Configuration.ToUpper().Contains('DEBUG'))">
+    <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded pseudoUNIX|Win32'">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -102,32 +104,6 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded pseudoUNIX|Win32'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded pseudoUNIX|x64'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded DLL|Win32'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded DLL|x64'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|Win32'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded pseudoUNIX|Win32'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded pseudoUNIX|x64'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded DLL|Win32'">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded DLL|x64'">
-  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <OutDir>$(SolutionDir)lib/</OutDir>
@@ -146,10 +122,6 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-<!--
-      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
- -->
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>

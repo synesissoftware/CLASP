@@ -8,19 +8,27 @@
   <PropertyGroup>
 
     <CharacterSet>Multibyte</CharacterSet>
-    <IntDir>$(SolutionDir)build/$(Configuration)/$(Platform)/$(ProjectName)/</IntDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\$(Platform)\$(ProjectName)\</IntDir>
     <LinkIncrementalDir>false</LinkIncrementalDir>
-    <OutDir>$(SolutionDir)build/$(Configuration)/$(Platform)/</OutDir>
+    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+  <PropertyGroup Condition="!$(Configuration.ToUpper().Contains('UNICODE'))">
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(Configuration.ToUpper().Contains('UNICODE'))">
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.ToUpper().Contains('DEBUG'))">
 
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(Configuration.Contains('Release'))">
+  <PropertyGroup Condition="$(Configuration.ToUpper().Contains('RELEASE'))">
 
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
@@ -50,7 +58,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="!$(Configuration.Contains('Unix')) AND !$(Configuration.Contains('UNIX'))">
+  <ItemDefinitionGroup Condition="!$(Configuration.ToUpper().Contains('UNIX'))">
     <ClCompile>
       <PreprocessorDefinitions>_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -65,13 +73,15 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Unix')) OR $(Configuration.Contains('UNIX'))">
+  <ItemDefinitionGroup Condition=" $(Configuration.ToUpper().Contains('UNIX'))">
     <ClCompile>
       <AdditionalIncludeDirectories Condition="exists('$(UNIXEM)/include')">$(UNIXEM)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="exists('$(PTHREADS_WIN32)/include')">$(PTHREADS_WIN32)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+
       <PreprocessorDefinitions>UNIX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>_STLSOFT_FORCE_ANY_COMPILER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>_REENTRANT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+
       <UndefinePreprocessorDefinitions>WIN32;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>WIN64;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
     </ClCompile>
@@ -151,7 +161,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('DEBUG'))">
     <ClCompile>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
@@ -171,19 +181,19 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('DEBUG MULTITHREADED'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded DLL'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('DEBUG MULTITHREADED DLL'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('RELEASE'))">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -209,13 +219,13 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('RELEASE MULTITHREADED'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
 
-  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded DLL'))">
+  <ItemDefinitionGroup Condition="$(Configuration.ToUpper().Contains('RELEASE MULTITHREADED DLL'))">
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
     </ClCompile>
@@ -274,6 +284,5 @@
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-
 
 </Project>

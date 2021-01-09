@@ -54,9 +54,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
-# define CLASP_VER_CLASP_H_CLASP_MINOR      0
+# define CLASP_VER_CLASP_H_CLASP_MINOR      1
 # define CLASP_VER_CLASP_H_CLASP_REVISION   1
-# define CLASP_VER_CLASP_H_CLASP_EDIT       88
+# define CLASP_VER_CLASP_H_CLASP_EDIT       90
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -77,9 +77,9 @@
 #define CLASP_VER_MINOR         14
 #define CLASP_VER_PATCH         0
 #define CLASP_VER_REVISION      CLASP_VER_PATCH
-#define CLASP_VER_AB            42
+#define CLASP_VER_AB            67
 
-#define CLASP_VER               0x000e0042
+#define CLASP_VER               0x000e0043
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -201,6 +201,111 @@
 
 # define CLASP_DEPRECATED_(msg)                             /* */
 #endif /* CLASP_OBSOLETE */
+
+/* /////////////////////////////////////////////////////////////////////////
+ * platform recognition
+ *
+ * Define the symbol CLASP_OVERRIDE_PLATFORM to provide your own platform
+ * discrimination
+ */
+
+#if defined(_WIN64)
+
+# if defined(EMULATE_UNIX_ON_WIN64) && \
+     !defined(EMULATE_UNIX_ON_WINDOWS)
+
+#  define EMULATE_UNIX_ON_WINDOWS
+# endif /* EMULATE_UNIX_ON_WIN64 && !EMULATE_UNIX_ON_WINDOWS */
+# if !defined(EMULATE_UNIX_ON_WIN64) && \
+     defined(EMULATE_UNIX_ON_WINDOWS)
+
+#  define EMULATE_UNIX_ON_WIN64
+# endif /* !EMULATE_UNIX_ON_WIN64 && EMULATE_UNIX_ON_WINDOWS */
+#elif defined(_WIN32)
+
+# if defined(EMULATE_UNIX_ON_WIN32) && \
+     !defined(EMULATE_UNIX_ON_WINDOWS)
+
+#  define EMULATE_UNIX_ON_WINDOWS
+# endif /* EMULATE_UNIX_ON_WIN32 && !EMULATE_UNIX_ON_WINDOWS */
+# if !defined(EMULATE_UNIX_ON_WIN32) && \
+     defined(EMULATE_UNIX_ON_WINDOWS)
+
+#  define EMULATE_UNIX_ON_WIN32
+# endif /* !EMULATE_UNIX_ON_WIN32 && EMULATE_UNIX_ON_WINDOWS */
+#endif /* _WIN32 || _WIN64 */
+
+
+#ifndef CLASP_OVERRIDE_PLATFORM
+
+# if defined(unix) || \
+     defined(UNIX) || \
+     defined(__unix) || \
+     defined(__unix__) || \
+     (   defined(__xlC__) && \
+         defined(_POWER) && \
+         defined(_AIX))
+
+   /* Platform is UNIX */
+#  define CLASP_PLATFORM_IS_UNIX
+   /* Now determine whether this is being emulated on Windows */
+#  if defined(_WIN64) && \
+      ( defined(EMULATE_UNIX_ON_WIN64) || \
+        defined(EMULATE_UNIX_ON_WINDOWS))
+
+#   define CLASP_PLATFORM_IS_UNIX_EMULATED_ON_WIN64
+#   define CLASP_PLATFORM_IS_UNIX_EMULATED_ON_WINDOWS
+#  elif defined(_WIN32) && \
+      ( defined(EMULATE_UNIX_ON_WIN32) || \
+        defined(EMULATE_UNIX_ON_WINDOWS))
+
+#   define CLASP_PLATFORM_IS_UNIX_EMULATED_ON_WIN32
+#   define CLASP_PLATFORM_IS_UNIX_EMULATED_ON_WINDOWS
+#  endif /* Windows */
+# elif defined(WIN64)
+
+   /* Platform is Win64 */
+#  define CLASP_PLATFORM_IS_WIN64
+#  define CLASP_PLATFORM_IS_WINDOWS
+# elif defined(WIN32)
+
+   /* Platform is Win32 */
+#  define CLASP_PLATFORM_IS_WIN32
+#  define CLASP_PLATFORM_IS_WINDOWS
+# else /* ? platform */
+
+#  error Platform not (yet) recognised
+# endif /* platform */
+#endif /* !CLASP_OVERRIDE_PLATFORM */
+
+#if defined(CLASP_PLATFORM_IS_UNIX)
+# if defined(__amd64__) || \
+     defined(__amd64) || \
+     defined(_AMD64_) || \
+     defined(_M_AMD64) || \
+     defined(_M_X64)
+#  define CLASP_ARCH_IS_X64
+# elif defined(__ia64__) || \
+       defined(__ia64) || \
+       defined(_IA64_) || \
+       defined(_M_IA64)
+#  define CLASP_ARCH_IS_IA64
+# elif defined(__i386__) || \
+       defined(__i386) || \
+       defined(_X86_) || \
+       defined(_M_IX86)
+#  define CLASP_ARCH_IS_X86
+# endif /* _M_?? */
+#elif defined(CLASP_PLATFORM_IS_WINDOWS)
+# if defined(_M_IA64)
+#  define CLASP_ARCH_IS_IA64
+# elif defined(_M_X64) || \
+       defined(_M_AMD64)
+#  define CLASP_ARCH_IS_X64
+# elif defined(_M_IX86)
+#  define CLASP_ARCH_IS_X86
+# endif /* _M_?? */
+#endif
 
 /* /////////////////////////////////////////////////////////////////////////
  * basic types
