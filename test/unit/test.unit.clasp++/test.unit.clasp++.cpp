@@ -1174,17 +1174,17 @@ static void test_2_08(void)
     {
         int         length_i;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_i, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_i, 0));
         XTESTS_TEST_INTEGER_EQUAL(1, length_i);
 
         unsigned    length_u;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_u, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_u, 0));
         XTESTS_TEST_INTEGER_EQUAL(1u, length_u);
 
         size_t      length_s;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_s, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_s, 0));
         XTESTS_TEST_INTEGER_EQUAL(1u, length_s);
 
 
@@ -1223,22 +1223,22 @@ static void test_2_09(void)
     {
         int         length_1;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
         XTESTS_TEST_INTEGER_EQUAL(1, length_1);
 
         int         length_2;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, 0));
         XTESTS_TEST_INTEGER_EQUAL(2, length_2);
 
         int         length_3;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, 0));
         XTESTS_TEST_INTEGER_EQUAL(3, length_3);
 
         int         v_;
 
-        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
 
 
         clasp::releaseArguments(args);
@@ -1276,22 +1276,22 @@ static void test_2_10(void)
     {
         unsigned    length_1;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
         XTESTS_TEST_INTEGER_EQUAL(1u, length_1);
 
         unsigned    length_2;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, 0));
         XTESTS_TEST_INTEGER_EQUAL(2u, length_2);
 
         unsigned    length_3;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, 0));
         XTESTS_TEST_INTEGER_EQUAL(3u, length_3);
 
         unsigned    v_;
 
-        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
 
 
         clasp::releaseArguments(args);
@@ -1329,22 +1329,22 @@ static void test_2_11(void)
     {
         double  length_1;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0.0));
         XTESTS_TEST_FLOATINGPOINT_EQUAL(1.1, length_1);
 
         double  length_2;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, 0.0));
         XTESTS_TEST_FLOATINGPOINT_EQUAL(2.2, length_2);
 
         double  length_3;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, 0.0));
         XTESTS_TEST_FLOATINGPOINT_EQUAL(3.3, length_3);
 
         double  v_;
 
-        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0.0));
 
 
         clasp::releaseArguments(args);
@@ -1382,22 +1382,22 @@ static void test_2_12(void)
     {
         size_t  length_1;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
         XTESTS_TEST_INTEGER_EQUAL(1u, length_1);
 
         size_t  length_2;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, 0));
         XTESTS_TEST_INTEGER_EQUAL(2u, length_2);
 
         size_t  length_3;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, 0));
         XTESTS_TEST_INTEGER_EQUAL(3u, length_3);
 
         size_t  v_;
 
-        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
 
 
         clasp::releaseArguments(args);
@@ -1435,22 +1435,22 @@ static void test_2_13(void)
     {
         long        length_1;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
         XTESTS_TEST_INTEGER_EQUAL(1, length_1);
 
         long        length_2;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_2, 0));
         XTESTS_TEST_INTEGER_EQUAL(2, length_2);
 
         long        length_3;
 
-        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, NULL));
+        XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_3, 0));
         XTESTS_TEST_INTEGER_EQUAL(3, length_3);
 
         long        v_;
 
-        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, NULL));
+        XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
 
 
         clasp::releaseArguments(args);
@@ -1480,7 +1480,6 @@ static void test_2_18(void)
 static void test_2_19(void)
 {
 }
-
 
 } // anonymous namespace
 
