@@ -441,7 +441,7 @@ CLASP_CALL(void) clasp_show_version_by_FILE(
 )
 {
     FILE*                 stm         =   (FILE*)info->param;
-    clasp_char_t          fmt[]       =   CLASP_LITERAL_("%s%s%d.%d.%d\n");
+    clasp_char_t          fmt[]       =   CLASP_LITERAL_("%s%s%d.%d.%d.%d\n");
     clasp_char_t const*   tool_name;
     clasp_char_t const*   v_prefix;
 
@@ -464,11 +464,20 @@ CLASP_CALL(void) clasp_show_version_by_FILE(
         fmt[ 9] = '\n';
         fmt[10] = '\0';
     }
+    else
+    if (info->version.build < 0)
+    {
+        CLASP_ASSERT('.' == fmt[ 9]);
+        CLASP_ASSERT('.' == fmt[12]);
+
+        fmt[12] = '\n';
+        fmt[13] = '\0';
+    }
 
     ((void)specifications);
     ((void)ctxt);
 
-    clasp_fprintf_(stm, fmt, tool_name, v_prefix, info->version.major, info->version.minor, info->version.revision);
+    clasp_fprintf_(stm, fmt, tool_name, v_prefix, info->version.major, info->version.minor, info->version.revision, info->version.build);
 }
 
 
