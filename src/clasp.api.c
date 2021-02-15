@@ -4,7 +4,7 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     10th January 2021
+ * Updated:     15th February 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -2053,6 +2053,16 @@ clasp_releaseArguments(
     CLASP_LOG_PRINTF(&argsx->ctxt, CLASP_SEVIX_DEBUG, CLASP_LITERAL_("clasp_releaseArguments()"));
 
     clasp_free_(&argsx->ctxt, argsx);
+}
+
+CLASP_CALL(clasp_specification_t const*)
+clasp_getSpecifications(
+    clasp_arguments_t const*    args
+)
+{
+    CLASP_ASSERT(NULL != args);
+
+    return (clasp_specification_t const*)clasp_argsx_from_args_(args)->specifications;
 }
 
 CLASP_CALL(size_t)

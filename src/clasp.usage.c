@@ -4,7 +4,7 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     9th January 2021
+ * Updated:     15th February 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -585,7 +585,8 @@ clasp_invoke_usage_new_(
  * API functions
  */
 
-CLASP_CALL(int) clasp_showUsage(
+CLASP_CALL(int)
+clasp_showUsage(
     clasp_arguments_t const*    args
 ,   clasp_alias_t const*        specifications
 ,   clasp_char_t const*         toolName    /* "rcp" */
@@ -632,7 +633,8 @@ CLASP_CALL(int) clasp_showUsage(
     return 0;
 }
 
-CLASP_CALL(int) clasp_show_usage(
+CLASP_CALL(int)
+clasp_show_usage(
   clasp_diagnostic_context_t const* ctxt
 , clasp_alias_t const*              specifications
 , clasp_char_t const*               toolName    /* "rcp" */
@@ -688,7 +690,8 @@ CLASP_CALL(int) clasp_show_usage(
     return 0;
 }
 
-CLASP_CALL(int) clasp_showHeader(
+CLASP_CALL(int)
+clasp_showHeader(
     clasp_arguments_t const*    args
 ,   clasp_alias_t const*        specifications
 ,   clasp_char_t const*         toolName
@@ -731,7 +734,8 @@ CLASP_CALL(int) clasp_showHeader(
     return clasp_invoke_header_new_(pfnHeader, args, &usageinfo, specifications);
 }
 
-CLASP_CALL(int) clasp_show_header(
+CLASP_CALL(int)
+clasp_show_header(
   clasp_diagnostic_context_t const* ctxt
 , clasp_alias_t const*              specifications
 , clasp_char_t const*               toolName
@@ -780,7 +784,8 @@ CLASP_CALL(int) clasp_show_header(
     return 0;
 }
 
-CLASP_CALL(int) clasp_showBody(
+CLASP_CALL(int)
+clasp_showBody(
     clasp_arguments_t const*    args
 ,   clasp_alias_t const*        specifications
 ,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
@@ -795,6 +800,7 @@ CLASP_CALL(int) clasp_showBody(
 
     ((void)flags);
 
+    CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != pfnBody);
 
     usageinfo.version.major         =   -1;
@@ -812,10 +818,16 @@ CLASP_CALL(int) clasp_showBody(
     usageinfo.assumedTabWidth       =   tabSize;
     usageinfo.blanksBetweenItems    =   blanksBetweenItems;
 
+    if (NULL == specifications)
+    {
+        specifications = clasp_getSpecifications(args);
+    }
+
     return clasp_invoke_body_new_(pfnBody, args, &usageinfo, specifications);
 }
 
-CLASP_CALL(int) clasp_show_body(
+CLASP_CALL(int)
+clasp_show_body(
   clasp_diagnostic_context_t const* ctxt
 , clasp_alias_t const*              specifications
 , void                            (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
@@ -860,7 +872,8 @@ CLASP_CALL(int) clasp_show_body(
     return 0;
 }
 
-CLASP_CALL(int) clasp_showVersion(
+CLASP_CALL(int)
+clasp_showVersion(
     clasp_arguments_t const*    args
 ,   clasp_char_t const*         toolName
 ,   int                         major
@@ -895,7 +908,8 @@ CLASP_CALL(int) clasp_showVersion(
     return clasp_invoke_version_new_(pfnVersion, args, &usageinfo, NULL);
 }
 
-CLASP_CALL(int) clasp_show_version(
+CLASP_CALL(int)
+clasp_show_version(
   clasp_diagnostic_context_t const* ctxt
 , clasp_char_t const*               toolName
 , int                               major

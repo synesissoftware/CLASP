@@ -4,7 +4,7 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     10th January 2021
+ * Updated:     15th February 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      1
-# define CLASP_VER_CLASP_H_CLASP_REVISION   1
-# define CLASP_VER_CLASP_H_CLASP_EDIT       90
+# define CLASP_VER_CLASP_H_CLASP_REVISION   2
+# define CLASP_VER_CLASP_H_CLASP_EDIT       91
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -77,9 +77,9 @@
 #define CLASP_VER_MINOR         14
 #define CLASP_VER_PATCH         0
 #define CLASP_VER_REVISION      CLASP_VER_PATCH
-#define CLASP_VER_AB            67
+#define CLASP_VER_AB            68
 
-#define CLASP_VER               0x000e0043
+#define CLASP_VER               0x000e0044
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -899,6 +899,16 @@ clasp_parseArguments(
  */
 CLASP_CALL(void)
 clasp_releaseArguments(
+    clasp_arguments_t const*            args
+);
+
+/** Obtains the specifications given in the call to clasp_parseArguments(),
+ *   which may be NULL.
+ *
+ * \pre NULL != args
+ */
+CLASP_CALL(clasp_specification_t const*)
+clasp_getSpecifications(
     clasp_arguments_t const*            args
 );
 
