@@ -4,7 +4,7 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     15th February 2021
+ * Updated:     16th February 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -575,6 +575,11 @@ clasp_invoke_usage_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
+    if (NULL == specifications)
+    {
+        specifications = clasp_getSpecifications(args);
+    }
+
     clasp_invoke_header_new_(pfnHeader, args, usageinfo, specifications);
     clasp_invoke_body_new_(pfnBody, args, usageinfo, specifications);
 
