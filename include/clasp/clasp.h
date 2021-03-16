@@ -4,7 +4,7 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     15th February 2021
+ * Updated:     15th March 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      1
 # define CLASP_VER_CLASP_H_CLASP_REVISION   2
-# define CLASP_VER_CLASP_H_CLASP_EDIT       91
+# define CLASP_VER_CLASP_H_CLASP_EDIT       92
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -275,7 +275,7 @@
 # else /* ? platform */
 
 /* We do not enforce that a neutral / non-recognised platform is a problem,
- * because the CLASP library does not rely on any platform-specifici
+ * because the CLASP library does not rely on any platform-specific
  * features
 #  error Platform not (yet) recognised
 */
