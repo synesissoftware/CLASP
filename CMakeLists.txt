@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 project(clasp)
 
@@ -10,4 +10,11 @@ add_subdirectory(./projects/clasp.core)
 add_subdirectory(./examples/cvu/prg)
 
 add_subdirectory(./examples/cvu/prg.main)
+
+install(TARGETS clasp)
+
+INSTALL (
+    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.h*")
 
