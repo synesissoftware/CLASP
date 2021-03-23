@@ -8,6 +8,10 @@ mkdir -p $CMakePath
 
 cd $CMakePath
 
+
+
+
+
 echo "Executing make clean"
 
 make clean
