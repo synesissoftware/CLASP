@@ -4,7 +4,7 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     15th February 2021
+ * Updated:     29th March 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -1500,7 +1500,7 @@ clasp_parseArguments_NoWild_(
                             const size_t                longLen     =   clasp_strlen_(alias->mappedArgument);
                             clasp_char_t const* const   equal5_c    =   clasp_strchreq_(alias->mappedArgument, flags);
 
-                            currentArg->resolvedName.len    =   (NULL == equal5_c) ? longLen : (equal5_c - alias->mappedArgument);
+                            currentArg->resolvedName.len    =   (NULL == equal5_c) ? longLen : (size_t)(equal5_c - alias->mappedArgument);
                             currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, alias->mappedArgument, currentArg->resolvedName.len);
                             currentArg->givenName.len       =   nameLen;
                             currentArg->givenName.ptr       =   clasp_add_string_to_area_(&currentString, arg, nameLen);
@@ -1691,7 +1691,7 @@ clasp_parseArguments_NoWild_(
                             const size_t                longLen     =   clasp_strlen_(alias->mappedArgument);
                             clasp_char_t const* const   equal6_b    =   clasp_strchreq_(alias->mappedArgument, flags);
 
-                            currentArg->resolvedName.len    =   (NULL == equal6_b) ? longLen : (equal6_b - alias->mappedArgument);
+                            currentArg->resolvedName.len    =   (NULL == equal6_b) ? longLen : (size_t)(equal6_b - alias->mappedArgument);
                             currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, alias->mappedArgument, currentArg->resolvedName.len);
                             currentArg->givenName.len       =   nameLen;
                             currentArg->givenName.ptr       =   clasp_add_string_to_area_(&currentString, arg, nameLen);
@@ -2074,7 +2074,6 @@ clasp_reportUnrecognisedFlagsAndOptions(
 )
 {
     size_t  i;
-    size_t  numSpecifications;
     size_t  n = 0;
 
     clasp_argument_t const* nextUnrecognisedArg_;
@@ -2097,8 +2096,6 @@ clasp_reportUnrecognisedFlagsAndOptions(
     }
 
     *nextUnrecognisedArg = NULL;
-
-    numSpecifications = clasp_countSpecifications(specifications);
 
     for (i = 0; i != args->numFlagsAndOptions; ++i)
     {

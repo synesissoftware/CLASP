@@ -4,7 +4,7 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     16th February 2021
+ * Updated:     29th March 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -219,6 +219,8 @@ clasp_find_replacement_usage_field_(
                     case    '8':
                     case    '9':
                         *isNumber = 0 != clasp_find_id_((*fields[i]) + 1);
+
+			/* fall through */
                     default:
                         return 1;
                 }
@@ -326,6 +328,8 @@ clasp_find_replacement_mappedArgument_(
                     case    '8':
                     case    '9':
                         *isNumber = 0 != clasp_find_id_(specifications->help + 1);
+
+			/* fall through */
                     default:
                         return 1;
                 }
@@ -376,7 +380,7 @@ clasp_invoke_header_expand_usage_(
         }
         else
         {
-            size_t const    len =   (NULL != l_s) ? (l_s + 1) - usage : le_;
+            size_t const    len =   (NULL != l_s) ? (size_t)((l_s + 1) - usage) : le_;
             size_t const    n_x =   clasp_strncount_(usage, len, sep);
 
             if (len >= CCH_USAGE)
