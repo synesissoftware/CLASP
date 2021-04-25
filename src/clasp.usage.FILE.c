@@ -4,7 +4,7 @@
  * Purpose:     CLASP usage (FILE) facilities.
  *
  * Created:     4th June 2008
- * Updated:     8th January 2021
+ * Updated:     25th April 2021
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
@@ -98,7 +98,7 @@ clasp_longOptionName_strlen_(clasp_char_t const* s, unsigned flags)
 {
     clasp_char_t const* equals = clasp_strchreq_(s, flags);
 
-    return (NULL == equals) ? clasp_strlen_(s) : (equals - s);
+    return (NULL == equals) ? clasp_strlen_(s) : (size_t)(equals - s);
 }
 
 static size_t clasp_find_matching_primary_(
@@ -764,7 +764,6 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
 
                         clasp_char_t        delim[2];
                         clasp_char_t        braces[3];
-                        clasp_char_t        separator;
                         clasp_char_t*       tok;
                         struct
                         strtok_savectxt_t   sc;
@@ -777,8 +776,6 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
                         braces[0]   =   bracePairs[braceIndex][0];
                         braces[1]   =   bracePairs[braceIndex][1];
                         braces[2]   =   '\0';
-
-                        separator   =   alias->valueSet[0];
 
                         buff[0] = ' ';
                         buff[1] = '\0';
