@@ -15,7 +15,9 @@ add_library(clasp ${CORE_SRCS})
 
 
 target_compile_options(clasp PRIVATE
-    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>: -Werror -Wall -Wextra -pedantic>
+    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+    -Werror -Wall -Wextra -pedantic
+    >
     $<$<CXX_COMPILER_ID:MSVC>: /WX /W4>
     )
 
