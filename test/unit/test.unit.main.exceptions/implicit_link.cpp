@@ -4,16 +4,7 @@
  * Purpose:     Implicit link file for the test.unit.main.exceptions project.
  *
  * Created:     7th March 2013
- * Updated:     18th April 2019
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2013-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Updated:     31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 

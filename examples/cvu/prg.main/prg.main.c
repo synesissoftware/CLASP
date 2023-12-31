@@ -4,14 +4,7 @@
  * Purpose:     Implementation file for the prg.main example project.
  *
  * Created:     8th December 2011
- * Updated:     18th April 2019
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Updated:     31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 
