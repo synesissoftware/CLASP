@@ -4,17 +4,7 @@
  * Purpose:     Implementation file for the test.unit.usage_width project.
  *
  * Created:     3rd April 2014
- * Updated:     10th January 2021
- *
- * Status:      Wizard-generated
- *
- * License:     BSD (3-clause)
- *
- *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
- *              Copyright (c) 2014-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://github.com/synesissoftware/CLASP
+ * Updated:     31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 
