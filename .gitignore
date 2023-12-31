@@ -1,76 +1,130 @@
 
 # directories (by name)
 
+/.vs/
+
 .svn/
 
-_internal/
+/_build/
+/_internal/
 
-bin/
-ipch/
-lib/
+/bin/
+/doc/
+/lib/
 
-include/shwild/
-include/xcontract/
-include/xcover/
-include/xtests/
+/include/shwild/
+/include/xcontract/
+/include/xcover/
+/include/xtests/
 
-src/shwild/
-src/xcontract/
-src/xcover/
-src/xtests/
+/src/shwild/
+/src/xcontract/
+/src/xcover/
+/src/xtests/
 
-Debug/
-DebugMt/
-DebugDll/
-DebugUnix/
-Release/
-ReleaseMt/
-ReleaseDll/
-ReleaseUnix/
-
-x64/
 Win32/
+ipch/
+x64/
+
+Debug Multithreaded DLL/
+Debug Multithreaded Dll/
+Debug Multithreaded pseudoUNIX/
+Debug Multithreaded pseudoUnix/
+Debug Multithreaded/
+Debug/
+DebugDLLUNIX/
+DebugDll/
+DebugMt/
+DebugUnix/
+Release Multithreaded DLL/
+Release Multithreaded Dll/
+Release Multithreaded pseudoUNIX/
+Release Multithreaded pseudoUnix/
+Release Multithreaded/
+Release/
+ReleaseDLLUNIX/
+ReleaseDll/
+ReleaseMt/
+ReleaseUnix/
+Unicode Debug Multithreaded DLL/
+Unicode Debug Multithreaded/
+Unicode Debug/
+Unicode Release Multithreaded DLL/
+Unicode Release Multithreaded/
+Unicode Release/
 
 vc9/
 
+
 # directories (by pattern)
+
 
 # files (by name)
 
+.DS_Store
+.ruby-version
 .svnignore
 .svnignore-at-root
+.update_deps
 
 clasp.vc9.sln
 
+list_changes.cmd
+prepare.cmd
+update_deps.cmd
 sh.exe.stackdump
+
+build/makefile.tmpl
+build/makefile.tools.xml
+
 
 # files (by pattern)
 
 *~
+*.???_obj
 *.a
 *.app
 *.aps
+*.b64
+*.bak
+*.chm
+*.d
 *.dll
 *.dylib
 *.exe
 *.gch
+*.idb
+*.ilk
+*.iobj
+*.ipch
+*.ipdb
+*.la
+*.lai
 *.lib
+*.lo
+*.log
 *.ncb
 *.o
-*.???_obj
 *.obj
 *.opensdf
 *.opt
+*.org
 *.out
 *.pch
 *.pdb
 *.rar
-*.scc
+*.res
 *.sbr
+*.scc
 *.sdf
+*.slo
 *.so
 *.suo
-*.vcproj.user
-*.vcxproj.user
+*.swp
+*.tlog
+*.tmp
+*.unsuccessfulbuild
+*.vcproj*.user
+*.vcxproj*.user
 *.zip
 

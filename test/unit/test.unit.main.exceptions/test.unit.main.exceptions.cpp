@@ -4,17 +4,7 @@
  * Purpose:     Implementation file for the test.unit.main.exceptions project.
  *
  * Created:     7th March 2013
- * Updated:     10th January 2021
- *
- * Status:      Wizard-generated
- *
- * License:     BSD (3-clause)
- *
- *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
- *              Copyright (c) 2013-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://github.com/synesissoftware/CLASP
+ * Updated:     31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -24,7 +14,7 @@
  */
 
 static char const* Test_programName;
-#define CLASP_MAIN_DEFAULT_PROGRAM_NAME     Test_programName
+#define CLASP_MAIN_DEFAULT_PROGRAM_NAME                     Test_programName
 
 #include <stdio.h>
 static FILE* Real_stderr = stderr;
@@ -33,17 +23,17 @@ static FILE* Test_stderr;
 # undef stderr
 # define CLASP_Test_stderr_was_defined
 #endif
-#define stderr  Test_stderr
+#define stderr                                              Test_stderr
 
 #include <clasp/main.hpp>
 
 #undef stderr
 #ifdef CLASP_Test_stderr_was_defined
-# define stderr Real_stderr
+# define stderr                                             Real_stderr
 #endif
 #undef CLASP_MAIN_DEFAULT_PROGRAM_NAME
 
-#define Test_path                           "test.unit.main.exceptions-stderr.txt"
+#define Test_path                                           "test.unit.main.exceptions-stderr.txt"
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
