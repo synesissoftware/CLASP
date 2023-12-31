@@ -1,17 +1,3 @@
-/* /////////////////////////////////////////////////////////////////////////
- * File:        implicit_link.cpp
- *
- * Purpose:     Implicit link file for the test.unit.custom_types project.
- *
- * Created:     12th September 2014
- * Updated:     31st December 2023
- *
- * ////////////////////////////////////////////////////////////////////// */
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
- */
 
 /* SystemTools::CLASP header files */
 #include <systemtools/clasp/implicit_link.h>

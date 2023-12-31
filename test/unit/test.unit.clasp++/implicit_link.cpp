@@ -1,17 +1,3 @@
-/* /////////////////////////////////////////////////////////////////////////
- * File:        implicit_link.cpp
- *
- * Purpose:     Implicit link file for the test.unit.clasp++ project.
- *
- * Created:     16th July 2009
- * Updated:     31st December 2023
- *
- * ////////////////////////////////////////////////////////////////////// */
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
- */
 
 /* SystemTools::CLASP header files */
 #include <systemtools/clasp/implicit_link.h>
