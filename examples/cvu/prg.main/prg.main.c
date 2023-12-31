@@ -1,18 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        examples/cvu/prg.main/prg.main.c
+ * File:    examples/cvu/prg.main/prg.main.c
  *
- * Purpose:     Implementation file for the prg.main example project.
+ * Purpose: Implementation file for the prg.main example project.
  *
- * Created:     8th December 2011
- * Updated:     10th January 2021
- *
- * License:     BSD (3-clause)
- *
- *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
- *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://github.com/synesissoftware/CLASP
+ * Created: 8th December 2011
+ * Updated: 31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 
