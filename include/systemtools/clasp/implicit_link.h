@@ -70,8 +70,8 @@
  * macros and definitions
  */
 
-#define CLASP_STRINGIZE_(x)     #x
-#define CLASP_STRINGIZE(x)      CLASP_STRINGIZE_(x)
+#define CLASP_STRINGIZE_(x)                                 #x
+#define CLASP_STRINGIZE(x)                                  CLASP_STRINGIZE_(x)
 
 /* /////////////////////////////////////////////////////////////////////////
  * architecture discrimination
@@ -135,7 +135,7 @@
 
   /* major version */
 
-#  define CLASP_IMPL_LINK_MAJOR_VERSION             "." CLASP_STRINGIZE(CLASP_VER_MAJOR)
+#  define CLASP_IMPL_LINK_MAJOR_VERSION                     "." CLASP_STRINGIZE(CLASP_VER_MAJOR)
 
   /* module name */
 

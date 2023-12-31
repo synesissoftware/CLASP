@@ -65,7 +65,7 @@ clasp_strcat_X_(clasp_char_t* s1, clasp_char_t const* s2)
     return clasp_strcat_(s1, s2);
 }
 # undef clasp_strcat_
-# define clasp_strcat_(s1, s2)  clasp_strcat_X_((s1), (s2))
+# define clasp_strcat_(s1, s2)                              clasp_strcat_X_((s1), (s2))
 # pragma warning(pop)
 #endif /* _MSC_VER */
 

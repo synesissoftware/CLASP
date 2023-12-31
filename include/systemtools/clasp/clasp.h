@@ -73,9 +73,9 @@
  * The composite version of the SystemTools::clasp library
  */
 
-#define CLASP_VER_MAJOR         0
-#define CLASP_VER_MINOR         13
-#define CLASP_VER_REVISION      2
+#define CLASP_VER_MAJOR                                     0
+#define CLASP_VER_MINOR                                     13
+#define CLASP_VER_REVISION                                  2
 
 #define CLASP_VER                                           0x000d02ff
 
@@ -165,10 +165,10 @@
 # define CLASP_CALLCONV
 #endif /* !CLASP_CALLCONV */
 
-#define CLASP_CALL(rt)                  CLASP_DECLSPEC CLASP_EXTERN_C rt CLASP_CALLCONV
+#define CLASP_CALL(rt)                                      CLASP_DECLSPEC CLASP_EXTERN_C rt CLASP_CALLCONV
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
-# define CLASP_CPP_CALL(rt)             CLASP_DECLSPEC extern "C++" rt CLASP_CALLCONV
+# define CLASP_CPP_CALL(rt)                                 CLASP_DECLSPEC extern "C++" rt CLASP_CALLCONV
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -213,10 +213,10 @@ typedef char        clasp_char_t;
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 #ifdef CLASP_USE_WIDE_STRINGS
-# define CLASP_LITERAL_STRING_(x)           L ## #x
-# define CLASP_LITERAL_STRING(x)            CLASP_LITERAL_STRING_(x)
+# define CLASP_LITERAL_STRING_(x)                           L ## #x
+# define CLASP_LITERAL_STRING(x)                            CLASP_LITERAL_STRING_(x)
 #else /* ? CLASP_USE_WIDE_STRINGS */
-# define CLASP_LITERAL_STRING(x)            x
+# define CLASP_LITERAL_STRING(x)                            x
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 
@@ -489,7 +489,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  * \param help The help assocated with the flag, e.g. "Causes items to be compared in a case-insensitive fashion"
  *
  */
-# define CLASP_FLAG(alias, mappedArgument, help)                  { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, 0 }
+# define CLASP_FLAG(alias, mappedArgument, help)            { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, 0 }
 
 /** \def CLASP_BIT_FLAG(alias, mappedArgument, bitFlags, help)
  *
@@ -508,7 +508,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  * Equivalent to CLASP_FLAG(), but omits the need to specify an
  * empty/NULL help argument
  */
-# define CLASP_FLAG_ALIAS(alias, mappedArgument)                  CLASP_FLAG((alias), (mappedArgument), NULL)
+# define CLASP_FLAG_ALIAS(alias, mappedArgument)            CLASP_FLAG((alias), (mappedArgument), NULL)
 
 /** \def CLASP_OPTION(alias, mappedArgument, help, valueSet)
  *
@@ -527,13 +527,13 @@ typedef struct clasp_alias_t clasp_alias_t;
  * Equivalent to CLASP_OPTION(), but omits the need to specify an
  * empty/NULL help argument
  */
-# define CLASP_OPTION_ALIAS(alias, mappedArgument)                CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
+# define CLASP_OPTION_ALIAS(alias, mappedArgument)          CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
 
 
 #ifdef __cplusplus
-# define CLASP_ARGTYPE_CAST_(N)     (clasp_argtype_t(N))
+# define CLASP_ARGTYPE_CAST_(N)                             (clasp_argtype_t(N))
 #else /* ? __cplusplus */
-# define CLASP_ARGTYPE_CAST_(N)     ((clasp_argtype_t)(N))
+# define CLASP_ARGTYPE_CAST_(N)                             ((clasp_argtype_t)(N))
 #endif /* __cplusplus */
 
 /** \def CLASP_SECTION(N)
@@ -544,7 +544,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  *
  * \note Items in sections with -ve numbers will not be listed in usage.
  */
-# define CLASP_SECTION(N)                                     { CLASP_ARGTYPE_CAST_(N), NULL, NULL, NULL, NULL, 0 }
+# define CLASP_SECTION(N)                                   { CLASP_ARGTYPE_CAST_(N), NULL, NULL, NULL, NULL, 0 }
 
 /** \def CLASP_TACIT_SECTION()
  *
@@ -552,7 +552,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  * the functions in the \ref group__clasp__api_usage.
  *
  */
-# define CLASP_TACIT_SECTION()                                CLASP_SECTION(CLASP_ARGTYPE_TACIT_)
+# define CLASP_TACIT_SECTION()                              CLASP_SECTION(CLASP_ARGTYPE_TACIT_)
 
 /** \def CLASP_GAP_SECTION(sectionLabel)
  *
@@ -562,7 +562,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  * \param sectionLabel A literal character C-style string that serves as a
  *   section label. May be the empty string.
  */
-# define CLASP_GAP_SECTION(sectionLabel)                      { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
+# define CLASP_GAP_SECTION(sectionLabel)                    { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
 
 /** \def CLASP_ALIAS_ARRAY_TERMINATOR
  *
@@ -1037,7 +1037,7 @@ clasp_valueIsTreatedHyphen(
     clasp_argument_t const*     arg
 );
 #else /* ? SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
-# define clasp_valueIsTreatedHyphen(a)      (0 != (a)->givenName.len)
+# define clasp_valueIsTreatedHyphen(a)                      (0 != (a)->givenName.len)
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 

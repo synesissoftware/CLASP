@@ -126,7 +126,7 @@ parse_Colour(
 ,   Colour*         result
 )
 {
-#define PARSE_ENTRY_(s, v)  else if(0 == ::strcmp(s, parsedValue)) { *result = v; return true; }
+#define PARSE_ENTRY_(s, v)                                  else if(0 == ::strcmp(s, parsedValue)) { *result = v; return true; }
 
     if(0) {}
     PARSE_ENTRY_("black", Black)

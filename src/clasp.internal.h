@@ -59,17 +59,17 @@
 
 #ifndef stlsoft_static_cast
 # ifdef __cplusplus
-#  define stlsoft_static_cast(t, v)         static_cast<t>((v))
+#  define stlsoft_static_cast(t, v)                         static_cast<t>((v))
 # else /* ? __cplusplus */
-#  define stlsoft_static_cast(t, v)         ((t)(v))
+#  define stlsoft_static_cast(t, v)                         ((t)(v))
 # endif /* __cplusplus */
 #endif /* !stlsoft_static_cast */
 
 #ifndef stlsoft_const_cast
 # ifdef __cplusplus
-#  define stlsoft_const_cast(t, v)          const_cast<t>((v))
+#  define stlsoft_const_cast(t, v)                          const_cast<t>((v))
 # else /* ? __cplusplus */
-#  define stlsoft_const_cast(t, v)          ((t)(v))
+#  define stlsoft_const_cast(t, v)                          ((t)(v))
 # endif /* __cplusplus */
 #endif /* !stlsoft_const_cast */
 
@@ -89,9 +89,9 @@
 
 #ifndef CLASP_ASSERT
 # ifdef _MSC_VER
-#  define CLASP_ASSERT(x)                    _ASSERTE(x)
+#  define CLASP_ASSERT(x)                                   _ASSERTE(x)
 # else /* ? compiler */
-#  define CLASP_ASSERT(x)                    assert(x)
+#  define CLASP_ASSERT(x)                                   assert(x)
 # endif /* compiler */
 #endif /* !CLASP_ASSERT */
 
@@ -173,7 +173,7 @@ int clasp_useArgument_(
 # define clasp_strncmp_                                     wcsncmp
 # define clasp_strpbrk_                                     wcspbrk
 # define clasp_strrchr_                                     wcsrchr
-# define CLASP_LITERAL_(x)  L ## x
+# define CLASP_LITERAL_(x)                                  L ## x
 #else
 # define clasp_fprintf_                                     fprintf
 # define clasp_strcat_                                      strcat
@@ -183,7 +183,7 @@ int clasp_useArgument_(
 # define clasp_strncmp_                                     strncmp
 # define clasp_strpbrk_                                     strpbrk
 # define clasp_strrchr_                                     strrchr
-# define CLASP_LITERAL_(x)  x
+# define CLASP_LITERAL_(x)                                  x
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////

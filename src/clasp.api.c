@@ -113,7 +113,7 @@ For two reasons, we can only call recls *once* for each wildcard argument:
  * macros
  */
 
-#define CLASP_STRING_NULL_OR_EMPTY_(s)      (NULL == (s) || '\0' == 0[(s)])
+#define CLASP_STRING_NULL_OR_EMPTY_(s)                      (NULL == (s) || '\0' == 0[(s)])
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
