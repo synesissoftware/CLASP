@@ -4,11 +4,11 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -98,16 +98,16 @@ For two reasons, we can only call recls *once* for each wildcard argument:
  * constants and definitions
  */
 
-#define CLASP_EXPANDEDARGS_ADDITIONAL       (20)
+#define CLASP_EXPANDEDARGS_ADDITIONAL                       (20)
 
-#define CLASP_SECTION_MIN_                  (1)
-#define CLASP_SECTION_MAX_                  (1000)
+#define CLASP_SECTION_MIN_                                  (1)
+#define CLASP_SECTION_MAX_                                  (1000)
 
 /* /////////////////////////////////////////////////////////////////////////
  * internal flags
  */
 
-#define CLASP_ARG_F_USED_       (0x0002)
+#define CLASP_ARG_F_USED_                                   (0x0002)
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros

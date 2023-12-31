@@ -5,10 +5,11 @@
  *              components
  *
  * Created:     5th December 2014
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
+ * Copyright (c) 2019-2023, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2014-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -113,15 +114,15 @@
 # endif /* SYSTEMTOOLS_CLASP_c_str_ptr_null_name_ */
 
 # ifdef CLASP_USE_WIDE_STRINGS
-#  define SYSTEMTOOLS_CLASP_c_str_data_name_                   c_str_data_w
-#  define SYSTEMTOOLS_CLASP_c_str_len_name_                    c_str_len_w
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                    c_str_ptr_w
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_               c_str_ptr_null_w
+#  define SYSTEMTOOLS_CLASP_c_str_data_name_                c_str_data_w
+#  define SYSTEMTOOLS_CLASP_c_str_len_name_                 c_str_len_w
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                 c_str_ptr_w
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_            c_str_ptr_null_w
 # else /* ? CLASP_USE_WIDE_STRINGS */
-#  define SYSTEMTOOLS_CLASP_c_str_data_name_                   c_str_data_a
-#  define SYSTEMTOOLS_CLASP_c_str_len_name_                    c_str_len_a
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                    c_str_ptr_a
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_               c_str_ptr_null_a
+#  define SYSTEMTOOLS_CLASP_c_str_data_name_                c_str_data_a
+#  define SYSTEMTOOLS_CLASP_c_str_len_name_                 c_str_len_a
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                 c_str_ptr_a
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_            c_str_ptr_null_a
 # endif /* CLASP_USE_WIDE_STRINGS */
 
 # if defined(STLSOFT_COMPILER_IS_DMC)

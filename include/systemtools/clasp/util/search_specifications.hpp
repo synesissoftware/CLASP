@@ -4,11 +4,11 @@
  * Purpose:     Utility class for processing search specifications.
  *
  * Created:     20th May 2010
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2019, Matthew Wilson
+ * Copyright (c) 2010-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,7 +55,7 @@
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR     1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR     6
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION  4
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      17
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT      18
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -274,7 +274,7 @@ private:
     {
       type = element_is_::elementIsDirectory;
     }
-    // 
+    //
     else if(traits_type_::is_path_absolute(element.c_str()) ||
             traits_type_::is_path_rooted(element.c_str()))
     {
@@ -401,7 +401,7 @@ public:
 
   /** Applies the given pattern(s) to any specifications that have empty
    * patterns
-   * 
+   *
    * \param defaultPatterns The default pattern(s)
    */
   void apply_default_patterns(string_type const& defaultPatterns)
@@ -439,7 +439,7 @@ public: // Attributes
   /** Obtains a non-mutating (const) reference to the search specification
    * at the given index.
    *
-   * \param index The 
+   * \param index The
    *
    * \pre index < size()
    */

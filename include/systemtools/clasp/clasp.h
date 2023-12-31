@@ -4,11 +4,11 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,7 +46,7 @@
 
 #ifndef SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
-#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_H_CLASP    /* Suppress previous version of CLASP */
+#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_H_CLASP                /* Suppress previous version of CLASP */
 
 /* /////////////////////////////////////////////////////////////////////////
  * version information
@@ -56,7 +56,7 @@
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    9
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     76
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     77
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -77,7 +77,7 @@
 #define CLASP_VER_MINOR         13
 #define CLASP_VER_REVISION      2
 
-#define CLASP_VER               0x000d02ff
+#define CLASP_VER                                           0x000d02ff
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -156,9 +156,9 @@
 
 #if defined(__cplusplus) || \
     defined(SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION)
-# define CLASP_EXTERN_C                 extern "C"
+# define CLASP_EXTERN_C                                     extern "C"
 #else /* ? __cplusplus */
-# define CLASP_EXTERN_C                 extern
+# define CLASP_EXTERN_C                                     extern
 #endif /* !__cplusplus */
 
 #if !defined(CLASP_CALLCONV)
@@ -568,7 +568,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  *
  * Terminates an array of aliases
  */
-# define CLASP_ALIAS_ARRAY_TERMINATOR                         { CLASP_ARGTYPE_INVALID, NULL, NULL, NULL, NULL, 0 }
+# define CLASP_ALIAS_ARRAY_TERMINATOR                       { CLASP_ARGTYPE_INVALID, NULL, NULL, NULL, NULL, 0 }
 
 /** Log function prototype. */
 typedef void (CLASP_CALLCONV *clasp_log_fn_t)(
@@ -1053,7 +1053,7 @@ clasp_valueIsTreatedHyphen(
  * with hyphens or not, in order to allow filenames (or other values) that
  * contain leading hyphens to be interpreted correctly.
  */
-#define CLASP_F_DONT_RECOGNISE_DOUBLEHYPHEN_TO_START_VALUES     (0x00000001)
+#define CLASP_F_DONT_RECOGNISE_DOUBLEHYPHEN_TO_START_VALUES (0x00000001)
 
 /** \def CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE
  *
@@ -1071,7 +1071,7 @@ clasp_valueIsTreatedHyphen(
  * \note To avoid ambiguity, a \c "-" transformed in this way will have
  *   non-empty \c resolvedName and \c givenName fields
  */
-#define CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE                     (0x00000002)
+#define CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE                 (0x00000002)
 
 /** \def CLASP_F_DONT_EXPAND_WILDCARDS_ON_WINDOWS
  *
@@ -1090,7 +1090,7 @@ clasp_valueIsTreatedHyphen(
  *   Windows executables. To do that, define the pre-processor symbol
  *   CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS during compilation clasp.
  */
-#define CLASP_F_DONT_EXPAND_WILDCARDS_ON_WINDOWS                (0x00000100)
+#define CLASP_F_DONT_EXPAND_WILDCARDS_ON_WINDOWS            (0x00000100)
 
 /** \def CLASP_F_DO_EXPAND_WILDCARDS_IN_APOSQUOTES_ON_WINDOWS
  *
@@ -1119,7 +1119,7 @@ clasp_valueIsTreatedHyphen(
  *   flag is used. Client code should only use <code>numArguments</code> and
  *   <code>arguments</code>.
  */
-#define CLASP_F_PRESERVE_ORIGINAL_ARGUMENT_ORDER                (0x00000400)
+#define CLASP_F_PRESERVE_ORIGINAL_ARGUMENT_ORDER            (0x00000400)
 
 /* /////////////////////////////////////////////////////////////////////////
  * usage API
