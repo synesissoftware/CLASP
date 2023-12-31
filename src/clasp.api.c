@@ -367,7 +367,7 @@ clasp_lookup_alias_len_(
 {
     ((void)flags);
 
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         CLASP_ASSERT(NULL != arg);
 
@@ -440,7 +440,7 @@ clasp_is_recognised_option_or_flag_(
 ,   clasp_char_t const*         arg
 )
 {
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         { for (specifications; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications)
         {
@@ -463,7 +463,7 @@ clasp_check_alias_duplicates_(
 ,   clasp_specification_t const         specifications[]
 )
 {
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         clasp_specification_t const* from = specifications;
 
@@ -792,7 +792,7 @@ clasp_calculate_sizes_(
 
                         *cbStrings += 1 + argLen;
                     }
-                    else if(NULL == specifications)
+                    else if (NULL == specifications)
                     {
                         ++*numArgs;
 
@@ -1130,7 +1130,7 @@ clasp_parseArguments(
      * - tacit section separator
      * - (in-range) section separators
      */
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         { clasp_specification_t const* specification = specifications; for (; CLASP_ARGTYPE_INVALID != specification->type; ++specification)
         {
@@ -1721,7 +1721,7 @@ clasp_parseArguments_NoWild_(
                         ++currentArg;
                         ++numOptions;
                     }
-                    else if(NULL == specifications)
+                    else if (NULL == specifications)
                     {
                         /* Without any specifications, we must assume a flag */
 
@@ -1962,7 +1962,7 @@ clasp_parseArguments_NoWild_(
     }
 
 #ifdef _DEBUG
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         size_t const numSpecifications = clasp_countSpecifications(specifications);
 
@@ -2367,17 +2367,17 @@ clasp_checkAllFlags(
             {
                 /* ... see if there is a flag alias ... */
 
-                if(CLASP_ARGTYPE_FLAG == specifications[j].type)
+                if (CLASP_ARGTYPE_FLAG == specifications[j].type)
                 {
                     /* ... with a corresponding name ... */
 
-                    if(0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
+                    if (0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
                     {
                         clasp_useArgument(args, arg);
 
                         /* ... and a non-0 bitFlags member. */
 
-                        if(0 != specifications[j].bitFlags)
+                        if (0 != specifications[j].bitFlags)
                         {
                             *flags |= specifications[j].bitFlags;
 
@@ -2418,9 +2418,9 @@ clasp_checkAllMatchingFlags(
         {
             { size_t j; for (j = 0; CLASP_ARGTYPE_INVALID != specifications[j].type; ++j)
             {
-                if(0 != (bitMask & specifications[j].bitFlags))
+                if (0 != (bitMask & specifications[j].bitFlags))
                 {
-                    if(0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
+                    if (0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
                     {
                         *flags |= specifications[j].bitFlags;
 

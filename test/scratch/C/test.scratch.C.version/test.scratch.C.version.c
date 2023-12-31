@@ -112,7 +112,7 @@ int main(int argc, char** argv)
 
         /* now check for unrecognised arguments */
 #if 0
-        if(0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, NULL, 0))
+        if (0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, NULL, 0))
         {
             clasp_argument_t const* unrecognisedArg;
             size_t const            n     = clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &unrecognisedArg, 0);
@@ -130,7 +130,7 @@ int main(int argc, char** argv)
 clasp_argument_t const* arg;
 unsigned nSkip = 0;
 size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &arg, nSkip);
-if(0 != n)
+if (0 != n)
 {
   fprintf(stderr, "%lu unrecognised argument(s):\n", n);
   do
