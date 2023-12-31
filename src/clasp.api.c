@@ -4,11 +4,11 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,18 +16,18 @@
  * met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
+ *   this list of conditions and the following disclaimer;
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Software nor the names
- *   of any contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ *   documentation and/or other materials provided with the distribution;
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -98,22 +98,22 @@ For two reasons, we can only call recls *once* for each wildcard argument:
  * constants and definitions
  */
 
-#define CLASP_EXPANDEDARGS_ADDITIONAL       (20)
+#define CLASP_EXPANDEDARGS_ADDITIONAL                       (20)
 
-#define CLASP_SECTION_MIN_                  (1)
-#define CLASP_SECTION_MAX_                  (1000)
+#define CLASP_SECTION_MIN_                                  (1)
+#define CLASP_SECTION_MAX_                                  (1000)
 
 /* /////////////////////////////////////////////////////////////////////////
  * internal flags
  */
 
-#define CLASP_ARG_F_USED_       (0x0002)
+#define CLASP_ARG_F_USED_                                   (0x0002)
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros
  */
 
-#define CLASP_STRING_NULL_OR_EMPTY_(s)      (NULL == (s) || '\0' == 0[(s)])
+#define CLASP_STRING_NULL_OR_EMPTY_(s)                      (NULL == (s) || '\0' == 0[(s)])
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions

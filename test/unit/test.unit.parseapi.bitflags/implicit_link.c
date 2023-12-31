@@ -1,26 +1,3 @@
-/* /////////////////////////////////////////////////////////////////////////
- * File:        implicit_link.cpp
- *
- * Purpose:     Implicit link file for the test.unit.parseapi.bitflags project.
- *
- * Created:     11th December 2011
- * Updated:     18th April 2019
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
- *
- * ////////////////////////////////////////////////////////////////////// */
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
- */
 
 /* SystemTools::CLASP header files */
 #include <systemtools/clasp/implicit_link.h>

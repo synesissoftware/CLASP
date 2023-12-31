@@ -5,10 +5,11 @@
  *              components
  *
  * Created:     5th December 2014
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
+ * Copyright (c) 2019-2023, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2014-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -113,43 +114,43 @@
 # endif /* SYSTEMTOOLS_CLASP_c_str_ptr_null_name_ */
 
 # ifdef CLASP_USE_WIDE_STRINGS
-#  define SYSTEMTOOLS_CLASP_c_str_data_name_                   c_str_data_w
-#  define SYSTEMTOOLS_CLASP_c_str_len_name_                    c_str_len_w
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                    c_str_ptr_w
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_               c_str_ptr_null_w
+#  define SYSTEMTOOLS_CLASP_c_str_data_name_                c_str_data_w
+#  define SYSTEMTOOLS_CLASP_c_str_len_name_                 c_str_len_w
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                 c_str_ptr_w
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_            c_str_ptr_null_w
 # else /* ? CLASP_USE_WIDE_STRINGS */
-#  define SYSTEMTOOLS_CLASP_c_str_data_name_                   c_str_data_a
-#  define SYSTEMTOOLS_CLASP_c_str_len_name_                    c_str_len_a
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                    c_str_ptr_a
-#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_               c_str_ptr_null_a
+#  define SYSTEMTOOLS_CLASP_c_str_data_name_                c_str_data_a
+#  define SYSTEMTOOLS_CLASP_c_str_len_name_                 c_str_len_a
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_name_                 c_str_ptr_a
+#  define SYSTEMTOOLS_CLASP_c_str_ptr_null_name_            c_str_ptr_null_a
 # endif /* CLASP_USE_WIDE_STRINGS */
 
 # if defined(STLSOFT_COMPILER_IS_DMC)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x)              stlsoft::SYSTEMTOOLS_CLASP_c_str_data_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)               stlsoft::SYSTEMTOOLS_CLASP_c_str_len_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_(x)               stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_null_(x)          stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_null_name_(x)
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_()               stlsoft_static_cast(void, 0)
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_()          stlsoft_static_cast(void, 0)
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_()      stlsoft_static_cast(void, 0)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x)           stlsoft::SYSTEMTOOLS_CLASP_c_str_data_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)            stlsoft::SYSTEMTOOLS_CLASP_c_str_len_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_(x)            stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_null_(x)       stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_null_name_(x)
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_()            stlsoft_static_cast(void, 0)
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_()       stlsoft_static_cast(void, 0)
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_()   stlsoft_static_cast(void, 0)
 # elif defined(STLSOFT_COMPILER_IS_GCC)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x)              SYSTEMTOOLS_CLASP_c_str_data_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)               SYSTEMTOOLS_CLASP_c_str_len_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_(x)               SYSTEMTOOLS_CLASP_c_str_ptr_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_null_(x)          SYSTEMTOOLS_CLASP_c_str_ptr_null_name_(x)
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_()               using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_name_
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_()          using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_null_name_
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_()      using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_data_name_; using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_len_name_
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x)           SYSTEMTOOLS_CLASP_c_str_data_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)            SYSTEMTOOLS_CLASP_c_str_len_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_(x)            SYSTEMTOOLS_CLASP_c_str_ptr_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_null_(x)       SYSTEMTOOLS_CLASP_c_str_ptr_null_name_(x)
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_()            using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_name_
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_()       using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_null_name_
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_()   using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_data_name_; using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_len_name_
 # else /* ? compiler */
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x)              SYSTEMTOOLS_CLASP_c_str_data_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)               SYSTEMTOOLS_CLASP_c_str_len_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_(x)               SYSTEMTOOLS_CLASP_c_str_ptr_name_(x)
-#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_null_(x)          SYSTEMTOOLS_CLASP_c_str_ptr_null_name_(x)
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_()               using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_name_
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_()          using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_null_name_
-#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_()      using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_data_name_; using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_len_name_
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x)           SYSTEMTOOLS_CLASP_c_str_data_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)            SYSTEMTOOLS_CLASP_c_str_len_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_(x)            SYSTEMTOOLS_CLASP_c_str_ptr_name_(x)
+#  define SYSTEMTOOLS_CLASP_INVOKE_c_str_ptr_null_(x)       SYSTEMTOOLS_CLASP_c_str_ptr_null_name_(x)
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_()            using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_name_
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_ptr_null_()       using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_ptr_null_name_
+#  define SYSTEMTOOLS_CLASP_DECLARE_c_str_datalen_PAIR_()   using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_data_name_; using ::stlsoft::SYSTEMTOOLS_CLASP_c_str_len_name_
 # endif /* compiler */
-# define SYSTEMTOOLS_CLASP_INVOKE_SHIM_PAIR_(x)                SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)
+# define SYSTEMTOOLS_CLASP_INVOKE_SHIM_PAIR_(x)             SYSTEMTOOLS_CLASP_INVOKE_c_str_data_(x), SYSTEMTOOLS_CLASP_INVOKE_c_str_len_(x)
 
 
 /* 2. Conversion shims

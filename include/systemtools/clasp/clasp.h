@@ -4,11 +4,11 @@
  * Purpose:     The CLASP library API.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,18 +16,18 @@
  * met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
+ *   this list of conditions and the following disclaimer;
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Software nor the names
- *   of any contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
+ *   documentation and/or other materials provided with the distribution;
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -46,7 +46,7 @@
 
 #ifndef SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
-#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_H_CLASP    /* Suppress previous version of CLASP */
+#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_H_CLASP                /* Suppress previous version of CLASP */
 
 /* /////////////////////////////////////////////////////////////////////////
  * version information
@@ -55,8 +55,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MAJOR    2
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_MINOR    9
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     76
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_REVISION 3
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_CLASP_H_CLASP_EDIT     78
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -73,11 +73,11 @@
  * The composite version of the SystemTools::clasp library
  */
 
-#define CLASP_VER_MAJOR         0
-#define CLASP_VER_MINOR         13
-#define CLASP_VER_REVISION      2
+#define CLASP_VER_MAJOR                                     0
+#define CLASP_VER_MINOR                                     13
+#define CLASP_VER_REVISION                                  2
 
-#define CLASP_VER               0x000d02ff
+#define CLASP_VER                                           0x000d02ff
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -156,19 +156,19 @@
 
 #if defined(__cplusplus) || \
     defined(SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION)
-# define CLASP_EXTERN_C                 extern "C"
+# define CLASP_EXTERN_C                                     extern "C"
 #else /* ? __cplusplus */
-# define CLASP_EXTERN_C                 extern
+# define CLASP_EXTERN_C                                     extern
 #endif /* !__cplusplus */
 
 #if !defined(CLASP_CALLCONV)
 # define CLASP_CALLCONV
 #endif /* !CLASP_CALLCONV */
 
-#define CLASP_CALL(rt)                  CLASP_DECLSPEC CLASP_EXTERN_C rt CLASP_CALLCONV
+#define CLASP_CALL(rt)                                      CLASP_DECLSPEC CLASP_EXTERN_C rt CLASP_CALLCONV
 
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
-# define CLASP_CPP_CALL(rt)             CLASP_DECLSPEC extern "C++" rt CLASP_CALLCONV
+# define CLASP_CPP_CALL(rt)                                 CLASP_DECLSPEC extern "C++" rt CLASP_CALLCONV
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -213,10 +213,10 @@ typedef char        clasp_char_t;
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 #ifdef CLASP_USE_WIDE_STRINGS
-# define CLASP_LITERAL_STRING_(x)           L ## #x
-# define CLASP_LITERAL_STRING(x)            CLASP_LITERAL_STRING_(x)
+# define CLASP_LITERAL_STRING_(x)                           L ## #x
+# define CLASP_LITERAL_STRING(x)                            CLASP_LITERAL_STRING_(x)
 #else /* ? CLASP_USE_WIDE_STRINGS */
-# define CLASP_LITERAL_STRING(x)            x
+# define CLASP_LITERAL_STRING(x)                            x
 #endif /* CLASP_USE_WIDE_STRINGS */
 
 
@@ -489,7 +489,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  * \param help The help assocated with the flag, e.g. "Causes items to be compared in a case-insensitive fashion"
  *
  */
-# define CLASP_FLAG(alias, mappedArgument, help)                  { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, 0 }
+# define CLASP_FLAG(alias, mappedArgument, help)            { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, 0 }
 
 /** \def CLASP_BIT_FLAG(alias, mappedArgument, bitFlags, help)
  *
@@ -508,7 +508,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  * Equivalent to CLASP_FLAG(), but omits the need to specify an
  * empty/NULL help argument
  */
-# define CLASP_FLAG_ALIAS(alias, mappedArgument)                  CLASP_FLAG((alias), (mappedArgument), NULL)
+# define CLASP_FLAG_ALIAS(alias, mappedArgument)            CLASP_FLAG((alias), (mappedArgument), NULL)
 
 /** \def CLASP_OPTION(alias, mappedArgument, help, valueSet)
  *
@@ -527,13 +527,13 @@ typedef struct clasp_alias_t clasp_alias_t;
  * Equivalent to CLASP_OPTION(), but omits the need to specify an
  * empty/NULL help argument
  */
-# define CLASP_OPTION_ALIAS(alias, mappedArgument)                CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
+# define CLASP_OPTION_ALIAS(alias, mappedArgument)          CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
 
 
 #ifdef __cplusplus
-# define CLASP_ARGTYPE_CAST_(N)     (clasp_argtype_t(N))
+# define CLASP_ARGTYPE_CAST_(N)                             (clasp_argtype_t(N))
 #else /* ? __cplusplus */
-# define CLASP_ARGTYPE_CAST_(N)     ((clasp_argtype_t)(N))
+# define CLASP_ARGTYPE_CAST_(N)                             ((clasp_argtype_t)(N))
 #endif /* __cplusplus */
 
 /** \def CLASP_SECTION(N)
@@ -544,7 +544,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  *
  * \note Items in sections with -ve numbers will not be listed in usage.
  */
-# define CLASP_SECTION(N)                                     { CLASP_ARGTYPE_CAST_(N), NULL, NULL, NULL, NULL, 0 }
+# define CLASP_SECTION(N)                                   { CLASP_ARGTYPE_CAST_(N), NULL, NULL, NULL, NULL, 0 }
 
 /** \def CLASP_TACIT_SECTION()
  *
@@ -552,7 +552,7 @@ typedef struct clasp_alias_t clasp_alias_t;
  * the functions in the \ref group__clasp__api_usage.
  *
  */
-# define CLASP_TACIT_SECTION()                                CLASP_SECTION(CLASP_ARGTYPE_TACIT_)
+# define CLASP_TACIT_SECTION()                              CLASP_SECTION(CLASP_ARGTYPE_TACIT_)
 
 /** \def CLASP_GAP_SECTION(sectionLabel)
  *
@@ -562,13 +562,13 @@ typedef struct clasp_alias_t clasp_alias_t;
  * \param sectionLabel A literal character C-style string that serves as a
  *   section label. May be the empty string.
  */
-# define CLASP_GAP_SECTION(sectionLabel)                      { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
+# define CLASP_GAP_SECTION(sectionLabel)                    { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
 
 /** \def CLASP_ALIAS_ARRAY_TERMINATOR
  *
  * Terminates an array of aliases
  */
-# define CLASP_ALIAS_ARRAY_TERMINATOR                         { CLASP_ARGTYPE_INVALID, NULL, NULL, NULL, NULL, 0 }
+# define CLASP_ALIAS_ARRAY_TERMINATOR                       { CLASP_ARGTYPE_INVALID, NULL, NULL, NULL, NULL, 0 }
 
 /** Log function prototype. */
 typedef void (CLASP_CALLCONV *clasp_log_fn_t)(
@@ -1037,7 +1037,7 @@ clasp_valueIsTreatedHyphen(
     clasp_argument_t const*     arg
 );
 #else /* ? SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
-# define clasp_valueIsTreatedHyphen(a)      (0 != (a)->givenName.len)
+# define clasp_valueIsTreatedHyphen(a)                      (0 != (a)->givenName.len)
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -1053,7 +1053,7 @@ clasp_valueIsTreatedHyphen(
  * with hyphens or not, in order to allow filenames (or other values) that
  * contain leading hyphens to be interpreted correctly.
  */
-#define CLASP_F_DONT_RECOGNISE_DOUBLEHYPHEN_TO_START_VALUES     (0x00000001)
+#define CLASP_F_DONT_RECOGNISE_DOUBLEHYPHEN_TO_START_VALUES (0x00000001)
 
 /** \def CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE
  *
@@ -1071,7 +1071,7 @@ clasp_valueIsTreatedHyphen(
  * \note To avoid ambiguity, a \c "-" transformed in this way will have
  *   non-empty \c resolvedName and \c givenName fields
  */
-#define CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE                     (0x00000002)
+#define CLASP_F_TREAT_SINGLEHYPHEN_AS_VALUE                 (0x00000002)
 
 /** \def CLASP_F_DONT_EXPAND_WILDCARDS_ON_WINDOWS
  *
@@ -1090,7 +1090,7 @@ clasp_valueIsTreatedHyphen(
  *   Windows executables. To do that, define the pre-processor symbol
  *   CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS during compilation clasp.
  */
-#define CLASP_F_DONT_EXPAND_WILDCARDS_ON_WINDOWS                (0x00000100)
+#define CLASP_F_DONT_EXPAND_WILDCARDS_ON_WINDOWS            (0x00000100)
 
 /** \def CLASP_F_DO_EXPAND_WILDCARDS_IN_APOSQUOTES_ON_WINDOWS
  *
@@ -1119,7 +1119,7 @@ clasp_valueIsTreatedHyphen(
  *   flag is used. Client code should only use <code>numArguments</code> and
  *   <code>arguments</code>.
  */
-#define CLASP_F_PRESERVE_ORIGINAL_ARGUMENT_ORDER                (0x00000400)
+#define CLASP_F_PRESERVE_ORIGINAL_ARGUMENT_ORDER            (0x00000400)
 
 /* /////////////////////////////////////////////////////////////////////////
  * usage API

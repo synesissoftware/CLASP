@@ -4,36 +4,37 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     18th April 2019
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2019, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * modification, are permitted provided that the following conditions are
+ * met:
  *
- * - Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * - Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the names of
- *   any contributors may be used to endorse or promote products derived from
+ * - Redistributions of source code must retain the above copyright notice,
+ *   this list of conditions and the following disclaimer;
+ * - Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in the
+ *   documentation and/or other materials provided with the distribution;
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
  *   this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -53,7 +54,7 @@
  * constants
  */
 
-#define CLASP_MAX_ALIASES_      (511)
+#define CLASP_MAX_ALIASES_                                  (511)
 
 static clasp_char_t const s_unknownIdentifier[] = { '@', 'u', 'n', 'k', 'n', 'o', 'w', 'n', '-', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'e', 'r', '@', '\0' };
 
@@ -70,7 +71,7 @@ static clasp_char_t const s_unknownIdentifier[] = { '@', 'u', 'n', 'k', 'n', 'o'
      defined(_X86_) || \
      defined(_M_IX86) || \
      0
-#  define CLASP_INTERNAL_STDCALL __stdcall
+#  define CLASP_INTERNAL_STDCALL                            __stdcall
 # else
 #  define CLASP_INTERNAL_STDCALL
 # endif
@@ -105,7 +106,7 @@ LoadStringW(
 ,   wchar_t*        lpBuffer
 ,   int             cchBufferMax
 );
-#  define clasp_ext_LoadString      LoadStringW
+#  define clasp_ext_LoadString                              LoadStringW
 # else /* ? CLASP_USE_WIDE_STRINGS */
 extern
 int
@@ -116,7 +117,7 @@ LoadStringA(
 ,   char*           lpBuffer
 ,   int             cchBufferMax
 );
-#  define clasp_ext_LoadString      LoadStringA
+#  define clasp_ext_LoadString                              LoadStringA
 # endif /* CLASP_USE_WIDE_STRINGS */
 
 #endif /* WIN32 || WIN64 */

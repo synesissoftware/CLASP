@@ -4,16 +4,7 @@
  * Purpose:     Implementation file for the test.component.usage.resources project.
  *
  * Created:     7th March 2012
- * Updated:     18th April 2019
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2012-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Updated:     31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 

@@ -4,16 +4,7 @@
  * Purpose:     Implementation file for the test.unit.custom_types project.
  *
  * Created:     12th September 2014
- * Updated:     18th April 2019
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2014-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Updated:     31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -135,7 +126,7 @@ parse_Colour(
 ,   Colour*         result
 )
 {
-#define PARSE_ENTRY_(s, v)  else if(0 == ::strcmp(s, parsedValue)) { *result = v; return true; }
+#define PARSE_ENTRY_(s, v)                                  else if(0 == ::strcmp(s, parsedValue)) { *result = v; return true; }
 
     if(0) {}
     PARSE_ENTRY_("black", Black)
@@ -143,7 +134,7 @@ parse_Colour(
     PARSE_ENTRY_("green", Green)
     PARSE_ENTRY_("red", Red)
     PARSE_ENTRY_("yellow", Yellow)
-    
+
     return false;
 }
 
