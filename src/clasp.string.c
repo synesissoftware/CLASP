@@ -264,6 +264,8 @@ clasp_strtok_r_(
     while (NULL != tok && '\0' == *tok);
 
 #else
+    ((void)&savectxt);
+
     tok = clasp_strtok_(s, delim);
 #endif
 

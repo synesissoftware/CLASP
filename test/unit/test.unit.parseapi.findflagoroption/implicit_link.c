@@ -1,17 +1,3 @@
-/* /////////////////////////////////////////////////////////////////////////
- * File:        implicit_link.c
- *
- * Purpose:     Implicit link file for the test.unit.parseapi.findflagoroption project.
- *
- * Created:     11th December 2011
- * Updated:     9th January 2021
- *
- * ////////////////////////////////////////////////////////////////////// */
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
- */
 
 /* CLASP header files */
 #include <clasp/implicit_link.h>
