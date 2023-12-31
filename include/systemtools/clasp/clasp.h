@@ -1,7 +1,7 @@
 
 #ifndef SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
 #define SYSTEMTOOLS_INCL_SYSTEMTOOLS_CLASP_H_CLASP
-#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_H_CLASP    /* Suppress previous version of CLASP */
+#define SYSTEMTOOLS_INCL_SYSTEMTOOLS_H_CLASP                /* Suppress previous version of CLASP */
 
 #include <clasp/clasp.h>
 

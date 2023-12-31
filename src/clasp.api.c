@@ -4,11 +4,11 @@
  * Purpose:     CLASP API.
  *
  * Created:     4th June 2008
- * Updated:     29th March 2021
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2021, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,19 +16,18 @@
  * met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
+ *   this list of conditions and the following disclaimer;
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems
- *   nor the names of any contributors may be used to endorse or promote
- *   products derived from this software without specific prior written
- *   permission.
+ *   documentation and/or other materials provided with the distribution;
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -101,16 +100,16 @@ For two reasons, we can only call recls *once* for each wildcard argument:
  * constants and definitions
  */
 
-#define CLASP_EXPANDEDARGS_ADDITIONAL       (20)
+#define CLASP_EXPANDEDARGS_ADDITIONAL                       (20)
 
-#define CLASP_SECTION_MIN_                  (1)
-#define CLASP_SECTION_MAX_                  (1000)
+#define CLASP_SECTION_MIN_                                  (1)
+#define CLASP_SECTION_MAX_                                  (1000)
 
 /* /////////////////////////////////////////////////////////////////////////
  * internal flags
  */
 
-#define CLASP_ARG_F_USED_                   (0x0002)
+#define CLASP_ARG_F_USED_                                   (0x0002)
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros
@@ -368,7 +367,7 @@ clasp_lookup_alias_len_(
 {
     ((void)flags);
 
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         CLASP_ASSERT(NULL != arg);
 
@@ -441,7 +440,7 @@ clasp_is_recognised_option_or_flag_(
 ,   clasp_char_t const*         arg
 )
 {
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         { for (specifications; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications)
         {
@@ -464,7 +463,7 @@ clasp_check_alias_duplicates_(
 ,   clasp_specification_t const         specifications[]
 )
 {
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         clasp_specification_t const* from = specifications;
 
@@ -793,7 +792,7 @@ clasp_calculate_sizes_(
 
                         *cbStrings += 1 + argLen;
                     }
-                    else if(NULL == specifications)
+                    else if (NULL == specifications)
                     {
                         ++*numArgs;
 
@@ -1131,7 +1130,7 @@ clasp_parseArguments(
      * - tacit section separator
      * - (in-range) section separators
      */
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         { clasp_specification_t const* specification = specifications; for (; CLASP_ARGTYPE_INVALID != specification->type; ++specification)
         {
@@ -1722,7 +1721,7 @@ clasp_parseArguments_NoWild_(
                         ++currentArg;
                         ++numOptions;
                     }
-                    else if(NULL == specifications)
+                    else if (NULL == specifications)
                     {
                         /* Without any specifications, we must assume a flag */
 
@@ -1963,7 +1962,7 @@ clasp_parseArguments_NoWild_(
     }
 
 #ifdef _DEBUG
-    if(NULL != specifications)
+    if (NULL != specifications)
     {
         size_t const numSpecifications = clasp_countSpecifications(specifications);
 
@@ -2365,17 +2364,17 @@ clasp_checkAllFlags(
             {
                 /* ... see if there is a flag alias ... */
 
-                if(CLASP_ARGTYPE_FLAG == specifications[j].type)
+                if (CLASP_ARGTYPE_FLAG == specifications[j].type)
                 {
                     /* ... with a corresponding name ... */
 
-                    if(0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
+                    if (0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
                     {
                         clasp_useArgument(args, arg);
 
                         /* ... and a non-0 bitFlags member. */
 
-                        if(0 != specifications[j].bitFlags)
+                        if (0 != specifications[j].bitFlags)
                         {
                             *flags |= specifications[j].bitFlags;
 
@@ -2416,9 +2415,9 @@ clasp_checkAllMatchingFlags(
         {
             { size_t j; for (j = 0; CLASP_ARGTYPE_INVALID != specifications[j].type; ++j)
             {
-                if(0 != (bitMask & specifications[j].bitFlags))
+                if (0 != (bitMask & specifications[j].bitFlags))
                 {
-                    if(0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
+                    if (0 == clasp_strcmp_(arg->resolvedName.ptr, specifications[j].mappedArgument))
                     {
                         *flags |= specifications[j].bitFlags;
 

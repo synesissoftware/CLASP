@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     29th March 2021
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2021, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,19 +16,18 @@
  * met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
+ *   this list of conditions and the following disclaimer;
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems
- *   nor the names of any contributors may be used to endorse or promote
- *   products derived from this software without specific prior written
- *   permission.
+ *   documentation and/or other materials provided with the distribution;
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -54,7 +53,7 @@
  * constants
  */
 
-#define CLASP_MAX_SPECIFICATIONS_       (511)
+#define CLASP_MAX_SPECIFICATIONS_                           (511)
 
 static clasp_char_t const               s_unknownIdentifier[] = { '@', 'u', 'n', 'k', 'n', 'o', 'w', 'n', '-', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'e', 'r', '@', '\0' };
 
@@ -72,7 +71,7 @@ static clasp_char_t const               s_unknownIdentifier[] = { '@', 'u', 'n',
      defined(_M_IX86) || \
      0
 
-#  define CLASP_INTERNAL_STDCALL        __stdcall
+#  define CLASP_INTERNAL_STDCALL                            __stdcall
 # else
 
 #  define CLASP_INTERNAL_STDCALL
@@ -115,7 +114,7 @@ LoadStringW(
 ,   wchar_t*        lpBuffer
 ,   int             cchBufferMax
 );
-#  define clasp_ext_LoadString          LoadStringW
+#  define clasp_ext_LoadString                              LoadStringW
 # else /* ? CLASP_USE_WIDE_STRINGS */
 extern
 int
@@ -126,7 +125,7 @@ LoadStringA(
 ,   char*           lpBuffer
 ,   int             cchBufferMax
 );
-#  define clasp_ext_LoadString          LoadStringA
+#  define clasp_ext_LoadString                              LoadStringA
 # endif /* CLASP_USE_WIDE_STRINGS */
 #endif /* WIN32 || WIN64 */
 

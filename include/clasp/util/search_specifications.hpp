@@ -4,11 +4,11 @@
  * Purpose:     Utility class for processing search specifications.
  *
  * Created:     20th May 2010
- * Updated:     9th January 2021
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2021, Matthew Wilson
+ * Copyright (c) 2010-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,19 +16,18 @@
  * met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
+ *   this list of conditions and the following disclaimer;
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems
- *   nor the names of any contributors may be used to endorse or promote
- *   products derived from this software without specific prior written
- *   permission.
+ *   documentation and/or other materials provided with the distribution;
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -55,8 +54,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR       0
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    2
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        21
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    3
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        23
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -272,7 +271,7 @@ private:
     {
       type = element_is_::elementIsDirectory;
     }
-    // 
+    //
     else if (traits_type_::is_path_absolute(element.c_str()) ||
             traits_type_::is_path_rooted(element.c_str()))
     {
@@ -399,7 +398,7 @@ public:
 
   /** Applies the given pattern(s) to any specifications that have empty
    * patterns
-   * 
+   *
    * \param defaultPatterns The default pattern(s)
    */
   void apply_default_patterns(string_type const& defaultPatterns)
@@ -437,7 +436,7 @@ public: // Attributes
   /** Obtains a non-mutating (const) reference to the search specification
    * at the given index.
    *
-   * \param index The 
+   * \param index The
    *
    * \pre index < size()
    */

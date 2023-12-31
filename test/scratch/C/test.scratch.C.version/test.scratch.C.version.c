@@ -4,17 +4,7 @@
  * Purpose:     Implementation file for the test.scratch.C.version project.
  *
  * Created:     6th December 2011
- * Updated:     10th January 2021
- *
- * Status:      Wizard-generated
- *
- * License:     BSD (3-clause)
- *
- *              Copyright (c) 2019-2021, Synesis Information Systems Pty Ltd.
- *              Copyright (c) 2011-2019, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://github.com/synesissoftware/CLASP
+ * Updated:     31st December 2023
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -122,7 +112,7 @@ int main(int argc, char** argv)
 
         /* now check for unrecognised arguments */
 #if 0
-        if(0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, NULL, 0))
+        if (0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, NULL, 0))
         {
             clasp_argument_t const* unrecognisedArg;
             size_t const            n     = clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &unrecognisedArg, 0);
@@ -140,7 +130,7 @@ int main(int argc, char** argv)
 clasp_argument_t const* arg;
 unsigned nSkip = 0;
 size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &arg, nSkip);
-if(0 != n)
+if (0 != n)
 {
   fprintf(stderr, "%lu unrecognised argument(s):\n", n);
   do

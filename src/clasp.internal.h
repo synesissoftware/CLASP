@@ -4,11 +4,11 @@
  * Purpose:     CLASP internal common header.
  *
  * Created:     4th June 2008
- * Updated:     8th January 2021
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2021, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,19 +16,18 @@
  * met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
+ *   this list of conditions and the following disclaimer;
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- * - Neither the names of Matthew Wilson and Synesis Information Systems
- *   nor the names of any contributors may be used to endorse or promote
- *   products derived from this software without specific prior written
- *   permission.
+ *   documentation and/or other materials provided with the distribution;
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -75,13 +74,13 @@
 #endif /* !stlsoft_const_cast */
 
 #ifdef __cplusplus
-# define clasp_bool_t                       bool
-# define clasp_true_v                       true
-# define clasp_false_v                      false
+# define clasp_bool_t                                       bool
+# define clasp_true_v                                       true
+# define clasp_false_v                                      false
 #else /* ? __cplusplus */
-# define clasp_bool_t                       int
-# define clasp_true_v                       (1)
-# define clasp_false_v                      (0)
+# define clasp_bool_t                                       int
+# define clasp_true_v                                       (1)
+# define clasp_false_v                                      (0)
 #endif /* __cplusplus */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -166,24 +165,24 @@ int clasp_useArgument_(
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
-# define clasp_fprintf_     fwprintf
-# define clasp_strcat_      wcscat
-# define clasp_strchr_      wcschr
-# define clasp_strcmp_      wcscmp
-# define clasp_strlen_      wcslen
-# define clasp_strncmp_     wcsncmp
-# define clasp_strpbrk_     wcspbrk
-# define clasp_strrchr_     wcsrchr
+# define clasp_fprintf_                                     fwprintf
+# define clasp_strcat_                                      wcscat
+# define clasp_strchr_                                      wcschr
+# define clasp_strcmp_                                      wcscmp
+# define clasp_strlen_                                      wcslen
+# define clasp_strncmp_                                     wcsncmp
+# define clasp_strpbrk_                                     wcspbrk
+# define clasp_strrchr_                                     wcsrchr
 # define CLASP_LITERAL_(x)  L ## x
 #else
-# define clasp_fprintf_     fprintf
-# define clasp_strcat_      strcat
-# define clasp_strchr_      strchr
-# define clasp_strcmp_      strcmp
-# define clasp_strlen_      strlen
-# define clasp_strncmp_     strncmp
-# define clasp_strpbrk_     strpbrk
-# define clasp_strrchr_     strrchr
+# define clasp_fprintf_                                     fprintf
+# define clasp_strcat_                                      strcat
+# define clasp_strchr_                                      strchr
+# define clasp_strcmp_                                      strcmp
+# define clasp_strlen_                                      strlen
+# define clasp_strncmp_                                     strncmp
+# define clasp_strpbrk_                                     strpbrk
+# define clasp_strrchr_                                     strrchr
 # define CLASP_LITERAL_(x)  x
 #endif
 
