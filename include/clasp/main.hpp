@@ -4,11 +4,11 @@
  * Purpose:     main() entry-point helper functions.
  *
  * Created:     29th December 2010
- * Updated:     8th January 2021
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2021, Matthew Wilson
+ * Copyright (c) 2010-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
 # define CLASP_VER_CLASP_HPP_MAIN_MINOR     0
 # define CLASP_VER_CLASP_HPP_MAIN_REVISION  1
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      38
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      39
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ namespace main
  *
  * \see clasp::main::invoke()
  */
-# define CLASP_MAIN_DEFAULT_PROGRAM_NAME            "MyExampleProgramName"
+# define CLASP_MAIN_DEFAULT_PROGRAM_NAME                    "MyExampleProgramName"
 
 #endif /* CLASP_DOCUMENTATION_SKIP_SECTION */
 

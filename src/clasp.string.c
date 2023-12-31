@@ -4,11 +4,11 @@
  * Purpose:     CLASP string facilities.
  *
  * Created:     4th June 2008
- * Updated:     8th January 2021
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2021, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,9 +60,9 @@
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
-# define clasp_strtok_      wcstok
+# define clasp_strtok_                                      wcstok
 #else
-# define clasp_strtok_      strtok
+# define clasp_strtok_                                      strtok
 #endif
 
 /* /////////////////////////////////////////////////////////////////////////

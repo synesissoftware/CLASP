@@ -4,11 +4,11 @@
  * Purpose:     CLASP usage facilities.
  *
  * Created:     4th June 2008
- * Updated:     16th February 2021
+ * Updated:     31st December 2023
  *
  * Home:        https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2021, Matthew Wilson
+ * Copyright (c) 2008-2023, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,7 +54,7 @@
  * constants
  */
 
-#define CLASP_MAX_SPECIFICATIONS_       (511)
+#define CLASP_MAX_SPECIFICATIONS_                           (511)
 
 static clasp_char_t const               s_unknownIdentifier[] = { '@', 'u', 'n', 'k', 'n', 'o', 'w', 'n', '-', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'e', 'r', '@', '\0' };
 
@@ -72,7 +72,7 @@ static clasp_char_t const               s_unknownIdentifier[] = { '@', 'u', 'n',
      defined(_M_IX86) || \
      0
 
-#  define CLASP_INTERNAL_STDCALL        __stdcall
+#  define CLASP_INTERNAL_STDCALL                            __stdcall
 # else
 
 #  define CLASP_INTERNAL_STDCALL
@@ -115,7 +115,7 @@ LoadStringW(
 ,   wchar_t*        lpBuffer
 ,   int             cchBufferMax
 );
-#  define clasp_ext_LoadString          LoadStringW
+#  define clasp_ext_LoadString                              LoadStringW
 # else /* ? CLASP_USE_WIDE_STRINGS */
 extern
 int
@@ -126,7 +126,7 @@ LoadStringA(
 ,   char*           lpBuffer
 ,   int             cchBufferMax
 );
-#  define clasp_ext_LoadString          LoadStringA
+#  define clasp_ext_LoadString                              LoadStringA
 # endif /* CLASP_USE_WIDE_STRINGS */
 #endif /* WIN32 || WIN64 */
 
