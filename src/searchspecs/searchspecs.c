@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        src/searchspecs/searchspecs.c
+ * File:    src/searchspecs/searchspecs.c
  *
- * Purpose:     The CLASP::Util::SearchSpecs library API.
+ * Purpose: The CLASP::Util::SearchSpecs library API.
  *
- * Created:     8th March 2012
- * Updated:     31st December 2023
+ * Created: 8th March 2012
+ * Updated: 2nd February 2024
  *
- * Home:        https://github.com/synesissoftware/CLASP/
+ * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2012-2023, Matthew Wilson
+ * Copyright (c) 2012-2024, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@
  * includes
  */
 
-#include <systemtools/clasp/util/searchspecs.h>
+#include <clasp/util/searchspecs.h>
 
 #include <assert.h>
 #include <errno.h>
@@ -69,11 +69,18 @@ clasp_util_searchSpecs_load(
 {
     clasp_util_searchspecs_t* ss;
 
+    ((void)&flags);
+    ((void)&numValues);
+    ((void)&values);
+    ((void)&defaultDirectory);
+    ((void)&defaultPatterns);
+
+
     assert(NULL != searchspecs);
 
     ss = (clasp_util_searchspecs_t*)malloc(sizeof(clasp_util_searchspecs_t));
 
-    if(NULL == ss)
+    if (NULL == ss)
     {
         *searchspecs = NULL;
 
@@ -90,6 +97,7 @@ clasp_util_searchSpecs_load(
         return 0;
     }
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

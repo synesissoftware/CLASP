@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /YX /FD /c
-# ADD CPP /nologo /W3 /WX /GR /GX /O2 /I "$(CLASP_ROOT)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_CONSOLE" /YX /FD /c
+# ADD CPP /nologo /W3 /WX /GR /GX /O2 /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_CONSOLE" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0xc09 /d "NDEBUG" /d "_AFXDLL"
@@ -69,7 +69,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /YX /FD /GZ /c
-# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "$(CLASP_ROOT)/include" /I "$(XTESTS_C_ROOT)/include" /I "$(STLSOFT_1_10)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
+# ADD CPP /nologo /W3 /WX /Gm /GR /GX /Zi /Od /I "../../../../include" /I "$(XTESTS_C_ROOT)/include" /I "$(STLSOFT)/include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_CONSOLE" /FR /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0xc09 /d "_DEBUG" /d "_AFXDLL"
@@ -143,11 +143,11 @@ SOURCE="$(STLSOFT)\include\winstl\winstl.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE="$(CLASP_ROOT)\include\systemtools\clasp\clasp.h"
+SOURCE="$(CLASP_ROOT)\include\clasp\clasp.h"
 # End Source File
 # Begin Source File
 
-SOURCE="$(CLASP_ROOT)\include\systemtools\clasp\implicit_link.h"
+SOURCE="$(CLASP_ROOT)\include\clasp\implicit_link.h"
 # End Source File
 # End Group
 # Begin Group "xTests Header Files"
@@ -164,7 +164,7 @@ SOURCE="$(XTESTS_C_ROOT)\include\xtests\xtests.h"
 # End Group
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\util\searchspecs.h
+SOURCE=..\..\..\..\include\clasp\util\searchspecs.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

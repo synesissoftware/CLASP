@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.unit.main.programname.1.cpp
+ * File:    test.unit.main.programname.1.cpp
  *
- * Purpose:     Implementation file for the test.unit.main.programname.1 project.
+ * Purpose: Unit-test program name in failure conditions
  *
- * Created:     9th March 2013
- * Updated:     31st December 2023
+ * Created: 9th March 2013
+ * Updated: 2nd February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -18,14 +18,14 @@ static char const* Test_programName;
 
 #include <stdio.h>
 static FILE* Real_stderr = stderr;
-static FILE* Test_stderr;
+static FILE* Test_stderr = Real_stderr; /* NOTE: this assignment here is solely to placate the compiler when it thinks `Real_stderr` not used */
 #ifdef stderr
 # undef stderr
 # define CLASP_Test_stderr_was_defined
 #endif
 #define stderr                                              Test_stderr
 
-#include <systemtools/clasp/main.hpp>
+#include <clasp/main.hpp>
 
 #undef stderr
 #ifdef CLASP_Test_stderr_was_defined
@@ -34,6 +34,7 @@ static FILE* Test_stderr;
 #undef CLASP_MAIN_DEFAULT_PROGRAM_NAME
 
 #define Test_path                                           "test.unit.main.programname.1-stderr.txt"
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -48,6 +49,7 @@ static FILE* Test_stderr;
 
 /* Standard C header files */
 #include <stdlib.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -79,6 +81,7 @@ namespace
 
 } // anonymous namespace
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * main
  */
@@ -106,7 +109,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER_WITH_SETUP_FNS("test.unit.main.programname.1", verbosity, setup, teardown, Test_path))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.unit.main.programname.1", verbosity, setup, teardown, const_cast<char*>(Test_path)))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -137,6 +140,7 @@ int main(int argc, char **argv)
     return retCode;
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test function implementations
  */
@@ -149,22 +153,27 @@ namespace
         run_test_(__FILE__, __LINE__, (argc), (argv), (pfnMain), (png), (pna), (al), (fl), (el0))
 
 static void run_test_(
-    char const*                 file
-,   int                         line
-,   int                         argc
-,   char const* const* const    argv
-,   int (STLSOFT_CDECL*         pfnMain)(clasp::arguments_t const* args)
-,   char const*                 programNameGlobal
-,   char const*                 programNameArgument
-,   clasp::alias_t const*       aliases
-,   unsigned                    flags
-,   char const*                 expectedLine0
+    char const*                     file
+,   int                             line
+,   int                             argc
+,   char const* const* const        argv
+,   int (STLSOFT_CDECL*             pfnMain)(clasp::arguments_t const* args)
+,   char const*                     programNameGlobal
+,   char const*                     programNameArgument
+,   clasp::specification_t const    specifications[]
+,   unsigned                        flags
+,   char const*                     expectedLine0
 )
 {
     Test_programName    =   programNameGlobal;
     Test_stderr         =   ::fopen(Test_path, "w");
 
-    if(NULL == Test_stderr)
+    /* TODO: enhance xTests such that can pass file/line to (variants of) common test macros */
+    ((void)&file);
+    ((void)&line);
+
+
+    if (NULL == Test_stderr)
     {
         int const e = errno;
 
@@ -178,9 +187,11 @@ static void run_test_(
                     ,   argv
                     ,   pfnMain
                     ,   programNameArgument
-                    ,   aliases
+                    ,   specifications
                     ,   flags
                     );
+
+    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_NOT_EQUAL(0, r));
 
     ::fflush(Test_stderr);
     ::fclose(Test_stderr);
@@ -327,7 +338,7 @@ static void test_1_3()
     ,   NULL, NULL
     ,   NULL
     ,   0
-    ,   "process: invalid command-line: required option is not found: --unknown"
+    ,   "test_1_0: invalid command-line: required option is not found: --unknown"
     );
 }
 
@@ -397,6 +408,7 @@ static void test_1_19()
 
 
 } // anonymous namespace
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

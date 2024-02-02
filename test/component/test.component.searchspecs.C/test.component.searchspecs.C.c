@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.component.searchspecs.C.c
+ * File:    test.component.searchspecs.C.c
  *
- * Purpose:     Implementation file for the test.component.searchspecs.C project.
+ * Purpose: Component test for search-specs
  *
- * Created:     12th September 2014
- * Updated:     31st December 2023
+ * Created: 12th September 2014
+ * Updated: 2nd February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -13,14 +13,15 @@
  * test component header file include(s)
  */
 
-#include <systemtools/clasp/util/searchspecs.h>
+#include <clasp/util/searchspecs.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
 
-/* SystemTools::CLASP header files */
-#include <systemtools/clasp/clasp.h>
+/* CLASP header files */
+#include <clasp/clasp.h>
 
 /* xTests header files */
 #include <xtests/xtests.h>
@@ -37,6 +38,7 @@
 #ifdef _MSC_VER
 # include <crtdbg.h>
 #endif /* _MSC_VER */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -97,6 +99,7 @@ static int setup(void* param);
 static int teardown(void* param);
 static void* setupParam = NULL;
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * main
  */
@@ -112,6 +115,8 @@ int main(int argc, char **argv)
     _CrtMemState    memState;
 
     _CrtMemCheckpoint(&memState);
+
+    STLSOFT_SUPPRESS_UNUSED(memState);
 #endif /* _MSC_VER */
 
     r = main_(argc, argv);
@@ -130,7 +135,7 @@ int main_(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.searchspecs.C", verbosity, setup, teardown, setupParam))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.searchspecs.C", verbosity, setup, teardown, setupParam))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -191,6 +196,7 @@ int main_(int argc, char **argv)
     return retCode;
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test function implementations
  */
@@ -212,7 +218,7 @@ static int teardown(void* param)
 static
 int
 load_helper_(
-    char const* /* const */*                    strings
+    char const* /* const */*            strings
 ,   int                                 flags
 ,   clasp_char_t const*                 defaultDirectory
 ,   clasp_char_t const*                 defaultPatterns
@@ -224,22 +230,22 @@ load_helper_(
     STLSOFT_C_AUTO_BUFFER_DECLARE(clasp_argument_t, 10, values);
 
 
-    { char const** s; for(s = strings; NULL != *s; ++s)
+    { char const** s; for (s = strings; NULL != *s; ++s)
     {
         ++numValues;
     }}
 
-    if(0 != STLSOFT_C_AUTO_BUFFER_ALLOCATE(values, numValues))
+    if (0 != STLSOFT_C_AUTO_BUFFER_RESIZE(values, numValues))
     {
         return ENOMEM;
     }
     else
     {
-        static const clasp_slice_t emptySlice;
+        static const clasp_slice_t emptySlice = { 0 };
 
         int r;
 
-        { size_t i; for(i = 0; i != numValues; ++i)
+        { size_t i; for (i = 0; i != numValues; ++i)
         {
             clasp_argument_t* const value   =   &values.ptr[i];
             char const* const       string  =   strings[i];
@@ -277,7 +283,7 @@ static void test_1_0()
             ,   &searchspecs
             );
 
-    if(ENOMEM == r)
+    if (ENOMEM == r)
     {
         XTESTS_TEST_FAIL("out of memory");
     }
@@ -308,7 +314,7 @@ static void test_1_1()
             ,   &searchspecs
             );
 
-    if(ENOMEM == r)
+    if (ENOMEM == r)
     {
         XTESTS_TEST_FAIL("out of memory");
     }
@@ -514,11 +520,13 @@ static void test_1_49()
 {
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test component source file include(s)
  */
 
 #include <../src/searchspecs/searchspecs.c>
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.component.usage.resources.C.c
+ * File:    test.component.usage.resources.C.c
  *
- * Purpose:     Implementation file for the test.component.usage.resources project.
+ * Purpose: Component test for USAGE by Windows resources
  *
- * Created:     7th March 2012
- * Updated:     31st December 2023
+ * Created: 7th March 2012
+ * Updated: 2nd February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -19,20 +19,22 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test component header file include(s)
  */
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 #include "resource.h"
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
 
-/* SystemTools::CLASP header files */
-#include <systemtools/clasp/clasp.h>
+/* CLASP header files */
+#include <clasp/clasp.h>
 
 /* xTests header files */
 #include <xtests/xtests.h>
@@ -49,6 +51,17 @@
 #ifdef _MSC_VER
 # include <crtdbg.h>
 #endif /* _MSC_VER */
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * compatibility - 2
+ */
+
+#if !defined(_STLSOFT_VER) || \
+    _STLSOFT_VER < 0x010a06ff
+# error Requires STLSoft 1.10.6 or later
+#endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -113,6 +126,14 @@ static int setup(void* param);
 static int teardown(void* param);
 static void* setupParam = NULL;
 
+
+/* /////////////////////////////////////////////////////////////////////////
+ * globals
+ */
+
+char* s_argv0 = NULL;
+
+
 /* /////////////////////////////////////////////////////////////////////////
  * main
  */
@@ -148,9 +169,11 @@ int main_(int argc, char **argv)
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;
 
+    s_argv0 = argv[0];
+
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.usage.resources.C", verbosity, setup, teardown, setupParam))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.usage.resources.C", verbosity, setup, teardown, setupParam))
     {
         XTESTS_RUN_CASE(test_header_with_LLLLL);
         XTESTS_RUN_CASE(test_header_with_RRRRR);
@@ -215,6 +238,7 @@ int main_(int argc, char **argv)
     return retCode;
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test function implementations
  */
@@ -239,14 +263,14 @@ void
 clasp_showHeaderIntoMemory(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const*        aliases
+,   clasp_specification_t const specifications[]
 )
 {
-    stlsoft_C_string_slice_a_t* const   sl  =   info->param;
+    stlsoft_C_string_slice_m_t* const   sl  =   info->param;
     char* const                         p   =   (char*)sl->ptr;
 
     STLSOFT_SUPPRESS_UNUSED(args);
-    STLSOFT_SUPPRESS_UNUSED(aliases);
+    STLSOFT_SUPPRESS_UNUSED(specifications);
 
     sprintf(
             p
@@ -268,10 +292,10 @@ void
 clasp_showBodyIntoMemory(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const*        aliases
+,   clasp_specification_t const specifications[]
 )
 {
-    stlsoft_C_string_slice_a_t* const   sl          =   info->param;
+    stlsoft_C_string_slice_m_t* const   sl          =   info->param;
     char*                               p           =   (char*)sl->ptr;
     size_t                              n;
     int                                 tabWidth    =   (info->assumedTabWidth < 0) ? -info->assumedTabWidth : 1;
@@ -279,28 +303,28 @@ clasp_showBodyIntoMemory(
 
     STLSOFT_SUPPRESS_UNUSED(args);
 
-    for(n = 0; NULL != aliases->mappedArgument; ++aliases)
+    for (n = 0; NULL != specifications->mappedArgument; ++specifications)
     {
-        if( NULL != aliases->name &&
-            '\0' != aliases->name)
+        if (NULL != specifications->name &&
+            '\0' != specifications->name[0])
         {
-            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, aliases->name);
+            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, specifications->name);
 
             p += n;
         }
 
-        if( NULL != aliases->mappedArgument &&
-            '\0' != aliases->mappedArgument)
+        if (NULL != specifications->mappedArgument &&
+            '\0' != specifications->mappedArgument[0])
         {
-            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, aliases->mappedArgument);
+            int n = sprintf(p, "%.*s%s\n", tabWidth, ws, specifications->mappedArgument);
 
             p += n;
         }
 
-        if( NULL != aliases->help &&
-            '\0' != aliases->help)
+        if (NULL != specifications->help &&
+            '\0' != specifications->help[0])
         {
-            int n = sprintf(p, "%.*s%s\n", 2 * tabWidth, ws, aliases->help);
+            int n = sprintf(p, "%.*s%s\n", 2 * tabWidth, ws, specifications->help);
 
             p += n;
         }
@@ -311,7 +335,7 @@ static void test_header_with_LLLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -319,14 +343,14 @@ static void test_header_with_LLLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -357,7 +381,7 @@ static void test_header_with_RRRRR()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -365,14 +389,14 @@ static void test_header_with_RRRRR()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -403,7 +427,7 @@ static void test_header_with_RLLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -411,14 +435,14 @@ static void test_header_with_RLLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -449,7 +473,7 @@ static void test_header_with_LRLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -457,14 +481,14 @@ static void test_header_with_LRLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -495,7 +519,7 @@ static void test_header_with_LLLRL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -503,14 +527,14 @@ static void test_header_with_LLLRL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -541,7 +565,7 @@ static void test_header_with_rLLLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -549,14 +573,14 @@ static void test_header_with_rLLLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -587,7 +611,7 @@ static void test_header_with_LLrLL()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -595,14 +619,14 @@ static void test_header_with_LLrLL()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -633,7 +657,7 @@ static void test_header_with_LLLLr()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -641,14 +665,14 @@ static void test_header_with_LLLLr()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -679,7 +703,7 @@ static void test_header_with_rRRRR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -687,14 +711,14 @@ static void test_header_with_rRRRR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -725,7 +749,7 @@ static void test_header_with_RrRRR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -733,14 +757,14 @@ static void test_header_with_RrRRR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -771,7 +795,7 @@ static void test_header_with_RRrRR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -779,14 +803,14 @@ static void test_header_with_RRrRR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -817,7 +841,7 @@ static void test_header_with_RRRrR(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -825,14 +849,14 @@ static void test_header_with_RRRrR(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -863,7 +887,7 @@ static void test_header_with_RRRRr(void)
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -871,14 +895,14 @@ static void test_header_with_RRRRr(void)
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -911,14 +935,14 @@ static void test_1_9()
 
 static void test_body_1()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -926,18 +950,18 @@ static void test_body_1()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -956,15 +980,15 @@ static void test_body_1()
 
 static void test_body_2()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "shows this help and terminates"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -972,18 +996,18 @@ static void test_body_2()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1002,15 +1026,15 @@ static void test_body_2()
 
 static void test_body_3()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "@"STLSOFT_STRINGIZE(IDS_USAGE_HELP)"@"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1018,18 +1042,18 @@ static void test_body_3()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1048,16 +1072,16 @@ static void test_body_3()
 
 static void test_body_4()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "@usage@"),
         CLASP_FLAG(NULL, "--version", "@"STLSOFT_STRINGIZE(IDS_USAGE_VERSION)"@"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1065,18 +1089,18 @@ static void test_body_4()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1095,16 +1119,16 @@ static void test_body_4()
 
 static void test_body_5()
 {
-    clasp_alias_t const         aliases[] =
+    clasp_specification_t const specifications[] =
     {
         CLASP_FLAG("-h", "--help", "@"STLSOFT_STRINGIZE(IDS_USAGE_HELP)"@"),
         CLASP_FLAG(NULL, "--version", "@usage@"),
 
-        CLASP_ALIAS_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1112,18 +1136,18 @@ static void test_body_5()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000] = { 0 };
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showBody(
                     args
-                ,   aliases
+                ,   specifications
                 ,   clasp_showBodyIntoMemory
                 ,   &sl
                 ,   0
@@ -1152,7 +1176,7 @@ static void test_expanded_usage_1()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1160,14 +1184,14 @@ static void test_expanded_usage_1()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -1198,7 +1222,7 @@ static void test_expanded_usage_2()
 {
     char* const                 argv[]  =
     {
-        "program",
+        s_argv0,
 
         NULL
     };
@@ -1206,14 +1230,14 @@ static void test_expanded_usage_2()
     clasp_arguments_t const*    args;
     int const                   cr      =   clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
 
-    if(0 != cr)
+    if (0 != cr)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
         char                        buff[2000];
-        stlsoft_C_string_slice_a_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
+        stlsoft_C_string_slice_m_t  sl = { STLSOFT_NUM_ELEMENTS(buff), &buff[0] };
         int const                   r =
             clasp_showHeader(
                     args
@@ -1363,6 +1387,7 @@ static void test_1_48()
 static void test_1_49()
 {
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

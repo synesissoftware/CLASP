@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        examples/cvu/prg/prg.c
+ * File:    examples/cvu/prg/prg.c
  *
- * Purpose:     Implementation file for the prg example project.
+ * Purpose: Implementation file for the prg example project.
  *
- * Created:     8th December 2011
- * Updated:     31st December 2023
+ * Created: 8th December 2011
+ * Updated: 2nd February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -13,13 +13,14 @@
  * includes
  */
 
-/* SystemTools::CLASP header files */
-#include <systemtools/clasp/clasp.h>
+/* CLASP header files */
+#include <clasp/clasp.h>
 
 /* Standard C header files */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
@@ -31,11 +32,12 @@
 # pragma warning(disable : 4996)
 #endif
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * globals
  */
 
-static clasp_alias_t const ALIASES[] =
+static clasp_specification_t const Specifications[] =
 {
   /* Filtering behaviour flags/options */
 
@@ -73,8 +75,9 @@ static clasp_alias_t const ALIASES[] =
   CLASP_FLAG(NULL,    "--help",                         "show this help and quit"),
   CLASP_FLAG(NULL,    "--version",                      "show version and quit"),
 
-  CLASP_ALIAS_ARRAY_TERMINATOR
+  CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * main()
@@ -84,9 +87,9 @@ int main(int argc, char** argv)
 {
   unsigned const            cflags  = 0;
   clasp_arguments_t const*  args;
-  int const                 cr      = clasp_parseArguments(cflags, argc, argv, ALIASES, NULL, &args);
+  int const                 cr      = clasp_parseArguments(cflags, argc, argv, Specifications, NULL, &args);
 
-  if(cr != 0)
+  if (cr != 0)
   {
     fprintf(stderr, "failed to initialise : %s (%d)\n", strerror(cr), cr);
 
@@ -94,18 +97,18 @@ int main(int argc, char** argv)
   }
   else
   {
-    if(clasp_flagIsSpecified(args, "--help"))
+    if (clasp_flagIsSpecified(args, "--help"))
     {
-      clasp_show_usage(
+      clasp_showUsage(
         NULL
-      , ALIASES
+      , Specifications
       , "prg"
       , "SystemTools (http://systemtools.sourceforge.net/)"
       , "Copyright Matthew Wilson"
       , "Exercises CLASP (C) for CVu"
       , "prg [... options ...] [<infile> | -] [<outfile> | -]"
       , 1, 0, 1 /* version: maj, min, rev */
-      , clasp_show_header_by_FILE, clasp_show_body_by_FILE, stdout
+      , clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
       , 0  /* flags */
       , 76 /* console width */
       , -2 /* indent size */
@@ -116,31 +119,31 @@ int main(int argc, char** argv)
     {
       puts("");
       printf("flags:\t%lu\n", args->numFlags);
-      { size_t i; for(i = 0; i != args->numFlags; ++i)
+      { size_t i; for (i = 0; i != args->numFlags; ++i)
       {
           clasp_argument_t const* const flag = args->flags + i;
 
           /* Treat strings as slices {len+ptr} */
-          printf("flag-%02d:\t%.*s\t%.*s\n", i, (int)flag->givenName.len, flag->givenName.ptr, (int)flag->resolvedName.len, flag->resolvedName.ptr);
+          printf("flag-%02d:\t%.*s\t%.*s\n", (int)i, (int)flag->givenName.len, flag->givenName.ptr, (int)flag->resolvedName.len, flag->resolvedName.ptr);
       }}
 
 
       puts("");
       printf("options:\t%lu\n", args->numOptions);
 
-      { size_t i; for(i = 0; i != args->numOptions; ++i)
+      { size_t i; for (i = 0; i != args->numOptions; ++i)
       {
           clasp_argument_t const* const option = args->options + i;
 
           /* Treat strings as C-style strings */
-          printf("option-%02d:\t%s\t%s\t=\t%s\n", i, option->givenName.ptr, option->resolvedName.ptr, option->value.ptr);
+          printf("option-%02d:\t%s\t%s\t=\t%s\n", (int)i, option->givenName.ptr, option->resolvedName.ptr, option->value.ptr);
       }}
 
 
       puts("");
       printf("values:\t%lu\n", args->numValues);
 
-      { size_t i; for(i = 0; i != args->numValues; ++i)
+      { size_t i; for (i = 0; i != args->numValues; ++i)
       {
           clasp_argument_t const* const value = args->values + i;
 
@@ -149,12 +152,12 @@ int main(int argc, char** argv)
           static_assert(sizeof(int) == sizeof(size_t));
 
           /* Treat strings as slices {len+ptr} in non-portable way! */
-          printf("value-%02d:\t%.*s\n", i, value->value);
+          printf("value-%02d:\t%.*s\n", (int)i, value->value);
 
 #else /* ? 0 */
 
           /* Treat strings as slices {len+ptr}*/
-          printf("value-%02d:\t%.*s\n", i, (int)value->value.len, value->value.ptr);
+          printf("value-%02d:\t%.*s\n", (int)i, (int)value->value.len, value->value.ptr);
 
 #endif /* 0 */
       }}
@@ -165,6 +168,7 @@ int main(int argc, char** argv)
     return EXIT_SUCCESS;
   }
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

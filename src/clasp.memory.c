@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        src/clasp.memory.c
+ * File:    src/clasp.memory.c
  *
- * Purpose:     CLASP memory facilities.
+ * Purpose: CLASP memory facilities.
  *
- * Created:     4th June 2008
- * Updated:     31st December 2023
+ * Created: 4th June 2008
+ * Updated: 2nd February 2024
  *
- * Home:        https://github.com/synesissoftware/CLASP/
+ * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2023, Matthew Wilson
+ * Copyright (c) 2008-2024, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -88,6 +88,7 @@ void clasp_free_(clasp_diagnostic_context_t const* ctxt, void* pv)
 
     ctxt->pfnFree(ctxt->context, pv);
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        src/clasp.string.c
+ * File:    src/clasp.string.c
  *
- * Purpose:     CLASP string facilities.
+ * Purpose: CLASP string facilities.
  *
- * Created:     4th June 2008
- * Updated:     31st December 2023
+ * Created: 4th June 2008
+ * Updated: 2nd February 2024
  *
- * Home:        https://github.com/synesissoftware/CLASP/
+ * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2023, Matthew Wilson
+ * Copyright (c) 2008-2024, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -77,7 +77,7 @@ clasp_strdup_(
     size_t          len     =   clasp_strlen_(s);
     clasp_char_t*   newS    =   (clasp_char_t*)clasp_malloc_(ctxt, (1 + len) * sizeof(clasp_char_t));
 
-    if(NULL != newS)
+    if (NULL != newS)
     {
         memcpy(newS, s, (1 + len) * sizeof(clasp_char_t));
     }
@@ -93,7 +93,7 @@ clasp_strdup_raw_(
     size_t          len     =   clasp_strlen_(s);
     clasp_char_t*   newS    =   (clasp_char_t*)malloc((1 + len) * sizeof(clasp_char_t));
 
-    if(NULL != newS)
+    if (NULL != newS)
     {
         memcpy(newS, s, (1 + len) * sizeof(clasp_char_t));
     }
@@ -134,9 +134,9 @@ clasp_strcount_(
 
     CLASP_ASSERT(NULL != s);
 
-    for(; '\0' != *s; ++s)
+    for (; '\0' != *s; ++s)
     {
-        if(c == *s)
+        if (c == *s)
         {
             ++count;
         }
@@ -165,9 +165,9 @@ clasp_strncount_(
 
     CLASP_ASSERT(NULL != s);
 
-    for(; 0 != n && '\0' != *s; --n, ++s)
+    for (; 0 != n && '\0' != *s; --n, ++s)
     {
-        if(c == *s)
+        if (c == *s)
         {
             ++count;
         }
@@ -192,13 +192,13 @@ clasp_strnrchr_(
 {
     CLASP_ASSERT(NULL != s || 0 == n);
 
-    if(0 != n)
+    if (0 != n)
     {
         clasp_char_t const* p = &s[n - 1];
 
-        for(;; --p)
+        for (;; --p)
         {
-            if(c == *p)
+            if (c == *p)
             {
                 return (clasp_char_t*)p;
             }
@@ -224,13 +224,13 @@ clasp_strnexrchr_(
 {
     CLASP_ASSERT(NULL != s || 0 == n);
 
-    if(0 != n)
+    if (0 != n)
     {
         clasp_char_t const* p = &s[n - 1];
 
-        for(;; --p)
+        for (;; --p)
         {
-            if(c != *p)
+            if (c != *p)
             {
                 return (clasp_char_t*)p;
             }
@@ -261,9 +261,11 @@ clasp_strtok_r_(
     {
         tok = clasp_strtok_wblank_r_(s, delim, savectxt);
     }
-    while(NULL != tok && '\0' == *tok);
+    while (NULL != tok && '\0' == *tok);
 
 #else
+    ((void)&savectxt);
+
     tok = clasp_strtok_(s, delim);
 #endif
 
@@ -290,7 +292,7 @@ clasp_strtok_wblank_r_(
     CLASP_ASSERT(NULL != delim);
     CLASP_ASSERT(NULL != savectxt);
 
-    if(NULL != s)
+    if (NULL != s)
     {
         size_t const    len =   clasp_strlen_(s);
         clasp_char_t*   end =   s + len + 1;
@@ -307,9 +309,9 @@ clasp_strtok_wblank_r_(
         tok = (clasp_char_t*)savectxt->p0;
     }
 
-    for(p = tok; savectxt->p1 != p; ++p)
+    for (p = tok; savectxt->p1 != p; ++p)
     {
-        if(NULL != clasp_strchr_(delim, *p))
+        if (NULL != clasp_strchr_(delim, *p))
         {
             savectxt->p0 = p + 1;
             *p = '\0';
@@ -320,9 +322,6 @@ clasp_strtok_wblank_r_(
     return NULL;
 }
 
-/* /////////////////////////////////////////////////////////////////////////
- * API functions
- */
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

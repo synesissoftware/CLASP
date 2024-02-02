@@ -1,4 +1,22 @@
-# CLASP
+# CLASP <!-- omit in toc -->
+
+## Table of Contents <!-- omit in toc -->
+
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Components](#components)
+  - [C API / core library](#c-api--core-library)
+  - [C++ API](#c-api)
+- [Examples](#examples)
+- [Project Information](#project-information)
+  - [Where to get help](#where-to-get-help)
+  - [Contribution guidelines](#contribution-guidelines)
+  - [Dependencies](#dependencies)
+  - [Related projects](#related-projects)
+  - [License](#license)
+
+
+## Introduction
 
 **CLASP** - **C**ommand-**L**ine **A**rgument **S**orting and **P**arsing - is a small, simple
 C-language library for parsing command-line arguments, along with a C++
@@ -27,3 +45,67 @@ The features of the library are:
 
 
 The design of the library is discussed in detail in the article _An Introduction to CLASP, part 1: C_, Matthew Wilson, [CVu](http://accu.org/index.php/journals/c77/), January 2012. (For those of you not subscribers to the [ACCU](http://accu.org/)'s [CVu](http://accu.org/index.php/journals/c77/) journal, this article will be made available on the [Synesis Software](http://www.synesis.com.au) website before end of September.)
+
+
+## Installation
+
+Detailed instructions - via **CMake**, via bundling, via custom makefile
+parameters - are provided in the accompanying [INSTALL.md](./INSTALL.md)
+file.
+
+
+## Components
+
+### C API / core library
+
+T.B.C.
+
+
+### C++ API
+
+T.B.C.
+
+
+## Examples
+
+Examples are provided in the ```examples``` directory, along with a markdown description for each.
+
+
+## Project Information
+
+### Where to get help
+
+[GitHub Page](https://github.com/synesissoftware/CLASP "GitHub Page")
+
+
+### Contribution guidelines
+
+Defect reports, feature requests, and pull requests are welcome on https://github.com/synesissoftware/CLASP.
+
+
+### Dependencies
+
+#### STLSoft (optional) <!-- omit in toc -->
+
+The original (~2005) implementation used **STLSoft** for discrimination of compilers and for library support. For modern compilers with broad support for the latest language standards this is not necessary. Hence, if the preprocessor symbol `SHWILD_NO_STLSOFT` is specified then all dependencies on **STLSoft** are removed and basic **C++-14** features are used instead. (This is done in the **CMake** configuration provided - see [INSTALL.md](./INSTALL.md).)
+
+If you _do_ need **STLSoft**, then version 1.10.6 or later is recommended. If you're using a _very_ old compiler you may wish to use STLSoft-1.9, for which version 1.9.136 is recommended. Further, the makefiles require definition of the environment variable `STLSOFT` that should be set to the root directory of a clone of **STLSoft**.
+
+* [STLSoft 1.9](http://github.com/synesissoftware/STLSoft-1.9/)
+* [STLSoft 1.10](http://github.com/synesissoftware/STLSoft-1.10/) (Recommended)
+
+
+### Related projects
+
+Projects in which **CLASP** is used include:
+
+T.B.C.
+
+
+### License
+
+**CLASP** is released under the 3-clause BSD license. See [LICENSE](./LICENSE) for details.
+
+
+<!-- ########################### end of file ########################### -->
+

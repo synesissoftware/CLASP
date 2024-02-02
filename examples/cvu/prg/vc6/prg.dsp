@@ -146,7 +146,7 @@ SOURCE="$(RECLS_ROOT)\include\recls\internal\retcodes.h"
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\..\..\..\include\systemtools\clasp\clasp.h
+SOURCE=..\..\..\..\include\clasp\clasp.h
 # End Source File
 # End Group
 # End Group

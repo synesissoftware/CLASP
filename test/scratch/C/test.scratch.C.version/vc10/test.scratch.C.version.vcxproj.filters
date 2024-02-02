@@ -39,8 +39,8 @@
     <ClInclude Include="$(RECLS_ROOT)\include\recls\internal\retcodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutuonDir)include\systemtools\clasp\clasp.h" />
-    <ClInclude Include="$(SolutuonDir)include\systemtools\clasp\implicit_link.h" />
+    <ClInclude Include="$(SolutionDir)include\clasp\clasp.h" />
+    <ClInclude Include="$(SolutionDir)include\clasp\implicit_link.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Implementation Files">

@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        src/clasp.core.c
+ * File:    src/clasp.core.c
  *
- * Purpose:     CLASP core facilities.
+ * Purpose: CLASP core facilities.
  *
- * Created:     4th June 2008
- * Updated:     31st December 2023
+ * Created: 4th June 2008
+ * Updated: 2nd February 2024
  *
- * Home:        https://github.com/synesissoftware/CLASP/
+ * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2023, Matthew Wilson
+ * Copyright (c) 2008-2024, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,10 @@
  *
  * ////////////////////////////////////////////////////////////////////// */
 
-static void* s_dummy;
+void
+clasp_core_dummy_function_to_avoid_empty_TU_warning_(void)
+{}
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

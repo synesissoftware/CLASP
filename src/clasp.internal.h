@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        src/clasp.internal.h
+ * File:    src/clasp.internal.h
  *
- * Purpose:     CLASP internal common header.
+ * Purpose: CLASP internal common header.
  *
- * Created:     4th June 2008
- * Updated:     31st December 2023
+ * Created: 4th June 2008
+ * Updated: 2nd February 2024
  *
- * Home:        https://github.com/synesissoftware/CLASP/
+ * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2023, Matthew Wilson
+ * Copyright (c) 2008-2024, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,7 @@
  * includes
  */
 
-#include <systemtools/clasp/clasp.h>
+#include <clasp/clasp.h>
 
 #ifdef _MSC_VER
 # include <crtdbg.h>
@@ -285,6 +285,7 @@ clasp_strtok_wblank_r_(
 ,   clasp_char_t const*         delim
 ,   struct strtok_savectxt_t*   savectxt
 );
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

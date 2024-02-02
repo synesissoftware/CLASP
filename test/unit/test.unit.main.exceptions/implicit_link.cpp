@@ -1,6 +1,6 @@
 
 /* CLASP header files */
-#include <systemtools/clasp/implicit_link.h>
+#include <clasp/implicit_link.h>
 
 /* recls header files */
 #include <recls/implicit_link.h>

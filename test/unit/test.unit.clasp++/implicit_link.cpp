@@ -1,6 +1,6 @@
 
-/* SystemTools::CLASP header files */
-#include <systemtools/clasp/implicit_link.h>
+/* CLASP header files */
+#include <clasp/implicit_link.h>
 
 /* xTests header files */
 #include <xtests/implicit_link.h>
@@ -10,8 +10,9 @@
 
 /* UNIXem header files */
 #include <platformstl/platformstl.h>
-#if defined(platformstl_OS_IS_UNIX) && \
+#if defined(PLATFORMSTL_OS_IS_UNIX) && \
     defined(_WIN32)
+
 # include <unixem/implicit_link.h>
 #endif /* OS */
 

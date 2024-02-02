@@ -1,47 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)src\clasp.api.c">
-      <Filter>Implementation Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)src\clasp.core.c">
-      <Filter>Implementation Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)src\clasp.diagnostics.c">
-      <Filter>Implementation Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)src\clasp.memory.c">
-      <Filter>Implementation Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)src\clasp.string.c">
-      <Filter>Implementation Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)src\clasp.usage.c">
-      <Filter>Implementation Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)src\clasp.usage.FILE.c">
-      <Filter>Implementation Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(SolutionDir)src\clasp.internal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)include\systemtools\clasp\internal\clasp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)include\systemtools\clasp\clasp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+      <UniqueIdentifier>{93995380-89BD-4B04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;ipp;ixx;inc;</Extensions>
+    </Filter>
+    <Filter Include="Header Files\include">
+      <UniqueIdentifier>{50992A8A-AF08-4806-902D-B13EB9B47DD1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\include\clasp">
+      <UniqueIdentifier>{fe147870-ff62-4fd4-9467-4a3e13667de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\include\clasp\internal">
+      <UniqueIdentifier>{9A38D497-E9FE-4284-8D5A-7F951CAC9BB6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\include\clasp\util">
+      <UniqueIdentifier>{E367A945-5BDC-4cb5-A47C-596949D06A6E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\src">
+      <UniqueIdentifier>{BBE0F4DF-D5CD-4f3a-BDCB-4433182B119F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Implementation Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <UniqueIdentifier>{D235CB96-B7A2-46AC-B7DC-310587E1D366}</UniqueIdentifier>
+      <Extensions>c;cc;cpp;cxx;</Extensions>
     </Filter>
+    <Filter Include="Implementation Files\src">
+      <UniqueIdentifier>{5C1278A0-2826-4E94-A9DF-B7121DAC2348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module Files">
+      <UniqueIdentifier>{115E6387-3699-414F-89E3-A8DCD7CD1CD3}</UniqueIdentifier>
+      <Extensions>def;hpj;idl;odl;rc;xsd;</Extensions>
+    </Filter>
+    <Filter Include="Module Files\_dev_pragmatics_">
+      <UniqueIdentifier>{F31D58C5-9614-4CD6-A019-C75F99CF755F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\clasp.api.c">
+      <Filter>Implementation Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\clasp.core.c">
+      <Filter>Implementation Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\clasp.diagnostics.c">
+      <Filter>Implementation Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\clasp.memory.c">
+      <Filter>Implementation Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\clasp.string.c">
+      <Filter>Implementation Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\clasp.usage.c">
+      <Filter>Implementation Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\clasp.usage.FILE.c">
+      <Filter>Implementation Files\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\clasp\clasp.h">
+      <Filter>Header Files\include\clasp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\clasp\implicit_link.h">
+      <Filter>Header Files\include\clasp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\clasp\main.h">
+      <Filter>Header Files\include\clasp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\clasp\internal\shim_macros.h">
+      <Filter>Header Files\include\clasp\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\clasp\util\searchspecs.h">
+      <Filter>Header Files\include\clasp\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\clasp.internal.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
 </Project>

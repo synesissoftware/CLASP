@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        src/clasp.diagnostics.c
+ * File:    src/clasp.diagnostics.c
  *
- * Purpose:     CLASP diagnostics facilities.
+ * Purpose: CLASP diagnostics facilities.
  *
- * Created:     4th June 2008
- * Updated:     31st December 2023
+ * Created: 4th June 2008
+ * Updated: 2nd February 2024
  *
- * Home:        https://github.com/synesissoftware/CLASP/
+ * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2023, Matthew Wilson
+ * Copyright (c) 2008-2024, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,12 +64,12 @@ void CLASP_CALLCONV clasp_default_log_fn_(
 {
     ((void)context);
 
-    if(severity >= 0)
+    if (severity >= 0)
     {
         clasp_char_t  fmt_[1025];
         size_t const  n = clasp_strlen_(fmt);
 
-        if(n + 1 < (sizeof(fmt_) / sizeof(fmt_[0])))
+        if (n + 1 < (sizeof(fmt_) / sizeof(fmt_[0])))
         {
             memcpy(fmt_, fmt, sizeof(clasp_char_t) * n);
             fmt_[n + 0] = '\n';
@@ -83,7 +83,7 @@ void CLASP_CALLCONV clasp_default_log_fn_(
 #else /* ? CLASP_USE_WIDE_STRINGS */
         vfprintf(stderr, fmt, args);
 #endif /* CLASP_USE_WIDE_STRINGS */
-        if(fmt != fmt_)
+        if (fmt != fmt_)
         {
             fputs("\n", stderr);
         }
@@ -98,7 +98,7 @@ CLASP_LOG_PRINTF(
 ,   ...
 )
 {
-    if(NULL != ctxt->pfnLog)
+    if (NULL != ctxt->pfnLog)
     {
         va_list args;
 
@@ -136,7 +136,7 @@ clasp_verify_context_(
     /* Check the context, and ensure that it specifies all the
      * memory functions, or none of them
      */
-    if(NULL != ctxt)
+    if (NULL != ctxt)
     {
         int n = 0;
 
@@ -144,7 +144,7 @@ clasp_verify_context_(
         n += (NULL != ctxt->pfnRealloc);
         n += (NULL != ctxt->pfnFree);
 
-        if( 0 != n &&
+        if (0 != n &&
             3 != n)
         {
             *r = EINVAL;
@@ -156,14 +156,14 @@ clasp_verify_context_(
 
         local->context       =   NULL;
 
-        if(NULL != ctxt->pfnMalloc)
+        if (NULL != ctxt->pfnMalloc)
         {
             local->pfnMalloc        =   ctxt->pfnMalloc;
             local->pfnRealloc       =   ctxt->pfnRealloc;
             local->pfnFree          =   ctxt->pfnFree;
         }
 
-        if(NULL != ctxt->pfnLog)
+        if (NULL != ctxt->pfnLog)
         {
             local->pfnLog           =   ctxt->pfnLog;
             local->severities[0]    =   ctxt->severities[0];
@@ -176,6 +176,7 @@ clasp_verify_context_(
 
     return local;
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        systemtools/clasp.hpp
+ * File:    systemtools/clasp.hpp
  *
- * Purpose:     C++ layer for the CLASP library.
+ * Purpose: C++ layer for the CLASP library.
  *
- * Created:     31st January 2014
- * Updated:     31st December 2023
+ * Created: 31st January 2014
+ * Updated: 2nd February 2024
  *
- * Home:        https://github.com/synesissoftware/CLASP/
+ * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2014-2023, Matthew Wilson
+ * Copyright (c) 2014-2024, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,8 @@
 #ifndef SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_MAJOR    1
 # define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_MINOR    0
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_REVISION 2
-# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_EDIT     4
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_REVISION 3
+# define SYSTEMTOOLS_VER_SYSTEMTOOLS_HPP_CLASP_EDIT     7
 #endif /* !SYSTEMTOOLS_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
