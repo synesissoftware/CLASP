@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 3rd February 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -54,8 +54,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      1
-# define CLASP_VER_CLASP_H_CLASP_REVISION   4
-# define CLASP_VER_CLASP_H_CLASP_EDIT       96
+# define CLASP_VER_CLASP_H_CLASP_REVISION   5
+# define CLASP_VER_CLASP_H_CLASP_EDIT       97
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -76,9 +76,9 @@
 #define CLASP_VER_MINOR     14
 #define CLASP_VER_PATCH     0
 #define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0x81
+#define CLASP_VER_AB        0x82
 
-#define CLASP_VER           0x000e0081
+#define CLASP_VER           0x000e0082
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -1435,7 +1435,7 @@ CLASP_CALL(int) clasp_showHeader(
  * \param specifications The specifications used in parsing the command-line
  * \param param User-defined parameter to be passed to \c pfnBody.
  * \param flags Flags that moderate the behaviour of the function
- * \param consoleWidth The width, in characters, of the console. Windows users may use the return value of <code>winstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries).
+ * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries).
  * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character.
  * \param blanksBetweenItems The number of blank lines to insert between each item
  *

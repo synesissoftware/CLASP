@@ -13,7 +13,7 @@
 * defect fix, allowing null `specifications`;
 * **test.unit.usage_width** now compatible with UNIX (as well as Windows), by using `platformstl::basic_file_lines<>` class template
 
- 
+
 ## 16th February 2021 - 0.14.0-alpha5 released
 
 T.B.C.
