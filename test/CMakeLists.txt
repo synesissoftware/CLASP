@@ -1,11 +1,10 @@
 
-if (APPLE)
+if(APPLE)
 
 	message("adding '/usr/local/include' to include-directories for 'test'")
 
 	include_directories("/usr/local/include")
-endif()
-
+endif(APPLE)
 
 if(WIN32)
 
