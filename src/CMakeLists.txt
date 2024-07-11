@@ -2,35 +2,35 @@
 SET (CORE_SRC_DIR .)
 
 SET (CORE_SRCS
-    ${CORE_SRC_DIR}/clasp.api.c
-    ${CORE_SRC_DIR}/clasp.usage.FILE.c
-    ${CORE_SRC_DIR}/clasp.string.c
-    ${CORE_SRC_DIR}/clasp.usage.c
-    ${CORE_SRC_DIR}/clasp.core.c
-    ${CORE_SRC_DIR}/clasp.diagnostics.c
-    ${CORE_SRC_DIR}/clasp.memory.c
+	${CORE_SRC_DIR}/clasp.api.c
+	${CORE_SRC_DIR}/clasp.usage.FILE.c
+	${CORE_SRC_DIR}/clasp.string.c
+	${CORE_SRC_DIR}/clasp.usage.c
+	${CORE_SRC_DIR}/clasp.core.c
+	${CORE_SRC_DIR}/clasp.diagnostics.c
+	${CORE_SRC_DIR}/clasp.memory.c
 )
 
 add_library(clasp
-    ${CORE_SRCS}
+	${CORE_SRCS}
 )
 
 if (APPLE)
 
-    message("-- -- adding '/usr/local/include' to include-directories for 'src'")
+	message("-- -- adding '/usr/local/include' to include-directories for 'src'")
 
-    include_directories("/usr/local/include")
+	include_directories("/usr/local/include")
 endif()
 
 if(WIN32)
 
-    message(FATAL_ERROR "Use of CMake on Windows not currently supported")
+	message(FATAL_ERROR "Use of CMake on Windows not currently supported")
 endif(WIN32)
 
 if(UNIX)
 
-    add_definitions(-DUNIX)
-    add_definitions(-Dunix)
+	add_definitions(-DUNIX)
+	add_definitions(-Dunix)
 endif(UNIX)
 
 
@@ -41,32 +41,32 @@ endif(UNIX)
 # header files from sub-directories, so this is done below in an additional
 # `install()` step
 set(CORE_PUBLIC_HEADERS
-    "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
 )
 
 set_target_properties(clasp PROPERTIES
-    OUTPUT_NAME "clasp"
-    PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
+	OUTPUT_NAME "clasp"
+	PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
 )
 
 target_include_directories(clasp PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
+	$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+	$<INSTALL_INTERFACE:include>
 )
 
 target_compile_options(clasp PRIVATE
-    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-        -Werror -Wall -Wextra -pedantic
+	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+		-Werror -Wall -Wextra -pedantic
 
-        # -Wno-deprecated-copy-with-user-provided-copy
-        # -Wno-missing-braces
-        # -Wno-missing-field-initializers
-        # -Wno-unused-parameter
-        # -Wno-unused-value
-        >
-    $<$<CXX_COMPILER_ID:MSVC>:
-        /WX /W4
-    >
+		# -Wno-deprecated-copy-with-user-provided-copy
+		# -Wno-missing-braces
+		# -Wno-missing-field-initializers
+		# -Wno-unused-parameter
+		# -Wno-unused-value
+		>
+	$<$<CXX_COMPILER_ID:MSVC>:
+		/WX /W4
+	>
 )
 
 
@@ -74,11 +74,11 @@ target_compile_options(clasp PRIVATE
 # install
 
 install(TARGETS clasp
-    EXPORT project-targets
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
+	EXPORT project-targets
+	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
 )
 
 # for now, we just include xtests.h, as it's not clear how to use the
@@ -94,10 +94,10 @@ install(TARGETS clasp
 # )
 
 install(
-    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
-    DESTINATION include
-    FILES_MATCHING
-    PATTERN "*.h*"
+	DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+	DESTINATION include
+	FILES_MATCHING
+	PATTERN "*.h*"
 )
 
 # install(

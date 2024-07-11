@@ -19,7 +19,7 @@ cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 file(TO_CMAKE_PATH "${CMAKE_CURRENT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
 if(EXISTS "${LOC_PATH}")
 
-    message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
+	message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
 endif()
 
 # directory for CMake specific extensions and source files.
@@ -30,9 +30,9 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 # project
 
 project(clasp
-    DESCRIPTION "CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API."
-    HOMEPAGE_URL "https://github.com/synesissoftware/CLASP"
-    LANGUAGES C CXX
+	DESCRIPTION "CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API."
+	HOMEPAGE_URL "https://github.com/synesissoftware/CLASP"
+	LANGUAGES C CXX
 )
 
 string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
@@ -91,15 +91,15 @@ include(CTest)
 
 if(BUILD_TESTING)
 
-    message("-- enabled building of tests ...")
+	message("-- enabled building of tests ...")
 
-    set(xTests_REQUIRED_VERSION_ 0.21.2)
+	set(xTests_REQUIRED_VERSION_ 0.21.2)
 
-    find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
+	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
-    message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
+	message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
 
-    add_subdirectory(test)
+	add_subdirectory(test)
 endif()
 
 
@@ -109,9 +109,9 @@ endif()
 option(BUILD_EXAMPLES "Build examples" ON)
 if(BUILD_EXAMPLES)
 
-    message("-- enabled building of examples ...")
+	message("-- enabled building of examples ...")
 
-    add_subdirectory(examples)
+	add_subdirectory(examples)
 endif()
 
 
@@ -127,32 +127,32 @@ include(CMakePackageConfigHelpers)
 set(EXPORT_NAME ${PROJECT_NAME_LOWER})
 
 configure_package_config_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake
-    INSTALL_DESTINATION ${LIB_INSTALL_DIR}/${EXPORT_NAME}/cmake
+	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
+	${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake
+	INSTALL_DESTINATION ${LIB_INSTALL_DIR}/${EXPORT_NAME}/cmake
 )
 
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY AnyNewerVersion
+	${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake
+	VERSION ${PROJECT_VERSION}
+	COMPATIBILITY AnyNewerVersion
 )
 
 export(EXPORT project-targets
-    FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-targets.cmake"
-    NAMESPACE "${PROJECT_NAME}::"
+	FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-targets.cmake"
+	NAMESPACE "${PROJECT_NAME}::"
 )
 
 install(EXPORT project-targets
-    NAMESPACE "${PROJECT_NAME}::"
-    FILE "${EXPORT_NAME}-targets.cmake"
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
+	NAMESPACE "${PROJECT_NAME}::"
+	FILE "${EXPORT_NAME}-targets.cmake"
+	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
 
 install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake"
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
+	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake"
+	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
 
 
