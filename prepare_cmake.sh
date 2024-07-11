@@ -3,7 +3,7 @@
 ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
-CMakePath=$Dir/_build
+CMakeDir=$Dir/_build
 
 
 CMakeExamplesDisabled=0
@@ -19,35 +19,36 @@ STLSoftDirGiven=
 # command-line handling
 
 while [[ $# -gt 0 ]]; do
-    case $1 in
-        -v|--cmake-verbose-makefile)
 
-            CMakeVerboseMakefile=1
-            ;;
-        -d|--debug-configuration)
+  case $1 in
+    -v|--cmake-verbose-makefile)
 
-            Configuration=Debug
-            ;;
-        -E|--disable-examples)
+      CMakeVerboseMakefile=1
+      ;;
+    -d|--debug-configuration)
 
-            CMakeExamplesDisabled=1
-            ;;
-        -T|--disable-testing)
+      Configuration=Debug
+      ;;
+    -E|--disable-examples)
 
-            CMakeTestingDisabled=1
-            ;;
-        -m|--run-make)
+      CMakeExamplesDisabled=1
+      ;;
+    -T|--disable-testing)
 
-            RunMake=1
-            ;;
-        -s|--stlsoft-root-dir)
+      CMakeTestingDisabled=1
+      ;;
+    -m|--run-make)
 
-            shift
-            STLSoftDirGiven=$1
-            ;;
-        --help)
+      RunMake=1
+      ;;
+    -s|--stlsoft-root-dir)
 
-            cat << EOF
+      shift
+      STLSoftDirGiven=$1
+      ;;
+    --help)
+
+      cat << EOF
 CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API.
 Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2008-2019, Matthew Wilson and Synesis Software
@@ -95,26 +96,26 @@ Flags/options:
 
 EOF
 
-            exit 0
-            ;;
-        *)
+      exit 0
+      ;;
+    *)
 
-            >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
+      >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
 
-            exit 1
-            ;;
-    esac
+      exit 1
+      ;;
+  esac
 
-    shift
+  shift
 done
 
 
 # ##########################################################
 # main()
 
-mkdir -p $CMakePath || exit 1
+mkdir -p $CMakeDir || exit 1
 
-cd $CMakePath
+cd $CMakeDir
 
 echo "Executing CMake"
 
@@ -127,30 +128,30 @@ if [ $CMakeVerboseMakefile -eq 0 ]; then CMakeVerboseMakefileFlag="OFF" ; else C
 if [ -z $STLSoftDirGiven ]; then CMakeSTLSoftVariable="" ; else CMakeSTLSoftVariable="-DSTLSOFT=$STLSoftDirGiven/" ; fi
 
 cmake \
-    -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
-    -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
-    -DCMAKE_BUILD_TYPE=$Configuration \
-    -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
-    $CMakeSTLSoftVariable \
-    .. || (cd ->/dev/null ; exit 1)
+  -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
+  -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
+  -DCMAKE_BUILD_TYPE=$Configuration \
+  -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
+  $CMakeSTLSoftVariable \
+  .. || (cd ->/dev/null ; exit 1)
 
 status=0
 
 if [ $RunMake -ne 0 ]; then
 
-    echo "Executing make"
+  echo "Executing make"
 
-    make
+  make
 
-    status=$?
+  status=$?
 fi
 
 cd ->/dev/null
 
 if [ $CMakeVerboseMakefile -ne 0 ]; then
 
-    echo -e "contents of $CMakePath:"
-    ls -al $CMakePath
+  echo -e "contents of $CMakeDir:"
+  ls -al $CMakeDir
 fi
 
 exit $status
