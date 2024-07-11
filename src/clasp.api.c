@@ -4,7 +4,7 @@
  * Purpose: CLASP API.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -56,19 +56,23 @@
 #if (   defined(_WIN32) || \
         defined(_WIN64)) && \
     !defined(CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS)
+
 # define CLASP_CMDLINE_ARGS_USE_RECLS
 #endif /* (_WIN32 || _WIN64) && !CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS */
 
 #ifdef CLASP_CMDLINE_ARGS_USE_RECLS
+
 # include <recls/recls.h>
 # if defined(CLASP_USE_WIDE_STRINGS) && \
      !defined(RECLS_CHAR_TYPE_IS_WCHAR)
+
 #  error RECLS_CHAR_TYPE_IS_WCHAR is not defined when CLASP_USE_WIDE_STRINGS is defined!
 # endif /* CLASP_USE_WIDE_STRINGS && !RECLS_CHAR_TYPE_IS_WCHAR */
 #endif /* CLASP_CMDLINE_ARGS_USE_RECLS */
 
 #include <errno.h>
 #include <stdlib.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * notes
@@ -86,6 +90,7 @@ For two reasons, we can only call recls *once* for each wildcard argument:
 
  */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * compiler warning suppression
  */
@@ -96,6 +101,7 @@ For two reasons, we can only call recls *once* for each wildcard argument:
 # pragma warning(disable : 4505)
 #endif /* VC++ and _DEBUG */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * constants and definitions
  */
@@ -105,17 +111,20 @@ For two reasons, we can only call recls *once* for each wildcard argument:
 #define CLASP_SECTION_MIN_                                  (1)
 #define CLASP_SECTION_MAX_                                  (1000)
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * internal flags
  */
 
 #define CLASP_ARG_F_USED_                                   (0x0002)
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * macros
  */
 
 #define CLASP_STRING_NULL_OR_EMPTY_(s)                      (NULL == (s) || '\0' == 0[(s)])
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
@@ -131,6 +140,7 @@ clasp_evaluate_specification_index_(
     int const r = stlsoft_static_cast(int, alias - specifications);
 
 #if _DEBUG
+
     int                             r2;
     clasp_specification_t const*    a2;
 
@@ -157,7 +167,6 @@ struct clasp_expanded_args_t
     clasp_char_t const**                args;       /*!< The array of string pointers */
     int                                 numFiles;
 };
-
 #endif /* CLASP_CMDLINE_ARGS_USE_RECLS */
 
 #ifdef CLASP_CMDLINE_ARGS_USE_RECLS
@@ -203,9 +212,7 @@ RECLS_CALLCONV_DEFAULT clasp_recls_callback(
 
     return 1; /* This continues the search. */
 }
-
 #endif /* CLASP_CMDLINE_ARGS_USE_RECLS */
-
 
 static
 int
@@ -1044,6 +1051,7 @@ clasp_is_valid_alias_section_range_(
     return CLASP_SECTION_MIN_ <= i && CLASP_SECTION_MAX_ >= i;
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
@@ -1356,6 +1364,7 @@ cleanup:
         }
     }
 #else /* ? CLASP_CMDLINE_ARGS_USE_RECLS */
+
     return clasp_parseArguments_NoWild_(flags, argc, argv, argc, argv, specifications, ctxt, args);
 #endif /* CLASP_CMDLINE_ARGS_USE_RECLS */
 }
@@ -2536,6 +2545,7 @@ clasp_countAliases(
 {
     return clasp_countSpecifications(specifications);
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

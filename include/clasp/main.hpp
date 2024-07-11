@@ -4,7 +4,7 @@
  * Purpose: main() entry-point helper functions.
  *
  * Created: 29th December 2010
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -47,6 +47,7 @@
 #ifndef CLASP_INCL_CLASP_HPP_MAIN
 #define CLASP_INCL_CLASP_HPP_MAIN
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * version information
  */
@@ -55,8 +56,9 @@
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
 # define CLASP_VER_CLASP_HPP_MAIN_MINOR     0
 # define CLASP_VER_CLASP_HPP_MAIN_REVISION  2
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      42
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      43
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -105,6 +107,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
@@ -113,6 +116,7 @@ namespace clasp
 {
 namespace main
 {
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * typedefs
@@ -129,12 +133,13 @@ namespace main
  * \see clasp::main::invoke()
  */
 # define CLASP_MAIN_DEFAULT_PROGRAM_NAME                    "MyExampleProgramName"
-
 #endif /* CLASP_DOCUMENTATION_SKIP_SECTION */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * typedefs
  */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * implementation functions
@@ -239,8 +244,8 @@ invoke_(
 }
 
 } /* namespace ximpl */
-
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * functions
@@ -342,12 +347,14 @@ invoke(
     return ximpl::invoke_(argc, argv, pfnMain, programName, specifications, flags, ctxt, usageHelpSuffix);
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
 } /* namespace main */
 } /* namespace clasp */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control

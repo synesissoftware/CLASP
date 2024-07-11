@@ -4,7 +4,7 @@
  * Purpose: Utility class for processing search specifications.
  *
  * Created: 20th May 2010
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -47,6 +47,7 @@
 #ifndef CLASP_INCL_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS
 #define CLASP_INCL_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * version information
  */
@@ -55,8 +56,9 @@
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR       0
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    3
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        23
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        24
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -78,12 +80,14 @@
 #include <utility>
 #include <vector>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
 namespace clasp
 {
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * classes
@@ -93,35 +97,35 @@ class search_specifications
 {
 public: // Member Types
   /// The character type
-  typedef clasp_char_t                          char_type;
+  typedef clasp_char_t                                      char_type;
   /// The string type
-  typedef clasp_string_t                        string_type;
+  typedef clasp_string_t                                    string_type;
   /// The boolean type
-  typedef bool                                  bool_type;
+  typedef bool                                              bool_type;
   /// The size type
-  typedef size_t                                size_type;
+  typedef size_t                                            size_type;
   /// The specification type
   typedef std::pair<
     string_type
   , string_type
-  >                                             specification_type;
+  >                                                         specification_type;
 private:
   typedef platformstl::filesystem_traits<
     char_type
-  >                                             traits_type_;
+  >                                                         traits_type_;
   typedef std::vector<
     specification_type
-  >                                             specifications_type_;
+  >                                                         specifications_type_;
 public:
   /// The value type
-  typedef specifications_type_::value_type      value_type;
+  typedef specifications_type_::value_type                  value_type;
   /// The non-mutating (const) iterator type
-  typedef specifications_type_::const_iterator  const_iterator;
+  typedef specifications_type_::const_iterator              const_iterator;
   /// The non-mutating (const) reference type
-  typedef specifications_type_::const_reference const_reference;
+  typedef specifications_type_::const_reference             const_reference;
 
   /// This type
-  typedef search_specifications                 class_type;
+  typedef search_specifications                             class_type;
 
 public: // Member Constants
   enum
@@ -473,11 +477,13 @@ private: // Fields
   string_type           m_commonPatterns;
 };
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
 } /* namespace clasp */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control
@@ -488,6 +494,7 @@ private: // Fields
 #endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !CLASP_INCL_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS */
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

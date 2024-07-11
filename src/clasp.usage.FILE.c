@@ -4,7 +4,7 @@
  * Purpose: CLASP usage (FILE) facilities.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -52,6 +52,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
  */
@@ -71,6 +72,7 @@ clasp_strcat_X_(clasp_char_t* s1, clasp_char_t const* s2)
 # define clasp_strcat_(s1, s2)                              clasp_strcat_X_((s1), (s2))
 # pragma warning(pop)
 #endif /* _MSC_VER */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions

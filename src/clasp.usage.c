@@ -4,7 +4,7 @@
  * Purpose: CLASP usage facilities.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -49,6 +49,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * constants
  */
@@ -56,6 +57,7 @@
 #define CLASP_MAX_SPECIFICATIONS_                           (511)
 
 static clasp_char_t const               s_unknownIdentifier[] = { '@', 'u', 'n', 'k', 'n', 'o', 'w', 'n', '-', 'i', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'e', 'r', '@', '\0' };
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * external declarations
@@ -128,6 +130,7 @@ LoadStringA(
 #  define clasp_ext_LoadString                              LoadStringA
 # endif /* CLASP_USE_WIDE_STRINGS */
 #endif /* WIN32 || WIN64 */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions

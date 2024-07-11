@@ -4,7 +4,7 @@
  * Purpose: Implicit linking for CLASP
  *
  * Created: 31st July 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_H_IMPLICIT_LINK_MAJOR      2
 # define CLASP_VER_CLASP_H_IMPLICIT_LINK_MINOR      0
 # define CLASP_VER_CLASP_H_IMPLICIT_LINK_REVISION   4
-# define CLASP_VER_CLASP_H_IMPLICIT_LINK_EDIT       22
+# define CLASP_VER_CLASP_H_IMPLICIT_LINK_EDIT       23
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -71,8 +71,8 @@
  * macros and definitions
  */
 
-#define CLASP_STRINGIZE_(x)     #x
-#define CLASP_STRINGIZE(x)      CLASP_STRINGIZE_(x)
+#define CLASP_STRINGIZE_(x)                                 #x
+#define CLASP_STRINGIZE(x)                                  CLASP_STRINGIZE_(x)
 
 /* /////////////////////////////////////////////////////////////////////////
  * architecture discrimination
@@ -235,6 +235,8 @@
 #     define CLASP_IMPL_LINK_COMPILER_NAME                  "vc15"
 #    elif _MSC_VER <= 1929
 #     define CLASP_IMPL_LINK_COMPILER_NAME                  "vc16"
+#    elif _MSC_VER <= 1940
+#     define CLASP_IMPL_LINK_COMPILER_NAME                  "vc17"
 #    else
 #     error Visual C++ version that is >= vc16 is not recognised
 #    endif
@@ -353,8 +355,8 @@
 #  pragma comment(lib, CLASP_IMPL_LINK_LIBRARY_NAME)
 
 # endif /* CLASP_IMPLICIT_LINK_SUPPORT */
-
 #endif /* Win-32 || Win-64 */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control

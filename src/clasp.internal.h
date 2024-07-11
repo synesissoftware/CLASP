@@ -4,7 +4,7 @@
  * Purpose: CLASP internal common header.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -53,6 +53,7 @@
 #endif /* compiler */
 #include <string.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * language agnosticism
  */
@@ -82,6 +83,7 @@
 # define clasp_true_v                                       (1)
 # define clasp_false_v                                      (0)
 #endif /* __cplusplus */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * diagnostics and contract enforcement
@@ -118,6 +120,7 @@ clasp_diagnostic_context_from_args_(
     clasp_arguments_t const* args
 );
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * memory
  */
@@ -129,6 +132,7 @@ void clasp_free_(clasp_diagnostic_context_t const* ctxt, void* pv);
 void* CLASP_CALLCONV clasp_stock_malloc_(void* context, size_t cb);
 void* CLASP_CALLCONV clasp_stock_realloc_(void* context, void* pv, size_t cb);
 void CLASP_CALLCONV clasp_stock_free_(void* context, void* pv);
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * argument-control
@@ -160,6 +164,7 @@ int clasp_useArgument_(
 ,   clasp_argument_t const*     arg
 );
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * character encoding abstraction
  */
@@ -185,6 +190,7 @@ int clasp_useArgument_(
 # define clasp_strrchr_                                     strrchr
 # define CLASP_LITERAL_(x)                                  x
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * string

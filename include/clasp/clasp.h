@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 3rd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -76,9 +76,10 @@
 #define CLASP_VER_MINOR     14
 #define CLASP_VER_PATCH     0
 #define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0x82
+#define CLASP_VER_AB        0x83
 
-#define CLASP_VER           0x000e0082
+#define CLASP_VER           0x000e0083
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -89,6 +90,7 @@
 #ifdef __cplusplus
 # include <string.h>
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * documentation
@@ -106,6 +108,7 @@
 
 /** \defgroup group__clasp__api_usage CLASP Usage API
  */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros
@@ -203,6 +206,7 @@
 
 # define CLASP_DEPRECATED_(msg)                             /* */
 #endif /* CLASP_OBSOLETE */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * platform recognition
@@ -312,6 +316,7 @@
 #  define CLASP_ARCH_IS_X86
 # endif /* _M_?? */
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * basic types
@@ -536,6 +541,7 @@ operator <<(
 }
 #endif /* __cplusplus */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * main API types
  */
@@ -663,7 +669,7 @@ typedef clasp_specification_t                               clasp_alias_t;
  * \param help The help assocated with the flag, e.g. "Causes items to be compared in a case-insensitive fashion"
  *
  */
-# define CLASP_FLAG(alias, mappedArgument, help)                  { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, 0 }
+# define CLASP_FLAG(alias, mappedArgument, help)            { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, 0 }
 
 /** \def CLASP_BIT_FLAG(alias, mappedArgument, bitFlags, help)
  *
@@ -675,14 +681,14 @@ typedef clasp_specification_t                               clasp_alias_t;
  * \param help The help assocated with the flag, e.g. "Causes items to be compared in a case-insensitive fashion"
  *
  */
-# define CLASP_BIT_FLAG(alias, mappedArgument, bitFlags, help)    { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, bitFlags }
+# define CLASP_BIT_FLAG(alias, mappedArgument, bitFlags, help)  { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, bitFlags }
 
 /** \def CLASP_FLAG_ALIAS(alias, mappedArgument)
  *
  * Equivalent to CLASP_FLAG(), but omits the need to specify an
  * empty/NULL help argument
  */
-# define CLASP_FLAG_ALIAS(alias, mappedArgument)                  CLASP_FLAG((alias), (mappedArgument), NULL)
+# define CLASP_FLAG_ALIAS(alias, mappedArgument)            CLASP_FLAG((alias), (mappedArgument), NULL)
 
 /** \def CLASP_OPTION(alias, mappedArgument, help, valueSet)
  *
@@ -694,14 +700,14 @@ typedef clasp_specification_t                               clasp_alias_t;
  * \param valueSet The char-separated list of options; first char is separator; if separator is trailing, indicates value may also be any-other-value
  *
  */
-# define CLASP_OPTION(alias, mappedArgument, help, valueSet)      { CLASP_ARGTYPE_OPTION, alias, mappedArgument, help, valueSet, 0 }
+# define CLASP_OPTION(alias, mappedArgument, help, valueSet)    { CLASP_ARGTYPE_OPTION, alias, mappedArgument, help, valueSet, 0 }
 
 /** \def CLASP_OPTION_ALIAS(alias, mappedArgument)
  *
  * Equivalent to CLASP_OPTION(), but omits the need to specify an
  * empty/NULL help argument
  */
-# define CLASP_OPTION_ALIAS(alias, mappedArgument)                CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
+# define CLASP_OPTION_ALIAS(alias, mappedArgument)          CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
 
 
 #ifdef __cplusplus
@@ -720,7 +726,7 @@ typedef clasp_specification_t                               clasp_alias_t;
  *
  * \note Items in sections with -ve numbers will not be listed in usage.
  */
-# define CLASP_SECTION(N)                                     { CLASP_ARGTYPE_CAST_(N), NULL, NULL, NULL, NULL, 0 }
+# define CLASP_SECTION(N)                                   { CLASP_ARGTYPE_CAST_(N), NULL, NULL, NULL, NULL, 0 }
 
 /** \def CLASP_TACIT_SECTION()
  *
@@ -728,7 +734,7 @@ typedef clasp_specification_t                               clasp_alias_t;
  * the functions in the \ref group__clasp__api_usage.
  *
  */
-# define CLASP_TACIT_SECTION()                                CLASP_SECTION(CLASP_ARGTYPE_TACIT_)
+# define CLASP_TACIT_SECTION()                              CLASP_SECTION(CLASP_ARGTYPE_TACIT_)
 
 /** \def CLASP_GAP_SECTION(sectionLabel)
  *
@@ -738,7 +744,7 @@ typedef clasp_specification_t                               clasp_alias_t;
  * \param sectionLabel A literal character C-style string that serves as a
  *   section label. May be the empty string.
  */
-# define CLASP_GAP_SECTION(sectionLabel)                      { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
+# define CLASP_GAP_SECTION(sectionLabel)                    { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
 
 /** \def CLASP_SPECIFICATION_ARRAY_TERMINATOR
  *
@@ -858,6 +864,7 @@ public: /** Construction */
     }
 #endif /* __cplusplus */
 };
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * parsing API
@@ -1319,6 +1326,7 @@ clasp_valueIsTreatedHyphen(
  */
 #define CLASP_F_PRESERVE_ORIGINAL_ARGUMENT_ORDER            (0x00000400)
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * usage API
  */
@@ -1387,7 +1395,6 @@ struct clasp_usageinfo_t
 #ifndef __cplusplus
 typedef struct clasp_usageinfo_t clasp_usageinfo_t;
 #endif /* !__cplusplus */
-
 
 
 CLASP_CALL(int) clasp_showUsage(
@@ -1623,8 +1630,8 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
 ,   clasp_usageinfo_t const*            info
 ,   clasp_specification_t const         specifications[]
 );
-
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
+
 
 /* ////////////////////////////////////////////////////////////////////// */
 
@@ -1684,7 +1691,6 @@ namespace clasp
     {
         clasp_releaseArguments(args);
     }
-
 
 } /* namespace clasp */
 
@@ -1833,10 +1839,9 @@ namespace stlsoft
     }
 
 } /* namespace stlsoft */
-
 # endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
-
 #endif /* __cplusplus */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control
