@@ -38,6 +38,8 @@ if(WIN32)
 
 	# suppress implicit-link file
 	add_definitions(-DCSTRING_INCL_CSTRING_H_IMPLICIT_LINK)
+
+	add_definitions(-DCLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS)
 endif()
 
 if(UNIX)
