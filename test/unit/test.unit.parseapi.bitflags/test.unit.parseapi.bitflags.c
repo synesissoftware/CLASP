@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP bit-flags functionality
  *
  * Created: 11th December 2011
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -117,12 +117,12 @@ int main(int argc, char **argv)
 
 static void test_1_0()
 {
-    clasp_specification_t Specifications[] =
+    clasp_specification_t   Specifications[] =
     {
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char*     argv[] =
+    char const* const       argv[] =
     {
         "arg0",
 
@@ -166,7 +166,7 @@ static void test_1_0()
 
 static void test_1_1()
 {
-    clasp_specification_t Specifications[] =
+    clasp_specification_t   Specifications[] =
     {
         CLASP_BIT_FLAG(NULL, "-f", 0x0001, ""),
         CLASP_BIT_FLAG(NULL, "-g", 0x0002, ""),
@@ -175,7 +175,7 @@ static void test_1_1()
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char*     argv[] =
+    char const* const       argv[] =
     {
         "arg0",
 
