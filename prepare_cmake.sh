@@ -52,7 +52,7 @@ while [[ $# -gt 0 ]]; do
 CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API.
 Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2008-2019, Matthew Wilson and Synesis Software
-Causes the creation/reinitialisation of the CMake build script(s)
+Creates/reinitialises the CMake build script(s)
 
 $ScriptPath [ ... flags/options ... ]
 
