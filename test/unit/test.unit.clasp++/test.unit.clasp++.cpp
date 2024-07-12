@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for CLASP C++ API
  *
  * Created: 16th July 2009
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -201,7 +201,7 @@ namespace
 
 static void test_1_0()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         NULL,
@@ -233,7 +233,7 @@ static void test_1_0()
 
 static void test_1_1()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "/dir0/arg0",
         "abc",
@@ -266,7 +266,7 @@ static void test_1_1()
 
 static void test_1_2()
 {
-    char* argv[] =
+    char const* argv[] =
     {
 #ifdef _WIN32
         "C:\\dir0\\arg0.exe",
@@ -304,7 +304,7 @@ static void test_1_2()
 
 static void test_1_3()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "abc",
@@ -338,7 +338,7 @@ static void test_1_3()
 
 static void test_1_4()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "abc",
@@ -373,7 +373,7 @@ static void test_1_4()
 
 static void test_1_5()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "abc",
@@ -410,7 +410,7 @@ static void test_1_5()
 
 static void test_1_6()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "abc",
@@ -465,7 +465,7 @@ static void test_1_6()
 
 static void test_1_7()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "abc",
@@ -527,7 +527,7 @@ static void test_1_9()
 
 static void test_1_10()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "abc",
@@ -576,7 +576,7 @@ static void test_1_13()
 
 static void test_1_14()
 {
-    char* argv[] =
+    char const* argv[] =
     {
             "arg0"
         ,   "--option-1=true"
@@ -631,7 +631,7 @@ static void test_1_14()
 
 static void test_1_15()
 {
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "--clipboard",
@@ -689,7 +689,7 @@ static void test_2_01()
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "-v",
@@ -756,7 +756,7 @@ static void test_2_01_c()
 
     Specifications[0] = Alias_Flag_Version; // ... it is assigned here
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "-v",
@@ -825,7 +825,7 @@ static void test_2_02(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "-v",
@@ -891,7 +891,7 @@ static void test_2_03(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "-v",
@@ -956,7 +956,7 @@ static void test_2_04(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "-v",
@@ -1022,7 +1022,7 @@ static void test_2_05(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "-v",
@@ -1089,7 +1089,7 @@ static void test_2_07(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "-m",
@@ -1150,7 +1150,7 @@ static void test_2_08(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "--length=1",
@@ -1197,7 +1197,7 @@ static void test_2_09(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "--length=1",
@@ -1250,7 +1250,7 @@ static void test_2_10(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "--length=1",
@@ -1303,7 +1303,7 @@ static void test_2_11(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "--length=1.1",
@@ -1356,7 +1356,7 @@ static void test_2_12(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "--length=1",
@@ -1409,7 +1409,7 @@ static void test_2_13(void)
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
-    char* argv[] =
+    char const* argv[] =
     {
         "arg0",
         "--length=1",
