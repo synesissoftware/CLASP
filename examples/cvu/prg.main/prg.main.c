@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the prg.main example project.
  *
  * Created: 8th December 2011
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -108,7 +108,7 @@ int main1(clasp_arguments_t const* args)
   else
   {
     puts("");
-    printf("flags:\t%lu\n", args->numFlags);
+    printf("flags:\t%lu\n", (unsigned long)args->numFlags);
     { size_t i; for (i = 0; i != args->numFlags; ++i)
     {
         clasp_argument_t const* const flag = args->flags + i;
@@ -119,7 +119,7 @@ int main1(clasp_arguments_t const* args)
 
 
     puts("");
-    printf("options:\t%lu\n", args->numOptions);
+    printf("options:\t%lu\n", (unsigned long)args->numOptions);
 
     { size_t i; for (i = 0; i != args->numOptions; ++i)
     {
@@ -131,7 +131,7 @@ int main1(clasp_arguments_t const* args)
 
 
     puts("");
-    printf("values:\t%lu\n", args->numValues);
+    printf("values:\t%lu\n", (unsigned long)args->numValues);
 
     { size_t i; for (i = 0; i != args->numValues; ++i)
     {

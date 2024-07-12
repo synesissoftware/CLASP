@@ -4,7 +4,7 @@
  * Purpose: Component test for USAGE by Windows resources
  *
  * Created: 7th March 2012
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -297,13 +297,13 @@ clasp_showBodyIntoMemory(
 {
     stlsoft_C_string_slice_m_t* const   sl          =   info->param;
     char*                               p           =   (char*)sl->ptr;
-    size_t                              n;
+    size_t                              i;
     int                                 tabWidth    =   (info->assumedTabWidth < 0) ? -info->assumedTabWidth : 1;
     char const*                         ws          =   (info->assumedTabWidth < 0) ? "                            " : "\t";
 
     STLSOFT_SUPPRESS_UNUSED(args);
 
-    for (n = 0; NULL != specifications->mappedArgument; ++specifications)
+    for (i = 0; NULL != specifications->mappedArgument; ++specifications)
     {
         if (NULL != specifications->name &&
             '\0' != specifications->name[0])

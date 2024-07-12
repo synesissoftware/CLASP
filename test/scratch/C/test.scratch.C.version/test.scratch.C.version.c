@@ -4,7 +4,7 @@
  * Purpose: Scratch test for version
  *
  * Created: 6th December 2011
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -62,7 +62,7 @@ int main(int argc, char** argv)
     else
     {
         puts("");
-        printf("flags:\t%lu\n", args->numFlags);
+        printf("flags:\t%lu\n", (unsigned long)args->numFlags);
 
         { size_t i; for (i = 0; i != args->numFlags; ++i)
         {
@@ -73,7 +73,7 @@ int main(int argc, char** argv)
 
 
         puts("");
-        printf("options:\t%lu\n", args->numOptions);
+        printf("options:\t%lu\n", (unsigned long)args->numOptions);
 
         { size_t i; for (i = 0; i != args->numOptions; ++i)
         {
@@ -84,7 +84,7 @@ int main(int argc, char** argv)
 
 
         puts("");
-        printf("values:\t%lu\n", args->numValues);
+        printf("values:\t%lu\n", (unsigned long)args->numValues);
 
         { size_t i; for (i = 0; i != args->numValues; ++i)
         {
@@ -135,7 +135,7 @@ unsigned nSkip = 0;
 size_t const n = clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &arg, nSkip);
 if (0 != n)
 {
-  fprintf(stderr, "%lu unrecognised argument(s):\n", n);
+  fprintf(stderr, "%lu unrecognised argument(s):\n", (unsigned long)n);
   do
   {
     fprintf(stderr, "\tunrecognised argument: %s\n", args->argv[arg->cmdLineIndex]);
@@ -167,7 +167,7 @@ unsigned nSkip = 0;
 size_t const n = clasp_reportUnusedValues(args, &arg, nSkip);
 if (0 != n)
 {
-  fprintf(stderr, "%lu unused argument(s):\n", n);
+  fprintf(stderr, "%lu unused argument(s):\n", (unsigned long)n);
   do
   {
     fprintf(stderr, "\tunused argument: %s\n", args->argv[arg->cmdLineIndex]);

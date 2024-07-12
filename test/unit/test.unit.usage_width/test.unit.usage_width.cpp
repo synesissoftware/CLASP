@@ -4,7 +4,7 @@
  * Purpose: Unit-tests usage-width functionality
  *
  * Created: 3rd April 2014
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -365,13 +365,15 @@ static void test_single_flag_changing_positiveTabSizes()
     int tabSize                 =   0;
     int showBlanksBetweenItems  =   0;
 
-    strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
+    {
+        strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
+        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
+    }
 
     for (tabSize = 1; 34 != tabSize; ++tabSize)
     {
