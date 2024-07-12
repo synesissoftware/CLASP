@@ -172,10 +172,10 @@
 # define CLASP_CALLCONV
 #endif /* !CLASP_CALLCONV */
 
-#define CLASP_CALL(rt)                                      CLASP_DECLSPEC CLASP_EXTERN_C rt CLASP_CALLCONV
+#define CLASP_CALL(rt)                                      CLASP_EXTERN_C CLASP_DECLSPEC rt CLASP_CALLCONV
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
-# define CLASP_CPP_CALL(rt)                                 CLASP_DECLSPEC extern "C++" rt CLASP_CALLCONV
+# define CLASP_CPP_CALL(rt)                                 extern "C++" CLASP_DECLSPEC rt CLASP_CALLCONV
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -184,6 +184,7 @@
 # if 0
 # elif defined(__cplusplus) && \
        __cplusplus >= 201402L
+
 #  define CLASP_DEPRECATED_(msg)                            [[deprecated(msg)]]
 # elif 0 || \
        defined(__GNUC__) || \
@@ -206,6 +207,15 @@
 
 # define CLASP_DEPRECATED_(msg)                             /* */
 #endif /* CLASP_OBSOLETE */
+
+#define CLASP_CALL_DEPRECATED(rt, msg)  \
+                                        \
+    CLASP_EXTERN_C                      \
+    CLASP_DECLSPEC                      \
+    CLASP_DEPRECATED_(msg)              \
+    rt \
+    CLASP_CALLCONV
+
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -1485,8 +1495,7 @@ clasp_countSpecifications(
  *
  * \deprecated Instead use clasp_countSpecifications()
  */
-CLASP_DEPRECATED_("clasp_countAliases() is deprecated and will be removed in a future release; use clasp_countSpecifications() instead")
-CLASP_CALL(size_t)
+CLASP_CALL_DEPRECATED(size_t, "clasp_countAliases() is deprecated and will be removed in a future release; use clasp_countSpecifications() instead")
 clasp_countAliases(
     clasp_specification_t const specifications[]
 );
@@ -1523,8 +1532,8 @@ CLASP_CALL(void) clasp_showBodyByFILE(
  *
  * \deprecated Instead use clasp_showUsage()
  */
-CLASP_DEPRECATED_("clasp_show_usage() is deprecated and will be removed in a future release; use clasp_showUsage() instead")
-CLASP_CALL(int) clasp_show_usage(
+CLASP_CALL_DEPRECATED(int, "clasp_show_usage() is deprecated and will be removed in a future release; use clasp_showUsage() instead")
+clasp_show_usage(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_specification_t const         specifications[]
 ,   clasp_char_t const*                 toolName    /* "rcp" */
@@ -1548,8 +1557,8 @@ CLASP_CALL(int) clasp_show_usage(
  *
  * \deprecated Instead use clasp_showHeader()
  */
-CLASP_DEPRECATED_("clasp_show_header() is deprecated and will be removed in a future release; use clasp_showHeader() instead")
-CLASP_CALL(int) clasp_show_header(
+CLASP_CALL_DEPRECATED(int, "clasp_show_header() is deprecated and will be removed in a future release; use clasp_showHeader() instead")
+clasp_show_header(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_specification_t const         specifications[]
 ,   clasp_char_t const*                 toolName
@@ -1569,8 +1578,8 @@ CLASP_CALL(int) clasp_show_header(
  *
  * \deprecated Instead use clasp_showBody()
  */
-CLASP_DEPRECATED_("clasp_show_body() is deprecated and will be removed in a future release; use clasp_showBody() instead")
-CLASP_CALL(int) clasp_show_body(
+CLASP_CALL_DEPRECATED(int, "clasp_show_body() is deprecated and will be removed in a future release; use clasp_showBody() instead")
+clasp_show_body(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_specification_t const         specifications[]
 ,   void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
@@ -1585,8 +1594,8 @@ CLASP_CALL(int) clasp_show_body(
  *
  * \deprecated Instead use clasp_showVersion()
  */
-CLASP_DEPRECATED_("clasp_show_version() is deprecated and will be removed in a future release; use clasp_showVersion() instead")
-CLASP_CALL(int) clasp_show_version(
+CLASP_CALL_DEPRECATED(int, "clasp_show_version() is deprecated and will be removed in a future release; use clasp_showVersion() instead")
+clasp_show_version(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_char_t const*                 toolName
 ,   int                                 major
@@ -1602,8 +1611,8 @@ CLASP_CALL(int) clasp_show_version(
  *
  * \deprecated Instead use clasp_showVersionByFILE()
  */
-CLASP_DEPRECATED_("clasp_show_version_by_FILE() is deprecated and will be removed in a future release; use clasp_showVersionByFILE() instead")
-CLASP_CALL(void) clasp_show_version_by_FILE(
+CLASP_CALL_DEPRECATED(void, "clasp_show_version_by_FILE() is deprecated and will be removed in a future release; use clasp_showVersionByFILE() instead")
+clasp_show_version_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
 ,   clasp_specification_t const         specifications[]
@@ -1613,8 +1622,8 @@ CLASP_CALL(void) clasp_show_version_by_FILE(
  *
  * \deprecated Instead use clasp_showHeaderByFILE()
  */
-CLASP_DEPRECATED_("clasp_show_header_by_FILE() is deprecated and will be removed in a future release; use clasp_showHeaderByFILE() instead")
-CLASP_CALL(void) clasp_show_header_by_FILE(
+CLASP_CALL_DEPRECATED(void, "clasp_show_header_by_FILE() is deprecated and will be removed in a future release; use clasp_showHeaderByFILE() instead")
+clasp_show_header_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
 ,   clasp_specification_t const         specifications[]
@@ -1624,8 +1633,8 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
  *
  * \deprecated Instead use clasp_showBodyByFILE()
  */
-CLASP_DEPRECATED_("clasp_show_body_by_FILE() is deprecated and will be removed in a future release; use clasp_showBodyByFILE() instead")
-CLASP_CALL(void) clasp_show_body_by_FILE(
+CLASP_CALL_DEPRECATED(void, "clasp_show_body_by_FILE() is deprecated and will be removed in a future release; use clasp_showBodyByFILE() instead")
+clasp_show_body_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
 ,   clasp_specification_t const         specifications[]
