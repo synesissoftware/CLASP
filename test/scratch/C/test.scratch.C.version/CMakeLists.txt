@@ -13,7 +13,12 @@ target_link_libraries(test_scratch_C_version
 target_compile_options(test_scratch_C_version PRIVATE
 	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
 		-Werror -Wall -Wextra -pedantic
+	>
+	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:
 		-Wno-incompatible-pointer-types-discards-qualifiers
+	>
+	$<$<CXX_COMPILER_ID:GNU>:
+		-Wno-incompatible-pointer-types
 	>
 	$<$<CXX_COMPILER_ID:MSVC>:
 		/WX /W4
