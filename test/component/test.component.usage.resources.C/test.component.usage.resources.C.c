@@ -929,7 +929,7 @@ static void test_header_with_RRRRr(void)
     }
 }
 
-static void test_1_9()
+static void test_1_9(void)
 {
 }
 
@@ -1164,11 +1164,11 @@ static void test_body_5()
     }
 }
 
-static void test_1_15()
+static void test_1_15(void)
 {
 }
 
-static void test_1_16()
+static void test_1_16(void)
 {
 }
 
@@ -1264,127 +1264,127 @@ static void test_expanded_usage_2()
     }
 }
 
-static void test_1_19()
+static void test_1_19(void)
 {
 }
 
-static void test_1_20()
+static void test_1_20(void)
 {
 }
 
-static void test_1_21()
+static void test_1_21(void)
 {
 }
 
-static void test_1_22()
+static void test_1_22(void)
 {
 }
 
-static void test_1_23()
+static void test_1_23(void)
 {
 }
 
-static void test_1_24()
+static void test_1_24(void)
 {
 }
 
-static void test_1_25()
+static void test_1_25(void)
 {
 }
 
-static void test_1_26()
+static void test_1_26(void)
 {
 }
 
-static void test_1_27()
+static void test_1_27(void)
 {
 }
 
-static void test_1_28()
+static void test_1_28(void)
 {
 }
 
-static void test_1_29()
+static void test_1_29(void)
 {
 }
 
-static void test_1_30()
+static void test_1_30(void)
 {
 }
 
-static void test_1_31()
+static void test_1_31(void)
 {
 }
 
-static void test_1_32()
+static void test_1_32(void)
 {
 }
 
-static void test_1_33()
+static void test_1_33(void)
 {
 }
 
-static void test_1_34()
+static void test_1_34(void)
 {
 }
 
-static void test_1_35()
+static void test_1_35(void)
 {
 }
 
-static void test_1_36()
+static void test_1_36(void)
 {
 }
 
-static void test_1_37()
+static void test_1_37(void)
 {
 }
 
-static void test_1_38()
+static void test_1_38(void)
 {
 }
 
-static void test_1_39()
+static void test_1_39(void)
 {
 }
 
-static void test_1_40()
+static void test_1_40(void)
 {
 }
 
-static void test_1_41()
+static void test_1_41(void)
 {
 }
 
-static void test_1_42()
+static void test_1_42(void)
 {
 }
 
-static void test_1_43()
+static void test_1_43(void)
 {
 }
 
-static void test_1_44()
+static void test_1_44(void)
 {
 }
 
-static void test_1_45()
+static void test_1_45(void)
 {
 }
 
-static void test_1_46()
+static void test_1_46(void)
 {
 }
 
-static void test_1_47()
+static void test_1_47(void)
 {
 }
 
-static void test_1_48()
+static void test_1_48(void)
 {
 }
 
-static void test_1_49()
+static void test_1_49(void)
 {
 }
 
