@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for `clasp_findFlagOrOption()`
  *
  * Created: 11th December 2011
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -14,6 +14,7 @@
  */
 
 #include <clasp/clasp.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -29,6 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
  */
@@ -38,6 +40,7 @@
 # pragma warning(push)
 # pragma warning(disable : 4996)
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -63,6 +66,7 @@ static void test_1_16(void);
 static void test_1_17(void);
 static void test_1_18(void);
 static void test_1_19(void);
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * main
@@ -106,13 +110,14 @@ int main(int argc, char **argv)
   return retCode;
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test function implementations
  */
 
 static void test_1_0()
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -138,7 +143,7 @@ static void test_1_0()
 
 static void test_1_1()
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -173,7 +178,7 @@ static void test_1_1()
 
 static void test_1_2()
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -203,7 +208,7 @@ static void test_1_2()
 
 static void test_1_3()
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -240,7 +245,7 @@ static void test_1_3()
 
 static void test_1_4()
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -275,7 +280,7 @@ static void test_1_4()
 
 static void test_1_5()
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -367,6 +372,7 @@ static void test_1_18()
 static void test_1_19()
 {
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 
