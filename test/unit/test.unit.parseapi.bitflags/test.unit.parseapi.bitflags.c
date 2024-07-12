@@ -219,7 +219,7 @@ static void test_1_1()
 
 static void test_1_2()
 {
-    clasp_specification_t Specifications[] =
+    clasp_specification_t   Specifications[] =
     {
         CLASP_BIT_FLAG(NULL, "-f", 0x0001, ""),
         CLASP_BIT_FLAG(NULL, "-g", 0x0002, ""),
@@ -228,7 +228,7 @@ static void test_1_2()
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char*       argv[] =
+    char const* const       argv[] =
     {
         "arg0",
 
@@ -236,7 +236,7 @@ static void test_1_2()
 
         NULL
     };
-    int const   argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
+    int const               argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
 
     {
         clasp_arguments_t const*  args;
