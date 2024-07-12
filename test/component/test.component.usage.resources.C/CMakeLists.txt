@@ -6,7 +6,10 @@ add_executable(test.component.usage.resources.C
 link_directories(${CMAKE_SOURCE_DIR}/projects/core)
 
 target_link_libraries(test.component.usage.resources.C
-	xTests::xTests.core
+	PRIVATE
+		core
+		$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+		xTests::xTests.core
 )
 
 target_compile_options(test.component.usage.resources.C PRIVATE

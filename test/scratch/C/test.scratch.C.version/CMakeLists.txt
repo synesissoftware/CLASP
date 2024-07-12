@@ -6,7 +6,8 @@ add_executable(test_scratch_C_version
 link_directories(${CMAKE_SOURCE_DIR}/projects/core)
 
 target_link_libraries(test_scratch_C_version
-	clasp
+	PRIVATE
+		core
 )
 
 target_compile_options(test_scratch_C_version PRIVATE

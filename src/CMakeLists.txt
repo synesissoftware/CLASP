@@ -11,7 +11,7 @@ SET (CORE_SRCS
 	${CORE_SRC_DIR}/clasp.memory.c
 )
 
-add_library(clasp
+add_library(core
 	${CORE_SRCS}
 )
 
@@ -24,8 +24,21 @@ endif(APPLE)
 
 if(WIN32)
 
-	message(FATAL_ERROR "Use of CMake on Windows not currently supported")
-endif(WIN32)
+	if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+
+		message (STATUS "Compiling for 64-bit Windows")
+
+		add_definitions(-DWIN64)
+	else()
+
+		message (STATUS "Compiling for 32-bit Windows")
+
+		add_definitions(-DWIN32)
+	endif()
+
+	# suppress implicit-link file
+	add_definitions(-DCSTRING_INCL_CSTRING_H_IMPLICIT_LINK)
+endif()
 
 if(UNIX)
 
@@ -44,17 +57,26 @@ set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
 )
 
-set_target_properties(clasp PROPERTIES
-	OUTPUT_NAME "clasp"
-	PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
+set_target_properties(core
+	PROPERTIES
+		OUTPUT_NAME "clasp"
+		PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
 )
 
-target_include_directories(clasp PUBLIC
+target_include_directories(core PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
 	$<INSTALL_INTERFACE:include>
 )
 
-target_compile_options(clasp PRIVATE
+target_link_libraries(core
+	PRIVATE
+		# $<$<OR:$<STREQUAL:${recls_FOUND},>>:recls>
+		# recls
+		# STLSoft::STLSoft
+)
+
+
+target_compile_options(core PRIVATE
 	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
 		-Werror -Wall -Wextra -pedantic
 
@@ -73,7 +95,7 @@ target_compile_options(clasp PRIVATE
 # ##########################################################
 # install
 
-install(TARGETS clasp
+install(TARGETS core
 	EXPORT project-targets
 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

@@ -6,8 +6,9 @@ add_executable(test.unit.main.exceptions
 link_directories(${CMAKE_SOURCE_DIR}/projects/core)
 
 target_link_libraries(test.unit.main.exceptions
-	clasp
-	xTests::xTests.core
+	PRIVATE
+		core
+		xTests::xTests.core
 )
 
 target_compile_options(test.unit.main.exceptions PRIVATE
@@ -18,6 +19,8 @@ target_compile_options(test.unit.main.exceptions PRIVATE
 	>
 	$<$<CXX_COMPILER_ID:MSVC>:
 		/WX /W4
+
+		/wd4996
 	>
 )
 

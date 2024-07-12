@@ -29,7 +29,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 # ##########################################################
 # project
 
-project(clasp
+project(CLASP
 	DESCRIPTION "CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API."
 	HOMEPAGE_URL "https://github.com/synesissoftware/CLASP"
 	LANGUAGES C CXX
@@ -93,7 +93,13 @@ if(BUILD_TESTING)
 
 	message("-- enabled building of tests ...")
 
-	set(xTests_REQUIRED_VERSION_ 0.21.2)
+	set(STLSoft_REQUIRED_VERSION_ 0.11)
+
+	find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
+
+	set(xTests_REQUIRED_VERSION_ 0.22)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 

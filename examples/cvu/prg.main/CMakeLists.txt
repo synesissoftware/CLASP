@@ -4,7 +4,8 @@ add_executable(cvu_prg_main
 )
 
 target_link_libraries(cvu_prg_main
-	clasp
+	PRIVATE
+		core
 )
 
 target_compile_options(cvu_prg_main PRIVATE
