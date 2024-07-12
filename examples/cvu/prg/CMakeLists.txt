@@ -14,7 +14,9 @@ target_compile_options(cvu_prg PRIVATE
 	-Wno-incompatible-pointer-types-discards-qualifiers
 	-Wno-incompatible-pointer-types
 	>
-	$<$<CXX_COMPILER_ID:MSVC>: /WX /W4>
+	$<$<CXX_COMPILER_ID:MSVC>:
+		/WX /W4
+	>
 )
 
 

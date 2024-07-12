@@ -15,7 +15,9 @@ target_compile_options(test_scratch_C_version PRIVATE
 		-Werror -Wall -Wextra -pedantic
 		-Wno-incompatible-pointer-types-discards-qualifiers
 	>
-	$<$<CXX_COMPILER_ID:MSVC>: /WX /W4>
+	$<$<CXX_COMPILER_ID:MSVC>:
+		/WX /W4
+	>
 )
 
 
