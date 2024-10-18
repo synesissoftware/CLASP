@@ -4,7 +4,7 @@
  * Purpose: Unit-tests exceptional inputs
  *
  * Created: 7th March 2013
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -49,6 +49,17 @@ static FILE* Test_stderr = Real_stderr; /* NOTE: this assignment here is solely 
 
 /* Standard C header files */
 #include <stdlib.h>
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * compatibility
+ */
+
+#if 0 ||\
+    defined(_MSC_VER) ||\
+    0
+# define unlink                                             _unlink
+#endif
 
 
 /* /////////////////////////////////////////////////////////////////////////

@@ -4,7 +4,7 @@
  * Purpose: The CLASP::Util::SearchSpecs library API.
  *
  * Created: 7th March 2012
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -47,6 +47,7 @@
 #ifndef CLASP_INCL_CLASP_UTIL_H_SEARCHSPECS
 #define CLASP_INCL_CLASP_UTIL_H_SEARCHSPECS
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * version information
  */
@@ -55,8 +56,9 @@
 # define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_MINOR       0
 # define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_REVISION    2
-# define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_EDIT        8
+# define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_EDIT        9
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -64,6 +66,10 @@
 
 #include <clasp/clasp.h>
 
+
+/* /////////////////////////////////////////////////////////////////////////
+ * types
+ */
 
 struct clasp_util_searchspec_t
 {
@@ -91,6 +97,10 @@ typedef struct clasp_util_searchspecs_t clasp_util_searchspecs_t;
 #endif /* !__cplusplus */
 
 
+/* /////////////////////////////////////////////////////////////////////////
+ * API functions
+ */
+
 /**
  *
  * \retval 0 The operation succeeded
@@ -115,6 +125,7 @@ clasp_util_searchSpecs_release(
     clasp_util_searchspecs_t const*     searchspecs
 );
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control
  */
@@ -124,6 +135,7 @@ clasp_util_searchSpecs_release(
 #endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !CLASP_INCL_CLASP_UTIL_H_SEARCHSPECS */
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

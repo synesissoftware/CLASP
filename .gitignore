@@ -1,6 +1,7 @@
 
 # directories (by name)
 
+/.git-old/
 /.vs/
 
 .svn/
@@ -9,22 +10,27 @@
 /_internal/
 
 /bin/
-/doc/
+/ipch/
 /lib/
 
+/doc/
+/dox/
+/ideas/
+/releases/
+/scratch/
+/temp/
+
+/include/b64/
 /include/shwild/
 /include/xcontract/
 /include/xcover/
 /include/xtests/
 
+/src/b64/
 /src/shwild/
 /src/xcontract/
 /src/xcover/
 /src/xtests/
-
-Win32/
-ipch/
-x64/
 
 Debug Multithreaded DLL/
 Debug Multithreaded Dll/
@@ -55,6 +61,9 @@ Unicode Release/
 
 vc9/
 
+Win32/
+x64/
+
 
 # directories (by pattern)
 
@@ -71,8 +80,8 @@ clasp.vc9.sln
 
 list_changes.cmd
 prepare.cmd
-update_deps.cmd
 sh.exe.stackdump
+update_deps.cmd
 
 build/makefile.tmpl
 build/makefile.tools.xml
@@ -90,6 +99,7 @@ build/makefile.tools.xml
 *.chm
 *.d
 *.dll
+*.dsp
 *.dylib
 *.exe
 *.gch
@@ -126,5 +136,17 @@ build/makefile.tools.xml
 *.unsuccessfulbuild
 *.vcproj*.user
 *.vcxproj*.user
+*.xcuserstate
 *.zip
+
+RCa0*
+RCb0*
+
+*.vc71.sln
+*.vc8.sln
+*.vc9.sln
+
+build/*.tmplgen
+build/*.tmpl
+build/*.tools.xml
 

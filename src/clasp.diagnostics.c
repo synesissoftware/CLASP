@@ -4,7 +4,7 @@
  * Purpose: CLASP diagnostics facilities.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -49,6 +49,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions

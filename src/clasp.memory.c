@@ -4,7 +4,7 @@
  * Purpose: CLASP memory facilities.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -46,6 +46,7 @@
 #include "clasp.internal.h"
 
 #include <stdlib.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions

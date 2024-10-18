@@ -4,7 +4,7 @@
  * Purpose: CLASP string facilities.
  *
  * Created: 4th June 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -45,6 +45,7 @@
 
 #define _CRT_NON_CONFORMING_WCSTOK
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
@@ -53,6 +54,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
@@ -63,6 +65,7 @@
 #else
 # define clasp_strtok_                                      strtok
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions

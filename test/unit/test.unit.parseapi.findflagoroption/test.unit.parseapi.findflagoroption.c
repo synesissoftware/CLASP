@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for `clasp_findFlagOrOption()`
  *
  * Created: 11th December 2011
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -14,6 +14,7 @@
  */
 
 #include <clasp/clasp.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -29,6 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
  */
@@ -38,6 +40,7 @@
 # pragma warning(push)
 # pragma warning(disable : 4996)
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -63,6 +66,7 @@ static void test_1_16(void);
 static void test_1_17(void);
 static void test_1_18(void);
 static void test_1_19(void);
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * main
@@ -106,13 +110,14 @@ int main(int argc, char **argv)
   return retCode;
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test function implementations
  */
 
-static void test_1_0()
+static void test_1_0(void)
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -136,9 +141,9 @@ static void test_1_0()
   }
 }
 
-static void test_1_1()
+static void test_1_1(void)
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -171,9 +176,9 @@ static void test_1_1()
   }
 }
 
-static void test_1_2()
+static void test_1_2(void)
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -201,9 +206,9 @@ static void test_1_2()
   }
 }
 
-static void test_1_3()
+static void test_1_3(void)
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -238,9 +243,9 @@ static void test_1_3()
   }
 }
 
-static void test_1_4()
+static void test_1_4(void)
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -273,9 +278,9 @@ static void test_1_4()
   }
 }
 
-static void test_1_5()
+static void test_1_5(void)
 {
-  char*     argv[] =
+  char const* const         argv[] =
   {
     "program",
 
@@ -312,61 +317,62 @@ static void test_1_5()
   }
 }
 
-static void test_1_6()
+static void test_1_6(void)
 {
 }
 
-static void test_1_7()
+static void test_1_7(void)
 {
 }
 
-static void test_1_8()
+static void test_1_8(void)
 {
 }
 
-static void test_1_9()
+static void test_1_9(void)
 {
 }
 
-static void test_1_10()
+static void test_1_10(void)
 {
 }
 
-static void test_1_11()
+static void test_1_11(void)
 {
 }
 
-static void test_1_12()
+static void test_1_12(void)
 {
 }
 
-static void test_1_13()
+static void test_1_13(void)
 {
 }
 
-static void test_1_14()
+static void test_1_14(void)
 {
 }
 
-static void test_1_15()
+static void test_1_15(void)
 {
 }
 
-static void test_1_16()
+static void test_1_16(void)
 {
 }
 
-static void test_1_17()
+static void test_1_17(void)
 {
 }
 
-static void test_1_18()
+static void test_1_18(void)
 {
 }
 
-static void test_1_19()
+static void test_1_19(void)
 {
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

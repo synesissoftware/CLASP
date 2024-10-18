@@ -5,7 +5,7 @@
  *          components
  *
  * Created: 5th December 2014
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -49,6 +49,7 @@
 #ifndef CLASP_INCL_CLASP_INTERNAL_H_SHIM_MACROS
 #define CLASP_INCL_CLASP_INTERNAL_H_SHIM_MACROS
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
@@ -57,9 +58,11 @@
 # include <clasp/clasp.h>
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * macros
  */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * compiler compatibility
@@ -175,6 +178,7 @@
 
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control
  */
@@ -184,6 +188,7 @@
 #endif /* STLSOFT_PPF_pragma_once_SUPPORT */
 
 #endif /* CLASP_INCL_CLASP_INTERNAL_H_SHIM_MACROS */
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

@@ -4,7 +4,7 @@
  * Purpose: C++ layer for the CLASP library.
  *
  * Created: 31st July 2008
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -132,7 +132,9 @@ namespace clasp
  * typedefs
  */
 
-typedef std::basic_string<clasp_char_t>                     clasp_string_t;
+typedef std::basic_string<
+    clasp_char_t
+>                                                           clasp_string_t;
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -160,8 +162,8 @@ class argument_exception
     : public clasp_exception
 {
 public: // Member Types
-    typedef clasp_exception     parent_class_type;
-    typedef argument_exception  class_type;
+    typedef clasp_exception                                 parent_class_type;
+    typedef argument_exception                              class_type;
 
 public: // Construction
     explicit argument_exception(message_string_type const& message, string_type const& optionName)
@@ -1702,7 +1704,6 @@ namespace ximpl
     }
 #endif /* 0 */
 } /* namespace ximpl */
-
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -2836,7 +2837,9 @@ require_option(
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    typedef ss_typename_type_k ::stlsoft::is_numeric_type<R>::type      numeric_t_;
+    typedef ss_typename_type_k ::stlsoft::is_numeric_type<
+        R
+    >::type                                                 numeric_t_;
 
     ::clasp::ximpl::require_option_dispatch_(
         numeric_t_()
@@ -2880,7 +2883,9 @@ require_option(
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    typedef ss_typename_type_k ::stlsoft::is_numeric_type<R>::type      numeric_t_;
+    typedef ss_typename_type_k ::stlsoft::is_numeric_type<
+        R
+    >::type                                                 numeric_t_;
 
     ::clasp::ximpl::require_option_dispatch_(
         numeric_t_()

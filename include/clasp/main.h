@@ -4,7 +4,7 @@
  * Purpose: main() entry-point helper functions.
  *
  * Created: 29th December 2010
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -47,6 +47,7 @@
 #ifndef CLASP_INCL_CLASP_H_MAIN
 #define CLASP_INCL_CLASP_H_MAIN
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * version information
  */
@@ -55,8 +56,9 @@
 # define CLASP_VER_CLASP_H_MAIN_MAJOR       2
 # define CLASP_VER_CLASP_H_MAIN_MINOR       0
 # define CLASP_VER_CLASP_H_MAIN_REVISION    2
-# define CLASP_VER_CLASP_H_MAIN_EDIT        19
+# define CLASP_VER_CLASP_H_MAIN_EDIT        20
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -74,10 +76,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #ifdef CLASP_USE_WIDE_STRINGS
 # include <wchar.h>
 #endif /* CLASP_USE_WIDE_STRINGS */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
@@ -105,6 +107,7 @@
 # endif
 #endif
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes - 2
  */
@@ -115,6 +118,7 @@
 
 # include <winstl/error/error_functions.h>
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * implementation
@@ -180,6 +184,7 @@ clasp_main_internal_strerror_(int en)
 # endif /* CLASP_MAIN_USE_WINSTL_ERROR_FUNCTIONS */
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * functions
  */
@@ -231,6 +236,7 @@ clasp_main_invoke(
     }
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control
  */
@@ -240,6 +246,7 @@ clasp_main_invoke(
 #endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !CLASP_INCL_CLASP_H_MAIN */
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

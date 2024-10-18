@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for custom type(s).
  *
  * Created: 12th September 2014
- * Updated: 2nd February 2024
+ * Updated: 12th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -168,7 +168,7 @@ using ::clasp::arguments_t;
 static void test_parse_Colour_missing_option_empty_default_C_style_string()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -188,7 +188,7 @@ static void test_parse_Colour_missing_option_empty_default_C_style_string()
 static void test_parse_Colour_missing_option_empty_default_std_string()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -208,7 +208,7 @@ static void test_parse_Colour_missing_option_empty_default_std_string()
 static void test_parse_Colour_missing_option_default_C_style_string()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -229,7 +229,7 @@ static void test_parse_Colour_missing_option_default_C_style_string()
 static void test_parse_Colour_missing_option_default_std_string()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -252,7 +252,7 @@ static void test_parse_Colour_missing_option_default_std_string()
 static void test_parse_Colour_missing_option_default_UDT()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -274,7 +274,7 @@ static void test_parse_Colour_missing_option_default_UDT()
 static void test_parse_Colour_missing_option_value_default_C_style_string()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -297,7 +297,7 @@ static void test_parse_Colour_missing_option_value_default_C_style_string()
 static void test_parse_Colour_missing_option_value_default_std_string()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -322,7 +322,7 @@ static void test_parse_Colour_missing_option_value_default_std_string()
 static void test_parse_Colour_missing_option_value_default_UDT()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -346,7 +346,7 @@ static void test_parse_Colour_missing_option_value_default_UDT()
 static void test_parse_Colour_valid_option_value()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
@@ -369,7 +369,7 @@ static void test_parse_Colour_valid_option_value()
 static void test_parse_Colour_invalid_option_value_default_C_style_string()
 {
     int const           flags   =   0;
-    char* const         argv[]  =
+    char const* const   argv[]  =
     {
             "programName"
 
