@@ -1,10 +1,11 @@
 
-if(APPLE)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-	message("adding '/usr/local/include' to include-directories for 'test'")
+if(UNIX)
 
-	include_directories("/usr/local/include")
-endif(APPLE)
+	add_definitions(-DUNIX)
+	add_definitions(-Dunix)
+endif(UNIX)
 
 if(WIN32)
 
@@ -22,12 +23,13 @@ if(WIN32)
 
 	# suppress implicit-link file
 	add_definitions(-DCSTRING_INCL_CSTRING_H_IMPLICIT_LINK)
-endif()
+endif(WIN32)
 
-if(UNIX)
+if((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
 
-	add_definitions(-DUNIX)
-	add_definitions(-Dunix)
+	add_compile_options("/Zc:__cplusplus")
+
+	add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
 endif()
 
 

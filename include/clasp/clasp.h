@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 18th October 2024
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -54,8 +54,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      1
-# define CLASP_VER_CLASP_H_CLASP_REVISION   5
-# define CLASP_VER_CLASP_H_CLASP_EDIT       97
+# define CLASP_VER_CLASP_H_CLASP_REVISION   6
+# define CLASP_VER_CLASP_H_CLASP_EDIT       98
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -799,7 +799,8 @@ typedef struct clasp_diagnostic_context_t clasp_diagnostic_context_t;
 #endif /* !__cplusplus */
 
 /** Initialises a diagnostic context */
-CLASP_CALL(void) clasp_init_diagnostic_context(
+CLASP_CALL(void)
+clasp_init_diagnostic_context(
     clasp_diagnostic_context_t* dc
 ,   void*                       context
 ,   clasp_malloc_fn_t           pfnMalloc
@@ -1407,7 +1408,8 @@ typedef struct clasp_usageinfo_t clasp_usageinfo_t;
 #endif /* !__cplusplus */
 
 
-CLASP_CALL(int) clasp_showUsage(
+CLASP_CALL(int)
+clasp_showUsage(
     clasp_arguments_t const*        args
 ,   clasp_specification_t const     specifications[]
 ,   clasp_char_t const*             toolName    /* "rcp" */
@@ -1427,7 +1429,8 @@ CLASP_CALL(int) clasp_showUsage(
 ,   int                             blanksBetweenItems
 );
 
-CLASP_CALL(int) clasp_showHeader(
+CLASP_CALL(int)
+clasp_showHeader(
     clasp_arguments_t const*        args
 ,   clasp_specification_t const     specifications[]
 ,   clasp_char_t const*             toolName
@@ -1457,7 +1460,8 @@ CLASP_CALL(int) clasp_showHeader(
  * \param blanksBetweenItems The number of blank lines to insert between each item
  *
  */
-CLASP_CALL(int) clasp_showBody(
+CLASP_CALL(int)
+clasp_showBody(
     clasp_arguments_t const*        args
 ,   clasp_specification_t const     specifications[]
 ,   void                          (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
@@ -1468,7 +1472,8 @@ CLASP_CALL(int) clasp_showBody(
 ,   int                             blanksBetweenItems
 );
 
-CLASP_CALL(int) clasp_showVersion(
+CLASP_CALL(int)
+clasp_showVersion(
     clasp_arguments_t const*    args
 ,   clasp_char_t const*         toolName
 ,   int                         major
@@ -1503,7 +1508,8 @@ clasp_countAliases(
 
 /**  Stock function that shows version to a <code>FILE*</code>
  */
-CLASP_CALL(void) clasp_showVersionByFILE(
+CLASP_CALL(void)
+clasp_showVersionByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
 ,   clasp_specification_t const specifications[]
@@ -1511,7 +1517,8 @@ CLASP_CALL(void) clasp_showVersionByFILE(
 
 /**  Stock function that shows header to a <code>FILE*</code>
  */
-CLASP_CALL(void) clasp_showHeaderByFILE(
+CLASP_CALL(void)
+clasp_showHeaderByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
 ,   clasp_specification_t const specifications[]
@@ -1519,7 +1526,8 @@ CLASP_CALL(void) clasp_showHeaderByFILE(
 
 /**  Stock function that shows body to a <code>FILE*</code>
  */
-CLASP_CALL(void) clasp_showBodyByFILE(
+CLASP_CALL(void)
+clasp_showBodyByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
 ,   clasp_specification_t const specifications[]
