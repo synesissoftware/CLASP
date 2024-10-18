@@ -4,6 +4,21 @@
 ----
 
 
+## 18th October 2024 - 0.14.0-beta3 released
+
+* CMake support on Windows;
+* MinGW compatibility;
+* GCC compatibility;
+* Visual C++ (19xx) compatibility;
+* Significant refactoring and enhancement of CMake configuration;
+
+
+## 12th February 2024 - 0.14.0-beta2 released
+
+* CMake minor enhancements;
+* Added more test cases;
+
+
 ## 2nd February 2024 - 0.14.0-beta1 released
 
 * CMake support
