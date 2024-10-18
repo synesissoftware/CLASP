@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for CLASP C++ API
  *
  * Created: 16th July 2009
- * Updated: 12th July 2024
+ * Updated: 18th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -60,19 +60,9 @@ namespace
     static void test_1_5(void);
     static void test_1_6(void);
     static void test_1_7(void);
-    static void test_1_8(void);
-    static void test_1_9(void);
     static void test_1_10(void);
-    static void test_1_11(void);
-    static void test_1_12(void);
-    static void test_1_13(void);
     static void test_1_14(void);
     static void test_1_15(void);
-    static void test_1_16(void);
-    static void test_1_17(void);
-    static void test_1_18(void);
-    static void test_1_19(void);
-
 
     static void test_2_01(void);
     static void test_2_01_c(void);
@@ -80,7 +70,6 @@ namespace
     static void test_2_03(void);
     static void test_2_04(void);
     static void test_2_05(void);
-    static void test_2_06(void);
     static void test_2_07(void);
     static void test_2_08(void);
     static void test_2_09(void);
@@ -88,13 +77,6 @@ namespace
     static void test_2_11(void);
     static void test_2_12(void);
     static void test_2_13(void);
-    static void test_2_14(void);
-    static void test_2_15(void);
-    static void test_2_16(void);
-    static void test_2_17(void);
-    static void test_2_18(void);
-    static void test_2_19(void);
-
 } // anonymous namespace
 
 
@@ -147,18 +129,9 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_5);
         XTESTS_RUN_CASE(test_1_6);
         XTESTS_RUN_CASE_THAT_THROWS(test_1_7, clasp::invalid_option_value_exception);
-        XTESTS_RUN_CASE(test_1_8);
-        XTESTS_RUN_CASE(test_1_9);
         XTESTS_RUN_CASE(test_1_10);
-        XTESTS_RUN_CASE(test_1_11);
-        XTESTS_RUN_CASE(test_1_12);
-        XTESTS_RUN_CASE(test_1_13);
         XTESTS_RUN_CASE(test_1_14);
         XTESTS_RUN_CASE(test_1_15);
-        XTESTS_RUN_CASE(test_1_16);
-        XTESTS_RUN_CASE(test_1_17);
-        XTESTS_RUN_CASE(test_1_18);
-        XTESTS_RUN_CASE(test_1_19);
 
         XTESTS_RUN_CASE(test_2_01);
         XTESTS_RUN_CASE(test_2_01_c);
@@ -166,7 +139,6 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_2_03);
         XTESTS_RUN_CASE(test_2_04);
         XTESTS_RUN_CASE(test_2_05);
-        XTESTS_RUN_CASE(test_2_06);
         XTESTS_RUN_CASE(test_2_07);
         XTESTS_RUN_CASE(test_2_08);
         XTESTS_RUN_CASE(test_2_09);
@@ -174,12 +146,6 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_2_11);
         XTESTS_RUN_CASE(test_2_12);
         XTESTS_RUN_CASE(test_2_13);
-        XTESTS_RUN_CASE(test_2_14);
-        XTESTS_RUN_CASE(test_2_15);
-        XTESTS_RUN_CASE(test_2_16);
-        XTESTS_RUN_CASE(test_2_17);
-        XTESTS_RUN_CASE(test_2_18);
-        XTESTS_RUN_CASE(test_2_19);
 
         XTESTS_PRINT_RESULTS();
 
@@ -517,14 +483,6 @@ static void test_1_7()
     }
 }
 
-static void test_1_8()
-{
-}
-
-static void test_1_9()
-{
-}
-
 static void test_1_10()
 {
     char const* argv[] =
@@ -560,18 +518,6 @@ static void test_1_10()
 
         clasp::releaseArguments(args);
     }
-}
-
-static void test_1_11()
-{
-}
-
-static void test_1_12()
-{
-}
-
-static void test_1_13()
-{
 }
 
 static void test_1_14()
@@ -661,22 +607,6 @@ static void test_1_15()
 
         clasp::releaseArguments(args);
     }
-}
-
-static void test_1_16()
-{
-}
-
-static void test_1_17()
-{
-}
-
-static void test_1_18()
-{
-}
-
-static void test_1_19()
-{
 }
 
 
@@ -1076,10 +1006,6 @@ static void test_2_05(void)
     }
 }
 
-static void test_2_06(void)
-{
-}
-
 static void test_2_07(void)
 {
     static clasp::specification_t const Specifications[] =
@@ -1168,17 +1094,17 @@ static void test_2_08(void)
     }
     else
     {
-        int         length_i;
+        int         length_i = 0;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_i, 0));
         XTESTS_TEST_INTEGER_EQUAL(1, length_i);
 
-        unsigned    length_u;
+        unsigned    length_u = 0;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_u, 0));
         XTESTS_TEST_INTEGER_EQUAL(1u, length_u);
 
-        size_t      length_s;
+        size_t      length_s = 0;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_s, 0));
         XTESTS_TEST_INTEGER_EQUAL(1u, length_s);
@@ -1451,30 +1377,6 @@ static void test_2_13(void)
 
         clasp::releaseArguments(args);
     }
-}
-
-static void test_2_14(void)
-{
-}
-
-static void test_2_15(void)
-{
-}
-
-static void test_2_16(void)
-{
-}
-
-static void test_2_17(void)
-{
-}
-
-static void test_2_18(void)
-{
-}
-
-static void test_2_19(void)
-{
 }
 
 } // anonymous namespace
