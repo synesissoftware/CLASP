@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for CLASP
 #
 # Created:  8th January 2021
-# Updated:  18th October 2024
+# Updated:  23rd October 2024
 #
 # ######################################################################## #
 
@@ -128,7 +128,7 @@ endif()
 
 if(BUILD_TESTING)
 
-	set(xTests_REQUIRED_VERSION_ 0.24)
+	set(xTests_REQUIRED_VERSION_ 0.25)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
