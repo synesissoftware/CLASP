@@ -4,6 +4,12 @@
 ----
 
 
+## 23rd October 2024 - 0.14.0-beta4 released
+
+* Dependency version update(s);
+* Documentation typos fixed;
+
+
 ## 18th October 2024 - 0.14.0-beta3 released
 
 * CMake support on Windows;

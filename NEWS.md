@@ -3,6 +3,7 @@
 
 | Date                  | News Item                                             |
 | --------------------- | ----------------------------------------------------- |
+| 23rd October 2024     | Release of 0.14.0-beta4                               |
 | 18th October 2024     | Release of 0.14.0-beta3                               |
 | 12th February 2024    | Release of 0.14.0-beta2                               |
 | 2nd February 2024     | Release of 0.14.0-beta1                               |

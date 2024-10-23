@@ -62,7 +62,7 @@ The primary choice for installation is by use of **CMake**.
 
 
    ```bash
-   $ sudo cmake --install ./_build --config Release
+   $ sudo cmake --install ${SIS_CMAKE_BUILD_DIR:-./_build} --config Release
    ```
 
 7. Then to use the library, it is a simple matter as follows:
@@ -77,14 +77,14 @@ The primary choice for installation is by use of **CMake**.
 
         int main(int argc, char* argv[])
         {
-        ((void)&argc);
-        ((void)&argv);
+          ((void)&argc);
+          ((void)&argv);
 
-        clasp_countSpecifications(NULL);
+          clasp_countSpecifications(NULL);
 
-        printf("using CLASP (minimally)\n");
+          printf("using CLASP (minimally)\n");
 
-        return EXIT_SUCCESS;
+          return EXIT_SUCCESS;
         }
         ```
 
@@ -94,7 +94,7 @@ The primary choice for installation is by use of **CMake**.
       for an explicit include directory for **CLASP**:
 
       ```bash
-      $ g++ -c -std=c++11 main.cpp
+      $ g++ -c -std=c++11 -D UNIX main.cpp
       ```
 
    3. Link your project against **CLASP**:
@@ -103,7 +103,7 @@ The primary choice for installation is by use of **CMake**.
       for an explicit library directory for **CLASP**:
 
       ```bash
-      $ g++ main.o -lshwild
+      $ g++ main.o -lclasp
       ```
 
    4. Test your project:
@@ -179,14 +179,14 @@ use one of the custom makefiles provided with the project, as follows:
 
         int main(int argc, char* argv[])
         {
-        ((void)&argc);
-        ((void)&argv);
+          ((void)&argc);
+          ((void)&argv);
 
-        clasp_countSpecifications(NULL);
+          clasp_countSpecifications(NULL);
 
-        printf("using CLASP (minimally)\n");
+          printf("using CLASP (minimally)\n");
 
-        return EXIT_SUCCESS;
+          return EXIT_SUCCESS;
         }
         ```
 
@@ -219,20 +219,20 @@ use one of the custom makefiles provided with the project, as follows:
 
       ```
       . . .
-      -rw-r--r--   1 mwan  staff   110K 30 Nov 12:24 libshwild.0.core.gcc42.a
-      -rw-r--r--   1 mwan  staff   262K 30 Nov 12:24 libshwild.0.core.gcc42.debug.a
-      -rw-r--r--   1 mwan  staff   110K 30 Nov 12:24 libshwild.0.core.gcc42.mt.a
-      -rw-r--r--   1 mwan  staff   262K 30 Nov 12:24 libshwild.0.core.gcc42.mt.debug.a
+      -rw-r--r--   1 mwan  staff   110K 30 Nov 12:24 libclasp.0.core.gcc42.a
+      -rw-r--r--   1 mwan  staff   262K 30 Nov 12:24 libclasp.0.core.gcc42.debug.a
+      -rw-r--r--   1 mwan  staff   110K 30 Nov 12:24 libclasp.0.core.gcc42.mt.a
+      -rw-r--r--   1 mwan  staff   262K 30 Nov 12:24 libclasp.0.core.gcc42.mt.debug.a
       ```
 
-      The best choice is `libshwild.0.core.gcc42.a`, which is the archive
+      The best choice is `libclasp.0.core.gcc42.a`, which is the archive
       for Release configuration and compiled without `_REENTRANT` as we
       don't care about multithreaded program support in this example.
 
       So, we link to **CLASP** via:
 
       ```bash
-      $ g++ main.o -L ${CLASP_ROOT}/lib -lshwild.0.core.gcc42
+      $ g++ main.o -L ${CLASP_ROOT}/lib -lclasp.0.core.gcc42
       ```
 
    5. Test your project:
