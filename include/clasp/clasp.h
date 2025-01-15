@@ -4,11 +4,11 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 23rd October 2024
+ * Updated: 15th January 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      1
-# define CLASP_VER_CLASP_H_CLASP_REVISION   7
-# define CLASP_VER_CLASP_H_CLASP_EDIT       99
+# define CLASP_VER_CLASP_H_CLASP_REVISION   8
+# define CLASP_VER_CLASP_H_CLASP_EDIT       100
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -76,9 +76,9 @@
 #define CLASP_VER_MINOR     14
 #define CLASP_VER_PATCH     0
 #define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0x84
+#define CLASP_VER_AB        0x85
 
-#define CLASP_VER           0x000e0084
+#define CLASP_VER           0x000e0085
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -904,7 +904,7 @@ CLASP_CALL(int)
 clasp_parseArguments(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const           argv[]
+,   clasp_char_t*                       argv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
@@ -1697,7 +1697,7 @@ namespace clasp
     ,   arguments_t const**                 args
     )
     {
-        return clasp_parseArguments(flags, argc, argv, specifications, ctxt, args);
+        return clasp_parseArguments(flags, argc, const_cast<clasp_char_t**>(argv), specifications, ctxt, args);
     }
 
     inline
