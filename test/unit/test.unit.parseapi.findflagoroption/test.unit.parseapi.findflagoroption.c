@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for `clasp_findFlagOrOption()`
  *
  * Created: 11th December 2011
- * Updated: 12th July 2024
+ * Updated: 15th January 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -125,7 +125,7 @@ static void test_1_0(void)
   };
   int const                 argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
   clasp_arguments_t const*  args;
-  int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
+  int const                 cr   = clasp_parseArguments(0, argc, (char**)argv, NULL, NULL, &args);
 
   if (0 != cr)
   {
@@ -153,7 +153,7 @@ static void test_1_1(void)
   };
   int const                 argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
   clasp_arguments_t const*  args;
-  int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
+  int const                 cr   = clasp_parseArguments(0, argc, (char**)argv, NULL, NULL, &args);
 
   if (0 != cr)
   {
@@ -190,7 +190,7 @@ static void test_1_2(void)
   };
   int const                 argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
   clasp_arguments_t const*  args;
-  int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
+  int const                 cr   = clasp_parseArguments(0, argc, (char**)argv, NULL, NULL, &args);
 
   if (0 != cr)
   {
@@ -220,7 +220,7 @@ static void test_1_3(void)
   };
   int const                 argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
   clasp_arguments_t const*  args;
-  int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
+  int const                 cr   = clasp_parseArguments(0, argc, (char**)argv, NULL, NULL, &args);
 
   if (0 != cr)
   {
@@ -255,7 +255,7 @@ static void test_1_4(void)
   };
   int const                 argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
   clasp_arguments_t const*  args;
-  int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
+  int const                 cr   = clasp_parseArguments(0, argc, (char**)argv, NULL, NULL, &args);
 
   if (0 != cr)
   {
@@ -294,7 +294,7 @@ static void test_1_5(void)
   };
   int const                 argc = STLSOFT_NUM_ELEMENTS(argv) - 1;
   clasp_arguments_t const*  args;
-  int const                 cr   = clasp_parseArguments(0, argc, argv, NULL, NULL, &args);
+  int const                 cr   = clasp_parseArguments(0, argc, (char**)argv, NULL, NULL, &args);
 
   if (0 != cr)
   {

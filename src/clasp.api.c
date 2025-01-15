@@ -4,11 +4,11 @@
  * Purpose: CLASP API.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 15th January 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -512,7 +512,7 @@ size_t
 clasp_identify_programName_(
     unsigned                    flags
 ,   int                         argc
-,   clasp_char_t const* const*  argv
+,   clasp_char_t*               argv[]
 ,   clasp_slice_t*              programName
 )
 {
@@ -578,7 +578,7 @@ int
 clasp_calculate_sizes_(
     unsigned                    flags
 ,   int                         argc
-,   clasp_char_t const* const*  argv
+,   clasp_char_t*               argv[]
 ,   clasp_specification_t const specifications[]
 ,   size_t*                     numArgs
 ,   size_t*                     cbStrings
@@ -1102,9 +1102,9 @@ int
 clasp_parseArguments_NoWild_(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp_char_t*                       argv[]
 ,   int                                 originalArgc
-,   clasp_char_t const* const*          originalArgv
+,   clasp_char_t*                       originalArgv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
@@ -1114,7 +1114,7 @@ CLASP_CALL(int)
 clasp_parseArguments(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp_char_t*                       argv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
@@ -1374,9 +1374,9 @@ int
 clasp_parseArguments_NoWild_(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp_char_t*                       argv[]
 ,   int                                 originalArgc
-,   clasp_char_t const* const*          originalArgv
+,   clasp_char_t*                       originalArgv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
