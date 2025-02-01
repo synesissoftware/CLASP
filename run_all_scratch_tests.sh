@@ -8,7 +8,6 @@ MakeCmd=${SIS_CMAKE_COMMAND:-make}
 
 ListOnly=0
 RunMake=1
-Verbosity=3
 
 
 # ##########################################################
@@ -25,18 +24,13 @@ while [[ $# -gt 0 ]]; do
 
       RunMake=0
       ;;
-    --verbosity)
-
-      shift
-      Verbosity=$1
-      ;;
     --help)
 
       cat << EOF
 CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API.
 Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2008-2019, Matthew Wilson and Synesis Software
-Runs all (matching) component and unit test programs
+Runs all (matching) scratch-test programs
 
 $ScriptPath [ ... flags/options ... ]
 
@@ -51,9 +45,6 @@ Flags/options:
     -M
     --no-make
         does not execute CMake and make before running tests
-
-    --verbosity <verbosity>
-        specifies an explicit verbosity for the unit-test(s)
 
 
     standard flags:
@@ -85,8 +76,7 @@ status=0
 if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
-
-    echo "Executing build (via command \`$MakeCmd\`) and then running all component and unit test programs"
+    echo "Executing make and then running all scratch test programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -109,13 +99,13 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all component and unit test programs"
+    echo "Listing all scratch test programs"
   else
 
-    echo "Running all component and unit test programs"
+    echo "Running all scratch test programs"
   fi
 
-  for f in $(find $CMakeDir -type f '(' -name 'test_unit*' -o -name 'test.unit.*' -o -name 'test_component*' -o -name 'test.component.*' ')' -exec test -x {} \; -print)
+  for f in $(find $CMakeDir -type f '(' -name 'test_scratch*' -o -name 'test.scratch.*' ')' -exec test -x {} \; -print)
   do
 
     if [ $ListOnly -ne 0 ]; then
@@ -125,23 +115,15 @@ if [ $status -eq 0 ]; then
       continue
     fi
 
-    if [ $Verbosity -ge 3 ]; then
+    echo
+    echo "executing $f:"
 
-      echo
-    fi
-    if [ $Verbosity -ge 2 ]; then
-
-      echo "executing $f:"
-    fi
-
-    if $f --verbosity=$Verbosity; then
+    if $f; then
 
       :
     else
 
       status=$?
-
-      break 1
     fi
   done
 fi

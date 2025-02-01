@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 23rd October 2024
+ * Updated: 1st February 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -53,9 +53,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
-# define CLASP_VER_CLASP_H_CLASP_MINOR      1
-# define CLASP_VER_CLASP_H_CLASP_REVISION   7
-# define CLASP_VER_CLASP_H_CLASP_EDIT       99
+# define CLASP_VER_CLASP_H_CLASP_MINOR      2
+# define CLASP_VER_CLASP_H_CLASP_REVISION   1
+# define CLASP_VER_CLASP_H_CLASP_EDIT       100
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -76,9 +76,9 @@
 #define CLASP_VER_MINOR     14
 #define CLASP_VER_PATCH     0
 #define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0x84
+#define CLASP_VER_AB        0x85
 
-#define CLASP_VER           0x000e0084
+#define CLASP_VER           0x000e0085
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -1670,6 +1670,7 @@ namespace clasp
     typedef ::clasp_argument_t              argument_t;
     typedef ::clasp_arguments_t             arguments_t;
     typedef ::clasp_diagnostic_context_t    diagnostic_context_t;
+    typedef ::clasp_slice_t                 slice_t;
     typedef ::clasp_specification_t         specification_t;
 
     inline
