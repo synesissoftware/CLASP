@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for CLASP
 #
 # Created:  8th January 2021
-# Updated:  23rd October 2024
+# Updated:  17th February 2025
 #
 # ######################################################################## #
 
@@ -191,7 +191,7 @@ endif(BUILD_TESTING)
 # ##########################################################
 # export
 
-set(EXPORT_NAME ${PROJECT_NAME})
+set(EXPORT_NAME ${PROJECT_NAME_LOWER})
 
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
