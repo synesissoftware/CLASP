@@ -4,6 +4,12 @@
 ----
 
 
+## 17th February 2025 - 0.14.0-beta5 released
+
+* GCC / CMake compatibility;
+* `clasp_parseArguments()` now takes `argv` of type `char*[]` rather than `char const* const []`
+
+
 ## 23rd October 2024 - 0.14.0-beta4 released
 
 * Dependency version update(s);
