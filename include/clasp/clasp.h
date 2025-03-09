@@ -1415,7 +1415,7 @@ clasp_showUsage(
 ,   clasp_char_t const*             summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
 ,   clasp_char_t const*             copyright   /* "Copyright (c) XXXX. All rights reserved" */
 ,   clasp_char_t const*             description /* "Recursively copies files" */
-,   clasp_char_t const*             usage       /* "rcp [ ... options ... ] <src-spec> <dest-spec>" */
+,   clasp_char_t const*             usage       /* ":program: [ ... options ... ] <src-spec> <dest-spec>" */
 ,   int                             major
 ,   int                             minor
 ,   int                             revision
@@ -1547,7 +1547,7 @@ clasp_show_usage(
 ,   clasp_char_t const*                 summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
 ,   clasp_char_t const*                 copyright   /* "Copyright (c) XXXX. All rights reserved" */
 ,   clasp_char_t const*                 description /* "Recursively copies files" */
-,   clasp_char_t const*                 usage       /* "rcp [ ... options ... ] <src-spec> <dest-spec>" */
+,   clasp_char_t const*                 usage       /* ":program: [ ... options ... ] <src-spec> <dest-spec>" */
 ,   int                                 major
 ,   int                                 minor
 ,   int                                 revision

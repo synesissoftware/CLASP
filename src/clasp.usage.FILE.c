@@ -392,31 +392,6 @@ static void clasp_show_split_option_help_limit_width_by_FILE_(
     }
 }
 
-static
-unsigned
-clasp_count_types_(
-    clasp_specification_t const     specifications[]
-,   clasp_argtype_t                 argType
-)
-{
-    unsigned n = 0;
-
-    if (NULL != specifications)
-    {
-        for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications)
-        {
-            if (argType == specifications->type)
-            {
-                ++n;
-            }
-        }
-    }
-
-    return n;
-}
-
-#define clasp_count_flags_(specifications)          clasp_count_types_((specifications), CLASP_ARGTYPE_FLAG)
-#define clasp_count_options_(specifications)        clasp_count_types_((specifications), CLASP_ARGTYPE_OPTION)
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -502,28 +477,15 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
 )
 {
     FILE*                       stm     =   (FILE*)info->param;
-    clasp_char_t*               usage   =   (clasp_char_t*)info->usage;
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
+
+    CLASP_ASSERT(NULL != info->usage);
 
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
         return;
-    }
-
-    if (NULL == usage ||
-        '\0' == *usage)
-    {
-        /* If the user has supplied a NULL usage, we
-         * supply one.
-         */
-
-        clasp_usageinfo_t info_ = *info;
-
-        info_.usage = CLASP_LITERAL_("[ ... options ... ] <arg1> [ ... <argN>]");
-
-        clasp_show_header_by_FILE(ctxt, &info_, specifications);
     }
 
     clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->summary);
@@ -545,7 +507,7 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
     }
 
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
-    clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), usage);
+    clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->usage);
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
 }
 
@@ -572,8 +534,8 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
     const size_t                numSpecifications   =   clasp_countSpecifications(specifications);
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
-    unsigned                    numFlags;
-    unsigned                    numOptions;
+    size_t                      numFlags            =   (size_t)~0;
+    size_t                      numOptions          =   (size_t)~0;
 
     unsigned const              flags               =   0;
 
@@ -593,8 +555,10 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
         return;
     }
 
-    numFlags    =   clasp_count_flags_(specifications);
-    numOptions  =   clasp_count_options_(specifications);
+    if (NULL != specifications)
+    {
+        clasp_count_flags_and_options_(specifications, &numFlags, &numOptions);
+    }
 
     if (0 == numFlags)
     {
