@@ -60,7 +60,7 @@ int main1(clasp_arguments_t const* args)
         clasp_showUsage(
             args
         ,   Specifications
-        ,   NULL
+        ,   NULL /* toolName inferred from process */
         ,   "CLASP (http://github.com/synesissoftware/CLASP)"
         ,   "Copyright Matthew Wilson and Synesis Information Systems"
         ,   "illustrates minimal usage functionality"
@@ -70,7 +70,7 @@ int main1(clasp_arguments_t const* args)
         ,   0  /* flags */
         ,   76 /* console width */
         ,   -2 /* indent size */
-        ,   1  /* blank line between args? */
+        ,   1  /* blank line between args */
         );
 
         return EXIT_SUCCESS;
@@ -80,7 +80,7 @@ int main1(clasp_arguments_t const* args)
     {
         clasp_showVersion(
             args
-        ,   NULL
+        ,   NULL /* toolName inferred from process */
         ,   PROGRAM_VER_ARGLIST
         ,   clasp_showVersionByFILE, stdout
         ,   0 /* flags */
