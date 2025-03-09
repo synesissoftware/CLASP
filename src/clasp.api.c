@@ -145,7 +145,7 @@ clasp_count_flags_and_options_(
         switch (p->type)
         {
         default:
-            CLASP_ASSERT(0);
+            /* fall through */
         case CLASP_ARGTYPE_VALUE:
 
             break;
