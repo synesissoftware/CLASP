@@ -137,6 +137,31 @@ LoadStringA(
  */
 
 static
+clasp_char_t const*
+executable_name_from_path_(
+    clasp_char_t const* path
+)
+{
+    clasp_char_t const* last_slash = clasp_strrchr_(path, '/');
+#ifdef _WIN32
+    clasp_char_t const* last_bslash = clasp_strrchr_(path, '\\');
+
+    if (NULL == last_slash || (NULL != last_bslash && last_slash < last_bslash))
+    {
+        last_slash = last_bslash;
+    }
+#endif
+    if (NULL == last_slash)
+    {
+        return path;
+    }
+    else
+    {
+        return last_slash + 1;
+    }
+}
+
+static
 long
 clasp_find_id_(
     clasp_char_t const* p
@@ -545,32 +570,46 @@ clasp_invoke_version_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
-    clasp_usageinfo_t       usageInfo_  =   *usageinfo;
-    int                     isNumber;
-    clasp_char_t const**    pp;
-
-    if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
+    if (NULL == usageinfo->toolName)
     {
-        clasp_char_t buff[4096];
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
 
-        CLASP_ASSERT(NULL != pp);
-
-        if (!isNumber)
+        if (args->argc > 0)
         {
-            *pp = s_unknownIdentifier;
-        }
-        else
-        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
-        {
-            *pp = s_unknownIdentifier;
-        }
+            usageinfo_.toolName = executable_name_from_path_(args->argv[0]);
 
-        return clasp_invoke_version_new_(pfnVersion, args, &usageInfo_, specifications);
+            return clasp_invoke_version_new_(pfnVersion, args, &usageinfo_, specifications);
+        }
     }
 
-    (*pfnVersion)(args, usageinfo, specifications);
+    {
+        clasp_usageinfo_t       usageInfo_  =   *usageinfo;
+        int                     isNumber;
+        clasp_char_t const**    pp;
 
-    return 0;
+        if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
+        {
+            clasp_char_t buff[4096];
+
+            CLASP_ASSERT(NULL != pp);
+
+            if (!isNumber)
+            {
+                *pp = s_unknownIdentifier;
+            }
+            else
+            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
+            {
+                *pp = s_unknownIdentifier;
+            }
+
+            return clasp_invoke_version_new_(pfnVersion, args, &usageInfo_, specifications);
+        }
+
+        (*pfnVersion)(args, usageinfo, specifications);
+
+        return 0;
+    }
 }
 
 static
@@ -583,16 +622,31 @@ clasp_invoke_usage_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
-    if (NULL == specifications)
+    if (NULL == usageinfo->toolName)
     {
-        specifications = clasp_getSpecifications(args);
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
+
+        if (args->argc > 0)
+        {
+            usageinfo_.toolName = executable_name_from_path_(args->argv[0]);
+
+            return clasp_invoke_usage_new_(pfnHeader, pfnBody, args, &usageinfo_, specifications);
+        }
     }
 
-    clasp_invoke_header_new_(pfnHeader, args, usageinfo, specifications);
-    clasp_invoke_body_new_(pfnBody, args, usageinfo, specifications);
+    {
+        if (NULL == specifications)
+        {
+            specifications = clasp_getSpecifications(args);
+        }
 
-    return 0;
+        clasp_invoke_header_new_(pfnHeader, args, usageinfo, specifications);
+        clasp_invoke_body_new_(pfnBody, args, usageinfo, specifications);
+
+        return 0;
+    }
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions

@@ -60,7 +60,7 @@ int main1(clasp_arguments_t const* args)
         clasp_showUsage(
             args
         ,   Specifications
-        ,   "minimal_usage"
+        ,   NULL
         ,   "CLASP (http://github.com/synesissoftware/CLASP)"
         ,   "Copyright Matthew Wilson and Synesis Information Systems"
         ,   "illustrates minimal usage functionality"
@@ -80,7 +80,7 @@ int main1(clasp_arguments_t const* args)
     {
         clasp_showVersion(
             args
-        ,   "minimal_usage"
+        ,   NULL
         ,   PROGRAM_VER_ARGLIST
         ,   clasp_showVersionByFILE, stdout
         ,   0 /* flags */
@@ -106,7 +106,7 @@ int main(int argc, char** argv)
 {
     unsigned const cflags = 0;
 
-    return clasp_main_invoke(argc, argv, main1, "minimal_usage", Specifications, cflags, NULL);
+    return clasp_main_invoke(argc, argv, main1, NULL, Specifications, cflags, NULL);
 }
 
 
