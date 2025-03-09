@@ -82,7 +82,7 @@ int main1(clasp_arguments_t const* args)
         clasp_showUsage(
             args
         ,   Specifications
-        ,   "minimal_usage"
+        ,   NULL /* toolName inferred from process */
         ,   "CLASP (http://github.com/synesissoftware/CLASP)"
         ,   "Copyright Matthew Wilson and Synesis Information Systems"
         ,   "illustrates minimal usage functionality"
@@ -102,7 +102,7 @@ int main1(clasp_arguments_t const* args)
     {
         clasp_showVersion(
             args
-        ,   "minimal_usage"
+        ,   NULL /* toolName inferred from process */
         ,   0, 0, 0
         ,   clasp_showHeaderByFILE, stdout
         ,   0 /* flags */
@@ -158,7 +158,7 @@ int main1(clasp_arguments_t const* args)
         clasp_showUsage(
             args
         ,   Specifications
-        ,   "minimal_usage_xx"
+        ,   NULL /* toolName inferred from process */
         ,   "CLASP (http://github.com/synesissoftware/CLASP)"
         ,   "Copyright Matthew Wilson and Synesis Information Systems"
         ,   "illustrates minimal usage functionality"
@@ -178,7 +178,7 @@ int main1(clasp_arguments_t const* args)
     {
         clasp_showVersion(
             args
-        ,   "minimal_usage"
+        ,   NULL /* toolName inferred from process */
         ,   0, 0, 0
         ,   clasp_showHeaderByFILE, stdout
         ,   0 /* flags */
