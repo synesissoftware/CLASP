@@ -138,7 +138,7 @@ LoadStringA(
 
 static
 clasp_char_t const*
-executable_name_from_path_(
+clasp_executable_name_from_path_(
     clasp_char_t const* path
 )
 {
@@ -576,7 +576,7 @@ clasp_invoke_version_new_(
 
         if (args->argc > 0)
         {
-            usageinfo_.toolName = executable_name_from_path_(args->argv[0]);
+            usageinfo_.toolName = clasp_executable_name_from_path_(args->argv[0]);
 
             return clasp_invoke_version_new_(pfnVersion, args, &usageinfo_, specifications);
         }
@@ -628,7 +628,7 @@ clasp_invoke_usage_new_(
 
         if (args->argc > 0)
         {
-            usageinfo_.toolName = executable_name_from_path_(args->argv[0]);
+            usageinfo_.toolName = clasp_executable_name_from_path_(args->argv[0]);
 
             return clasp_invoke_usage_new_(pfnHeader, pfnBody, args, &usageinfo_, specifications);
         }
