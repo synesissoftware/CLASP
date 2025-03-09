@@ -1,5 +1,10 @@
 # CLASP - CHANGES list <!-- omit in toc -->
 
+## 10th March 2025 - 0.15.0-alpha3
+
+* fixed CMakeLists.txt such that it picks up `CLASP_VER_PATCH`;
+
+
 ## 10th March 2025 - 0.15.0-alpha2
 
 * removed assertion left in **0.15.0-alpha1**;
