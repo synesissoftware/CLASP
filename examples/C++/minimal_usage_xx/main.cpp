@@ -83,7 +83,7 @@ int main1(clasp_arguments_t const* args)
             args
         ,   "minimal_usage"
         ,   PROGRAM_VER_ARGLIST
-        ,   clasp_showHeaderByFILE, stdout
+        ,   clasp_showVersionByFILE, stdout
         ,   0 /* flags */
         );
 
