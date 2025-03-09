@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    examples/C/minimal_usage/main.c
+ * File:    examples/C++/minimal_usage_xx/main.cpp
  *
- * Purpose: Illustrates a minimal use of CLASP in a C program.
+ * Purpose: Illustrates a minimal use of CLASP in a C++ program.
  *
  * Created: 9th March 2025
  * Updated: 9th March 2025
@@ -14,10 +14,11 @@
  */
 
 
-#include <clasp/main.h>
+#include <clasp/main.hpp>
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -55,16 +56,16 @@ static clasp_specification_t const Specifications[] =
 static
 int main1(clasp_arguments_t const* args)
 {
-    if (clasp_flagIsSpecified(args, "--help"))
+    if (clasp::flag_specified(args, "--help"))
     {
         clasp_showUsage(
             args
         ,   Specifications
-        ,   "minimal_usage"
+        ,   "minimal_usage_xx"
         ,   "CLASP (http://github.com/synesissoftware/CLASP)"
         ,   "Copyright Matthew Wilson and Synesis Information Systems"
         ,   "illustrates minimal usage functionality"
-        ,   "minimal_usage [... flags/options ...]"
+        ,   "minimal_usage_xx [... flags/options ...]"
         ,   PROGRAM_VER_ARGLIST
         ,   clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
         ,   0  /* flags */
@@ -76,7 +77,7 @@ int main1(clasp_arguments_t const* args)
         return EXIT_SUCCESS;
     }
 
-    if (clasp_flagIsSpecified(args, "--version"))
+    if (clasp::flag_specified(args, "--version"))
     {
         clasp_showVersion(
             args
@@ -90,13 +91,19 @@ int main1(clasp_arguments_t const* args)
     }
 
 
-    printf("args={ numArguments=%zu, numFlagsAndOptions=%zu, numFlags=%zu, numOptions=%zu, numValues=%zu, }\n"
-    ,   args->numArguments
-    ,   args->numFlagsAndOptions
-    ,   args->numFlags
-    ,   args->numOptions
-    ,   args->numValues
-    );
+    std::cout
+        << "args={ numArguments="
+        << args->numArguments
+        << ", numFlagsAndOptions="
+        << args->numFlagsAndOptions
+        << ", numFlags="
+        << args->numFlags
+        << ", numOptions="
+        << args->numOptions
+        << ", numValues="
+        << args->numValues
+        << ", }"
+        << std::endl;
 
 
     return EXIT_SUCCESS;
@@ -106,9 +113,9 @@ int main(int argc, char** argv)
 {
     unsigned const cflags = 0;
 
-    return clasp_main_invoke(argc, argv, main1, "minimal_usage", Specifications, cflags, NULL);
+    return clasp::main::invoke(argc, argv, main1, "minimal_usage", Specifications, cflags);
 }
 
 
-/* ///////////////////////////// end of file //////////////////////////// */
+ /* ///////////////////////////// end of file //////////////////////////// */
 

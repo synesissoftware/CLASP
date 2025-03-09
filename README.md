@@ -12,6 +12,7 @@
   - [Where to get help](#where-to-get-help)
   - [Contribution guidelines](#contribution-guidelines)
   - [Dependencies](#dependencies)
+    - [Development Dependencies (required for testing)](#development-dependencies-required-for-testing)
   - [Related projects](#related-projects)
   - [License](#license)
 
@@ -58,12 +59,158 @@ file.
 
 ### C API / core library
 
-T.B.C.
+```C
+/* examples/C/minimal_usage/main.c */
+#include <clasp/main.h>
+#include <stdio.h>
+
+static clasp_specification_t const Specifications[] =
+{
+    CLASP_GAP_SECTION("standard flags:"),
+
+    CLASP_FLAG(NULL,    "--help",           "show this help and terminate"),
+    CLASP_FLAG(NULL,    "--version",        "show version and terminate"),
+
+    CLASP_SPECIFICATION_ARRAY_TERMINATOR
+};
+
+static
+int main1(clasp_arguments_t const* args)
+{
+    if (clasp_flagIsSpecified(args, "--help"))
+    {
+        clasp_showUsage(
+            args
+        ,   Specifications
+        ,   "minimal_usage"
+        ,   "CLASP (http://github.com/synesissoftware/CLASP)"
+        ,   "Copyright Matthew Wilson and Synesis Information Systems"
+        ,   "illustrates minimal usage functionality"
+        ,   "minimal_usage [... flags/options ...]"
+        ,   0, 0, 0
+        ,   clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
+        ,   0  /* flags */
+        ,   76 /* console width */
+        ,   -2 /* indent size */
+        ,   1  /* blank line between args? */
+        );
+
+        return EXIT_SUCCESS;
+    }
+
+    if (clasp_flagIsSpecified(args, "--version"))
+    {
+        clasp_showVersion(
+            args
+        ,   "minimal_usage"
+        ,   0, 0, 0
+        ,   clasp_showHeaderByFILE, stdout
+        ,   0 /* flags */
+        );
+
+        return EXIT_SUCCESS;
+    }
+
+    printf("args={ numArguments=%zu, numFlagsAndOptions=%zu, numFlags=%zu, numOptions=%zu, numValues=%zu, }\n"
+    ,   args->numArguments
+    ,   args->numFlagsAndOptions
+    ,   args->numFlags
+    ,   args->numOptions
+    ,   args->numValues
+    );
+
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char** argv)
+{
+    unsigned const cflags = 0;
+
+    return clasp_main_invoke(argc, argv, main1, "minimal_usage", Specifications, cflags, NULL);
+}
+```
 
 
 ### C++ API
 
-T.B.C.
+```C++
+// examples/C++/minimal_usage_xx/main.cpp
+#include <clasp/main.hpp>
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+
+static clasp_specification_t const Specifications[] =
+{
+    CLASP_GAP_SECTION("standard flags:"),
+
+    CLASP_FLAG(NULL,    "--help",           "show this help and terminate"),
+    CLASP_FLAG(NULL,    "--version",        "show version and terminate"),
+
+    CLASP_SPECIFICATION_ARRAY_TERMINATOR
+};
+
+static
+int main1(clasp_arguments_t const* args)
+{
+    if (clasp::flag_specified(args, "--help"))
+    {
+        clasp_showUsage(
+            args
+        ,   Specifications
+        ,   "minimal_usage_xx"
+        ,   "CLASP (http://github.com/synesissoftware/CLASP)"
+        ,   "Copyright Matthew Wilson and Synesis Information Systems"
+        ,   "illustrates minimal usage functionality"
+        ,   "minimal_usage_xx [... flags/options ...]"
+        ,   0, 0, 0
+        ,   clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
+        ,   0  /* flags */
+        ,   76 /* console width */
+        ,   -2 /* indent size */
+        ,   1  /* blank line between args? */
+        );
+
+        return EXIT_SUCCESS;
+    }
+
+    if (clasp::flag_specified(args, "--version"))
+    {
+        clasp_showVersion(
+            args
+        ,   "minimal_usage"
+        ,   0, 0, 0
+        ,   clasp_showHeaderByFILE, stdout
+        ,   0 /* flags */
+        );
+
+        return EXIT_SUCCESS;
+    }
+
+    std::cout
+        << "args={ numArguments="
+        << args->numArguments
+        << ", numFlagsAndOptions="
+        << args->numFlagsAndOptions
+        << ", numFlags="
+        << args->numFlags
+        << ", numOptions="
+        << args->numOptions
+        << ", numValues="
+        << args->numValues
+        << ", }"
+        << std::endl;
+
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char** argv)
+{
+    unsigned const cflags = 0;
+
+    return clasp::main::invoke(argc, argv, main1, "minimal_usage_xx", Specifications, cflags);
+}
+```
 
 
 ## Examples
@@ -85,21 +232,22 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 ### Dependencies
 
-#### STLSoft (optional) <!-- omit in toc -->
+* [STLSoft 1.11](http://github.com/synesissoftware/STLSoft-1.11/)
 
-The original (~2005) implementation used **STLSoft** for discrimination of compilers and for library support. For modern compilers with broad support for the latest language standards this is not necessary. Hence, if the preprocessor symbol `SHWILD_NO_STLSOFT` is specified then all dependencies on **STLSoft** are removed and basic **C++-14** features are used instead. (This is done in the **CMake** configuration provided - see [INSTALL.md](./INSTALL.md).)
 
-If you _do_ need **STLSoft**, then version 1.10.6 or later is recommended. If you're using a _very_ old compiler you may wish to use STLSoft-1.9, for which version 1.9.136 is recommended. Further, the makefiles require definition of the environment variable `STLSOFT` that should be set to the root directory of a clone of **STLSoft**.
+#### Development Dependencies (required for testing)
 
-* [STLSoft 1.9](http://github.com/synesissoftware/STLSoft-1.9/)
-* [STLSoft 1.10](http://github.com/synesissoftware/STLSoft-1.10/) (Recommended)
+* [xTests](http://github.com/synesissoftware/xTests/)
 
 
 ### Related projects
 
 Projects in which **CLASP** is used include:
 
-T.B.C.
+* [chomp](http://github.com/sistools/chomp/)
+* [lstrip](http://github.com/sistools/lstrip/)
+* [rstrip](http://github.com/sistools/rstrip/)
+* [libCLImate](http://github.com/synesissoftware/libCLImate/)
 
 
 ### License
