@@ -724,14 +724,14 @@ clasp_invoke_usage_new_(
 
         size_t const    CCH_REQUIRED    =   (usage_len_0 - len) + toolName_len;
 
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
+
         if (CCH_REQUIRED > CLASP_NUM_ELEMENTS_(buff_))
         {
             usageinfo_.usage = CLASP_LITERAL_STRING("INVALID USAGE: TOO MANY RESULTING CHARACTERS!");
         }
         else
         {
-            clasp_usageinfo_t usageinfo_ = *usageinfo;
-
             memcpy(&buff_[0] + 0                        , usageinfo->usage                  , sizeof(clasp_char_t) * n_lhs);
             memcpy(&buff_[0] + ix_start                 , usageinfo->toolName               , sizeof(clasp_char_t) * n_mid);
             memcpy(&buff_[0] + ix_start + toolName_len  , usageinfo->usage + ix_start + len , sizeof(clasp_char_t) * n_rhs);

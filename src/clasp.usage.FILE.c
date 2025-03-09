@@ -559,6 +559,11 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
     {
         clasp_count_flags_and_options_(specifications, &numFlags, &numOptions);
     }
+    else
+    {
+        numFlags = 0;
+        numOptions = 0;
+    }
 
     if (0 == numFlags)
     {
