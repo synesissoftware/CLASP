@@ -63,7 +63,7 @@ int main1(clasp_arguments_t const* args)
         ,   "CLASP (http://github.com/synesissoftware/CLASP)"
         ,   "Copyright Matthew Wilson and Synesis Information Systems"
         ,   "illustrates minimal usage functionality"
-        ,   "minimal_usage [... flags/options ...]"
+        ,   NULL /* usage inferred from Specifications */
         ,   PROGRAM_VER_ARGLIST
         ,   clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
         ,   0  /* flags */

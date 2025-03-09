@@ -680,6 +680,37 @@ clasp_invoke_usage_new_(
         }
     }
 
+    if (NULL == usageinfo->usage)
+    {
+        clasp_char_t const* const   s_usages[4] =
+        {
+                ":program: <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... flags ... ] <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... options ... ] <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... flags/options ... ] <arg1> [ ... <argN> ]"
+        };
+        clasp_char_t const* usage;
+        size_t              index;
+
+        clasp_usageinfo_t   usageinfo_ = *usageinfo;
+
+        size_t  numFlags    =   (size_t)~0;
+        size_t  numOptions  =   (size_t)~0;
+
+        if (NULL != specifications)
+        {
+            clasp_count_flags_and_options_(specifications, &numFlags, &numOptions);
+        }
+
+        index = 1 * (0 != numFlags) + 2 * (0 != numOptions);
+
+        usage = s_usages[index];
+
+        usageinfo_.usage = usage;
+
+        return clasp_invoke_usage_new_(pfnHeader, pfnBody, args, &usageinfo_, specifications);
+    }
+
     if (0 != clasp_usage_has_replacement_toolName_(usageinfo->usage, &ix_start, &len))
     {
         clasp_char_t    buff_[1001] = "";

@@ -477,28 +477,15 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
 )
 {
     FILE*                       stm     =   (FILE*)info->param;
-    clasp_char_t*               usage   =   (clasp_char_t*)info->usage;
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
+
+    CLASP_ASSERT(NULL != info->usage);
 
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
         return;
-    }
-
-    if (NULL == usage ||
-        '\0' == *usage)
-    {
-        /* If the user has supplied a NULL usage, we
-         * supply one.
-         */
-
-        clasp_usageinfo_t info_ = *info;
-
-        info_.usage = CLASP_LITERAL_("[ ... options ... ] <arg1> [ ... <argN>]");
-
-        clasp_show_header_by_FILE(ctxt, &info_, specifications);
     }
 
     clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->summary);
@@ -520,7 +507,7 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
     }
 
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
-    clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), usage);
+    clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->usage);
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
 }
 
