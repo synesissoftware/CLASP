@@ -137,6 +137,31 @@ LoadStringA(
  */
 
 static
+clasp_char_t const*
+clasp_executable_name_from_path_(
+    clasp_char_t const* path
+)
+{
+    clasp_char_t const* last_slash = clasp_strrchr_(path, '/');
+#ifdef _WIN32
+    clasp_char_t const* last_bslash = clasp_strrchr_(path, '\\');
+
+    if (NULL == last_slash || (NULL != last_bslash && last_slash < last_bslash))
+    {
+        last_slash = last_bslash;
+    }
+#endif
+    if (NULL == last_slash)
+    {
+        return path;
+    }
+    else
+    {
+        return last_slash + 1;
+    }
+}
+
+static
 long
 clasp_find_id_(
     clasp_char_t const* p
@@ -174,7 +199,7 @@ clasp_find_replacement_usage_field_(
 )
 {
     clasp_char_t const**    fields[5];
-    size_t const            n = sizeof(fields) / sizeof(fields[0]);
+    size_t const            n = CLASP_NUM_ELEMENTS_(fields);
     size_t                  i;
 
     fields[0] = &usageinfo->toolName;
@@ -344,6 +369,49 @@ clasp_find_replacement_mappedArgument_(
 
 static
 int
+clasp_usage_has_replacement_toolName_(
+    clasp_char_t const*     usage
+,   size_t*                 ix_start
+,   size_t*                 len
+)
+{
+    CLASP_ASSERT(usage);
+    CLASP_ASSERT(ix_start);
+    CLASP_ASSERT(len);
+
+    *ix_start = 0;
+    *len = 0;
+
+    {
+        clasp_char_t const* const s_tags[] =
+        {
+            ":toolName:",
+            ":toolname:",
+            ":program_name:",
+            ":program:",
+            NULL
+        };
+
+        clasp_char_t* p = NULL;
+
+        for (size_t i = 0; NULL == p && NULL != s_tags[i]; ++i)
+        {
+            clasp_char_t const* const   tag     =   s_tags[i];
+            size_t const                tag_len =   clasp_strlen_(tag);
+
+            if (NULL != (p = clasp_strstr_(usage, tag)))
+            {
+                *ix_start = (size_t)(p - usage);
+                *len = *ix_start + tag_len;
+            }
+        }
+
+        return NULL != p;
+    }
+}
+
+static
+int
 clasp_invoke_header_expand_usage_(
     void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
 ,   clasp_arguments_t const*    args
@@ -352,9 +420,9 @@ clasp_invoke_header_expand_usage_(
 )
 {
     clasp_char_t        usage1_[2000];
-    clasp_char_t        usage2_[sizeof(usage1_) / sizeof(usage1_[0])];
+    clasp_char_t        usage2_[CLASP_NUM_ELEMENTS_(usage1_)];
 
-    size_t const        CCH_USAGE = sizeof(usage1_) / sizeof(usage1_[0]);
+    size_t const        CCH_USAGE   =   CLASP_NUM_ELEMENTS_(usage1_);
 
     clasp_char_t const  prefixChar  =   (usageinfo->assumedTabWidth < 1) ? ' ' : '\t';
     size_t const        prefixLen   =   (usageinfo->assumedTabWidth < 1) ? (size_t)(-usageinfo->assumedTabWidth) : 1u;
@@ -478,7 +546,7 @@ clasp_invoke_header_new_(
             *pp = s_unknownIdentifier;
         }
         else
-        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
+        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, CLASP_NUM_ELEMENTS_(buff)))
         {
             *pp = s_unknownIdentifier;
         }
@@ -522,7 +590,7 @@ clasp_invoke_body_new_(
                 *pp = s_unknownIdentifier;
             }
             else
-            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
+            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, CLASP_NUM_ELEMENTS_(buff)))
             {
                 *pp = s_unknownIdentifier;
             }
@@ -545,32 +613,46 @@ clasp_invoke_version_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
-    clasp_usageinfo_t       usageInfo_  =   *usageinfo;
-    int                     isNumber;
-    clasp_char_t const**    pp;
-
-    if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
+    if (NULL == usageinfo->toolName)
     {
-        clasp_char_t buff[4096];
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
 
-        CLASP_ASSERT(NULL != pp);
-
-        if (!isNumber)
+        if (args->argc > 0)
         {
-            *pp = s_unknownIdentifier;
-        }
-        else
-        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
-        {
-            *pp = s_unknownIdentifier;
-        }
+            usageinfo_.toolName = clasp_executable_name_from_path_(args->argv[0]);
 
-        return clasp_invoke_version_new_(pfnVersion, args, &usageInfo_, specifications);
+            return clasp_invoke_version_new_(pfnVersion, args, &usageinfo_, specifications);
+        }
     }
 
-    (*pfnVersion)(args, usageinfo, specifications);
+    {
+        clasp_usageinfo_t       usageInfo_  =   *usageinfo;
+        int                     isNumber;
+        clasp_char_t const**    pp;
 
-    return 0;
+        if (clasp_find_replacement_usage_field_(&usageInfo_, &pp, &isNumber))
+        {
+            clasp_char_t buff[4096];
+
+            CLASP_ASSERT(NULL != pp);
+
+            if (!isNumber)
+            {
+                *pp = s_unknownIdentifier;
+            }
+            else
+            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, CLASP_NUM_ELEMENTS_(buff)))
+            {
+                *pp = s_unknownIdentifier;
+            }
+
+            return clasp_invoke_version_new_(pfnVersion, args, &usageInfo_, specifications);
+        }
+
+        (*pfnVersion)(args, usageinfo, specifications);
+
+        return 0;
+    }
 }
 
 static
@@ -583,16 +665,97 @@ clasp_invoke_usage_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
-    if (NULL == specifications)
+    size_t  ix_start;
+    size_t  len;
+
+    if (NULL == usageinfo->toolName)
     {
-        specifications = clasp_getSpecifications(args);
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
+
+        if (args->argc > 0)
+        {
+            usageinfo_.toolName = clasp_executable_name_from_path_(args->argv[0]);
+
+            return clasp_invoke_usage_new_(pfnHeader, pfnBody, args, &usageinfo_, specifications);
+        }
     }
 
-    clasp_invoke_header_new_(pfnHeader, args, usageinfo, specifications);
-    clasp_invoke_body_new_(pfnBody, args, usageinfo, specifications);
+    if (NULL == usageinfo->usage)
+    {
+        clasp_char_t const* const   s_usages[4] =
+        {
+                ":program: <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... flags ... ] <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... options ... ] <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... flags/options ... ] <arg1> [ ... <argN> ]"
+        };
+        clasp_char_t const* usage;
+        size_t              index;
 
-    return 0;
+        clasp_usageinfo_t   usageinfo_ = *usageinfo;
+
+        size_t  numFlags    =   (size_t)~0;
+        size_t  numOptions  =   (size_t)~0;
+
+        if (NULL != specifications)
+        {
+            clasp_count_flags_and_options_(specifications, &numFlags, &numOptions);
+        }
+
+        index = 1 * (0 != numFlags) + 2 * (0 != numOptions);
+
+        usage = s_usages[index];
+
+        usageinfo_.usage = usage;
+
+        return clasp_invoke_usage_new_(pfnHeader, pfnBody, args, &usageinfo_, specifications);
+    }
+
+    if (0 != clasp_usage_has_replacement_toolName_(usageinfo->usage, &ix_start, &len))
+    {
+        clasp_char_t    buff_[1001] = "";
+
+        size_t const    usage_len_0     =   clasp_strlen_(usageinfo->usage);
+        size_t const    toolName_len    =   clasp_strlen_(usageinfo->toolName);
+
+        size_t const    n_lhs           =   ix_start;
+        size_t const    n_mid           =   toolName_len;
+        size_t const    n_rhs           =   usage_len_0 - (ix_start + len);
+
+        size_t const    CCH_REQUIRED    =   (usage_len_0 - len) + toolName_len;
+
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
+
+        if (CCH_REQUIRED > CLASP_NUM_ELEMENTS_(buff_))
+        {
+            usageinfo_.usage = CLASP_LITERAL_STRING("INVALID USAGE: TOO MANY RESULTING CHARACTERS!");
+        }
+        else
+        {
+            memcpy(&buff_[0] + 0                        , usageinfo->usage                  , sizeof(clasp_char_t) * n_lhs);
+            memcpy(&buff_[0] + ix_start                 , usageinfo->toolName               , sizeof(clasp_char_t) * n_mid);
+            memcpy(&buff_[0] + ix_start + toolName_len  , usageinfo->usage + ix_start + len , sizeof(clasp_char_t) * n_rhs);
+
+            usageinfo_.usage = buff_;
+        }
+
+        return clasp_invoke_usage_new_(pfnHeader, pfnBody, args, &usageinfo_, specifications);
+    }
+
+    {
+        if (NULL == specifications)
+        {
+            specifications = clasp_getSpecifications(args);
+        }
+
+        clasp_invoke_header_new_(pfnHeader, args, usageinfo, specifications);
+
+        clasp_invoke_body_new_(pfnBody, args, usageinfo, specifications);
+
+        return 0;
+    }
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -606,7 +769,7 @@ clasp_showUsage(
 ,   clasp_char_t const*         summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
 ,   clasp_char_t const*         copyright   /* "Copyright (c) XXXX. All rights reserved" */
 ,   clasp_char_t const*         description /* "Recursively copies files" */
-,   clasp_char_t const*         usage       /* "rcp [ ... options ... ] <src-spec> <dest-spec>" */
+,   clasp_char_t const*         usage       /* ":program: [ ... options ... ] <src-spec> <dest-spec>" */
 ,   int                         major
 ,   int                         minor
 ,   int                         revision

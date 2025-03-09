@@ -130,6 +130,37 @@ For two reasons, we can only call recls *once* for each wildcard argument:
  * helper functions
  */
 
+void
+clasp_count_flags_and_options_(
+    clasp_specification_t const     specifications[]
+,   size_t*                         numFlags
+,   size_t*                         numOptions
+)
+{
+    *numFlags = 0;
+    *numOptions = 0;
+
+    for (clasp_specification_t const* p = specifications; CLASP_ARGTYPE_INVALID != p->type; ++p)
+    {
+        switch (p->type)
+        {
+        default:
+            CLASP_ASSERT(0);
+        case CLASP_ARGTYPE_VALUE:
+
+            break;
+        case CLASP_ARGTYPE_FLAG:
+
+            ++*numFlags;
+            break;
+        case CLASP_ARGTYPE_OPTION:
+
+            ++*numOptions;
+            break;
+        }
+    }
+}
+
 static
 int
 clasp_evaluate_specification_index_(

@@ -11,6 +11,24 @@ RunMake=1
 
 
 # ##########################################################
+# colours
+
+if command -v tput > /dev/null; then
+
+  RbEnvClr_Blue=${FG_BLUE:-$(tput setaf 4)}
+  RbEnvClr_Red=${FG_BLUE:-$(tput setaf 1)}
+  RbEnvClr_Bold=${FD_BOLD:-$(tput bold)}
+  RbEnvClr_None=${FD_NONE:-$(tput sgr0)}
+else
+
+  RbEnvClr_Blue=
+  RbEnvClr_Red=
+  RbEnvClr_Bold=
+  RbEnvClr_None=
+fi
+
+
+# ##########################################################
 # command-line handling
 
 while [[ $# -gt 0 ]]; do
@@ -106,21 +124,21 @@ if [ $status -eq 0 ]; then
     echo "Running all example programs"
   fi
 
-  for f in $(find $CMakeDir -type f '(' -name 'example?[cC]*' -o -name 'example?[cC][pP+][pP+]*' ')' -exec test -x {} \; -print)
+  for f in $(find $CMakeDir/examples -type f -exec test -x {} \; -print)
   do
 
     if [ $ListOnly -ne 0 ]; then
 
-      echo "would execute $f:"
+      echo "would execute $RbEnvClr_Blue$RbEnvClr_Bold$f$RbEnvClr_None:"
 
       continue
     fi
 
     echo
-    echo "executing $f:"
+    echo "executing $RbEnvClr_Blue$RbEnvClr_Bold$f$RbEnvClr_None:"
 
     # NOTE: we do not break on fail because these tests are not always intended to succeed
-    $f
+    $f --help
   done
 fi
 
