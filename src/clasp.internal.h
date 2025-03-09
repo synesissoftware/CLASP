@@ -179,6 +179,13 @@ clasp_useArgument_(
 ,   clasp_argument_t const*     arg
 );
 
+void
+clasp_count_flags_and_options_(
+    clasp_specification_t const     specifications[]
+,   size_t*                         numFlags
+,   size_t*                         numOptions
+);
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * character encoding abstraction
