@@ -4,11 +4,11 @@
  * Purpose: CLASP usage (FILE) facilities.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -84,12 +84,12 @@ clasp_is_valid_specification_type_(clasp_argtype_t t)
 {
     switch (t)
     {
-        case  CLASP_ARGTYPE_FLAG:
-        case  CLASP_ARGTYPE_OPTION:
-        case  CLASP_ARGTYPE_VALUE:
-            return clasp_true_v;
-        default:
-            return clasp_false_v;
+    case CLASP_ARGTYPE_FLAG:
+    case CLASP_ARGTYPE_OPTION:
+    case CLASP_ARGTYPE_VALUE:
+        return clasp_true_v;
+    default:
+        return clasp_false_v;
     }
 }
 
@@ -293,10 +293,10 @@ static size_t clasp_find_matching_primary_(
 static
 void
 clasp_show_split_option_help_limit_width_by_FILE_fitting_fragment_(
-  FILE*                             stm
-, clasp_char_t const*               fragment
-, size_t                            len
-, int                               TabSize
+    FILE*                           stm
+,   clasp_char_t const*             fragment
+,   size_t                          len
+,   int                             TabSize
 )
 {
     if (TabSize < 1)
@@ -310,11 +310,11 @@ clasp_show_split_option_help_limit_width_by_FILE_fitting_fragment_(
 }
 
 static void clasp_show_split_option_help_limit_width_by_FILE_(
-  clasp_diagnostic_context_t const* ctxt
-, clasp_char_t const*               help
-, FILE*                             stm
-, int                               width
-, int                               TabSize
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_char_t const*                 help
+,   FILE*                               stm
+,   int                                 width
+,   int                                 TabSize
 )
 {
     size_t const    len             =   clasp_strlen_(help);

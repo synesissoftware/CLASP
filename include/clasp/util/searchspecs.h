@@ -4,7 +4,7 @@
  * Purpose: The CLASP::Util::SearchSpecs library API.
  *
  * Created: 7th March 2012
- * Updated: 12th July 2024
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_MINOR       0
 # define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_REVISION    2
-# define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_EDIT        9
+# define CLASP_VER_CLASP_UTIL_H_SEARCHSPECS_EDIT        10
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -77,7 +77,7 @@ struct clasp_util_searchspec_t
     clasp_slice_t           patterns;
 };
 #ifndef __cplusplus
-typedef struct clasp_util_searchspec_t  clasp_util_searchspec_t;
+typedef struct clasp_util_searchspec_t                      clasp_util_searchspec_t;
 #endif /* !__cplusplus */
 
 
@@ -93,7 +93,7 @@ struct clasp_util_searchspecs_t
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 };
 #ifndef __cplusplus
-typedef struct clasp_util_searchspecs_t clasp_util_searchspecs_t;
+typedef struct clasp_util_searchspecs_t                     clasp_util_searchspecs_t;
 #endif /* !__cplusplus */
 
 

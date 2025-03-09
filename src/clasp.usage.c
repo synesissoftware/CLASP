@@ -4,11 +4,11 @@
  * Purpose: CLASP usage facilities.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -211,15 +211,15 @@ clasp_find_replacement_usage_field_(
 
                 switch ((*fields[i])[1])
                 {
-                case    '1':
-                case    '2':
-                case    '3':
-                case    '4':
-                case    '5':
-                case    '6':
-                case    '7':
-                case    '8':
-                case    '9':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
                     *isNumber = 0 != clasp_find_id_((*fields[i]) + 1);
 
                 /* fall through */
@@ -320,15 +320,15 @@ clasp_find_replacement_mappedArgument_(
 
                 switch (specifications->help[1])
                 {
-                case    '1':
-                case    '2':
-                case    '3':
-                case    '4':
-                case    '5':
-                case    '6':
-                case    '7':
-                case    '8':
-                case    '9':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
                     *isNumber = 0 != clasp_find_id_(specifications->help + 1);
 
                 /* fall through */
@@ -498,8 +498,8 @@ clasp_invoke_body_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
-    clasp_alias_t       specifications_[CLASP_MAX_SPECIFICATIONS_ + 1];
-    size_t const        n = clasp_countSpecifications(specifications);
+    clasp_alias_t   specifications_[CLASP_MAX_SPECIFICATIONS_ + 1];
+    size_t const    n = clasp_countSpecifications(specifications);
 
     if (0 != n &&
         n <= CLASP_MAX_SPECIFICATIONS_)
@@ -648,23 +648,23 @@ clasp_showUsage(
 
 CLASP_CALL(int)
 clasp_show_usage(
-  clasp_diagnostic_context_t const* ctxt
-, clasp_alias_t const*              specifications
-, clasp_char_t const*               toolName    /* "rcp" */
-, clasp_char_t const*               summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
-, clasp_char_t const*               copyright   /* "Copyright (c) XXXX. All rights reserved" */
-, clasp_char_t const*               description /* "Recursively copies files" */
-, clasp_char_t const*               usage       /* "rcp [ ... options ... ] <src-spec> <dest-spec>" */
-, int                               major
-, int                               minor
-, int                               revision
-, void                            (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void                            (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void*                             param
-, int                               flags
-, int                               consoleWidth
-, int                               tabSize
-, int                               blanksBetweenItems
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_alias_t const*                specifications
+,   clasp_char_t const*                 toolName    /* "rcp" */
+,   clasp_char_t const*                 summary     /* "SystemTools (http://systemtools.sourceforge.net/)" */
+,   clasp_char_t const*                 copyright   /* "Copyright (c) XXXX. All rights reserved" */
+,   clasp_char_t const*                 description /* "Recursively copies files" */
+,   clasp_char_t const*                 usage       /* "rcp [ ... options ... ] <src-spec> <dest-spec>" */
+,   int                                 major
+,   int                                 minor
+,   int                                 revision
+,   void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void*                               param
+,   int                                 flags
+,   int                                 consoleWidth
+,   int                                 tabSize
+,   int                                 blanksBetweenItems
 )
 {
     clasp_usageinfo_t           usageinfo;
@@ -749,19 +749,19 @@ clasp_showHeader(
 
 CLASP_CALL(int)
 clasp_show_header(
-  clasp_diagnostic_context_t const* ctxt
-, clasp_alias_t const*              specifications
-, clasp_char_t const*               toolName
-, clasp_char_t const*               summary
-, clasp_char_t const*               copyright
-, clasp_char_t const*               description
-, clasp_char_t const*               usage
-, int                               major
-, int                               minor
-, int                               revision
-, void                            (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void*                             param
-, int                               flags
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_alias_t const*                specifications
+,   clasp_char_t const*                 toolName
+,   clasp_char_t const*                 summary
+,   clasp_char_t const*                 copyright
+,   clasp_char_t const*                 description
+,   clasp_char_t const*                 usage
+,   int                                 major
+,   int                                 minor
+,   int                                 revision
+,   void                              (*pfnHeader)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void*                               param
+,   int                                 flags
 )
 {
     clasp_usageinfo_t           usageinfo;
@@ -841,14 +841,14 @@ clasp_showBody(
 
 CLASP_CALL(int)
 clasp_show_body(
-  clasp_diagnostic_context_t const* ctxt
-, clasp_alias_t const*              specifications
-, void                            (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void*                             param
-, int                               flags
-, int                               consoleWidth
-, int                               tabSize
-, int                               blanksBetweenItems
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_alias_t const*                specifications
+,   void                              (*pfnBody)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void*                               param
+,   int                                 flags
+,   int                                 consoleWidth
+,   int                                 tabSize
+,   int                                 blanksBetweenItems
 )
 {
     clasp_usageinfo_t           usageinfo;
@@ -923,14 +923,14 @@ clasp_showVersion(
 
 CLASP_CALL(int)
 clasp_show_version(
-  clasp_diagnostic_context_t const* ctxt
-, clasp_char_t const*               toolName
-, int                               major
-, int                               minor
-, int                               revision
-, void                            (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-, void*                             param
-, int                               flags
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_char_t const*                 toolName
+,   int                                 major
+,   int                                 minor
+,   int                                 revision
+,   void                              (*pfnVersion)(clasp_diagnostic_context_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+,   void*                               param
+,   int                                 flags
 )
 {
     clasp_usageinfo_t           usageinfo;

@@ -4,7 +4,7 @@
  * Purpose: CLASP API.
  *
  * Created: 4th June 2008
- * Updated: 15th January 2025
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -238,41 +238,41 @@ compare_clasp_argument_t_(
     {
         switch (lhs->type)
         {
+        default:
+            CLASP_ASSERT(0);
+        case CLASP_ARGTYPE_VALUE:
+            switch (rhs->type)
+            {
             default:
+            case CLASP_ARGTYPE_VALUE:
                 CLASP_ASSERT(0);
-            case    CLASP_ARGTYPE_VALUE:
-                switch (rhs->type)
-                {
-                    default:
-                    case    CLASP_ARGTYPE_VALUE:
-                        CLASP_ASSERT(0);
-                    case    CLASP_ARGTYPE_OPTION:
-                    case    CLASP_ARGTYPE_FLAG:
-                        return +1;
-                }
-            case    CLASP_ARGTYPE_OPTION:
-                switch (rhs->type)
-                {
-                    default:
-                    case    CLASP_ARGTYPE_OPTION:
-                        CLASP_ASSERT(0);
-                    case    CLASP_ARGTYPE_VALUE:
-                        return -1;
-                    case    CLASP_ARGTYPE_FLAG:
-                        return +1;
-                }
-                break;
-            case    CLASP_ARGTYPE_FLAG:
-                switch (rhs->type)
-                {
-                    default:
-                    case    CLASP_ARGTYPE_FLAG:
-                        CLASP_ASSERT(0);
-                    case    CLASP_ARGTYPE_VALUE:
-                    case    CLASP_ARGTYPE_OPTION:
-                        return -1;
-                }
-                break;
+            case CLASP_ARGTYPE_OPTION:
+            case CLASP_ARGTYPE_FLAG:
+                return +1;
+            }
+        case CLASP_ARGTYPE_OPTION:
+            switch (rhs->type)
+            {
+            default:
+            case CLASP_ARGTYPE_OPTION:
+                CLASP_ASSERT(0);
+            case CLASP_ARGTYPE_VALUE:
+                return -1;
+            case CLASP_ARGTYPE_FLAG:
+                return +1;
+            }
+            break;
+        case CLASP_ARGTYPE_FLAG:
+            switch (rhs->type)
+            {
+            default:
+            case CLASP_ARGTYPE_FLAG:
+                CLASP_ASSERT(0);
+            case CLASP_ARGTYPE_VALUE:
+            case CLASP_ARGTYPE_OPTION:
+                return -1;
+            }
+            break;
         }
     }
 }
@@ -309,7 +309,7 @@ struct clasp_arguments_x_t
     clasp_argument_t            args[1];
 };
 #ifndef __cplusplus
-typedef struct clasp_arguments_x_t clasp_arguments_x_t;
+typedef struct clasp_arguments_x_t                          clasp_arguments_x_t;
 #endif /* !__cplusplus */
 
 clasp_arguments_x_t*
@@ -1818,16 +1818,16 @@ clasp_parseArguments_NoWild_(
 
                             switch (currentArg->type)
                             {
-                                default:
-                                    CLASP_ASSERT(0);
-                                case    CLASP_ARGTYPE_VALUE:
-                                    CLASP_ASSERT(0);
-                                case    CLASP_ARGTYPE_OPTION:
-                                    ++numOptions;
-                                    break;
-                                case    CLASP_ARGTYPE_FLAG:
-                                    ++numFlags;
-                                    break;
+                            default:
+                                CLASP_ASSERT(0);
+                            case CLASP_ARGTYPE_VALUE:
+                                CLASP_ASSERT(0);
+                            case CLASP_ARGTYPE_OPTION:
+                                ++numOptions;
+                                break;
+                            case CLASP_ARGTYPE_FLAG:
+                                ++numFlags;
+                                break;
                             }
 
                             if (!nextArgumentIsValue)
@@ -1901,16 +1901,16 @@ clasp_parseArguments_NoWild_(
 
                                     switch (currentArg->type)
                                     {
-                                        default:
-                                            CLASP_ASSERT(0);
-                                        case    CLASP_ARGTYPE_VALUE:
-                                            CLASP_ASSERT(0);
-                                        case    CLASP_ARGTYPE_OPTION:
-                                            ++numOptions;
-                                            break;
-                                        case    CLASP_ARGTYPE_FLAG:
-                                            ++numFlags;
-                                            break;
+                                    default:
+                                        CLASP_ASSERT(0);
+                                    case CLASP_ARGTYPE_VALUE:
+                                        CLASP_ASSERT(0);
+                                    case CLASP_ARGTYPE_OPTION:
+                                        ++numOptions;
+                                        break;
+                                    case CLASP_ARGTYPE_FLAG:
+                                        ++numFlags;
+                                        break;
                                     }
 
                                     ++currentArg;

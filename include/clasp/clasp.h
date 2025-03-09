@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 15th January 2025
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -55,7 +55,7 @@
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      1
 # define CLASP_VER_CLASP_H_CLASP_REVISION   8
-# define CLASP_VER_CLASP_H_CLASP_EDIT       100
+# define CLASP_VER_CLASP_H_CLASP_EDIT       101
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -215,7 +215,6 @@
     CLASP_DEPRECATED_(msg)              \
     rt \
     CLASP_CALLCONV
-
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -392,7 +391,7 @@ typedef char                                                clasp_char_t;
 struct clasp_slice_t;
 #else /* ? __cplusplus */
 
-typedef struct clasp_slice_t clasp_slice_t;
+typedef struct clasp_slice_t                                clasp_slice_t;
 #endif /* __cplusplus */
 
 CLASP_CALL(int)
@@ -795,7 +794,7 @@ typedef void (CLASP_CALLCONV *clasp_free_fn_t)(
 
 struct clasp_diagnostic_context_t;
 #ifndef __cplusplus
-typedef struct clasp_diagnostic_context_t clasp_diagnostic_context_t;
+typedef struct clasp_diagnostic_context_t                   clasp_diagnostic_context_t;
 #endif /* !__cplusplus */
 
 /** Initialises a diagnostic context */
@@ -1352,7 +1351,7 @@ struct clasp_versioninfo_t
     int build;      /*!< The build number. */
 };
 #ifndef __cplusplus
-typedef struct clasp_versioninfo_t clasp_versioninfo_t;
+typedef struct clasp_versioninfo_t                          clasp_versioninfo_t;
 #endif /* !__cplusplus */
 
 struct clasp_tool_t
@@ -1372,7 +1371,7 @@ struct clasp_tool_t
     clasp_char_t const*     authors;
 };
 #ifndef __cplusplus
-typedef struct clasp_tool_t clasp_tool_t;
+typedef struct clasp_tool_t                                 clasp_tool_t;
 #endif /* !__cplusplus */
 
 /**
@@ -1404,7 +1403,7 @@ struct clasp_usageinfo_t
     int                     blanksBetweenItems;
 };
 #ifndef __cplusplus
-typedef struct clasp_usageinfo_t clasp_usageinfo_t;
+typedef struct clasp_usageinfo_t                            clasp_usageinfo_t;
 #endif /* !__cplusplus */
 
 
