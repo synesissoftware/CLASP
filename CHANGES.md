@@ -1,5 +1,10 @@
 # CLASP - CHANGES list <!-- omit in toc -->
 
+## 10th March 2025 - 0.15.0-alpha2
+
+* removed assertion left in **0.15.0-alpha1**;
+
+
 ## 10th March 2025 - 0.15.0-alpha1
 
 * `clasp_showUsage()` and `clasp_showVersion()` now infer `clasp_usageinfo_t#toolName` if null;
