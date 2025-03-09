@@ -199,7 +199,7 @@ clasp_find_replacement_usage_field_(
 )
 {
     clasp_char_t const**    fields[5];
-    size_t const            n = sizeof(fields) / sizeof(fields[0]);
+    size_t const            n = CLASP_NUM_ELEMENTS_(fields);
     size_t                  i;
 
     fields[0] = &usageinfo->toolName;
@@ -377,9 +377,9 @@ clasp_invoke_header_expand_usage_(
 )
 {
     clasp_char_t        usage1_[2000];
-    clasp_char_t        usage2_[sizeof(usage1_) / sizeof(usage1_[0])];
+    clasp_char_t        usage2_[CLASP_NUM_ELEMENTS_(usage1_)];
 
-    size_t const        CCH_USAGE = sizeof(usage1_) / sizeof(usage1_[0]);
+    size_t const        CCH_USAGE   =   CLASP_NUM_ELEMENTS_(usage1_);
 
     clasp_char_t const  prefixChar  =   (usageinfo->assumedTabWidth < 1) ? ' ' : '\t';
     size_t const        prefixLen   =   (usageinfo->assumedTabWidth < 1) ? (size_t)(-usageinfo->assumedTabWidth) : 1u;
@@ -503,7 +503,7 @@ clasp_invoke_header_new_(
             *pp = s_unknownIdentifier;
         }
         else
-        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
+        if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, CLASP_NUM_ELEMENTS_(buff)))
         {
             *pp = s_unknownIdentifier;
         }
@@ -547,7 +547,7 @@ clasp_invoke_body_new_(
                 *pp = s_unknownIdentifier;
             }
             else
-            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
+            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, CLASP_NUM_ELEMENTS_(buff)))
             {
                 *pp = s_unknownIdentifier;
             }
@@ -598,7 +598,7 @@ clasp_invoke_version_new_(
                 *pp = s_unknownIdentifier;
             }
             else
-            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, sizeof(buff) / sizeof(buff[0])))
+            if (!clasp_replace_field_from_resource_(args->argv[0], pp, buff, CLASP_NUM_ELEMENTS_(buff)))
             {
                 *pp = s_unknownIdentifier;
             }
