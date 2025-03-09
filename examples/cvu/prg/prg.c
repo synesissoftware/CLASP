@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the prg example project.
  *
  * Created: 8th December 2011
- * Updated: 12th July 2024
+ * Updated: 10th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -72,8 +72,8 @@ static clasp_specification_t const Specifications[] =
 
   CLASP_GAP_SECTION("standard flags:"),
 
-  CLASP_FLAG(NULL,    "--help",                         "show this help and quit"),
-  CLASP_FLAG(NULL,    "--version",                      "show version and quit"),
+  CLASP_STOCK_FLAG_HELP,
+  CLASP_STOCK_FLAG_VERSION,
 
   CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };

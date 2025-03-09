@@ -4,7 +4,7 @@
  * Purpose: Scratch test for version
  *
  * Created: 6th December 2011
- * Updated: 12th July 2024
+ * Updated: 10th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -34,9 +34,6 @@
 
 static clasp_specification_t const Specifications[] =
 {
-    CLASP_FLAG(NULL,    "--help",           "show usage and quit"),
-    CLASP_FLAG("-v",    "--version",        "show version and quit"),
-
     CLASP_OPTION("-o",  "--output-file",    "specify the output-file", ""),
 
     CLASP_SPECIFICATION_ARRAY_TERMINATOR
@@ -98,10 +95,12 @@ int main(int argc, char** argv)
 
         if (clasp_flagIsSpecified(args, "--help"))
         {
+            printf(" '--help' detected\n")
             ; /* show usage */
         }
         if (clasp_flagIsSpecified(args, "--version"))
         {
+            printf(" '--version' detected\n")
             ; /* show version */
         }
         {

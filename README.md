@@ -68,8 +68,8 @@ static clasp_specification_t const Specifications[] =
 {
     CLASP_GAP_SECTION("standard flags:"),
 
-    CLASP_FLAG(NULL,    "--help",           "show this help and terminate"),
-    CLASP_FLAG(NULL,    "--version",        "show version and terminate"),
+    CLASP_STOCK_FLAG_HELP,
+    CLASP_STOCK_FLAG_VERSION,
 
     CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };
@@ -144,8 +144,8 @@ static clasp_specification_t const Specifications[] =
 {
     CLASP_GAP_SECTION("standard flags:"),
 
-    CLASP_FLAG(NULL,    "--help",           "show this help and terminate"),
-    CLASP_FLAG(NULL,    "--version",        "show version and terminate"),
+    CLASP_STOCK_FLAG_HELP,
+    CLASP_STOCK_FLAG_VERSION,
 
     CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };
