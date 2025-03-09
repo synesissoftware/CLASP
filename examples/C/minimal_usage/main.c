@@ -43,7 +43,6 @@ static clasp_specification_t const Specifications[] =
     CLASP_FLAG(NULL,    "--help",           "show this help and terminate"),
     CLASP_FLAG(NULL,    "--version",        "show version and terminate"),
 
-
     CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };
 
