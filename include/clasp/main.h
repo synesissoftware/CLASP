@@ -4,11 +4,11 @@
  * Purpose: main() entry-point helper functions.
  *
  * Created: 29th December 2010
- * Updated: 12th July 2024
+ * Updated: 15th January 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2024, Matthew Wilson
+ * Copyright (c) 2010-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_MAIN_MAJOR       2
 # define CLASP_VER_CLASP_H_MAIN_MINOR       0
-# define CLASP_VER_CLASP_H_MAIN_REVISION    2
-# define CLASP_VER_CLASP_H_MAIN_EDIT        20
+# define CLASP_VER_CLASP_H_MAIN_REVISION    3
+# define CLASP_VER_CLASP_H_MAIN_EDIT        21
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -193,7 +193,7 @@ static
 int
 clasp_main_invoke(
     int                                 argc
-,   clasp_char_t**                      argv
+,   clasp_char_t*                       argv[]
 ,   int (*                              pfnMain)(clasp_arguments_t const* args)
 ,   clasp_char_t const*                 programName
 ,   clasp_specification_t const         specifications[]
@@ -203,7 +203,7 @@ clasp_main_invoke(
 {
     clasp_arguments_t const* args;
 
-    int r = clasp_parseArguments(flags, argc, (clasp_char_t const* const*)argv, specifications, ctxt, &args);
+    int r = clasp_parseArguments(flags, argc, argv, specifications, ctxt, &args);
 
     if (r != 0)
     {

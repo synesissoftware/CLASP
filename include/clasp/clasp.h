@@ -4,11 +4,11 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 1st February 2025
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,7 +55,7 @@
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      2
 # define CLASP_VER_CLASP_H_CLASP_REVISION   1
-# define CLASP_VER_CLASP_H_CLASP_EDIT       100
+# define CLASP_VER_CLASP_H_CLASP_EDIT       102
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -215,7 +215,6 @@
     CLASP_DEPRECATED_(msg)              \
     rt \
     CLASP_CALLCONV
-
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -392,7 +391,7 @@ typedef char                                                clasp_char_t;
 struct clasp_slice_t;
 #else /* ? __cplusplus */
 
-typedef struct clasp_slice_t clasp_slice_t;
+typedef struct clasp_slice_t                                clasp_slice_t;
 #endif /* __cplusplus */
 
 CLASP_CALL(int)
@@ -639,7 +638,7 @@ struct clasp_arguments_t
     size_t                      numValues;          /*!< The number of values */
     clasp_argument_t const*     values;             /*!< Pointer to an array of values */
     int                         argc;               /*!< Pointer to the <code>argc</code> argument passed to clasp_parseArguments() */
-    clasp_char_t const* const*  argv;               /*!< Pointer to the <code>argv</code> argument passed to clasp_parseArguments() */
+    clasp_char_t**              argv;               /*!< Pointer to the <code>argv</code> argument passed to clasp_parseArguments() */
     clasp_slice_t               programName;        /*!< The program name, deduced from argv[0] */
 };
 #ifndef __cplusplus
@@ -795,7 +794,7 @@ typedef void (CLASP_CALLCONV *clasp_free_fn_t)(
 
 struct clasp_diagnostic_context_t;
 #ifndef __cplusplus
-typedef struct clasp_diagnostic_context_t clasp_diagnostic_context_t;
+typedef struct clasp_diagnostic_context_t                   clasp_diagnostic_context_t;
 #endif /* !__cplusplus */
 
 /** Initialises a diagnostic context */
@@ -904,7 +903,7 @@ CLASP_CALL(int)
 clasp_parseArguments(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const           argv[]
+,   clasp_char_t*                       argv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
@@ -1352,7 +1351,7 @@ struct clasp_versioninfo_t
     int build;      /*!< The build number. */
 };
 #ifndef __cplusplus
-typedef struct clasp_versioninfo_t clasp_versioninfo_t;
+typedef struct clasp_versioninfo_t                          clasp_versioninfo_t;
 #endif /* !__cplusplus */
 
 struct clasp_tool_t
@@ -1372,7 +1371,7 @@ struct clasp_tool_t
     clasp_char_t const*     authors;
 };
 #ifndef __cplusplus
-typedef struct clasp_tool_t clasp_tool_t;
+typedef struct clasp_tool_t                                 clasp_tool_t;
 #endif /* !__cplusplus */
 
 /**
@@ -1404,7 +1403,7 @@ struct clasp_usageinfo_t
     int                     blanksBetweenItems;
 };
 #ifndef __cplusplus
-typedef struct clasp_usageinfo_t clasp_usageinfo_t;
+typedef struct clasp_usageinfo_t                            clasp_usageinfo_t;
 #endif /* !__cplusplus */
 
 
@@ -1451,13 +1450,13 @@ clasp_showHeader(
 
 /**
  *
- * \param args The arguments obtained from parsing the command-line
- * \param specifications The specifications used in parsing the command-line
- * \param param User-defined parameter to be passed to \c pfnBody.
- * \param flags Flags that moderate the behaviour of the function
- * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries).
- * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character.
- * \param blanksBetweenItems The number of blank lines to insert between each item
+ * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param specifications The specifications used in parsing the command-line;
+ * \param param User-defined parameter to be passed to \c pfnBody;
+ * \param flags Flags that moderate the behaviour of the function;
+ * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries);
+ * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
+ * \param blanksBetweenItems The number of blank lines to insert between each item;
  *
  */
 CLASP_CALL(int)
@@ -1698,7 +1697,7 @@ namespace clasp
     ,   arguments_t const**                 args
     )
     {
-        return clasp_parseArguments(flags, argc, argv, specifications, ctxt, args);
+        return clasp_parseArguments(flags, argc, const_cast<clasp_char_t**>(argv), specifications, ctxt, args);
     }
 
     inline
