@@ -4,11 +4,11 @@
  * Purpose: C++ layer for the CLASP library.
  *
  * Created: 31st July 2008
- * Updated: 12th July 2024
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
 # define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
 # define CLASP_VER_CLASP_HPP_CLASP_REVISION 1
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     68
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     69
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -453,124 +453,124 @@ namespace ximpl
 
             switch (str.ptr[0])
             {
-                /* Affirmative */
-                case    'Y':
-                case    'y':
+            /* Affirmative */
+            case 'Y':
+            case 'y':
 
-                    switch (str.ptr[1])
+                switch (str.ptr[1])
+                {
+                case '\0':
+
+                    return true;
+                case 'E':
+                case 'e':
+
+                    switch (str.ptr[2])
                     {
-                        case    '\0':
+                    case 'S':
+                    case 's':
 
+                        if ('\0' == str.ptr[3])
+                        {
                             return true;
-                        case    'E':
-                        case    'e':
+                        }
+                        break;
+                    }
+                    break;
+                }
+                break;
+            case 'T':
+            case 't':
 
-                            switch (str.ptr[2])
+                switch (str.ptr[1])
+                {
+                case '\0':
+
+                    return true;
+                case 'R':
+                case 'r':
+
+                    switch (str.ptr[2])
+                    {
+                    case 'U':
+                    case 'u':
+
+                        switch (str.ptr[3])
+                        {
+                        case 'E':
+                        case 'e':
+
+                            if ('\0' == str.ptr[4])
                             {
-                                case    'S':
-                                case    's':
-
-                                    if ('\0' == str.ptr[3])
-                                    {
-                                        return true;
-                                    }
-                                    break;
+                                return true;
                             }
                             break;
+                        }
+                        break;
                     }
                     break;
-                case    'T':
-                case    't':
+                }
+                break;
 
-                    switch (str.ptr[1])
+            /* Negative */
+            case 'N':
+            case 'n':
+
+                switch (str.ptr[1])
+                {
+                case '\0':
+
+                    return false;
+                case 'O':
+                case 'o':
+
+                    if ('\0' == str.ptr[2])
                     {
-                        case    '\0':
-
-                            return true;
-                        case    'R':
-                        case    'r':
-
-                            switch (str.ptr[2])
-                            {
-                                case    'U':
-                                case    'u':
-
-                                    switch (str.ptr[3])
-                                    {
-                                        case    'E':
-                                        case    'e':
-
-                                            if ('\0' == str.ptr[4])
-                                            {
-                                                return true;
-                                            }
-                                            break;
-                                    }
-                                    break;
-                            }
-                            break;
+                        return false;
                     }
                     break;
+                }
+                break;
+            case 'F':
+            case 'f':
 
-                /* Negative */
-                case    'N':
-                case    'n':
+                switch (str.ptr[1])
+                {
+                case '\0':
 
-                    switch (str.ptr[1])
+                    return false;
+                case 'A':
+                case 'a':
+
+                    switch (str.ptr[2])
                     {
-                        case    '\0':
+                    case 'L':
+                    case 'l':
 
-                            return false;
-                        case    'O':
-                        case    'o':
+                        switch (str.ptr[3])
+                        {
+                        case 'S':
+                        case 's':
 
-                            if ('\0' == str.ptr[2])
+                            switch (str.ptr[4])
                             {
-                                return false;
+                            case 'E':
+                            case 'e':
+
+                                if ('\0' == str.ptr[5])
+                                {
+                                    return false;
+                                }
+                                break;
                             }
-                            break;
+                        }
                     }
-                    break;
-                case    'F':
-                case    'f':
+                }
+                break;
 
-                    switch (str.ptr[1])
-                    {
-                        case    '\0':
+            default:
 
-                            return false;
-                        case    'A':
-                        case    'a':
-
-                            switch (str.ptr[2])
-                            {
-                                case    'L':
-                                case    'l':
-
-                                    switch (str.ptr[3])
-                                    {
-                                        case    'S':
-                                        case    's':
-
-                                            switch (str.ptr[4])
-                                            {
-                                                case    'E':
-                                                case    'e':
-
-                                                    if ('\0' == str.ptr[5])
-                                                    {
-                                                        return false;
-                                                    }
-                                                    break;
-                                            }
-                                    }
-                            }
-                    }
-                    break;
-
-                default:
-
-                    break;
+                break;
             }
 
             *wasStrictlyCorrect = false;
@@ -683,29 +683,29 @@ namespace ximpl
 
                 switch (arg.value.ptr[0])
                 {
-                    case    '-':
+                case '-':
 
-                        throw_invalid_option_value_exception_if_<0 == stlsoft::is_signed_type<I>::value>("value may not be negative for option", optionName);
-                        break;
-                    case    '0':
-                    case    '1':
-                    case    '2':
-                    case    '3':
-                    case    '4':
-                    case    '5':
-                    case    '6':
-                    case    '7':
-                    case    '8':
-                    case    '9':
-                    case    '+':
+                    throw_invalid_option_value_exception_if_<0 == stlsoft::is_signed_type<I>::value>("value may not be negative for option", optionName);
+                    break;
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                case '+':
 
-                        *result = integer_conversion_traits_<I>::convert(arg.value.ptr);
+                    *result = integer_conversion_traits_<I>::convert(arg.value.ptr);
 
-                        return true;
-                    default:
+                    return true;
+                default:
 
-                        throw_invalid_option_value_exception_("value is not an integer for option", optionName);
-                        break;
+                    throw_invalid_option_value_exception_("value is not an integer for option", optionName);
+                    break;
                 }
             }
         }}
@@ -742,29 +742,29 @@ namespace ximpl
                 {
                     switch (arg.value.ptr[0])
                     {
-                        case    '-':
+                    case '-':
 
-                            throw_invalid_option_value_exception_if_<0 == stlsoft::is_signed_type<I>::value>("value may not be negative for option", optionName);
-                            break;
-                        case    '0':
-                        case    '1':
-                        case    '2':
-                        case    '3':
-                        case    '4':
-                        case    '5':
-                        case    '6':
-                        case    '7':
-                        case    '8':
-                        case    '9':
-                        case    '+':
+                        throw_invalid_option_value_exception_if_<0 == stlsoft::is_signed_type<I>::value>("value may not be negative for option", optionName);
+                        break;
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                    case '+':
 
-                            *result = integer_conversion_traits_<I>::convert(arg.value.ptr);
+                        *result = integer_conversion_traits_<I>::convert(arg.value.ptr);
 
-                            return;
-                        default:
+                        return;
+                    default:
 
-                            throw_invalid_option_value_exception_("value is not an integer for option", optionName);
-                            break;
+                        throw_invalid_option_value_exception_("value is not an integer for option", optionName);
+                        break;
                     }
                 }
             }

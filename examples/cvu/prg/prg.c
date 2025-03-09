@@ -106,7 +106,7 @@ int main(int argc, char** argv)
       , "SystemTools (http://systemtools.sourceforge.net/)"
       , "Copyright Matthew Wilson"
       , "Exercises CLASP (C) for CVu"
-      , "prg [... options ...] [<infile> | -] [<outfile> | -]"
+      , "!USAGE:!prg [... options ...] [<infile> | -] [<outfile> | -]"
       , 1, 0, 1 /* version: maj, min, rev */
       , clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
       , 0  /* flags */

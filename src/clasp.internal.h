@@ -4,11 +4,11 @@
  * Purpose: CLASP internal common header.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -86,6 +86,13 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * macros
+ */
+
+#define CLASP_NUM_ELEMENTS_(ar)                             (sizeof((ar)) / sizeof((ar)[0]))
+
+
+/* /////////////////////////////////////////////////////////////////////////
  * diagnostics and contract enforcement
  */
 
@@ -106,7 +113,13 @@ enum clasp_severity_index_t
     ,   CLASP_SEVIX_EMERG =   4
 };
 
-void CLASP_LOG_PRINTF(clasp_diagnostic_context_t const* ctxt, int severityIndex, clasp_char_t const* fmt, ...);
+void
+CLASP_LOG_PRINTF(
+    clasp_diagnostic_context_t const*   ctxt
+,   int                                 severityIndex
+,   clasp_char_t const*                 fmt
+,   ...
+);
 
 clasp_diagnostic_context_t const*
 clasp_verify_context_(
@@ -138,7 +151,7 @@ void CLASP_CALLCONV clasp_stock_free_(void* context, void* pv);
  * argument-control
  */
 
-/*
+/** Indicates whether the given argument is marked as used.
  *
  * \retval 0 The argument is not used
  * \retval !0 The argument is used
@@ -146,12 +159,13 @@ void CLASP_CALLCONV clasp_stock_free_(void* context, void* pv);
  * \pre NULL != args
  * \pre NULL != arg
  */
-int clasp_argumentIsUsed_(
+int
+clasp_argumentIsUsed_(
     clasp_arguments_t const*    args
 ,   clasp_argument_t const*     arg
 );
 
-/*
+/* Causes the given argument to be marked as used.
  *
  * \retval 0 The argument was previously unused
  * \retval !0 The argument was previously used
@@ -159,9 +173,17 @@ int clasp_argumentIsUsed_(
  * \pre NULL != args
  * \pre NULL != arg
  */
-int clasp_useArgument_(
+int
+clasp_useArgument_(
     clasp_arguments_t const*    args
 ,   clasp_argument_t const*     arg
+);
+
+void
+clasp_count_flags_and_options_(
+    clasp_specification_t const     specifications[]
+,   size_t*                         numFlags
+,   size_t*                         numOptions
 );
 
 
@@ -178,6 +200,7 @@ int clasp_useArgument_(
 # define clasp_strncmp_                                     wcsncmp
 # define clasp_strpbrk_                                     wcspbrk
 # define clasp_strrchr_                                     wcsrchr
+# define clasp_strstr_                                      wcsstr
 # define CLASP_LITERAL_(x)                                  L ## x
 #else
 # define clasp_fprintf_                                     fprintf
@@ -188,6 +211,7 @@ int clasp_useArgument_(
 # define clasp_strncmp_                                     strncmp
 # define clasp_strpbrk_                                     strpbrk
 # define clasp_strrchr_                                     strrchr
+# define clasp_strstr_                                      strstr
 # define CLASP_LITERAL_(x)                                  x
 #endif
 
@@ -196,10 +220,34 @@ int clasp_useArgument_(
  * string
  */
 
-clasp_char_t* clasp_strdup_(clasp_diagnostic_context_t const* ctxt, clasp_char_t const* s);
-clasp_char_t* clasp_strdup_raw_(clasp_char_t const* s);
+/* T.B.C.
+ *
+ * \param ctxt T.B.C.
+ * \param s T.B.C.
+ */
+clasp_char_t* clasp_strdup_(
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_char_t const*                 s
+);
 
-clasp_char_t* clasp_strchreq_(clasp_char_t const* s, unsigned flags);
+/* T.B.C.
+ *
+ * \param s T.B.C.
+ */
+clasp_char_t* clasp_strdup_raw_(
+    clasp_char_t const* s
+);
+
+/* T.B.C.
+ *
+ * \param s T.B.C.
+ * \param flags T.B.C.
+ */
+clasp_char_t*
+clasp_strchreq_(
+    clasp_char_t const* s
+,   unsigned            flags
+);
 
 /* Counts the number of instances of c in s
  *

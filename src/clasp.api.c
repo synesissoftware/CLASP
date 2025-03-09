@@ -4,11 +4,11 @@
  * Purpose: CLASP API.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -130,6 +130,37 @@ For two reasons, we can only call recls *once* for each wildcard argument:
  * helper functions
  */
 
+void
+clasp_count_flags_and_options_(
+    clasp_specification_t const     specifications[]
+,   size_t*                         numFlags
+,   size_t*                         numOptions
+)
+{
+    *numFlags = 0;
+    *numOptions = 0;
+
+    for (clasp_specification_t const* p = specifications; CLASP_ARGTYPE_INVALID != p->type; ++p)
+    {
+        switch (p->type)
+        {
+        default:
+            CLASP_ASSERT(0);
+        case CLASP_ARGTYPE_VALUE:
+
+            break;
+        case CLASP_ARGTYPE_FLAG:
+
+            ++*numFlags;
+            break;
+        case CLASP_ARGTYPE_OPTION:
+
+            ++*numOptions;
+            break;
+        }
+    }
+}
+
 static
 int
 clasp_evaluate_specification_index_(
@@ -238,41 +269,41 @@ compare_clasp_argument_t_(
     {
         switch (lhs->type)
         {
+        default:
+            CLASP_ASSERT(0);
+        case CLASP_ARGTYPE_VALUE:
+            switch (rhs->type)
+            {
             default:
+            case CLASP_ARGTYPE_VALUE:
                 CLASP_ASSERT(0);
-            case    CLASP_ARGTYPE_VALUE:
-                switch (rhs->type)
-                {
-                    default:
-                    case    CLASP_ARGTYPE_VALUE:
-                        CLASP_ASSERT(0);
-                    case    CLASP_ARGTYPE_OPTION:
-                    case    CLASP_ARGTYPE_FLAG:
-                        return +1;
-                }
-            case    CLASP_ARGTYPE_OPTION:
-                switch (rhs->type)
-                {
-                    default:
-                    case    CLASP_ARGTYPE_OPTION:
-                        CLASP_ASSERT(0);
-                    case    CLASP_ARGTYPE_VALUE:
-                        return -1;
-                    case    CLASP_ARGTYPE_FLAG:
-                        return +1;
-                }
-                break;
-            case    CLASP_ARGTYPE_FLAG:
-                switch (rhs->type)
-                {
-                    default:
-                    case    CLASP_ARGTYPE_FLAG:
-                        CLASP_ASSERT(0);
-                    case    CLASP_ARGTYPE_VALUE:
-                    case    CLASP_ARGTYPE_OPTION:
-                        return -1;
-                }
-                break;
+            case CLASP_ARGTYPE_OPTION:
+            case CLASP_ARGTYPE_FLAG:
+                return +1;
+            }
+        case CLASP_ARGTYPE_OPTION:
+            switch (rhs->type)
+            {
+            default:
+            case CLASP_ARGTYPE_OPTION:
+                CLASP_ASSERT(0);
+            case CLASP_ARGTYPE_VALUE:
+                return -1;
+            case CLASP_ARGTYPE_FLAG:
+                return +1;
+            }
+            break;
+        case CLASP_ARGTYPE_FLAG:
+            switch (rhs->type)
+            {
+            default:
+            case CLASP_ARGTYPE_FLAG:
+                CLASP_ASSERT(0);
+            case CLASP_ARGTYPE_VALUE:
+            case CLASP_ARGTYPE_OPTION:
+                return -1;
+            }
+            break;
         }
     }
 }
@@ -309,7 +340,7 @@ struct clasp_arguments_x_t
     clasp_argument_t            args[1];
 };
 #ifndef __cplusplus
-typedef struct clasp_arguments_x_t clasp_arguments_x_t;
+typedef struct clasp_arguments_x_t                          clasp_arguments_x_t;
 #endif /* !__cplusplus */
 
 clasp_arguments_x_t*
@@ -512,7 +543,7 @@ size_t
 clasp_identify_programName_(
     unsigned                    flags
 ,   int                         argc
-,   clasp_char_t const* const*  argv
+,   clasp_char_t*               argv[]
 ,   clasp_slice_t*              programName
 )
 {
@@ -578,7 +609,7 @@ int
 clasp_calculate_sizes_(
     unsigned                    flags
 ,   int                         argc
-,   clasp_char_t const* const*  argv
+,   clasp_char_t*               argv[]
 ,   clasp_specification_t const specifications[]
 ,   size_t*                     numArgs
 ,   size_t*                     cbStrings
@@ -1102,9 +1133,9 @@ int
 clasp_parseArguments_NoWild_(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp_char_t*                       argv[]
 ,   int                                 originalArgc
-,   clasp_char_t const* const*          originalArgv
+,   clasp_char_t*                       originalArgv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
@@ -1114,7 +1145,7 @@ CLASP_CALL(int)
 clasp_parseArguments(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp_char_t*                       argv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
@@ -1374,9 +1405,9 @@ int
 clasp_parseArguments_NoWild_(
     unsigned                            flags
 ,   int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp_char_t*                       argv[]
 ,   int                                 originalArgc
-,   clasp_char_t const* const*          originalArgv
+,   clasp_char_t*                       originalArgv[]
 ,   clasp_specification_t const         specifications[]
 ,   clasp_diagnostic_context_t const*   ctxt
 ,   clasp_arguments_t const**           args
@@ -1424,7 +1455,7 @@ clasp_parseArguments_NoWild_(
     argsx->claspArgs.numValues          =   0;
     argsx->claspArgs.values             =   NULL;
     argsx->claspArgs.argc               =   originalArgc;
-    argsx->claspArgs.argv               =   stlsoft_const_cast(clasp_char_t const* const*, originalArgv);
+    argsx->claspArgs.argv               =   originalArgv;
 #if 0
     argsx->claspArgs.programName;
 #endif
@@ -1818,16 +1849,16 @@ clasp_parseArguments_NoWild_(
 
                             switch (currentArg->type)
                             {
-                                default:
-                                    CLASP_ASSERT(0);
-                                case    CLASP_ARGTYPE_VALUE:
-                                    CLASP_ASSERT(0);
-                                case    CLASP_ARGTYPE_OPTION:
-                                    ++numOptions;
-                                    break;
-                                case    CLASP_ARGTYPE_FLAG:
-                                    ++numFlags;
-                                    break;
+                            default:
+                                CLASP_ASSERT(0);
+                            case CLASP_ARGTYPE_VALUE:
+                                CLASP_ASSERT(0);
+                            case CLASP_ARGTYPE_OPTION:
+                                ++numOptions;
+                                break;
+                            case CLASP_ARGTYPE_FLAG:
+                                ++numFlags;
+                                break;
                             }
 
                             if (!nextArgumentIsValue)
@@ -1901,16 +1932,16 @@ clasp_parseArguments_NoWild_(
 
                                     switch (currentArg->type)
                                     {
-                                        default:
-                                            CLASP_ASSERT(0);
-                                        case    CLASP_ARGTYPE_VALUE:
-                                            CLASP_ASSERT(0);
-                                        case    CLASP_ARGTYPE_OPTION:
-                                            ++numOptions;
-                                            break;
-                                        case    CLASP_ARGTYPE_FLAG:
-                                            ++numFlags;
-                                            break;
+                                    default:
+                                        CLASP_ASSERT(0);
+                                    case CLASP_ARGTYPE_VALUE:
+                                        CLASP_ASSERT(0);
+                                    case CLASP_ARGTYPE_OPTION:
+                                        ++numOptions;
+                                        break;
+                                    case CLASP_ARGTYPE_FLAG:
+                                        ++numFlags;
+                                        break;
                                     }
 
                                     ++currentArg;
@@ -2068,8 +2099,6 @@ clasp_getSpecifications(
     clasp_arguments_t const*    args
 )
 {
-    CLASP_ASSERT(NULL != args);
-
     if (NULL != args)
     {
         return (clasp_specification_t const*)clasp_argsx_from_args_(args)->specifications;

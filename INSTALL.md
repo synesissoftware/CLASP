@@ -119,6 +119,8 @@ The primary choice for installation is by use of **CMake**.
 
 ## Custom makefile
 
+>NOTE: As of 0.15.0-alpha1, the custom, manually-written makefiles are no longer supported, so the following instructions are no longer valid. A future release will include a description of making a custom makefile should you wish to do so.
+
 Before support for **CMake** was provided, the recommended approach was to
 use one of the custom makefiles provided with the project, as follows:
 

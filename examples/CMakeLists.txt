@@ -33,6 +33,8 @@ if((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
 endif()
 
 
+add_subdirectory(C)
+add_subdirectory(C++)
 add_subdirectory(cvu)
 
 

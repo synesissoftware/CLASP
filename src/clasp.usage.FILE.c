@@ -4,11 +4,11 @@
  * Purpose: CLASP usage (FILE) facilities.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 9th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -84,12 +84,12 @@ clasp_is_valid_specification_type_(clasp_argtype_t t)
 {
     switch (t)
     {
-        case  CLASP_ARGTYPE_FLAG:
-        case  CLASP_ARGTYPE_OPTION:
-        case  CLASP_ARGTYPE_VALUE:
-            return clasp_true_v;
-        default:
-            return clasp_false_v;
+    case CLASP_ARGTYPE_FLAG:
+    case CLASP_ARGTYPE_OPTION:
+    case CLASP_ARGTYPE_VALUE:
+        return clasp_true_v;
+    default:
+        return clasp_false_v;
     }
 }
 
@@ -293,10 +293,10 @@ static size_t clasp_find_matching_primary_(
 static
 void
 clasp_show_split_option_help_limit_width_by_FILE_fitting_fragment_(
-  FILE*                             stm
-, clasp_char_t const*               fragment
-, size_t                            len
-, int                               TabSize
+    FILE*                           stm
+,   clasp_char_t const*             fragment
+,   size_t                          len
+,   int                             TabSize
 )
 {
     if (TabSize < 1)
@@ -310,11 +310,11 @@ clasp_show_split_option_help_limit_width_by_FILE_fitting_fragment_(
 }
 
 static void clasp_show_split_option_help_limit_width_by_FILE_(
-  clasp_diagnostic_context_t const* ctxt
-, clasp_char_t const*               help
-, FILE*                             stm
-, int                               width
-, int                               TabSize
+    clasp_diagnostic_context_t const*   ctxt
+,   clasp_char_t const*                 help
+,   FILE*                               stm
+,   int                                 width
+,   int                                 TabSize
 )
 {
     size_t const    len             =   clasp_strlen_(help);
@@ -392,31 +392,6 @@ static void clasp_show_split_option_help_limit_width_by_FILE_(
     }
 }
 
-static
-unsigned
-clasp_count_types_(
-    clasp_specification_t const     specifications[]
-,   clasp_argtype_t                 argType
-)
-{
-    unsigned n = 0;
-
-    if (NULL != specifications)
-    {
-        for (; CLASP_ARGTYPE_INVALID != specifications->type; ++specifications)
-        {
-            if (argType == specifications->type)
-            {
-                ++n;
-            }
-        }
-    }
-
-    return n;
-}
-
-#define clasp_count_flags_(specifications)          clasp_count_types_((specifications), CLASP_ARGTYPE_FLAG)
-#define clasp_count_options_(specifications)        clasp_count_types_((specifications), CLASP_ARGTYPE_OPTION)
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -502,28 +477,15 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
 )
 {
     FILE*                       stm     =   (FILE*)info->param;
-    clasp_char_t*               usage   =   (clasp_char_t*)info->usage;
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
+
+    CLASP_ASSERT(NULL != info->usage);
 
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
         return;
-    }
-
-    if (NULL == usage ||
-        '\0' == *usage)
-    {
-        /* If the user has supplied a NULL usage, we
-         * supply one.
-         */
-
-        clasp_usageinfo_t info_ = *info;
-
-        info_.usage = CLASP_LITERAL_("[ ... options ... ] <arg1> [ ... <argN>]");
-
-        clasp_show_header_by_FILE(ctxt, &info_, specifications);
     }
 
     clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->summary);
@@ -545,7 +507,7 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
     }
 
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
-    clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), usage);
+    clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->usage);
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
 }
 
@@ -572,8 +534,8 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
     const size_t                numSpecifications   =   clasp_countSpecifications(specifications);
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
-    unsigned                    numFlags;
-    unsigned                    numOptions;
+    size_t                      numFlags            =   (size_t)~0;
+    size_t                      numOptions          =   (size_t)~0;
 
     unsigned const              flags               =   0;
 
@@ -593,8 +555,15 @@ CLASP_CALL(void) clasp_show_body_by_FILE(
         return;
     }
 
-    numFlags    =   clasp_count_flags_(specifications);
-    numOptions  =   clasp_count_options_(specifications);
+    if (NULL != specifications)
+    {
+        clasp_count_flags_and_options_(specifications, &numFlags, &numOptions);
+    }
+    else
+    {
+        numFlags = 0;
+        numOptions = 0;
+    }
 
     if (0 == numFlags)
     {
