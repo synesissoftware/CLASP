@@ -1455,7 +1455,7 @@ clasp_parseArguments_NoWild_(
     argsx->claspArgs.numValues          =   0;
     argsx->claspArgs.values             =   NULL;
     argsx->claspArgs.argc               =   originalArgc;
-    argsx->claspArgs.argv               =   stlsoft_const_cast(clasp_char_t const* const*, originalArgv);
+    argsx->claspArgs.argv               =   originalArgv;
 #if 0
     argsx->claspArgs.programName;
 #endif
@@ -2099,8 +2099,6 @@ clasp_getSpecifications(
     clasp_arguments_t const*    args
 )
 {
-    CLASP_ASSERT(NULL != args);
-
     if (NULL != args)
     {
         return (clasp_specification_t const*)clasp_argsx_from_args_(args)->specifications;

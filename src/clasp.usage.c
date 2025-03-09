@@ -976,7 +976,6 @@ clasp_showBody(
 
     ((void)flags);
 
-    CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != pfnBody);
 
     usageinfo.version.major         =   -1;

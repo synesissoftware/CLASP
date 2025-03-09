@@ -53,9 +53,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
-# define CLASP_VER_CLASP_H_CLASP_MINOR      1
-# define CLASP_VER_CLASP_H_CLASP_REVISION   8
-# define CLASP_VER_CLASP_H_CLASP_EDIT       101
+# define CLASP_VER_CLASP_H_CLASP_MINOR      2
+# define CLASP_VER_CLASP_H_CLASP_REVISION   1
+# define CLASP_VER_CLASP_H_CLASP_EDIT       102
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -638,7 +638,7 @@ struct clasp_arguments_t
     size_t                      numValues;          /*!< The number of values */
     clasp_argument_t const*     values;             /*!< Pointer to an array of values */
     int                         argc;               /*!< Pointer to the <code>argc</code> argument passed to clasp_parseArguments() */
-    clasp_char_t const* const*  argv;               /*!< Pointer to the <code>argv</code> argument passed to clasp_parseArguments() */
+    clasp_char_t**              argv;               /*!< Pointer to the <code>argv</code> argument passed to clasp_parseArguments() */
     clasp_slice_t               programName;        /*!< The program name, deduced from argv[0] */
 };
 #ifndef __cplusplus
@@ -1450,13 +1450,13 @@ clasp_showHeader(
 
 /**
  *
- * \param args The arguments obtained from parsing the command-line
- * \param specifications The specifications used in parsing the command-line
- * \param param User-defined parameter to be passed to \c pfnBody.
- * \param flags Flags that moderate the behaviour of the function
- * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries).
- * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character.
- * \param blanksBetweenItems The number of blank lines to insert between each item
+ * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param specifications The specifications used in parsing the command-line;
+ * \param param User-defined parameter to be passed to \c pfnBody;
+ * \param flags Flags that moderate the behaviour of the function;
+ * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries);
+ * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
+ * \param blanksBetweenItems The number of blank lines to insert between each item;
  *
  */
 CLASP_CALL(int)
@@ -1669,6 +1669,7 @@ namespace clasp
     typedef ::clasp_argument_t              argument_t;
     typedef ::clasp_arguments_t             arguments_t;
     typedef ::clasp_diagnostic_context_t    diagnostic_context_t;
+    typedef ::clasp_slice_t                 slice_t;
     typedef ::clasp_specification_t         specification_t;
 
     inline
