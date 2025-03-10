@@ -267,7 +267,7 @@ clasp_showHeaderIntoMemory(
 )
 {
     stlsoft_C_string_slice_m_t* const   sl  =   info->param;
-    char* const                         p   =   (char*)sl->ptr;
+    char*                               p   =   (char*)sl->ptr;
 
     STLSOFT_SUPPRESS_UNUSED(args);
     STLSOFT_SUPPRESS_UNUSED(specifications);
@@ -333,7 +333,7 @@ clasp_showBodyIntoMemory(
 
 static void test_header_with_LLLLL()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -379,7 +379,7 @@ static void test_header_with_LLLLL()
 
 static void test_header_with_RRRRR()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -425,7 +425,7 @@ static void test_header_with_RRRRR()
 
 static void test_header_with_RLLLL()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -471,7 +471,7 @@ static void test_header_with_RLLLL()
 
 static void test_header_with_LRLLL()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -517,7 +517,7 @@ static void test_header_with_LRLLL()
 
 static void test_header_with_LLLRL()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -563,7 +563,7 @@ static void test_header_with_LLLRL()
 
 static void test_header_with_rLLLL()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -609,7 +609,7 @@ static void test_header_with_rLLLL()
 
 static void test_header_with_LLrLL()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -655,7 +655,7 @@ static void test_header_with_LLrLL()
 
 static void test_header_with_LLLLr()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -701,7 +701,7 @@ static void test_header_with_LLLLr()
 
 static void test_header_with_rRRRR(void)
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -747,7 +747,7 @@ static void test_header_with_rRRRR(void)
 
 static void test_header_with_RrRRR(void)
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -793,7 +793,7 @@ static void test_header_with_RrRRR(void)
 
 static void test_header_with_RRrRR(void)
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -839,7 +839,7 @@ static void test_header_with_RRrRR(void)
 
 static void test_header_with_RRRrR(void)
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -885,7 +885,7 @@ static void test_header_with_RRRrR(void)
 
 static void test_header_with_RRRRr(void)
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -940,7 +940,7 @@ static void test_body_1()
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -986,7 +986,7 @@ static void test_body_2()
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -1032,7 +1032,7 @@ static void test_body_3()
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -1079,7 +1079,7 @@ static void test_body_4()
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -1126,7 +1126,7 @@ static void test_body_5()
 
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -1174,7 +1174,7 @@ static void test_1_16(void)
 
 static void test_expanded_usage_1()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 
@@ -1220,7 +1220,7 @@ static void test_expanded_usage_1()
 
 static void test_expanded_usage_2()
 {
-    char* const                 argv[]  =
+    char*                       argv[]  =
     {
         s_argv0,
 

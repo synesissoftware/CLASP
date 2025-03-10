@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for CLASP core library
 #
 # Created:  ...
-# Updated:  18th October 2024
+# Updated:  20th March 2025
 #
 # ######################################################################## #
 
@@ -38,10 +38,7 @@ endif(WIN32)
 
 if((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
 
-	target_compile_definitions(core
-		PRIVATE
-			"/Zc:__cplusplus"
-	)
+	add_compile_options("/Zc:__cplusplus")
 
 	add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
 endif()
