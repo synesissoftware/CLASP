@@ -1,16 +1,22 @@
 # CLASP - CHANGES list <!-- omit in toc -->
 
-## 10th March 2025 - 0.15.0-alpha3
+
+## 10th March 2025 - 0.15.0-alpha4
+
+* added stock flag macros `CLASP_STOCK_FLAG_HELP()` and `CLASP_STOCK_FLAG_VERSION()`;
+
+
+## 9th March 2025 - 0.15.0-alpha3
 
 * fixed CMakeLists.txt such that it picks up `CLASP_VER_PATCH`;
 
 
-## 10th March 2025 - 0.15.0-alpha2
+## 9th March 2025 - 0.15.0-alpha2
 
 * removed assertion left in **0.15.0-alpha1**;
 
 
-## 10th March 2025 - 0.15.0-alpha1
+## 9th March 2025 - 0.15.0-alpha1
 
 * `clasp_showUsage()` and `clasp_showVersion()` now infer `clasp_usageinfo_t#toolName` if null;
 * `clasp_showUsage()` handling of `usage` now accepts replacement null string, in which case will use suitable default;

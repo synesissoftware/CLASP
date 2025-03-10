@@ -2,9 +2,10 @@
 
 | Date                  | News Item                                     |
 | --------------------- | --------------------------------------------- |
-| 10th March 2025       | Release of 0.15.0-alpha3                      |
-| 10th March 2025       | Release of 0.15.0-alpha2                      |
-| 10th March 2025       | Release of 0.15.0-alpha1                      |
+| 10th March 2025       | Release of 0.15.0-alpha4                      |
+| 9th March 2025        | Release of 0.15.0-alpha3                      |
+| 9th March 2025        | Release of 0.15.0-alpha2                      |
+| 9th March 2025        | Release of 0.15.0-alpha1                      |
 | 23rd October 2024     | Release of 0.14.0-beta4                       |
 | 18th October 2024     | Release of 0.14.0-beta3                       |
 | 12th February 2024    | Release of 0.14.0-beta2                       |

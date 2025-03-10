@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 9th March 2025
+ * Updated: 10th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -53,9 +53,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
-# define CLASP_VER_CLASP_H_CLASP_MINOR      2
-# define CLASP_VER_CLASP_H_CLASP_REVISION   3
-# define CLASP_VER_CLASP_H_CLASP_EDIT       105
+# define CLASP_VER_CLASP_H_CLASP_MINOR      3
+# define CLASP_VER_CLASP_H_CLASP_REVISION   1
+# define CLASP_VER_CLASP_H_CLASP_EDIT       106
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -76,9 +76,9 @@
 #define CLASP_VER_MINOR     15
 #define CLASP_VER_PATCH     0
 #define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0x43
+#define CLASP_VER_AB        0x44
 
-#define CLASP_VER           0x000f0043
+#define CLASP_VER           0x000f0044
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -292,8 +292,7 @@
 /* We do not enforce that a neutral / non-recognised platform is a problem,
  * because the CLASP library does not rely on any platform-specific
  * features
-#  error Platform not (yet) recognised
-*/
+ */
 # endif /* platform */
 #endif /* !CLASP_OVERRIDE_PLATFORM */
 
@@ -1340,6 +1339,19 @@ clasp_valueIsTreatedHyphen(
 /* /////////////////////////////////////////////////////////////////////////
  * usage API
  */
+
+/** \def CLASP_STOCK_FLAG_HELP
+ *
+ * Defines a CLASP_FLAG() specification for the "--help" de-facto
+ * standard flag.
+ */
+#define CLASP_STOCK_FLAG_HELP                               CLASP_FLAG(NULL, "--help", "Show this help and terminate.")
+/** \def CLASP_STOCK_FLAG_VERSION
+ *
+ * Defines a CLASP_FLAG() specification for the "--version" de-facto
+ * standard flag.
+ */
+#define CLASP_STOCK_FLAG_VERSION                            CLASP_FLAG(NULL, "--version", "Show version and terminate.")
 
 /** Aggregate of version
  */
