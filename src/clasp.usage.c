@@ -402,7 +402,7 @@ clasp_usage_has_replacement_toolName_(
             if (NULL != (p = clasp_strstr_(usage, tag)))
             {
                 *ix_start = (size_t)(p - usage);
-                *len = *ix_start + tag_len;
+                *len = tag_len;
             }
         }
 
@@ -486,7 +486,7 @@ clasp_invoke_header_expand_usage_(
                 clasp_char_t*       tok =   (seps[0] = sep, seps[1] = '\0', clasp_strtok_wblank_r_(usage2_, seps, &sc));
                 clasp_char_t*       p0  =   usage1_;
 
-                for (; NULL != tok; tok = clasp_strtok_wblank_r_(NULL, seps, &sc))
+                for (; NULL != tok; )
                 {
                     size_t const tl = clasp_strlen_(tok);
 
@@ -502,7 +502,12 @@ clasp_invoke_header_expand_usage_(
                         p0 += tl;
                     }
 
-                    *p0++ = '\n';
+                    tok = clasp_strtok_wblank_r_(NULL, seps, &sc);
+
+                    if (NULL != tok)
+                    {
+                        *p0++ = '\n';
+                    }
                 }
                 CLASP_ASSERT(p0 < &usage1_[CCH_USAGE]);
                 *p0 = 0;
@@ -531,6 +536,83 @@ clasp_invoke_header_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
+    size_t  ix_start;
+    size_t  len;
+
+    if (NULL == usageinfo->toolName)
+    {
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
+
+        if (args->argc > 0)
+        {
+            usageinfo_.toolName = clasp_executable_name_from_path_(args->argv[0]);
+
+            return clasp_invoke_header_new_(pfnHeader, args, &usageinfo_, specifications);
+        }
+    }
+
+    if (NULL == usageinfo->usage)
+    {
+        clasp_char_t const* const   s_usages[4] =
+        {
+                ":program: <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... flags ... ] <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... options ... ] <arg1> [ ... <argN> ]"
+            ,   ":program: [ ... flags/options ... ] <arg1> [ ... <argN> ]"
+        };
+        clasp_char_t const* usage;
+        size_t              index;
+
+        clasp_usageinfo_t   usageinfo_ = *usageinfo;
+
+        size_t  numFlags    =   (size_t)~0;
+        size_t  numOptions  =   (size_t)~0;
+
+        if (NULL != specifications)
+        {
+            clasp_count_flags_and_options_(specifications, &numFlags, &numOptions);
+        }
+
+        index = 1 * (0 != numFlags) + 2 * (0 != numOptions);
+
+        usage = s_usages[index];
+
+        usageinfo_.usage = usage;
+
+        return clasp_invoke_header_new_(pfnHeader, args, &usageinfo_, specifications);
+    }
+
+    if (0 != clasp_usage_has_replacement_toolName_(usageinfo->usage, &ix_start, &len))
+    {
+        clasp_char_t    buff_[1001] = "";
+
+        size_t const    usage_len_0     =   clasp_strlen_(usageinfo->usage);
+        size_t const    toolName_len    =   clasp_strlen_(usageinfo->toolName);
+
+        size_t const    n_lhs           =   ix_start;
+        size_t const    n_mid           =   toolName_len;
+        size_t const    n_rhs           =   usage_len_0 - (ix_start + len);
+
+        size_t const    CCH_REQUIRED    =   (usage_len_0 - len) + toolName_len;
+
+        clasp_usageinfo_t usageinfo_ = *usageinfo;
+
+        if (CCH_REQUIRED > CLASP_NUM_ELEMENTS_(buff_))
+        {
+            usageinfo_.usage = CLASP_LITERAL_STRING("INVALID USAGE: TOO MANY RESULTING CHARACTERS!");
+        }
+        else
+        {
+            memcpy(&buff_[0] + 0                        , usageinfo->usage                  , sizeof(clasp_char_t) * n_lhs);
+            memcpy(&buff_[0] + ix_start                 , usageinfo->toolName               , sizeof(clasp_char_t) * n_mid);
+            memcpy(&buff_[0] + ix_start + toolName_len  , usageinfo->usage + ix_start + len , sizeof(clasp_char_t) * n_rhs);
+
+            usageinfo_.usage = buff_;
+        }
+
+        return clasp_invoke_header_new_(pfnHeader, args, &usageinfo_, specifications);
+    }
+
     clasp_usageinfo_t       usageInfo_  =   *usageinfo;
     int                     isNumber;
     clasp_char_t const**    pp;
@@ -566,6 +648,10 @@ clasp_invoke_body_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
+    CLASP_ASSERT(NULL != pfnBody);
+    CLASP_ASSERT(NULL != args);
+    CLASP_ASSERT(NULL != usageinfo);
+
     clasp_alias_t   specifications_[CLASP_MAX_SPECIFICATIONS_ + 1];
     size_t const    n = clasp_countSpecifications(specifications);
 
@@ -613,6 +699,9 @@ clasp_invoke_version_new_(
 ,   clasp_alias_t const*        specifications
 )
 {
+    CLASP_ASSERT(NULL != pfnVersion);
+    CLASP_ASSERT(NULL != args);
+
     if (NULL == usageinfo->toolName)
     {
         clasp_usageinfo_t usageinfo_ = *usageinfo;
@@ -784,7 +873,9 @@ clasp_showUsage(
 {
     clasp_usageinfo_t usageinfo;
 
-    ((void)flags);
+    CLASP_ASSERT(NULL != args);
+    CLASP_ASSERT(NULL != pfnHeader);
+    CLASP_ASSERT(NULL != pfnBody);
 
     CLASP_ASSERT(NULL != pfnHeader);
     CLASP_ASSERT(NULL != pfnBody);
@@ -798,7 +889,7 @@ clasp_showUsage(
     usageinfo.copyright             =   copyright;
     usageinfo.description           =   description;
     usageinfo.usage                 =   usage;
-    usageinfo.flags                 =   0;
+    usageinfo.flags                 =   flags;
     usageinfo.param                 =   param;
     usageinfo.width                 =   consoleWidth;
     usageinfo.assumedTabWidth       =   tabSize;
@@ -834,7 +925,6 @@ clasp_show_usage(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
-    ((void)flags);
 
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
@@ -888,7 +978,8 @@ clasp_showHeader(
 {
     clasp_usageinfo_t usageinfo;
 
-    ((void)flags);
+    CLASP_ASSERT(NULL != args);
+    CLASP_ASSERT(NULL != pfnHeader);
 
     CLASP_ASSERT(NULL != pfnHeader);
 
@@ -931,8 +1022,6 @@ clasp_show_header(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
-    ((void)flags);
-
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
@@ -950,7 +1039,7 @@ clasp_show_header(
     usageinfo.copyright         =   copyright;
     usageinfo.description       =   description;
     usageinfo.usage             =   usage;
-    usageinfo.flags             =   0;
+    usageinfo.flags             =   flags;
     usageinfo.param             =   param;
     usageinfo.width             =   -1;
     usageinfo.assumedTabWidth   =   -1;
@@ -974,8 +1063,7 @@ clasp_showBody(
 {
     clasp_usageinfo_t usageinfo;
 
-    ((void)flags);
-
+    CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != pfnBody);
 
     usageinfo.version.major         =   -1;
@@ -1017,8 +1105,6 @@ clasp_show_body(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
-    ((void)flags);
-
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
@@ -1036,7 +1122,7 @@ clasp_show_body(
     usageinfo.copyright             =   NULL;
     usageinfo.description           =   NULL;
     usageinfo.usage                 =   NULL;
-    usageinfo.flags                 =   0;
+    usageinfo.flags                 =   flags;
     usageinfo.param                 =   param;
     usageinfo.width                 =   consoleWidth;
     usageinfo.assumedTabWidth       =   tabSize;
@@ -1061,8 +1147,7 @@ clasp_showVersion(
 {
     clasp_usageinfo_t usageinfo;
 
-    ((void)flags);
-
+    CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != pfnVersion);
 
     usageinfo.version.major         =   major;
@@ -1099,8 +1184,6 @@ clasp_show_version(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
-    ((void)flags);
-
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
@@ -1118,7 +1201,7 @@ clasp_show_version(
     usageinfo.copyright         =   NULL;
     usageinfo.description       =   NULL;
     usageinfo.usage             =   NULL;
-    usageinfo.flags             =   0;
+    usageinfo.flags             =   flags;
     usageinfo.param             =   param;
     usageinfo.width             =   -1;
     usageinfo.assumedTabWidth   =   -1;

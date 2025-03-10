@@ -1432,7 +1432,7 @@ clasp_showVersionByFILE(
 
 /** T.B.C.
  *
- * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param args The arguments obtained from parsing the command-line. May not be NULL;
  * \param specifications The specifications used in parsing the command-line;
  * \param toolName T.B.C.;
  * \param summary T.B.C.;
@@ -1476,7 +1476,7 @@ clasp_showUsage(
 
 /** T.B.C.
  *
- * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param args The arguments obtained from parsing the command-line. May not be NULL;
  * \param specifications The specifications used in parsing the command-line;
  * \param toolName T.B.C.;
  * \param summary T.B.C.;
@@ -1517,7 +1517,7 @@ clasp_showHeader(
 
 /** T.B.C.
  *
- * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param args The arguments obtained from parsing the command-line. May not be NULL;
  * \param specifications The specifications used in parsing the command-line;
  * \param param User-defined parameter to be passed to \c pfnBody;
  * \param flags Flags that moderate the behaviour of the function;
@@ -1541,7 +1541,7 @@ clasp_showBody(
 
 /** T.B.C.
  *
- * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param args The arguments obtained from parsing the command-line. May not be NULL;
  * \param toolName T.B.C.;
  * \param major T.B.C.;
  * \param minor T.B.C.;
