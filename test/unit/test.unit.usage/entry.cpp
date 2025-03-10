@@ -48,16 +48,16 @@
 namespace
 {
 
-    static void test_null_specifications();
-    static void test_empty_specifications();
-    static void test_single_flag();
-    static void test_single_option();
-    static void test_one_flag_one_option();
-    static void test_one_flag_one_option_infinite_length();
-    static void test_one_flag_one_option_zero_length();
-    static void test_one_option_one_flag();
-    static void test_single_flag_changing_positiveTabSizes();
-    static void test_single_flag_changing_consoleWidths();
+    static void TEST_showBody_null_specifications();
+    static void TEST_showBody_empty_specifications();
+    static void TEST_showBody_single_flag();
+    static void TEST_showBody_single_option();
+    static void TEST_showBody_one_flag_one_option();
+    static void TEST_showBody_one_flag_one_option_infinite_length();
+    static void TEST_showBody_one_flag_one_option_zero_length();
+    static void TEST_showBody_one_option_one_flag();
+    static void TEST_showBody_single_flag_changing_positiveTabSizes();
+    static void TEST_showBody_single_flag_changing_consoleWidths();
 } // anonymous namespace
 
 
@@ -74,16 +74,16 @@ int main(int argc, char **argv)
 
     if (XTESTS_START_RUNNER("test.unit.usage", verbosity))
     {
-        XTESTS_RUN_CASE(test_null_specifications);
-        XTESTS_RUN_CASE(test_empty_specifications);
-        XTESTS_RUN_CASE(test_single_flag);
-        XTESTS_RUN_CASE(test_single_option);
-        XTESTS_RUN_CASE(test_one_flag_one_option);
-        XTESTS_RUN_CASE(test_one_flag_one_option_infinite_length);
-        XTESTS_RUN_CASE(test_one_flag_one_option_zero_length);
-        XTESTS_RUN_CASE(test_one_option_one_flag);
-        XTESTS_RUN_CASE(test_single_flag_changing_positiveTabSizes);
-        XTESTS_RUN_CASE(test_single_flag_changing_consoleWidths);
+        XTESTS_RUN_CASE(TEST_showBody_null_specifications);
+        XTESTS_RUN_CASE(TEST_showBody_empty_specifications);
+        XTESTS_RUN_CASE(TEST_showBody_single_flag);
+        XTESTS_RUN_CASE(TEST_showBody_single_option);
+        XTESTS_RUN_CASE(TEST_showBody_one_flag_one_option);
+        XTESTS_RUN_CASE(TEST_showBody_one_flag_one_option_infinite_length);
+        XTESTS_RUN_CASE(TEST_showBody_one_flag_one_option_zero_length);
+        XTESTS_RUN_CASE(TEST_showBody_one_option_one_flag);
+        XTESTS_RUN_CASE(TEST_showBody_single_flag_changing_positiveTabSizes);
+        XTESTS_RUN_CASE(TEST_showBody_single_flag_changing_consoleWidths);
 
         XTESTS_PRINT_RESULTS();
 
@@ -157,7 +157,7 @@ namespace
     }
 
 
-static void test_null_specifications()
+static void TEST_showBody_null_specifications()
 {
     clasp_specification_t const* const specifications = NULL;
     int consoleWidth = 80;
@@ -169,11 +169,10 @@ static void test_null_specifications()
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0u, lines.size()));
 }
 
-static void test_empty_specifications()
+static void TEST_showBody_empty_specifications()
 {
     clasp_specification_t const specifications[] =
     {
-
         CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
     int consoleWidth = 80;
@@ -185,7 +184,7 @@ static void test_empty_specifications()
     XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0u, lines.size()));
 }
 
-static void test_single_flag()
+static void TEST_showBody_single_flag()
 {
     clasp_specification_t const specifications[] =
     {
@@ -206,7 +205,7 @@ static void test_single_flag()
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
 }
 
-static void test_single_option()
+static void TEST_showBody_single_option()
 {
     clasp_specification_t const specifications[] =
     {
@@ -227,7 +226,7 @@ static void test_single_option()
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[3]);
 }
 
-static void test_one_flag_one_option()
+static void TEST_showBody_one_flag_one_option()
 {
     clasp_specification_t const specifications[] =
     {
@@ -251,7 +250,7 @@ static void test_one_flag_one_option()
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
 }
 
-static void test_one_flag_one_option_infinite_length()
+static void TEST_showBody_one_flag_one_option_infinite_length()
 {
     clasp_specification_t const specifications[] =
     {
@@ -275,7 +274,7 @@ static void test_one_flag_one_option_infinite_length()
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
 }
 
-static void test_one_flag_one_option_zero_length()
+static void TEST_showBody_one_flag_one_option_zero_length()
 {
     clasp_specification_t const specifications[] =
     {
@@ -299,7 +298,7 @@ static void test_one_flag_one_option_zero_length()
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
 }
 
-static void test_one_option_one_flag()
+static void TEST_showBody_one_option_one_flag()
 {
     clasp_specification_t const specifications[] =
     {
@@ -323,7 +322,7 @@ static void test_one_option_one_flag()
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[5]);
 }
 
-static void test_single_flag_changing_positiveTabSizes()
+static void TEST_showBody_single_flag_changing_positiveTabSizes()
 {
     clasp_specification_t const specifications[] =
     {
@@ -404,7 +403,7 @@ static void test_single_flag_changing_positiveTabSizes()
     }
 }
 
-static void test_single_flag_changing_consoleWidths()
+static void TEST_showBody_single_flag_changing_consoleWidths()
 {
     clasp_specification_t const specifications[] =
     {
