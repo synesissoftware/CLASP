@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.parseapi.bitflags.cpp
+ * File:    test.unit.parseapi.bitflags/entry.cpp
  *
  * Purpose: Unit-test(s) for CLASP bit-flags functionality
  *
  * Created: 11th December 2011
- * Updated: 15th January 2025
+ * Updated: 10th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 

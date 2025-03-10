@@ -1,6 +1,6 @@
 
 add_executable(test.component.usage.resources.C
-	test.component.usage.resources.C.c
+	entry.c
 	$<$<STREQUAL:${CMAKE_SYSTEM_NAME},Windows>:test.component.usage.resources.rc>
 )
 

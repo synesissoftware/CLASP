@@ -1,2 +1,2 @@
 list(APPEND X_GCC_CUSTOM_WARNINGS_TO_BE_SUPPRESSED incompatible-pointer-types incompatible-pointer-types-discards-qualifiers)
-define_example_program(test_scratch_C_version test.scratch.C.version.c)
+define_example_program(test_scratch_C_version main.c)
