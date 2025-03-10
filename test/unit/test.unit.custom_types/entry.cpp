@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.custom_types.cpp
+ * File:    test.unit.custom_types/entry.cpp
  *
  * Purpose: Unit-tests for custom type(s).
  *
  * Created: 12th September 2014
- * Updated: 12th July 2024
+ * Updated: 10th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 

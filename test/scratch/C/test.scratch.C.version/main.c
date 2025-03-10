@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.scratch.C.version.c
+ * File:    test.scratch.C.version/main.c
  *
  * Purpose: Scratch test for version
  *

@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.clasp++.cpp
+ * File:    test.unit.clasp++/entry.cpp
  *
  * Purpose: Unit-tests for CLASP C++ API
  *
  * Created: 16th July 2009
- * Updated: 18th October 2024
+ * Updated: 10th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 

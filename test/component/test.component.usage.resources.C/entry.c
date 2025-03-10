@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.component.usage.resources.C.c
+ * File:    test.component.usage.resources.C/entry.c
  *
  * Purpose: Component test for USAGE by Windows resources
  *
  * Created: 7th March 2012
- * Updated: 12th July 2024
+ * Updated: 10th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 

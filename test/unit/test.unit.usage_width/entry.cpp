@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.usage_width.cpp
+ * File:    test.unit.usage_width/entry.cpp
  *
  * Purpose: Unit-tests usage-width functionality
  *
  * Created: 3rd April 2014
- * Updated: 12th July 2024
+ * Updated: 10th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
