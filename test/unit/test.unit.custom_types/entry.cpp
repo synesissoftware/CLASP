@@ -13,6 +13,7 @@
  * test component header file include(s)
  */
 
+#include <stlsoft/shims/access/string.hpp>
 #include <clasp/clasp.hpp>
 
 
