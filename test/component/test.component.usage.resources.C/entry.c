@@ -90,37 +90,6 @@ static void test_1_15(void);
 static void test_1_16(void);
 static void test_expanded_usage_1(void);
 static void test_expanded_usage_2(void);
-static void test_1_19(void);
-static void test_1_20(void);
-static void test_1_21(void);
-static void test_1_22(void);
-static void test_1_23(void);
-static void test_1_24(void);
-static void test_1_25(void);
-static void test_1_26(void);
-static void test_1_27(void);
-static void test_1_28(void);
-static void test_1_29(void);
-static void test_1_30(void);
-static void test_1_31(void);
-static void test_1_32(void);
-static void test_1_33(void);
-static void test_1_34(void);
-static void test_1_35(void);
-static void test_1_36(void);
-static void test_1_37(void);
-static void test_1_38(void);
-static void test_1_39(void);
-static void test_1_40(void);
-static void test_1_41(void);
-static void test_1_42(void);
-static void test_1_43(void);
-static void test_1_44(void);
-static void test_1_45(void);
-static void test_1_46(void);
-static void test_1_47(void);
-static void test_1_48(void);
-static void test_1_49(void);
 
 static int setup(void* param);
 static int teardown(void* param);
@@ -198,37 +167,6 @@ int main_(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_16);
         XTESTS_RUN_CASE(test_expanded_usage_1);
         XTESTS_RUN_CASE(test_expanded_usage_2);
-        XTESTS_RUN_CASE(test_1_19);
-        XTESTS_RUN_CASE(test_1_20);
-        XTESTS_RUN_CASE(test_1_21);
-        XTESTS_RUN_CASE(test_1_22);
-        XTESTS_RUN_CASE(test_1_23);
-        XTESTS_RUN_CASE(test_1_24);
-        XTESTS_RUN_CASE(test_1_25);
-        XTESTS_RUN_CASE(test_1_26);
-        XTESTS_RUN_CASE(test_1_27);
-        XTESTS_RUN_CASE(test_1_28);
-        XTESTS_RUN_CASE(test_1_29);
-        XTESTS_RUN_CASE(test_1_30);
-        XTESTS_RUN_CASE(test_1_31);
-        XTESTS_RUN_CASE(test_1_32);
-        XTESTS_RUN_CASE(test_1_33);
-        XTESTS_RUN_CASE(test_1_34);
-        XTESTS_RUN_CASE(test_1_35);
-        XTESTS_RUN_CASE(test_1_36);
-        XTESTS_RUN_CASE(test_1_37);
-        XTESTS_RUN_CASE(test_1_38);
-        XTESTS_RUN_CASE(test_1_39);
-        XTESTS_RUN_CASE(test_1_40);
-        XTESTS_RUN_CASE(test_1_41);
-        XTESTS_RUN_CASE(test_1_42);
-        XTESTS_RUN_CASE(test_1_43);
-        XTESTS_RUN_CASE(test_1_44);
-        XTESTS_RUN_CASE(test_1_45);
-        XTESTS_RUN_CASE(test_1_46);
-        XTESTS_RUN_CASE(test_1_47);
-        XTESTS_RUN_CASE(test_1_48);
-        XTESTS_RUN_CASE(test_1_49);
 
         XTESTS_PRINT_RESULTS();
 
@@ -1262,130 +1200,6 @@ static void test_expanded_usage_2()
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n\tabc\n\n\tdef\n; v=0.1.01.0000", buff);
     }
-}
-
-static void test_1_19(void)
-{
-}
-
-static void test_1_20(void)
-{
-}
-
-static void test_1_21(void)
-{
-}
-
-static void test_1_22(void)
-{
-}
-
-static void test_1_23(void)
-{
-}
-
-static void test_1_24(void)
-{
-}
-
-static void test_1_25(void)
-{
-}
-
-static void test_1_26(void)
-{
-}
-
-static void test_1_27(void)
-{
-}
-
-static void test_1_28(void)
-{
-}
-
-static void test_1_29(void)
-{
-}
-
-static void test_1_30(void)
-{
-}
-
-static void test_1_31(void)
-{
-}
-
-static void test_1_32(void)
-{
-}
-
-static void test_1_33(void)
-{
-}
-
-static void test_1_34(void)
-{
-}
-
-static void test_1_35(void)
-{
-}
-
-static void test_1_36(void)
-{
-}
-
-static void test_1_37(void)
-{
-}
-
-static void test_1_38(void)
-{
-}
-
-static void test_1_39(void)
-{
-}
-
-static void test_1_40(void)
-{
-}
-
-static void test_1_41(void)
-{
-}
-
-static void test_1_42(void)
-{
-}
-
-static void test_1_43(void)
-{
-}
-
-static void test_1_44(void)
-{
-}
-
-static void test_1_45(void)
-{
-}
-
-static void test_1_46(void)
-{
-}
-
-static void test_1_47(void)
-{
-}
-
-static void test_1_48(void)
-{
-}
-
-static void test_1_49(void)
-{
 }
 
 

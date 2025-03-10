@@ -1390,7 +1390,9 @@ typedef struct clasp_tool_t                                 clasp_tool_t;
  */
 struct clasp_usageinfo_t
 {
+    /** The version information. */
     clasp_versioninfo_t     version;
+    /** The tool name / program name. */
     clasp_char_t const*     toolName;
     clasp_char_t const*     summary;
     clasp_char_t const*     copyright;
@@ -1419,6 +1421,38 @@ typedef struct clasp_usageinfo_t                            clasp_usageinfo_t;
 #endif /* !__cplusplus */
 
 
+/*
+CLASP_CALL(void)
+clasp_showVersionByFILE(
+    clasp_arguments_t const*    args
+,   clasp_usageinfo_t const*    info
+,   clasp_specification_t const specifications[]
+);
+*/
+
+/** T.B.C.
+ *
+ * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param specifications The specifications used in parsing the command-line;
+ * \param toolName T.B.C.;
+ * \param summary T.B.C.;
+ * \param copyright T.B.C.;
+ * \param description T.B.C.;
+ * \param usage T.B.C.;
+ * \param major T.B.C.;
+ * \param minor T.B.C.;
+ * \param revision T.B.C.;
+ * \param pfnHeader T.B.C.;
+ * \param pfnBody T.B.C.;
+ * \param param User-defined parameter to be passed to \c pfnHeader and \c pfnBody;
+ * \param flags T.B.C.;
+ * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries);
+ * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
+ * \param blanksBetweenItems The number of blank lines to insert between each item;
+ *
+ * \retval 0 The operation completed successfully;
+ */
+
 CLASP_CALL(int)
 clasp_showUsage(
     clasp_arguments_t const*        args
@@ -1440,6 +1474,27 @@ clasp_showUsage(
 ,   int                             blanksBetweenItems
 );
 
+/** T.B.C.
+ *
+ * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param specifications The specifications used in parsing the command-line;
+ * \param toolName T.B.C.;
+ * \param summary T.B.C.;
+ * \param copyright T.B.C.;
+ * \param description T.B.C.;
+ * \param usage T.B.C.;
+ * \param major T.B.C.;
+ * \param minor T.B.C.;
+ * \param revision T.B.C.;
+ * \param pfnHeader T.B.C.;
+ * \param param User-defined parameter to be passed to \c pfnHeader;
+ * \param flags T.B.C.;
+ * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries);
+ * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
+ * \param blanksBetweenItems The number of blank lines to insert between each item;
+ *
+ * \retval 0 The operation completed successfully;
+ */
 CLASP_CALL(int)
 clasp_showHeader(
     clasp_arguments_t const*        args
@@ -1460,7 +1515,7 @@ clasp_showHeader(
 ,   int                             blanksBetweenItems
 );
 
-/**
+/** T.B.C.
  *
  * \param args The arguments obtained from parsing the command-line. May be NULL;
  * \param specifications The specifications used in parsing the command-line;
@@ -1470,6 +1525,7 @@ clasp_showHeader(
  * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
  * \param blanksBetweenItems The number of blank lines to insert between each item;
  *
+ * \retval 0 The operation completed successfully;
  */
 CLASP_CALL(int)
 clasp_showBody(
@@ -1483,6 +1539,19 @@ clasp_showBody(
 ,   int                             blanksBetweenItems
 );
 
+/** T.B.C.
+ *
+ * \param args The arguments obtained from parsing the command-line. May be NULL;
+ * \param toolName T.B.C.;
+ * \param major T.B.C.;
+ * \param minor T.B.C.;
+ * \param revision T.B.C.;
+ * \param pfnVersion T.B.C.;
+ * \param param User-defined parameter to be passed to \c pfnVersion;
+ * \param flags T.B.C.;
+ *
+ * \retval 0 The operation completed successfully;
+ */
 CLASP_CALL(int)
 clasp_showVersion(
     clasp_arguments_t const*    args
@@ -1507,6 +1576,8 @@ clasp_countSpecifications(
     clasp_specification_t const specifications[]
 );
 
+#ifndef CLASP_DOCUMENTATION_SKIP_SECTION
+
 /** [DEPRECATED]
  *
  * \deprecated Instead use clasp_countSpecifications()
@@ -1515,6 +1586,7 @@ CLASP_CALL_DEPRECATED(size_t, "clasp_countAliases() is deprecated and will be re
 clasp_countAliases(
     clasp_specification_t const specifications[]
 );
+#endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
 /**  Stock function that shows version to a <code>FILE*</code>
