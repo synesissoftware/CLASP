@@ -53,23 +53,6 @@ namespace
     static void test_one_option_one_flag(void);
     static void test_single_flag_changing_positiveTabSizes(void);
     static void test_single_flag_changing_consoleWidths(void);
-    static void test_1_3(void);
-    static void test_1_4(void);
-    static void test_1_5(void);
-    static void test_1_6(void);
-    static void test_1_7(void);
-    static void test_1_8(void);
-    static void test_1_9(void);
-    static void test_1_10(void);
-    static void test_1_11(void);
-    static void test_1_12(void);
-    static void test_1_13(void);
-    static void test_1_14(void);
-    static void test_1_15(void);
-    static void test_1_16(void);
-    static void test_1_17(void);
-    static void test_1_18(void);
-    static void test_1_19(void);
 
 } // anonymous namespace
 
@@ -96,23 +79,6 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_one_option_one_flag);
         XTESTS_RUN_CASE(test_single_flag_changing_positiveTabSizes);
         XTESTS_RUN_CASE(test_single_flag_changing_consoleWidths);
-        XTESTS_RUN_CASE(test_1_3);
-        XTESTS_RUN_CASE(test_1_4);
-        XTESTS_RUN_CASE(test_1_5);
-        XTESTS_RUN_CASE(test_1_6);
-        XTESTS_RUN_CASE(test_1_7);
-        XTESTS_RUN_CASE(test_1_8);
-        XTESTS_RUN_CASE(test_1_9);
-        XTESTS_RUN_CASE(test_1_10);
-        XTESTS_RUN_CASE(test_1_11);
-        XTESTS_RUN_CASE(test_1_12);
-        XTESTS_RUN_CASE(test_1_13);
-        XTESTS_RUN_CASE(test_1_14);
-        XTESTS_RUN_CASE(test_1_15);
-        XTESTS_RUN_CASE(test_1_16);
-        XTESTS_RUN_CASE(test_1_17);
-        XTESTS_RUN_CASE(test_1_18);
-        XTESTS_RUN_CASE(test_1_19);
 
         XTESTS_PRINT_RESULTS();
 
@@ -468,76 +434,8 @@ static void test_single_flag_changing_consoleWidths()
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  flag", lines[4]);
     }
 }
-
-static void test_1_3()
-{
-}
-
-static void test_1_4()
-{
-}
-
-static void test_1_5()
-{
-}
-
-static void test_1_6()
-{
-}
-
-static void test_1_7()
-{
-}
-
-static void test_1_8()
-{
-}
-
-static void test_1_9()
-{
-}
-
-static void test_1_10()
-{
-}
-
-static void test_1_11()
-{
-}
-
-static void test_1_12()
-{
-}
-
-static void test_1_13()
-{
-}
-
-static void test_1_14()
-{
-}
-
-static void test_1_15()
-{
-}
-
-static void test_1_16()
-{
-}
-
-static void test_1_17()
-{
-}
-
-static void test_1_18()
-{
-}
-
-static void test_1_19()
-{
-}
-
 } // anonymous namespace
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 
