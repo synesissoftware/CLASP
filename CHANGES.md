@@ -1,6 +1,11 @@
 # CLASP - CHANGES list <!-- omit in toc -->
 
 
+## 10th March 2025 - 0.15.0-alpha5
+
+* **Visual C++** compatibility;
+
+
 ## 10th March 2025 - 0.15.0-alpha4
 
 * added stock flag macros `CLASP_STOCK_FLAG_HELP()` and `CLASP_STOCK_FLAG_VERSION()`;
