@@ -2,6 +2,7 @@
 
 | Date                  | News Item                                     |
 | --------------------- | --------------------------------------------- |
+| 11th March 2025       | Release of 0.15.0-alpha6                      |
 | 10th March 2025       | Release of 0.15.0-alpha5                      |
 | 10th March 2025       | Release of 0.15.0-alpha4                      |
 | 9th March 2025        | Release of 0.15.0-alpha3                      |
