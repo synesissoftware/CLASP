@@ -513,6 +513,7 @@ clasp_check_alias_duplicates_(
             {
                 if (NULL != from->name &&
                     NULL != to->name &&
+                    0 != clasp_strlen_(from->name)
                     0 == clasp_strcmp_(from->name, to->name))
                 {
                     CLASP_LOG_PRINTF(ctxt, CLASP_SEVIX_ERROR, CLASP_LITERAL_("programming error: duplicate argument alias: %s"), from->name);

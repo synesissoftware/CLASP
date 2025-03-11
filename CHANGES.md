@@ -3,10 +3,11 @@
 
 ## 11th March 2025 - 0.15.0-alpha6
 
-* Improved documentation markup;
 * Added a _lot_ more tests of usage, and fixed several decent defects and missing bits of functionality;
 * Renamed **test.unit.usage_width** to **test.unit.usage**, and added significantly more test coverage;
+* Fixed defect whereby specifying multiple specifications with empty string, rather than `NULL`, as alias results in report of duplicates;
 * Backwards-compatibility with C90;
+* Improved documentation markup;
 
 
 ## 10th March 2025 - 0.15.0-alpha5
