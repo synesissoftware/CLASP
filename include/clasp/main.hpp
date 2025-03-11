@@ -294,7 +294,7 @@ int
 invoke(
     int                                 argc
 ,   clasp_char_t const* const*          argv
-,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
+,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
 ,   clasp_char_t const*                 programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
@@ -347,6 +347,30 @@ invoke(
     return ximpl::invoke_(argc, argv, pfnMain, programName, specifications, flags, ctxt, usageHelpSuffix);
 }
 
+inline
+int
+invoke(
+    int                                 argc
+,   clasp_char_t const* const*          argv
+,   clasp::specification_t const        specifications[]
+,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
+,   clasp_char_t const*                 programName     =   NULL
+,   unsigned                            flags           =   0
+,   clasp::diagnostic_context_t const*  ctxt            =   NULL
+,   clasp_char_t const*                 usageHelpSuffix =   NULL
+)
+{
+    return invoke(
+        argc
+    ,   argv
+    ,   pfnMain
+    ,   programName
+    ,   specifications
+    ,   flags
+    ,   ctxt
+    ,   usageHelpSuffix
+    );
+}
 
 /* /////////////////////////////////////////////////////////////////////////
  * namespace

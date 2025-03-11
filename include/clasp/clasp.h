@@ -88,6 +88,7 @@
 #include <stddef.h> /* size_t */
 #include <stdarg.h> /* for logging function pointer */
 #ifdef __cplusplus
+# include <stdio.h>
 # include <string.h>
 #endif
 
@@ -878,7 +879,7 @@ public: /** Construction */
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * parsing API
+ * Parsing API
  */
 
 /** Pre-processors and sorts the command-line arguments
@@ -1339,7 +1340,7 @@ clasp_valueIsTreatedHyphen(
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * usage API
+ * Usage API
  */
 
 /** \def CLASP_STOCK_FLAG_HELP
@@ -1764,12 +1765,13 @@ clasp_show_body_by_FILE(
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
-/* ////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////
+ * C++ API
+ */
 
 #ifdef __cplusplus
 
-namespace clasp
-{
+namespace clasp {
 
 # ifdef CLASP_DOCUMENTATION_SKIP_SECTION
 
@@ -1779,23 +1781,24 @@ namespace clasp
 #  include <clasp/internal/shim_macros.h>
 # endif /* CLASP_DOCUMENTATION_SKIP_SECTION */
 
-    typedef ::clasp_alias_t                 alias_t;
-    typedef ::clasp_argtype_t               argtype_t;
-    typedef ::clasp_argument_t              argument_t;
-    typedef ::clasp_arguments_t             arguments_t;
-    typedef ::clasp_diagnostic_context_t    diagnostic_context_t;
-    typedef ::clasp_slice_t                 slice_t;
-    typedef ::clasp_specification_t         specification_t;
+    typedef ::clasp_alias_t                                     alias_t;
+    typedef ::clasp_argtype_t                                   argtype_t;
+    typedef ::clasp_argument_t                                  argument_t;
+    typedef ::clasp_arguments_t                                 arguments_t;
+    typedef ::clasp_char_t                                      char_t;
+    typedef ::clasp_diagnostic_context_t                        diagnostic_context_t;
+    typedef ::clasp_slice_t                                     slice_t;
+    typedef ::clasp_specification_t                             specification_t;
 
     inline
     int
     parseArguments(
-        unsigned                            flags
-    ,   int                                 argc
-    ,   clasp_char_t*                       argv[]
-    ,   specification_t const               specifications[]
-    ,   clasp_diagnostic_context_t const*   ctxt
-    ,   arguments_t const**                 args
+        unsigned                    flags
+    ,   int                         argc
+    ,   char_t*                     argv[]
+    ,   specification_t const       specifications[]
+    ,   diagnostic_context_t const* ctxt
+    ,   arguments_t const**         args
     )
     {
         return clasp_parseArguments(flags, argc, argv, specifications, ctxt, args);
@@ -1804,15 +1807,15 @@ namespace clasp
     inline
     int
     parseArguments(
-        unsigned                            flags
-    ,   int                                 argc
-    ,   clasp_char_t const* const           argv[]
-    ,   specification_t const               specifications[]
-    ,   clasp_diagnostic_context_t const*   ctxt
-    ,   arguments_t const**                 args
+        unsigned                    flags
+    ,   int                         argc
+    ,   char_t const* const         argv[]
+    ,   specification_t const       specifications[]
+    ,   diagnostic_context_t const* ctxt
+    ,   arguments_t const**         args
     )
     {
-        return clasp_parseArguments(flags, argc, const_cast<clasp_char_t**>(argv), specifications, ctxt, args);
+        return clasp_parseArguments(flags, argc, const_cast<char_t**>(argv), specifications, ctxt, args);
     }
 
     inline
@@ -1824,11 +1827,257 @@ namespace clasp
         clasp_releaseArguments(args);
     }
 
+    inline
+    int
+    showUsage(
+        clasp_arguments_t const*    args
+    ,   clasp_alias_t const*        specifications
+    ,   clasp_char_t const*         toolName
+    ,   clasp_char_t const*         summary
+    ,   clasp_char_t const*         copyright
+    ,   clasp_char_t const*         description
+    ,   clasp_char_t const*         usage
+    ,   int                         major
+    ,   int                         minor
+    ,   int                         revision
+    ,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+    ,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+    ,   void*                       param
+    ,   int                         flags
+    ,   int                         consoleWidth
+    ,   int                         tabSize
+    ,   int                         blanksBetweenItems
+    )
+    {
+        return clasp_showUsage(
+            args
+        ,   specifications
+        ,   toolName
+        ,   summary
+        ,   copyright
+        ,   description
+        ,   usage
+        ,   major
+        ,   minor
+        ,   revision
+        ,   pfnHeader
+        ,   pfnBody
+        ,   param
+        ,   flags
+        ,   consoleWidth
+        ,   tabSize
+        ,   blanksBetweenItems
+        );
+    }
+
+    inline
+    int
+    showUsage(
+        clasp_arguments_t const*    args
+    ,   clasp_alias_t const*        specifications
+    ,   clasp_char_t const*         toolName
+    ,   clasp_char_t const*         summary
+    ,   clasp_char_t const*         copyright
+    ,   clasp_char_t const*         description
+    ,   clasp_char_t const*         usage
+    ,   int                         major
+    ,   int                         minor
+    ,   int                         revision
+    ,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+    ,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
+    ,   void*                       param
+    )
+    {
+        return clasp_showUsage(
+            args
+        ,   specifications
+        ,   toolName
+        ,   summary
+        ,   copyright
+        ,   description
+        ,   usage
+        ,   major
+        ,   minor
+        ,   revision
+        ,   pfnHeader
+        ,   pfnBody
+        ,   param
+        ,   0
+        ,   0
+        ,   -2
+        ,   1
+        );
+    }
+
+    inline
+    int
+    showUsage(
+        clasp_arguments_t const*    args
+    ,   clasp_alias_t const*        specifications
+    ,   clasp_char_t const*         toolName
+    ,   clasp_char_t const*         summary
+    ,   clasp_char_t const*         copyright
+    ,   clasp_char_t const*         description
+    ,   clasp_char_t const*         usage
+    ,   int                         major
+    ,   int                         minor
+    ,   int                         revision
+    )
+    {
+        return clasp_showUsage(
+            args
+        ,   specifications
+        ,   toolName
+        ,   summary
+        ,   copyright
+        ,   description
+        ,   usage
+        ,   major
+        ,   minor
+        ,   revision
+        ,   clasp_showHeaderByFILE
+        ,   clasp_showBodyByFILE
+        ,   stdout
+        ,   0
+        ,   0
+        ,   -2
+        ,   1
+        );
+    }
+
+    inline
+    int
+    showUsage(
+        clasp_arguments_t const*    args
+    ,   clasp_char_t const*         toolName
+    ,   clasp_char_t const*         summary
+    ,   clasp_char_t const*         copyright
+    ,   clasp_char_t const*         description
+    ,   clasp_char_t const*         usage
+    ,   int                         major
+    ,   int                         minor
+    ,   int                         revision
+    )
+    {
+        return clasp_showUsage(
+            args
+        ,   NULL
+        ,   toolName
+        ,   summary
+        ,   copyright
+        ,   description
+        ,   usage
+        ,   major
+        ,   minor
+        ,   revision
+        ,   clasp_showHeaderByFILE
+        ,   clasp_showBodyByFILE
+        ,   stdout
+        ,   0
+        ,   0
+        ,   -2
+        ,   1
+        );
+    }
+
+    inline
+    int
+    showVersion(
+        arguments_t const*  args
+    ,   char_t const*       toolName
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
+    ,   void              (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+    ,   void*               param
+    ,   int                 flags
+    )
+    {
+        return clasp_showVersion(
+            args
+        ,   toolName
+        ,   major
+        ,   minor
+        ,   revision
+        ,   pfnVersion
+        ,   param
+        ,   flags
+        );
+    }
+
+    inline
+    int
+    showVersion(
+        arguments_t const*  args
+    ,   char_t const*       toolName
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
+    ,   void              (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+    ,   void*               param
+    )
+    {
+        return clasp_showVersion(
+            args
+        ,   toolName
+        ,   major
+        ,   minor
+        ,   revision
+        ,   pfnVersion
+        ,   param
+        ,   0
+        );
+    }
+
+    inline
+    int
+    showVersion(
+        arguments_t const*  args
+    ,   char_t const*       toolName
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
+    )
+    {
+        return clasp_showVersion(
+            args
+        ,   toolName
+        ,   major
+        ,   minor
+        ,   revision
+        ,   clasp_showVersionByFILE
+        ,   stdout
+        ,   0
+        );
+    }
+
+    inline
+    int
+    showVersion(
+        arguments_t const*  args
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
+    )
+    {
+        return clasp_showVersion(
+            args
+        ,   NULL /* toolName inferred from process */
+        ,   major
+        ,   minor
+        ,   revision
+        ,   clasp_showVersionByFILE
+        ,   stdout
+        ,   0
+        );
+    }
 } /* namespace clasp */
 
 
 /** A generic inserter function for clasp_argument_t into output streams
  *
+ * \param stm The stream into which to insert;
+ * \param arg The argument to insert;
  */
 template <typename T_stm>
 T_stm&
@@ -1857,6 +2106,33 @@ operator <<(
     }
 
     return stm;
+}
+
+/** A generic inserter function for arguments_t into output streams
+ *
+ * \param stm The stream into which to insert;
+ * \param arg The arguments to insert;
+ */
+template <typename T_stm>
+T_stm&
+operator <<(
+    T_stm&                      stm
+,   clasp_arguments_t const*    args
+)
+{
+    return stm
+        << "{ .numArguments="
+        << args->numArguments
+        << ", .numFlagsAndOptions="
+        << args->numFlagsAndOptions
+        << ", .numFlags="
+        << args->numFlags
+        << ", .numOptions="
+        << args->numOptions
+        << ", .numValues="
+        << args->numValues
+        << ", }"
+        ;
 }
 
 

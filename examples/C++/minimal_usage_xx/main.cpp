@@ -4,7 +4,7 @@
  * Purpose: Illustrates a minimal use of CLASP in a C++ program.
  *
  * Created: 9th March 2025
- * Updated: 10th March 2025
+ * Updated: 11th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -13,10 +13,8 @@
  * includes
  */
 
-
 #include <clasp/main.hpp>
 
-#include <cstdio>
 #include <cstdlib>
 #include <iostream>
 
@@ -40,7 +38,6 @@ static clasp_specification_t const Specifications[] =
     /* Standard flags */
 
     CLASP_GAP_SECTION("standard flags:"),
-
     CLASP_STOCK_FLAG_HELP,
     CLASP_STOCK_FLAG_VERSION,
 
@@ -52,67 +49,34 @@ static clasp_specification_t const Specifications[] =
  * main()
  */
 
-static
-int main1(clasp_arguments_t const* args)
+int main(int argc, char* argv[])
 {
-    if (clasp::flag_specified(args, "--help"))
-    {
-        clasp_showUsage(
-            args
-        ,   Specifications
-        ,   NULL /* toolName inferred from process */
-        ,   "CLASP (http://github.com/synesissoftware/CLASP)"
-        ,   "Copyright Matthew Wilson and Synesis Information Systems"
-        ,   "illustrates minimal usage functionality"
-        ,   ":program: [... flags/options ...]"
-        ,   PROGRAM_VER_ARGLIST
-        ,   clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
-        ,   0  /* flags */
-        ,   76 /* console width */
-        ,   -2 /* indent size */
-        ,   1  /* blank line between args */
-        );
+    return clasp::main::invoke(argc, argv, Specifications, [](clasp_arguments_t const* args) {
+
+        if (clasp::flag_specified(args, "--help"))
+        {
+            return clasp::showUsage(
+                args
+            ,   NULL /* toolName inferred from process */
+            ,   "CLASP (http://github.com/synesissoftware/CLASP)"
+            ,   "Copyright Matthew Wilson and Synesis Information Systems"
+            ,   "illustrates minimal usage functionality"
+            ,   NULL /* toolName inferred from process/specifications */
+            ,   PROGRAM_VER_ARGLIST
+            );
+        }
+
+        if (clasp::flag_specified(args, "--version"))
+        {
+            return clasp::showVersion(args, PROGRAM_VER_ARGLIST);
+        }
+
+
+        std::cout << "args=" << args << std::endl;
+
 
         return EXIT_SUCCESS;
-    }
-
-    if (clasp::flag_specified(args, "--version"))
-    {
-        clasp_showVersion(
-            args
-        ,   NULL /* toolName inferred from process */
-        ,   PROGRAM_VER_ARGLIST
-        ,   clasp_showVersionByFILE, stdout
-        ,   0 /* flags */
-        );
-
-        return EXIT_SUCCESS;
-    }
-
-
-    std::cout
-        << "args={ numArguments="
-        << args->numArguments
-        << ", numFlagsAndOptions="
-        << args->numFlagsAndOptions
-        << ", numFlags="
-        << args->numFlags
-        << ", numOptions="
-        << args->numOptions
-        << ", numValues="
-        << args->numValues
-        << ", }"
-        << std::endl;
-
-
-    return EXIT_SUCCESS;
-}
-
-int main(int argc, char** argv)
-{
-    unsigned const cflags = 0;
-
-    return clasp::main::invoke(argc, argv, main1, NULL, Specifications, cflags);
+    });
 }
 
 
