@@ -4,7 +4,7 @@
  * Purpose: CLASP usage (FILE) facilities.
  *
  * Created: 4th June 2008
- * Updated: 9th March 2025
+ * Updated: 11th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -87,8 +87,10 @@ clasp_is_valid_specification_type_(clasp_argtype_t t)
     case CLASP_ARGTYPE_FLAG:
     case CLASP_ARGTYPE_OPTION:
     case CLASP_ARGTYPE_VALUE:
+
         return clasp_true_v;
     default:
+
         return clasp_false_v;
     }
 }
@@ -397,7 +399,8 @@ static void clasp_show_split_option_help_limit_width_by_FILE_(
  * API functions
  */
 
-CLASP_CALL(void) clasp_showVersionByFILE(
+CLASP_CALL(void)
+clasp_showVersionByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
 ,   clasp_alias_t const         specifications[]
@@ -410,7 +413,8 @@ CLASP_CALL(void) clasp_showVersionByFILE(
     );
 }
 
-CLASP_CALL(void) clasp_show_version_by_FILE(
+CLASP_CALL(void)
+clasp_show_version_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
 ,   clasp_alias_t const                 specifications[]
@@ -457,7 +461,8 @@ CLASP_CALL(void) clasp_show_version_by_FILE(
 }
 
 
-CLASP_CALL(void) clasp_showHeaderByFILE(
+CLASP_CALL(void)
+clasp_showHeaderByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
 ,   clasp_alias_t const         specifications[]
@@ -470,7 +475,8 @@ CLASP_CALL(void) clasp_showHeaderByFILE(
     );
 }
 
-CLASP_CALL(void) clasp_show_header_by_FILE(
+CLASP_CALL(void)
+clasp_show_header_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
 ,   clasp_alias_t const                 specifications[]
@@ -488,7 +494,11 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
         return;
     }
 
-    clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->summary);
+    if (NULL != info->summary &&
+        '\0' != info->summary[0])
+    {
+        clasp_fprintf_(stm, CLASP_LITERAL_("%s\n"), info->summary);
+    }
     /* clasp_fprintf_(stm, CLASP_LITERAL_("\n")); */
 
     clasp_show_version_by_FILE(ctxt, info, specifications);
@@ -511,7 +521,8 @@ CLASP_CALL(void) clasp_show_header_by_FILE(
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
 }
 
-CLASP_CALL(void) clasp_showBodyByFILE(
+CLASP_CALL(void)
+clasp_showBodyByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
 ,   clasp_alias_t const         specifications[]
@@ -524,7 +535,8 @@ CLASP_CALL(void) clasp_showBodyByFILE(
     );
 }
 
-CLASP_CALL(void) clasp_show_body_by_FILE(
+CLASP_CALL(void)
+clasp_show_body_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
 ,   clasp_alias_t const                 specifications[]

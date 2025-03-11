@@ -4,7 +4,7 @@
  * Purpose: CLASP usage facilities.
  *
  * Created: 4th June 2008
- * Updated: 9th March 2025
+ * Updated: 11th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -136,6 +136,12 @@ LoadStringA(
  * helper functions
  */
 
+/* Obtains the file basename from the given path, taking into account the
+ * rightmost path-name separator character.
+ *
+ * \note: On UNIX, this just searches for the rightmost '/'; on Windows the
+ *  rightmost '\\' is also considered.
+ */
 static
 clasp_char_t const*
 clasp_executable_name_from_path_(
@@ -302,7 +308,6 @@ clasp_replace_field_from_resource_(
     return 0;
 }
 
-
 static
 int
 clasp_find_replacement_mappedArgument_(
@@ -367,6 +372,17 @@ clasp_find_replacement_mappedArgument_(
     return 0;
 }
 
+/* Examines the usage string as to whether it contains a tool-name
+ * replacement - such as ':toolName:', ':program_name:', ... - and, if so,
+ * writes the index and length into the variables provided in the given
+ * pointers.
+ *
+ * \param usage The usage string. May not be NULL;
+ * \param ix_start Pointer of a variable into which to write the index, if
+ *  a replacement is found. 0 is written if not found. May not be NULL;
+ * \param len Pointer of a variable into which to write the length, if a
+ *  replacement is found. 0 is written if not found. May not be NULL;
+ */
 static
 int
 clasp_usage_has_replacement_toolName_(
@@ -807,10 +823,8 @@ clasp_showUsage(
 {
     clasp_usageinfo_t usageinfo;
 
-    CLASP_ASSERT(NULL != args);
-    CLASP_ASSERT(NULL != pfnHeader);
-    CLASP_ASSERT(NULL != pfnBody);
 
+    CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != pfnHeader);
     CLASP_ASSERT(NULL != pfnBody);
 
@@ -829,9 +843,13 @@ clasp_showUsage(
     usageinfo.assumedTabWidth       =   tabSize;
     usageinfo.blanksBetweenItems    =   blanksBetweenItems;
 
-    clasp_invoke_usage_new_(pfnHeader, pfnBody, args, &usageinfo, specifications);
-
-    return 0;
+    return clasp_invoke_usage_new_(
+        pfnHeader
+    ,   pfnBody
+    ,   args
+    ,   &usageinfo
+    ,   specifications
+    );
 }
 
 CLASP_CALL(int)
@@ -859,15 +877,14 @@ clasp_show_usage(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
+    CLASP_ASSERT(NULL != pfnHeader);
+    CLASP_ASSERT(NULL != pfnBody);
 
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
         return r;
     }
-
-    CLASP_ASSERT(NULL != pfnHeader);
-    CLASP_ASSERT(NULL != pfnBody);
 
     usageinfo.version.major         =   major;
     usageinfo.version.minor         =   minor;
@@ -915,7 +932,6 @@ clasp_showHeader(
     CLASP_ASSERT(NULL != args);
     CLASP_ASSERT(NULL != pfnHeader);
 
-    CLASP_ASSERT(NULL != pfnHeader);
 
     usageinfo.version.major         =   major;
     usageinfo.version.minor         =   minor;
@@ -956,13 +972,13 @@ clasp_show_header(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
+    CLASP_ASSERT(NULL != pfnHeader);
+
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
         return r;
     }
-
-    CLASP_ASSERT(NULL != pfnHeader);
 
     usageinfo.version.major     =   major;
     usageinfo.version.minor     =   minor;
@@ -1034,13 +1050,13 @@ clasp_show_body(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
+    CLASP_ASSERT(NULL != pfnBody);
+
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
         return r;
     }
-
-    CLASP_ASSERT(NULL != pfnBody);
 
     usageinfo.version.major         =   -1;
     usageinfo.version.minor         =   -1;
@@ -1113,13 +1129,13 @@ clasp_show_version(
     clasp_diagnostic_context_t  ctxt_;
     int                         r;
 
+    CLASP_ASSERT(NULL != pfnVersion);
+
     ctxt = clasp_verify_context_(ctxt, &ctxt_, &r);
     if (NULL == ctxt)
     {
         return r;
     }
-
-    CLASP_ASSERT(NULL != pfnVersion);
 
     usageinfo.version.major     =   major;
     usageinfo.version.minor     =   minor;

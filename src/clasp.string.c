@@ -4,11 +4,11 @@
  * Purpose: CLASP string facilities.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 11th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -61,8 +61,10 @@
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
 # define clasp_strtok_                                      wcstok
 #else
+
 # define clasp_strtok_                                      strtok
 #endif
 
@@ -104,29 +106,23 @@ clasp_strdup_raw_(
     return newS;
 }
 
-/* This function controls whether the library recognises just an equals
- * sign ('='), or both an equals sign '=' and a colon (':') as separating
- * an option name and value.
- */
-clasp_char_t* clasp_strchreq_(clasp_char_t const* s, unsigned flags)
+clasp_char_t*
+clasp_strchreq_(
+    clasp_char_t const* s
+,   unsigned            flags
+)
 {
     ((void)flags);
 
 #if 0
+
     return clasp_strchr_(s, '=');
 #else /* ? 0 */
+
     return clasp_strpbrk_(s, CLASP_LITERAL_STRING("=:"));
 #endif /* 0 */
 }
 
-/* Counts the number of instances of c in s
- *
- * \param s String to search
- * \param c Character for which to search
- *
- * \pre (NULL != s)
- * \pre ('\0' != c)
- */
 size_t
 clasp_strcount_(
     clasp_char_t const* s
@@ -148,15 +144,6 @@ clasp_strcount_(
     return count;
 }
 
-/* Counts the number of instances of c in s to length n
- *
- * \param s String to search
- * \param n Maximum number of characters to search
- * \param c Character for which to search
- *
- * \pre (NULL != s)
- * \pre ('\0' != c)
- */
 size_t
 clasp_strncount_(
     clasp_char_t const* s
@@ -179,13 +166,6 @@ clasp_strncount_(
     return count;
 }
 
-/* Searches for the last occurence of n in a section of a
- * string - s[0, n) - and returns a pointer to it, or NULL if it could not
- * be found
- *
- * \pre (NULL != s || 0 == n)
- * \pre ('\0' != c)
- */
 clasp_char_t*
 clasp_strnrchr_(
     clasp_char_t const* s
@@ -211,13 +191,6 @@ clasp_strnrchr_(
     return NULL;
 }
 
-/* Searches for the last occurence of a character that is not c in a section
- * of a string - s[0, n) - and returns a pointer to it, or NULL if it could
- * not be found
- *
- * \pre (NULL != s || 0 == n)
- * \pre ('\0' != c)
- */
 clasp_char_t*
 clasp_strnexrchr_(
     clasp_char_t const* s
@@ -243,8 +216,6 @@ clasp_strnexrchr_(
     return NULL;
 }
 
-/* string tokenisation a la strtok_r
- */
 clasp_char_t*
 clasp_strtok_r_(
     clasp_char_t*               s
@@ -265,8 +236,8 @@ clasp_strtok_r_(
         tok = clasp_strtok_wblank_r_(s, delim, savectxt);
     }
     while (NULL != tok && '\0' == *tok);
-
 #else
+
     ((void)&savectxt);
 
     tok = clasp_strtok_(s, delim);
@@ -275,13 +246,6 @@ clasp_strtok_r_(
     return tok;
 }
 
-/* string tokenisation a la strtok_r, except that the blanks are
- * preserved (and returned as empty, not null, strings)
- *
- * \pre (NULL != s)
- * \pre (NULL != delim)
- * \pre (NULL != saveptr)
- */
 clasp_char_t*
 clasp_strtok_wblank_r_(
     clasp_char_t*               s
