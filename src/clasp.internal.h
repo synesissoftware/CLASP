@@ -223,7 +223,7 @@ clasp_count_flags_and_options_(
 /* Duplicates a string.
  *
  * \param ctxt The diagnostic context. May not be NULL;
-/* Duplicates a string.
+ * param s The string to be duplicated;
  */
 clasp_char_t* clasp_strdup_(
     clasp_diagnostic_context_t const*   ctxt
@@ -232,7 +232,7 @@ clasp_char_t* clasp_strdup_(
 
 /* Duplicates a string.
  *
-/* Duplicates a string.
+ * param s The string to be duplicated;
  */
 clasp_char_t* clasp_strdup_raw_(
     clasp_char_t const* s
