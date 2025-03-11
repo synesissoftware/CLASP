@@ -4,7 +4,7 @@
  * Purpose: CLASP API.
  *
  * Created: 4th June 2008
- * Updated: 9th March 2025
+ * Updated: 11th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -140,7 +140,7 @@ clasp_count_flags_and_options_(
     *numFlags = 0;
     *numOptions = 0;
 
-    for (clasp_specification_t const* p = specifications; CLASP_ARGTYPE_INVALID != p->type; ++p)
+    { clasp_specification_t const* p; for (p = specifications; CLASP_ARGTYPE_INVALID != p->type; ++p)
     {
         switch (p->type)
         {
@@ -158,7 +158,7 @@ clasp_count_flags_and_options_(
             ++*numOptions;
             break;
         }
-    }
+    }}
 }
 
 static

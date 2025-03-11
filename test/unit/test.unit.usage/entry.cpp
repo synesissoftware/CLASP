@@ -359,7 +359,6 @@ namespace
             ,   blanksBetweenItems
             );
 
-
             scoper.close();
 
             typedef platformstl::basic_file_lines<
@@ -440,8 +439,6 @@ namespace
 #endif
             }
 
-
-
             scoper.close();
 
             typedef platformstl::basic_file_lines<
@@ -520,7 +517,6 @@ namespace
             ,   tabSize
             ,   blanksBetweenItems
             );
-
 
             scoper.close();
 
@@ -608,8 +604,6 @@ namespace
 #else
 #endif
                 }
-
-
 
             scoper.close();
 
