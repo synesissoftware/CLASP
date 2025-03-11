@@ -4,7 +4,7 @@
  * Purpose: C++ layer for the CLASP library.
  *
  * Created: 31st July 2008
- * Updated: 9th March 2025
+ * Updated: 11th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
 # define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
 # define CLASP_VER_CLASP_HPP_CLASP_REVISION 1
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     69
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     70
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -145,12 +145,12 @@ typedef std::basic_string<
 class clasp_exception
     : public std::runtime_error
 {
-public: // Member Types
+public: // types
     typedef std::runtime_error                              parent_class_type;
     typedef std::string                                     message_string_type;
     typedef clasp_string_t                                  string_type;
 
-public: // Construction
+public: // construction
     explicit clasp_exception(message_string_type const& message)
         : parent_class_type(message)
     {}
@@ -161,11 +161,11 @@ public: // Construction
 class argument_exception
     : public clasp_exception
 {
-public: // Member Types
+public: // types
     typedef clasp_exception                                 parent_class_type;
     typedef argument_exception                              class_type;
 
-public: // Construction
+public: // construction
     explicit argument_exception(message_string_type const& message, string_type const& optionName)
         : parent_class_type(calc_message_(message, optionName))
         , optionName(optionName)
@@ -219,11 +219,11 @@ private:
 class missing_option_exception
     : public argument_exception
 {
-public: // Member Types
+public: // types
     typedef argument_exception                              parent_class_type;
     typedef missing_option_exception                        class_type;
 
-public: // Construction
+public: // construction
     explicit missing_option_exception(message_string_type const& message, string_type const& optionName)
         : parent_class_type(message, optionName)
     {}
@@ -238,11 +238,11 @@ private:
 class missing_option_value_exception
     : public argument_exception
 {
-public: // Member Types
+public: // types
     typedef argument_exception                              parent_class_type;
     typedef missing_option_value_exception                  class_type;
 
-public: // Construction
+public: // construction
     explicit missing_option_value_exception(message_string_type const& message, string_type const& optionName)
         : parent_class_type(message, optionName)
     {}
@@ -252,11 +252,11 @@ public: // Construction
 class invalid_option_value_exception
     : public argument_exception
 {
-public: // Member Types
+public: // types
     typedef argument_exception                              parent_class_type;
     typedef invalid_option_value_exception                  class_type;
 
-public: // Construction
+public: // construction
     explicit invalid_option_value_exception(message_string_type const& message, string_type const& optionName)
         : parent_class_type(message, optionName)
     {}
@@ -266,11 +266,11 @@ public: // Construction
 class unused_argument_exception
     : public argument_exception
 {
-public: // Member Types
+public: // types
     typedef argument_exception                              parent_class_type;
     typedef unused_argument_exception                       class_type;
 
-public: // Construction
+public: // construction
     explicit unused_argument_exception(message_string_type const& message, string_type const& optionName)
         : parent_class_type(message, optionName)
     {}
@@ -280,11 +280,11 @@ public: // Construction
 class unrecognised_argument_exception
     : public argument_exception
 {
-public: // Member Types
+public: // types
     typedef argument_exception                              parent_class_type;
     typedef unrecognised_argument_exception                 class_type;
 
-public: // Construction
+public: // construction
     explicit unrecognised_argument_exception(message_string_type const& message, string_type const& optionName)
         : parent_class_type(message, optionName)
     {}

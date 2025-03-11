@@ -845,6 +845,7 @@ clasp_calculate_sizes_(
                         if (NULL != alias)
                         {
 #if 0
+
                             clasp_char_t const* equal3;
 
                             if (NULL != alias->mappedArgument &&

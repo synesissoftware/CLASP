@@ -4,7 +4,7 @@
  * Purpose: Scratch test for version
  *
  * Created: 6th December 2011
- * Updated: 10th March 2025
+ * Updated: 11th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -114,6 +114,7 @@ int main(int argc, char** argv)
 
         /* now check for unrecognised arguments */
 #if 0
+
         if (0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, NULL, 0))
         {
             clasp_argument_t const* unrecognisedArg;
@@ -128,6 +129,7 @@ int main(int argc, char** argv)
             } while (0 != clasp_reportUnrecognisedFlagsAndOptions(args, Specifications, &unrecognisedArg, ++nSkip));
         }
 #else
+
         {
 clasp_argument_t const* arg;
 unsigned nSkip = 0;
@@ -146,6 +148,7 @@ if (0 != n)
 
         /* now check for unused arguments */
 #if 0
+
         if (0 != clasp_reportUnusedFlagsAndOptions(args, NULL, 0))
         {
             clasp_argument_t const* unusedArg;
@@ -160,6 +163,7 @@ if (0 != n)
             } while (0 != clasp_reportUnusedFlagsAndOptions(args, &unusedArg, ++nSkip));
         }
 #else
+
         {
 clasp_argument_t const* arg;
 unsigned nSkip = 0;

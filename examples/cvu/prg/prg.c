@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the prg example project.
  *
  * Created: 8th December 2011
- * Updated: 10th March 2025
+ * Updated: 11th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -153,12 +153,10 @@ int main(int argc, char** argv)
 
           /* Treat strings as slices {len+ptr} in non-portable way! */
           printf("value-%02d:\t%.*s\n", (int)i, value->value);
-
 #else /* ? 0 */
 
           /* Treat strings as slices {len+ptr}*/
           printf("value-%02d:\t%.*s\n", (int)i, (int)value->value.len, value->value.ptr);
-
 #endif /* 0 */
       }}
     }

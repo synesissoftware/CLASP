@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for CLASP C++ API
  *
  * Created: 16th July 2009
- * Updated: 10th March 2025
+ * Updated: 11th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -235,8 +235,10 @@ static void test_1_2()
     char const* argv[] =
     {
 #ifdef _WIN32
+
         "C:\\dir0\\arg0.exe",
 #else
+
         "/dir0/arg0",
 #endif
         "abc",

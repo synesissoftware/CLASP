@@ -296,7 +296,6 @@ clasp_replace_field_from_resource_(
 
         return 1;
     }
-
 #else
 
     ((void)argv0);

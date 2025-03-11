@@ -75,10 +75,12 @@
 #endif /* !stlsoft_const_cast */
 
 #ifdef __cplusplus
+
 # define clasp_bool_t                                       bool
 # define clasp_true_v                                       true
 # define clasp_false_v                                      false
 #else /* ? __cplusplus */
+
 # define clasp_bool_t                                       int
 # define clasp_true_v                                       (1)
 # define clasp_false_v                                      (0)
@@ -192,6 +194,7 @@ clasp_count_flags_and_options_(
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
 # define clasp_fprintf_                                     fwprintf
 # define clasp_strcat_                                      wcscat
 # define clasp_strchr_                                      wcschr
@@ -202,7 +205,8 @@ clasp_count_flags_and_options_(
 # define clasp_strrchr_                                     wcsrchr
 # define clasp_strstr_                                      wcsstr
 # define CLASP_LITERAL_(x)                                  L ## x
-#else
+#else /* ? CLASP_USE_WIDE_STRINGS */
+
 # define clasp_fprintf_                                     fprintf
 # define clasp_strcat_                                      strcat
 # define clasp_strchr_                                      strchr

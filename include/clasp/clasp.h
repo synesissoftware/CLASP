@@ -163,8 +163,10 @@
 
 #if defined(__cplusplus) || \
     defined(CLASP_DOCUMENTATION_SKIP_SECTION)
+
 # define CLASP_EXTERN_C                                     extern "C"
 #else /* ? __cplusplus */
+
 # define CLASP_EXTERN_C                                     extern
 #endif /* !__cplusplus */
 

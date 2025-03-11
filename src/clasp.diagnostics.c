@@ -4,11 +4,11 @@
  * Purpose: CLASP diagnostics facilities.
  *
  * Created: 4th June 2008
- * Updated: 12th July 2024
+ * Updated: 11th March 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2024, Matthew Wilson
+ * Copyright (c) 2008-2025, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,8 @@
  */
 
 static
-void CLASP_CALLCONV clasp_default_log_fn_(
+void
+CLASP_CALLCONV clasp_default_log_fn_(
     void*               context
 ,   int                 severity
 ,   clasp_char_t const* fmt
@@ -80,8 +81,10 @@ void CLASP_CALLCONV clasp_default_log_fn_(
         }
 
 #ifdef CLASP_USE_WIDE_STRINGS
+
         vfwprintf(stderr, fmt, args);
 #else /* ? CLASP_USE_WIDE_STRINGS */
+
         vfprintf(stderr, fmt, args);
 #endif /* CLASP_USE_WIDE_STRINGS */
         if (fmt != fmt_)
