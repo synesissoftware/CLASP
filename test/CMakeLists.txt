@@ -32,6 +32,12 @@ if((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
 	add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
 endif()
 
+set(GCC_WARN_NO_cxx11_long_long "")
+if(X_CMAKE_CXX_FULLSTANDARD LESS 2011)
+
+	set(GCC_WARN_NO_cxx11_long_long -Wno-c++11-long-long)
+endif()
+
 
 add_subdirectory(component)
 add_subdirectory(scratch)
