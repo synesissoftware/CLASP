@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for CLASP C++ API
  *
  * Created: 16th July 2009
- * Updated: 11th March 2025
+ * Updated: 9th May 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -184,6 +184,8 @@ static void test_1_0()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numFlags);
@@ -191,9 +193,6 @@ static void test_1_0()
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(1, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -217,6 +216,8 @@ static void test_1_1()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numFlags);
@@ -224,9 +225,6 @@ static void test_1_1()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(2, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -257,6 +255,8 @@ static void test_1_2()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numFlags);
@@ -264,9 +264,6 @@ static void test_1_2()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -291,6 +288,8 @@ static void test_1_3()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numFlags);
@@ -298,9 +297,6 @@ static void test_1_3()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -326,6 +322,8 @@ static void test_1_4()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(0u, args->numFlags);
@@ -333,9 +331,6 @@ static void test_1_4()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(4, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -363,6 +358,8 @@ static void test_1_5()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(5u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(4u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numFlags);
@@ -370,9 +367,6 @@ static void test_1_5()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -408,6 +402,8 @@ static void test_1_6()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(5u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(4u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numFlags);
@@ -425,9 +421,6 @@ static void test_1_6()
         clasp::check_flag(args, "--y-argument", &flags, TEST_1_6_DOUBLE_Y, 0);
 
         XTESTS_TEST_INTEGER_EQUAL(TEST_1_6_SINGLE_X | TEST_1_6_SINGLE_Y | TEST_1_6_DOUBLE_X, flags);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -509,6 +502,8 @@ static void test_1_10()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(5u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(4u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numFlags);
@@ -516,9 +511,6 @@ static void test_1_10()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -598,6 +590,8 @@ static void test_1_15()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numArguments);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numFlagsAndOptions);
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numFlags);
@@ -605,9 +599,6 @@ static void test_1_15()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -642,6 +633,8 @@ static void test_2_01()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         bool    v;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--nonexistant"));
@@ -669,9 +662,6 @@ static void test_2_01()
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -709,6 +699,8 @@ static void test_2_01_c()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         bool    v;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--nonexistant"));
@@ -740,9 +732,6 @@ static void test_2_01_c()
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -779,6 +768,8 @@ static void test_2_02()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         bool    v;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--nonexistant"));
@@ -806,9 +797,6 @@ static void test_2_02()
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -844,6 +832,8 @@ static void test_2_03()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         bool    v;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--nonexistant"));
@@ -871,9 +861,6 @@ static void test_2_03()
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -910,6 +897,8 @@ static void test_2_04()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         bool    v;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--nonexistant"));
@@ -937,9 +926,6 @@ static void test_2_04()
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -975,6 +961,8 @@ static void test_2_05()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         bool    v;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::flag_specified(args, "--nonexistant"));
@@ -1002,9 +990,6 @@ static void test_2_05()
         XTESTS_TEST_BOOLEAN_TRUE(clasp::flag_specified(args, "--boolopt3"));
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -1039,6 +1024,8 @@ static void test_2_07()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         char const* v1 = ss_nullptr_k;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--multi-opt", &v1, NULL));
@@ -1063,9 +1050,6 @@ static void test_2_07()
 
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -1096,6 +1080,8 @@ static void test_2_08()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         int         length_i = 0;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_i, 0));
@@ -1110,9 +1096,6 @@ static void test_2_08()
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--length", &length_s, 0));
         XTESTS_TEST_INTEGER_EQUAL(1u, length_s);
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -1145,6 +1128,8 @@ static void test_2_09()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         int         length_1;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
@@ -1163,9 +1148,6 @@ static void test_2_09()
         int         v_;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -1198,6 +1180,8 @@ static void test_2_10()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         unsigned    length_1;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
@@ -1216,9 +1200,6 @@ static void test_2_10()
         unsigned    v_;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -1251,6 +1232,8 @@ static void test_2_11()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         double  length_1;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0.0));
@@ -1269,9 +1252,6 @@ static void test_2_11()
         double  v_;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0.0));
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -1304,6 +1284,8 @@ static void test_2_12()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         size_t  length_1;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
@@ -1322,9 +1304,6 @@ static void test_2_12()
         size_t  v_;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
-
-
-        clasp::releaseArguments(args);
     }
 }
 
@@ -1357,6 +1336,8 @@ static void test_2_13()
     }
     else
     {
+        stlsoft::scoped_handle<arguments_t const*> scoper(args, clasp::releaseArguments);
+
         long        length_1;
 
         XTESTS_TEST_BOOLEAN_TRUE(clasp::check_next_option(args, "--length", &length_1, 0));
@@ -1375,9 +1356,6 @@ static void test_2_13()
         long        v_;
 
         XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
-
-
-        clasp::releaseArguments(args);
     }
 }
 
