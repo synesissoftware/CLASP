@@ -53,9 +53,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
-# define CLASP_VER_CLASP_H_CLASP_MINOR      3
-# define CLASP_VER_CLASP_H_CLASP_REVISION   3
-# define CLASP_VER_CLASP_H_CLASP_EDIT       110
+# define CLASP_VER_CLASP_H_CLASP_MINOR      4
+# define CLASP_VER_CLASP_H_CLASP_REVISION   0
+# define CLASP_VER_CLASP_H_CLASP_EDIT       111
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -73,9 +73,9 @@
  */
 
 #define CLASP_VER_MAJOR               0
-#define CLASP_VER_MINOR               15
+#define CLASP_VER_MINOR               16
 #define CLASP_VER_PATCH               0
-#define CLASP_VER_ALPHABETA           0x47
+#define CLASP_VER_ALPHABETA           0x41
 
 #define CLASP_VER \
     (0\
