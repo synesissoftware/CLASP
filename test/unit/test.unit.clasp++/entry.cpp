@@ -52,31 +52,31 @@
 namespace
 {
 
-    static void test_1_0();
-    static void test_1_1();
-    static void test_1_2();
-    static void test_1_3();
-    static void test_1_4();
-    static void test_1_5();
-    static void test_1_6();
-    static void test_1_7();
-    static void test_1_10();
-    static void test_1_14();
-    static void test_1_15();
+    static void TEST_NO_ARGUMENTS();
+    static void TEST_1_VALUE();
+    static void TEST_1_VALUE_1_FLAG();
+    static void TEST_1_VALUE_AND_SINGLEHYPHEN();
+    static void TEST_1_VALUE_AND_DOUBLEHYPHEN_AND_SINGLEHYPHEN();
+    static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS();
+    static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag();
+    static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_2();
+    static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_3();
+    static void TEST_2_LONGOPTIONS();
+    static void TEST_1_FLAG_1_VALUE();
 
-    static void test_2_01();
-    static void test_2_01_c();
-    static void test_2_02();
-    static void test_2_03();
-    static void test_2_04();
-    static void test_2_05();
-    static void test_2_07();
-    static void test_2_08();
-    static void test_2_09();
-    static void test_2_10();
-    static void test_2_11();
-    static void test_2_12();
-    static void test_2_13();
+    static void TEST_1_FLAG_2_OPTIONS_1_FLAG();
+    static void TEST_1_FLAG_2_OPTIONS_1_FLAG_2();
+    static void TEST_1_FLAG_2_OPTIONS_1_FLAG_3();
+    static void TEST_1_FLAG_2_OPTIONS_1_FLAG_4();
+    static void TEST_1_FLAG_2_OPTIONS_1_FLAG_5();
+    static void TEST_1_FLAG_2_OPTIONS_1_FLAG_6();
+    static void TEST_1_FLAG_1_VALUE_1_OPTION_1_FLAG_1_VALUE();
+    static void TEST_1_OPTION();
+    static void TEST_3_OPTIONS();
+    static void TEST_3_OPTIONS_2();
+    static void TEST_3_OPTIONS_3();
+    static void TEST_3_OPTIONS_4();
+    static void TEST_3_OPTIONS_5();
 } // anonymous namespace
 
 
@@ -118,34 +118,34 @@ int main(int argc, char **argv)
     if (XTESTS_START_RUNNER("test.unit.clasp++", verbosity))
     {
 #if 0
-        XTESTS_RUN_CASE(test_2_04);
+        XTESTS_RUN_CASE(TEST_1_FLAG_2_OPTIONS_1_FLAG_5);
 #endif /* 0 */
 
-        XTESTS_RUN_CASE(test_1_0);
-        XTESTS_RUN_CASE(test_1_1);
-        XTESTS_RUN_CASE(test_1_2);
-        XTESTS_RUN_CASE(test_1_3);
-        XTESTS_RUN_CASE(test_1_4);
-        XTESTS_RUN_CASE(test_1_5);
-        XTESTS_RUN_CASE(test_1_6);
-        XTESTS_RUN_CASE_THAT_THROWS(test_1_7, clasp::invalid_option_value_exception);
-        XTESTS_RUN_CASE(test_1_10);
-        XTESTS_RUN_CASE(test_1_14);
-        XTESTS_RUN_CASE(test_1_15);
+        XTESTS_RUN_CASE(TEST_NO_ARGUMENTS);
+        XTESTS_RUN_CASE(TEST_1_VALUE);
+        XTESTS_RUN_CASE(TEST_1_VALUE_1_FLAG);
+        XTESTS_RUN_CASE(TEST_1_VALUE_AND_SINGLEHYPHEN);
+        XTESTS_RUN_CASE(TEST_1_VALUE_AND_DOUBLEHYPHEN_AND_SINGLEHYPHEN);
+        XTESTS_RUN_CASE(TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS);
+        XTESTS_RUN_CASE(TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag);
+        XTESTS_RUN_CASE_THAT_THROWS(TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_2, clasp::invalid_option_value_exception);
+        XTESTS_RUN_CASE(TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_3);
+        XTESTS_RUN_CASE(TEST_2_LONGOPTIONS);
+        XTESTS_RUN_CASE(TEST_1_FLAG_1_VALUE);
 
-        XTESTS_RUN_CASE(test_2_01);
-        XTESTS_RUN_CASE(test_2_01_c);
-        XTESTS_RUN_CASE(test_2_02);
-        XTESTS_RUN_CASE(test_2_03);
-        XTESTS_RUN_CASE(test_2_04);
-        XTESTS_RUN_CASE(test_2_05);
-        XTESTS_RUN_CASE(test_2_07);
-        XTESTS_RUN_CASE(test_2_08);
-        XTESTS_RUN_CASE(test_2_09);
-        XTESTS_RUN_CASE(test_2_10);
-        XTESTS_RUN_CASE(test_2_11);
-        XTESTS_RUN_CASE(test_2_12);
-        XTESTS_RUN_CASE(test_2_13);
+        XTESTS_RUN_CASE(TEST_1_FLAG_2_OPTIONS_1_FLAG);
+        XTESTS_RUN_CASE(TEST_1_FLAG_2_OPTIONS_1_FLAG_2);
+        XTESTS_RUN_CASE(TEST_1_FLAG_2_OPTIONS_1_FLAG_3);
+        XTESTS_RUN_CASE(TEST_1_FLAG_2_OPTIONS_1_FLAG_4);
+        XTESTS_RUN_CASE(TEST_1_FLAG_2_OPTIONS_1_FLAG_5);
+        XTESTS_RUN_CASE(TEST_1_FLAG_2_OPTIONS_1_FLAG_6);
+        XTESTS_RUN_CASE(TEST_1_FLAG_1_VALUE_1_OPTION_1_FLAG_1_VALUE);
+        XTESTS_RUN_CASE(TEST_1_OPTION);
+        XTESTS_RUN_CASE(TEST_3_OPTIONS);
+        XTESTS_RUN_CASE(TEST_3_OPTIONS_2);
+        XTESTS_RUN_CASE(TEST_3_OPTIONS_3);
+        XTESTS_RUN_CASE(TEST_3_OPTIONS_4);
+        XTESTS_RUN_CASE(TEST_3_OPTIONS_5);
 
         XTESTS_PRINT_RESULTS();
 
@@ -165,7 +165,8 @@ namespace
     using clasp::argument_t;
     using clasp::arguments_t;
 
-static void test_1_0()
+
+static void TEST_NO_ARGUMENTS()
 {
     char const* argv[] =
     {
@@ -196,7 +197,7 @@ static void test_1_0()
     }
 }
 
-static void test_1_1()
+static void TEST_1_VALUE()
 {
     char const* argv[] =
     {
@@ -228,7 +229,7 @@ static void test_1_1()
     }
 }
 
-static void test_1_2()
+static void TEST_1_VALUE_1_FLAG()
 {
     char const* argv[] =
     {
@@ -267,7 +268,7 @@ static void test_1_2()
     }
 }
 
-static void test_1_3()
+static void TEST_1_VALUE_AND_SINGLEHYPHEN()
 {
     char const* argv[] =
     {
@@ -300,7 +301,7 @@ static void test_1_3()
     }
 }
 
-static void test_1_4()
+static void TEST_1_VALUE_AND_DOUBLEHYPHEN_AND_SINGLEHYPHEN()
 {
     char const* argv[] =
     {
@@ -334,7 +335,7 @@ static void test_1_4()
     }
 }
 
-static void test_1_5()
+static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS()
 {
     char const* argv[] =
     {
@@ -370,7 +371,7 @@ static void test_1_5()
     }
 }
 
-static void test_1_6()
+static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag()
 {
     char const* argv[] =
     {
@@ -424,7 +425,7 @@ static void test_1_6()
     }
 }
 
-static void test_1_7()
+static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_2()
 {
     char const* argv[] =
     {
@@ -478,7 +479,7 @@ static void test_1_7()
     }
 }
 
-static void test_1_10()
+static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_3()
 {
     char const* argv[] =
     {
@@ -514,7 +515,7 @@ static void test_1_10()
     }
 }
 
-static void test_1_14()
+static void TEST_2_LONGOPTIONS()
 {
     char const* argv[] =
     {
@@ -569,7 +570,7 @@ static void test_1_14()
     }
 }
 
-static void test_1_15()
+static void TEST_1_FLAG_1_VALUE()
 {
     char const* argv[] =
     {
@@ -602,8 +603,7 @@ static void test_1_15()
     }
 }
 
-
-static void test_2_01()
+static void TEST_1_FLAG_2_OPTIONS_1_FLAG()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -665,7 +665,7 @@ static void test_2_01()
     }
 }
 
-static void test_2_01_c()
+static void TEST_1_FLAG_2_OPTIONS_1_FLAG_2()
 {
     clasp::specification_t const    Alias_Flag_Version  =   CLASP_FLAG("-v", "--version", NULL);
 
@@ -735,7 +735,7 @@ static void test_2_01_c()
     }
 }
 
-static void test_2_02()
+static void TEST_1_FLAG_2_OPTIONS_1_FLAG_3()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -800,7 +800,7 @@ static void test_2_02()
     }
 }
 
-static void test_2_03()
+static void TEST_1_FLAG_2_OPTIONS_1_FLAG_4()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -864,7 +864,7 @@ static void test_2_03()
     }
 }
 
-static void test_2_04()
+static void TEST_1_FLAG_2_OPTIONS_1_FLAG_5()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -929,7 +929,7 @@ static void test_2_04()
     }
 }
 
-static void test_2_05()
+static void TEST_1_FLAG_2_OPTIONS_1_FLAG_6()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -993,7 +993,7 @@ static void test_2_05()
     }
 }
 
-static void test_2_07()
+static void TEST_1_FLAG_1_VALUE_1_OPTION_1_FLAG_1_VALUE()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -1053,7 +1053,7 @@ static void test_2_07()
     }
 }
 
-static void test_2_08()
+static void TEST_1_OPTION()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -1099,7 +1099,7 @@ static void test_2_08()
     }
 }
 
-static void test_2_09()
+static void TEST_3_OPTIONS()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -1151,7 +1151,7 @@ static void test_2_09()
     }
 }
 
-static void test_2_10()
+static void TEST_3_OPTIONS_2()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -1203,7 +1203,7 @@ static void test_2_10()
     }
 }
 
-static void test_2_11()
+static void TEST_3_OPTIONS_3()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -1255,7 +1255,7 @@ static void test_2_11()
     }
 }
 
-static void test_2_12()
+static void TEST_3_OPTIONS_4()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -1307,7 +1307,7 @@ static void test_2_12()
     }
 }
 
-static void test_2_13()
+static void TEST_3_OPTIONS_5()
 {
     static clasp::specification_t const Specifications[] =
     {
@@ -1358,7 +1358,6 @@ static void test_2_13()
         XTESTS_TEST_BOOLEAN_FALSE(clasp::check_next_option(args, "--length", &v_, 0));
     }
 }
-
 } // anonymous namespace
 
 
