@@ -44,6 +44,13 @@
 # pragma warning(disable : 4996)
 #endif
 
+#ifndef XTESTS_TEST_FAIL_WITH_ERRNO
+
+# define XTESTS_TEST_FAIL_WITH_ERRNO(msg, e)                \
+                                                            \
+    XTESTS_TEST_FAIL_WITH_QUALIFIER(msg, stlsoft::error_desc(r).c_str())
+#endif // XTESTS_TEST_FAIL_WITH_ERRNO
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -181,7 +188,7 @@ static void TEST_NO_ARGUMENTS()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -213,7 +220,7 @@ static void TEST_1_VALUE()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -252,7 +259,7 @@ static void TEST_1_VALUE_1_FLAG()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -285,7 +292,7 @@ static void TEST_1_VALUE_AND_SINGLEHYPHEN()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -319,7 +326,7 @@ static void TEST_1_VALUE_AND_DOUBLEHYPHEN_AND_SINGLEHYPHEN()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -355,7 +362,7 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -399,7 +406,7 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -453,7 +460,7 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_2()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -499,7 +506,7 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_3()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -541,7 +548,7 @@ static void TEST_2_LONGOPTIONS()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -587,7 +594,7 @@ static void TEST_1_FLAG_1_VALUE()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -629,7 +636,7 @@ static void TEST_1_FLAG_2_OPTIONS_1_FLAG()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -695,7 +702,7 @@ static void TEST_1_FLAG_2_OPTIONS_1_FLAG_2()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -764,7 +771,7 @@ static void TEST_1_FLAG_2_OPTIONS_1_FLAG_3()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -828,7 +835,7 @@ static void TEST_1_FLAG_2_OPTIONS_1_FLAG_4()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -893,7 +900,7 @@ static void TEST_1_FLAG_2_OPTIONS_1_FLAG_5()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -957,7 +964,7 @@ static void TEST_1_FLAG_2_OPTIONS_1_FLAG_6()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -1020,7 +1027,7 @@ static void TEST_1_FLAG_1_VALUE_1_OPTION_1_FLAG_1_VALUE()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -1076,7 +1083,7 @@ static void TEST_1_OPTION()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -1124,7 +1131,7 @@ static void TEST_3_OPTIONS()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -1176,7 +1183,7 @@ static void TEST_3_OPTIONS_2()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -1228,7 +1235,7 @@ static void TEST_3_OPTIONS_3()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -1280,7 +1287,7 @@ static void TEST_3_OPTIONS_4()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
@@ -1332,7 +1339,7 @@ static void TEST_3_OPTIONS_5()
 
     if (0 != r)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not parse arguments", stlsoft::error_desc(r));
+        XTESTS_TEST_FAIL_WITH_ERRNO("could not parse arguments", r);
     }
     else
     {
