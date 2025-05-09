@@ -1758,8 +1758,8 @@ options(
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 typedef stlsoft::member_selector_view<
-    argument_t
-,   clasp_slice_t
+    argument_t const
+,   clasp_slice_t const
 ,   argument_t const*
 >                                                           clasp_cxx_values_view_type_;
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
@@ -1775,7 +1775,7 @@ values(
 {
     STLSOFT_ASSERT(NULL != args);
 
-    return stlsoft::make_member_selector_view(
+    return clasp_cxx_values_view_type_(
         &args->values[0]
     ,   &args->values[0] + args->numValues
     ,   &argument_t::value

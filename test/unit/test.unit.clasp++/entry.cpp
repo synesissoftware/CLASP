@@ -233,6 +233,14 @@ static void TEST_1_VALUE()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(2, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+        }
+#endif
     }
 }
 
@@ -272,6 +280,19 @@ static void TEST_1_VALUE_1_FLAG()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& flag : clasp::flags(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("-x", flag.resolvedName);
+        }
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+        }
+#endif
     }
 }
 
@@ -305,6 +326,19 @@ static void TEST_1_VALUE_AND_SINGLEHYPHEN()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& flag : clasp::flags(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("-", flag.resolvedName);
+        }
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+        }
+#endif
     }
 }
 
@@ -339,6 +373,17 @@ static void TEST_1_VALUE_AND_DOUBLEHYPHEN_AND_SINGLEHYPHEN()
         XTESTS_TEST_INTEGER_EQUAL(2u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(4, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& value : clasp::values(args))
+        {
+            ((void)&value);
+
+            // XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+            // XTESTS_TEST_MULTIBYTE_STRING_EQUAL("-", value);
+        }
+#endif
     }
 }
 
@@ -375,6 +420,29 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& flag : clasp::flags(args))
+        {
+            switch (flag.cmdLineIndex)
+            {
+            case 4:
+
+                XTESTS_TEST_MULTIBYTE_STRING_EQUAL("-x", flag.resolvedName);
+                break;
+            case 5:
+
+                XTESTS_TEST_MULTIBYTE_STRING_EQUAL("-y", flag.resolvedName);
+                break;
+            }
+        }
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+        }
+#endif
     }
 }
 
@@ -419,6 +487,29 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& flag : clasp::flags(args))
+        {
+            switch (flag.cmdLineIndex)
+            {
+            case 4:
+
+                XTESTS_TEST_MULTIBYTE_STRING_EQUAL("-x", flag.resolvedName);
+                break;
+            case 5:
+
+                XTESTS_TEST_MULTIBYTE_STRING_EQUAL("-y", flag.resolvedName);
+                break;
+            }
+        }
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+        }
+#endif
 
         int flags = 0;
 
@@ -474,6 +565,14 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_2()
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
 
+#if __cplusplus >= 201103L
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+        }
+#endif
+
         int flags = 0;
 
         clasp::check_flag(args, "-x", &flags, TEST_1_6_SINGLE_X, 0);
@@ -519,6 +618,14 @@ static void TEST_1_VALUE_2_LONGOPTIONS_2_FLAGS_ALSO_CALLING_clasp_check_flag_3()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(6, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("abc", value);
+        }
+#endif
     }
 }
 
@@ -607,6 +714,25 @@ static void TEST_1_FLAG_1_VALUE()
         XTESTS_TEST_INTEGER_EQUAL(1u, args->numValues);
         XTESTS_TEST_INTEGER_EQUAL(3, args->argc);
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+#if __cplusplus >= 201103L
+
+        for (auto const& flag : clasp::flags(args))
+        {
+            switch (flag.cmdLineIndex)
+            {
+            case 1:
+
+                XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--clipboard", flag.resolvedName);
+                break;
+            }
+        }
+
+        for (auto const& value : clasp::values(args))
+        {
+            XTESTS_TEST_MULTIBYTE_STRING_EQUAL("H:\\dev\\srctools\\number_lines\\implicit_link.cpp", value);
+        }
+#endif
     }
 }
 
@@ -1057,6 +1183,18 @@ static void TEST_1_FLAG_1_VALUE_1_OPTION_1_FLAG_1_VALUE()
 
 
         XTESTS_TEST_MULTIBYTE_STRING_EQUAL("arg0", args->programName);
+
+
+#if __cplusplus >= 201103L
+
+        for (auto const& value : clasp::values(args))
+        {
+            ((void)&value);
+
+            // XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v1", value);
+            // XTESTS_TEST_MULTIBYTE_STRING_EQUAL("v3", value);
+        }
+#endif
     }
 }
 
