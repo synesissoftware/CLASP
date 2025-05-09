@@ -72,13 +72,21 @@
  * The composite version of the clasp library
  */
 
-#define CLASP_VER_MAJOR     0
-#define CLASP_VER_MINOR     15
-#define CLASP_VER_PATCH     0
-#define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0x46
+#define CLASP_VER_MAJOR               0
+#define CLASP_VER_MINOR               15
+#define CLASP_VER_PATCH               0
+#define CLASP_VER_ALPHABETA           0x47
 
-#define CLASP_VER           0x000f0046
+#define CLASP_VER \
+    (0\
+        |   (   CLASP_VER_MAJOR       << 24   ) \
+        |   (   CLASP_VER_MINOR       << 16   ) \
+        |   (   CLASP_VER_PATCH       <<  8   ) \
+        |   (   CLASP_VER_ALPHABETA   <<  0   ) \
+    )
+
+#define CLASP_VER_REVISION            CLASP_VER_PATCH
+
 
 
 /* /////////////////////////////////////////////////////////////////////////
