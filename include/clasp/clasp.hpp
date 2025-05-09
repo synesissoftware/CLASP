@@ -54,9 +54,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
-# define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
-# define CLASP_VER_CLASP_HPP_CLASP_REVISION 1
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     71
+# define CLASP_VER_CLASP_HPP_CLASP_MINOR    2
+# define CLASP_VER_CLASP_HPP_CLASP_REVISION 0
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     72
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -69,8 +69,9 @@
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
-#if _STLSOFT_VER < 0x010988ff
-# error This requires STLSoft 1.9.136 or later
+#include <stlsoft/collections/array_view.hpp>
+#if _STLSOFT_VER < 0x010b01c2
+# error This requires STLSoft 1.11.1-rc2 or later
 #endif
 #ifdef CLASP_USE_WIDE_STRINGS
 # include <stlsoft/conversion/char_conversions.hpp>
@@ -84,6 +85,7 @@
 #include <stlsoft/meta/is_signed_type.hpp>
 #include <stlsoft/meta/yesno.hpp>
 #include <stlsoft/shims/access/string/std/c_string.h>
+#include <stlsoft/view/transforming/member_selector_view.hpp>
 #if 0
 #elif 0 ||\
       defined(STLSOFT_COMPILER_IS_CLANG) || \
@@ -1710,6 +1712,77 @@ namespace ximpl
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
  */
+
+
+/** Obtains a (read-only) view of all (sorted) arguments, which is
+ * compatible with range-based for-loop.
+ */
+inline
+stlsoft::array_view<argument_t const>
+arguments(
+    clasp_arguments_t const*    args
+)
+{
+    STLSOFT_ASSERT(NULL != args);
+
+    return stlsoft::array_view<argument_t const>(args->arguments, args->numArguments);
+}
+
+/** Obtains a (read-only) view of all (sorted) flags, which is compatible
+ * with range-based for-loop.
+ */
+inline
+stlsoft::array_view<argument_t const>
+flags(
+    clasp_arguments_t const*    args
+)
+{
+    STLSOFT_ASSERT(NULL != args);
+
+    return stlsoft::array_view<argument_t const>(args->flags, args->numFlags);
+}
+
+/** Obtains a (read-only) view of all (sorted) options, which is compatible
+ * with range-based for-loop.
+ */
+inline
+stlsoft::array_view<argument_t const>
+options(
+    clasp_arguments_t const*    args
+)
+{
+    STLSOFT_ASSERT(NULL != args);
+
+    return stlsoft::array_view<argument_t const>(args->options, args->numOptions);
+}
+
+#ifndef CLASP_DOCUMENTATION_SKIP_SECTION
+typedef stlsoft::member_selector_view<
+    argument_t
+,   clasp_slice_t
+,   argument_t const*
+>                                                           clasp_cxx_values_view_type_;
+#endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
+
+/** Obtains a (read-only) view of all (sorted) values, which is compatible
+ * with range-based for-loop.
+ */
+inline
+clasp_cxx_values_view_type_
+values(
+    clasp_arguments_t const*    args
+)
+{
+    STLSOFT_ASSERT(NULL != args);
+
+    return stlsoft::make_member_selector_view(
+        &args->values[0]
+    ,   &args->values[0] + args->numValues
+    ,   &argument_t::value
+    );
+}
+
+
 
 /** Checks whether the given option exists, and elicits its value if so; if
  * not, sets the result to be the given default value
