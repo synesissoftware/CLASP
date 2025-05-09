@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 9th May 2025
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -55,7 +55,7 @@
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      3
 # define CLASP_VER_CLASP_H_CLASP_REVISION   3
-# define CLASP_VER_CLASP_H_CLASP_EDIT       109
+# define CLASP_VER_CLASP_H_CLASP_EDIT       110
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
