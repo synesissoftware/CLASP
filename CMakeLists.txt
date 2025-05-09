@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for CLASP
 #
 # Created:  8th January 2021
-# Updated:  9th March 2025
+# Updated:  9th May 2025
 #
 # ######################################################################## #
 
@@ -136,6 +136,11 @@ endif()
 
 if(DEFINED STLSOFT_INCLUDE_DIR)
 
+	if(BUILD_TESTING)
+		find_package(STLSoft REQUIRED)
+
+	endif(BUILD_TESTING)
+
 	include_directories(${STLSOFT_INCLUDE_DIR})
 endif()
 
@@ -243,7 +248,7 @@ install(FILES
 # ##########################################################
 # completion
 
-message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}")
+message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}, with build type ${CMAKE_BUILD_TYPE}")
 
 
 # ############################## end of file ############################# #
