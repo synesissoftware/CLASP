@@ -56,10 +56,8 @@ while [[ $# -gt 0 ]]; do
   case $1 in
     --help)
 
+      [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API.
-Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
-Copyright (c) 2008-2019, Matthew Wilson and Synesis Software
 Removes all known CMake artefacts
 
 $ScriptPath [ ... flags/options ... ]
