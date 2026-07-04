@@ -1,16 +1,28 @@
-# CLASP - TODO list <!-- omit in toc -->
+# CLASP - TODO <!-- omit in toc -->
 
-## CLASP 0.15.x TODOs:
+
+## Table of Contents <!-- omit in toc -->
+
+- [Functional improvements](#functional-improvements)
+- [Performance improvements](#performance-improvements)
+- [Packaging improvements](#packaging-improvements)
+
+
+## Functional improvements
 
 * [ ] review Usage API dependencies;
 * [ ] add new show-usage and show-version functions that operate off structure (`clasp_usageinfo_t`);
 * [ ] stream insertion operators should take into account alignment and wide;
-* [ ] full boilerplate (**README.md** and **INSTALL.md**);
 
-## CLASP 0.16+ TODOs:
+
+## Performance improvements
 
 * \<none>
 
 
-<!-- ########################### end of file ########################### -->
+## Packaging improvements
 
+* [ ] full boilerplate (**README.md** and **INSTALL.md**);
+
+
+<!-- ########################### end of file ########################### -->
