@@ -1,6 +1,12 @@
 # CLASP - CHANGES list <!-- omit in toc -->
 
 
+## 29th July 2026 - 0.15.0-beta1
+
+* improved definition of `CLASP_VER` (and associated preprocesor object-like macros);
+* added README.md badges;
+
+
 ## 11th March 2025 - 0.15.0-alpha6
 
 * Added a _lot_ more tests of usage, and fixed several decent defects and missing bits of functionality;

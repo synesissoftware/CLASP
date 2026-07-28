@@ -4,11 +4,11 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 28th July 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,31 +54,41 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      3
-# define CLASP_VER_CLASP_H_CLASP_REVISION   3
-# define CLASP_VER_CLASP_H_CLASP_EDIT       109
+# define CLASP_VER_CLASP_H_CLASP_REVISION   4
+# define CLASP_VER_CLASP_H_CLASP_EDIT       110
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
  * \def CLASP_VER_MAJOR
- * The Major version number of the clasp library
+ *
+ * The Major version number of the CLASP library
  *
  * \def CLASP_VER_MINOR
- * Minor version number of the clasp library
  *
- * \def CLASP_VER_REVISION
- * The revision number of the clasp library
+ * Minor version number of the CLASP library
+ *
+ * \def CLASP_VER_PATCH
+ *
+ * The patch number of the CLASP library
  *
  * \def CLASP_VER
- * The composite version of the clasp library
+ *
+ * The composite version of the CLASP library
  */
 
 #define CLASP_VER_MAJOR     0
 #define CLASP_VER_MINOR     15
 #define CLASP_VER_PATCH     0
 #define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0x46
+#define CLASP_VER_ALPHABETA 0x81
 
-#define CLASP_VER           0x000f0046
+#define CLASP_VER \
+    (0\
+        |   (   CLASP_VER_MAJOR       << 24   ) \
+        |   (   CLASP_VER_MINOR       << 16   ) \
+        |   (   CLASP_VER_PATCH       <<  8   ) \
+        |   (   CLASP_VER_ALPHABETA   <<  0   ) \
+    )
 
 
 /* /////////////////////////////////////////////////////////////////////////
