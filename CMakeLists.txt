@@ -102,6 +102,8 @@ include(TargetMacros)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 
+option(BUILD_TESTING "Build tests" ON)
+
 # ######################################
 # dependencies
 #

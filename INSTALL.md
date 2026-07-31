@@ -37,7 +37,7 @@ The primary choice for installation is by use of **CMake**.
    $ ./prepare_cmake.sh -E -T
    ```
 
-   In this case, you do not need to have installed [**STLSoft**](https://github.com/synesissoftware/STLSoft-1.10); otherwise, you will.
+   You will still need [**STLSoft**](https://github.com/synesissoftware/STLSoft) (1.11 or later).
 
 3. Run a build of the generated **CMake**-derived build files via the
    **build_cmake.sh** script, as in:
@@ -56,7 +56,7 @@ The primary choice for installation is by use of **CMake**.
    $ ./run_all_unit_tests.sh
    ```
 
-5. Install the library on the host, via `cmake`, as in:
+6. Install the library on the host, via `cmake`, as in:
 
 
    ```bash

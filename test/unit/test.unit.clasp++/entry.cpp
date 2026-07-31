@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for CLASP C++ API
  *
  * Created: 16th July 2009
- * Updated: 11th March 2025
+ * Updated: 31st July 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -21,6 +21,7 @@
  */
 
 /* xTests header files */
+#include <stlsoft/error/error_desc.hpp> // required for GCC template lookup
 #include <xtests/xtests.h>
 
 /* STLSoft header files */

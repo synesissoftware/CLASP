@@ -1,6 +1,18 @@
 # CLASP <!-- omit in toc -->
 
+**C**ommand-**L**ine **A**rgument **S**orting and **P**arsing
+
+
+![C](https://img.shields.io/badge/C-00599C?style=flat&logo=c&logoColor=white)
+![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat&logo=c%2B%2B&logoColor=white)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![GitHub release](https://img.shields.io/github/v/release/synesissoftware/CLASP.svg)](https://github.com/synesissoftware/CLASP/releases/latest)
+[![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/CLASP)](https://github.com/synesissoftware/CLASP/commits/master)
+[![CMake on multiple platforms](https://github.com/synesissoftware/CLASP/actions/workflows/ci.yml/badge.svg)](https://github.com/synesissoftware/CLASP/actions/workflows/ci.yml)
+
+
 ## Table of Contents <!-- omit in toc -->
+
 
 - [Introduction](#introduction)
 - [Installation](#installation)
@@ -41,8 +53,8 @@ The features of the library are:
   - the specification of flags and options is done declaratively, in an array of `clasp_specification_t`;
   - there is a rich set of functions for discovering flags, options, and values, and eliciting their _values_ in different data types;
 - apart from memory allocation (of which there is only one), the library is no-fail, so can never be a source of program failure, allowing it to form a reliable part of C/C++ CLI program frameworks;
-- the core (C) library has no non-standard dependencies on UNIX; on Windows it depends on the [**recls**](http://sourceforge.net/projects/recls/) library;
-- the C++ API depends on the [**STLSoft**](http://sourceforge.net/projects/stlsoft/) library;
+- the core (C) library has no non-standard dependencies on UNIX; on Windows, wildcard expansion may optionally use [**recls**](https://github.com/synesissoftware/recls/) (disabled by default in the CMake build via `CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS`);
+- the C++ API depends on the [**STLSoft**](https://github.com/synesissoftware/STLSoft/) library;
 
 
 The design of the library is discussed in detail in the article "_An Introduction to CLASP, part 1: C_", Matthew Wilson, [CVu](http://accu.org/index.php/journals/c77/), January 2012. (For those of you not subscribers to the [ACCU](http://accu.org/)'s [CVu](http://accu.org/index.php/journals/c77/) journal, this article will be made available on the [Synesis Software](http://www.synesis.com.au) website before end of September.)
@@ -196,22 +208,22 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 ### Dependencies
 
-* [STLSoft 1.11](http://github.com/synesissoftware/STLSoft-1.11/)
+* [STLSoft 1.11](https://github.com/synesissoftware/STLSoft/)
 
 
 #### Development Dependencies (required for testing)
 
-* [xTests](http://github.com/synesissoftware/xTests/)
+* [xTests](https://github.com/synesissoftware/xTests/)
 
 
 ### Related projects
 
 Projects in which **CLASP** is used include:
 
-* [chomp](http://github.com/sistools/chomp/)
-* [lstrip](http://github.com/sistools/lstrip/)
-* [rstrip](http://github.com/sistools/rstrip/)
-* [libCLImate](http://github.com/synesissoftware/libCLImate/)
+* [chomp](https://github.com/sistools/chomp/)
+* [lstrip](https://github.com/sistools/lstrip/)
+* [rstrip](https://github.com/sistools/rstrip/)
+* [libCLImate](https://github.com/synesissoftware/libCLImate/)
 
 
 ### License
