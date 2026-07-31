@@ -8,6 +8,7 @@
 * Modernised **CHANGES.md** (version-first headings; trailing semicolons);
 * Trimmed **INSTALL.md** and **README.md** (badges; dependency links); README CI badge now targets **ci.yml**;
 * CMake: added `option(BUILD_TESTING …)` for parity with peer libraries;
+* Enhanced **run_all_unit_tests.sh** (`--unit-only` / `--component-only` and `--no-make` guard);
 * Project boilerplate updates;
 
 
