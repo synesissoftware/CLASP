@@ -4,7 +4,7 @@
  * Purpose: Component test for USAGE by Windows resources
  *
  * Created: 7th March 2012
- * Updated: 10th March 2025
+ * Updated: 31st July 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -1152,7 +1152,7 @@ static void test_expanded_usage_1()
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n    abc\n\n    def\n; v=0.1.01.0000", buff);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n    abc\n\n    def; v=0.1.01.0000", buff);
     }
 }
 
@@ -1198,7 +1198,7 @@ static void test_expanded_usage_2()
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n\tabc\n\n\tdef\n; v=0.1.01.0000", buff);
+        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n\tabc\n\n\tdef; v=0.1.01.0000", buff);
     }
 }
 

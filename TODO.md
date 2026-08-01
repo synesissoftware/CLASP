@@ -22,7 +22,7 @@
 
 ## Packaging improvements
 
-* [ ] full boilerplate (**README.md** and **INSTALL.md**);
+* [x] ~~~full boilerplate (**README.md** and **INSTALL.md**); modular CI (**ci.yml** / **ci-cell.yml**)~~~ - ✅;
 
 
 <!-- ########################### end of file ########################### -->
