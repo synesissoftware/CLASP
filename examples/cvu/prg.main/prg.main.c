@@ -154,11 +154,11 @@ int main1(clasp_arguments_t const* args)
   return EXIT_SUCCESS;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
-  unsigned const cflags = 0;
+  unsigned const clasp_flags = 0;
 
-  return clasp_main_invoke(argc, argv, main1, "prg.main", Specifications, cflags, NULL);
+  return clasp_main_invoke(argc, argv, main1, "prg.main", Specifications, clasp_flags, NULL);
 }
 
 

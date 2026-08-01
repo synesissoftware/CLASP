@@ -83,11 +83,11 @@ static clasp_specification_t const Specifications[] =
  * main()
  */
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
-  unsigned const            cflags  = 0;
+  unsigned const            clasp_flags  = 0;
   clasp_arguments_t const*  args;
-  int const                 cr      = clasp_parseArguments(cflags, argc, argv, Specifications, NULL, &args);
+  int const                 cr      = clasp_parseArguments(clasp_flags, argc, argv, Specifications, NULL, &args);
 
   if (cr != 0)
   {

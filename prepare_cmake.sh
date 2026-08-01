@@ -4,7 +4,9 @@ ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
-MakeCmd=${SIS_CMAKE_COMMAND:-make}
+[[ -n "$MSYSTEM" ]] && DefaultMakeCmd=mingw32-make.exe || DefaultMakeCmd=make
+MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
+
 
 Configuration=Release
 ExamplesDisabled=0
@@ -22,19 +24,19 @@ VerboseMakefile=0
 while [[ $# -gt 0 ]]; do
 
   case $1 in
-    -v|--cmake-verbose-makefile)
+    --cmake-verbose-makefile|-v)
 
       VerboseMakefile=1
       ;;
-    -d|--debug-configuration)
+    --debug-configuration|-d)
 
       Configuration=Debug
       ;;
-    -E|--disable-examples)
+    --disable-examples|-E)
 
       ExamplesDisabled=1
       ;;
-    -T|--disable-testing)
+    --disable-testing|-T)
 
       TestingDisabled=1
       ;;
@@ -46,21 +48,19 @@ while [[ $# -gt 0 ]]; do
 
       MSVC_MT=1
       ;;
-    -m|--run-make)
+    --run-make|-m)
 
       RunMake=1
       ;;
-    -s|--stlsoft-root-dir)
+    --stlsoft-root-dir|-s)
 
       shift
       STLSoftDirGiven=$1
       ;;
     --help)
 
+      [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-CLASP is a small, simple C-language library for parsing command-line arguments, along with a C++ header-only API.
-Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
-Copyright (c) 2008-2019, Matthew Wilson and Synesis Software
 Creates/reinitialises the CMake build script(s)
 
 $ScriptPath [ ... flags/options ... ]

@@ -1,6 +1,18 @@
 # CLASP <!-- omit in toc -->
 
+**C**ommand-**L**ine **A**rgument **S**orting and **P**arsing
+
+
+![C](https://img.shields.io/badge/C-00599C?style=flat&logo=c&logoColor=white)
+![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat&logo=c%2B%2B&logoColor=white)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![GitHub release](https://img.shields.io/github/v/release/synesissoftware/CLASP.svg)](https://github.com/synesissoftware/CLASP/releases/latest)
+[![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/CLASP)](https://github.com/synesissoftware/CLASP/commits/master)
+[![CMake on multiple platforms](https://github.com/synesissoftware/CLASP/actions/workflows/ci.yml/badge.svg)](https://github.com/synesissoftware/CLASP/actions/workflows/ci.yml)
+
+
 ## Table of Contents <!-- omit in toc -->
+
 
 - [Introduction](#introduction)
 - [Installation](#installation)
@@ -41,8 +53,8 @@ The features of the library are:
   - the specification of flags and options is done declaratively, in an array of `clasp_specification_t`;
   - there is a rich set of functions for discovering flags, options, and values, and eliciting their _values_ in different data types;
 - apart from memory allocation (of which there is only one), the library is no-fail, so can never be a source of program failure, allowing it to form a reliable part of C/C++ CLI program frameworks;
-- the core (C) library has no non-standard dependencies on UNIX; on Windows it depends on the [**recls**](http://sourceforge.net/projects/recls/) library;
-- the C++ API depends on the [**STLSoft**](http://sourceforge.net/projects/stlsoft/) library;
+- the core (C) library has no non-standard dependencies on UNIX; on Windows, wildcard expansion may optionally use [**recls**](https://github.com/synesissoftware/recls/) (disabled by default in the CMake build via `CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS`);
+- the C++ API depends on the [**STLSoft**](https://github.com/synesissoftware/STLSoft/) library;
 
 
 The design of the library is discussed in detail in the article "_An Introduction to CLASP, part 1: C_", Matthew Wilson, [CVu](http://accu.org/index.php/journals/c77/), January 2012. (For those of you not subscribers to the [ACCU](http://accu.org/)'s [CVu](http://accu.org/index.php/journals/c77/) journal, this article will be made available on the [Synesis Software](http://www.synesis.com.au) website before end of September.)
@@ -50,9 +62,8 @@ The design of the library is discussed in detail in the article "_An Introductio
 
 ## Installation
 
-Detailed instructions - via **CMake**, via bundling, via custom makefile
-parameters - are provided in the accompanying [INSTALL.md](./INSTALL.md)
-file.
+Detailed instructions — via **CMake** — are provided in the accompanying
+[INSTALL.md](./INSTALL.md) file.
 
 
 ## Components
@@ -67,7 +78,6 @@ file.
 static clasp_specification_t const Specifications[] =
 {
     CLASP_GAP_SECTION("standard flags:"),
-
     CLASP_STOCK_FLAG_HELP,
     CLASP_STOCK_FLAG_VERSION,
 
@@ -79,37 +89,34 @@ int main1(clasp_arguments_t const* args)
 {
     if (clasp_flagIsSpecified(args, "--help"))
     {
-        clasp_showUsage(
+        return clasp_showUsage(
             args
         ,   Specifications
         ,   NULL /* toolName inferred from process */
         ,   "CLASP (http://github.com/synesissoftware/CLASP)"
         ,   "Copyright Matthew Wilson and Synesis Information Systems"
         ,   "illustrates minimal usage functionality"
-        ,   ":program: [... flags/options ...]"
+        ,   NULL /* toolName inferred from process/specifications */
         ,   0, 0, 0
         ,   clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
         ,   0  /* flags */
-        ,   76 /* console width */
+        ,   0  /* console width */
         ,   -2 /* indent size */
         ,   1  /* blank line between args? */
         );
-
-        return EXIT_SUCCESS;
     }
 
     if (clasp_flagIsSpecified(args, "--version"))
     {
-        clasp_showVersion(
+        return clasp_showVersion(
             args
         ,   NULL /* toolName inferred from process */
         ,   0, 0, 0
         ,   clasp_showHeaderByFILE, stdout
         ,   0 /* flags */
         );
-
-        return EXIT_SUCCESS;
     }
+
 
     printf("args={ numArguments=%zu, numFlagsAndOptions=%zu, numFlags=%zu, numOptions=%zu, numValues=%zu, }\n"
     ,   args->numArguments
@@ -119,10 +126,11 @@ int main1(clasp_arguments_t const* args)
     ,   args->numValues
     );
 
+
     return EXIT_SUCCESS;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
     unsigned const cflags = 0;
 
@@ -143,72 +151,40 @@ int main(int argc, char** argv)
 static clasp_specification_t const Specifications[] =
 {
     CLASP_GAP_SECTION("standard flags:"),
-
     CLASP_STOCK_FLAG_HELP,
     CLASP_STOCK_FLAG_VERSION,
 
     CLASP_SPECIFICATION_ARRAY_TERMINATOR
 };
 
-static
-int main1(clasp_arguments_t const* args)
+int main(int argc, char* argv[])
 {
-    if (clasp::flag_specified(args, "--help"))
-    {
-        clasp_showUsage(
-            args
-        ,   Specifications
-        ,   NULL /* toolName inferred from process */
-        ,   "CLASP (http://github.com/synesissoftware/CLASP)"
-        ,   "Copyright Matthew Wilson and Synesis Information Systems"
-        ,   "illustrates minimal usage functionality"
-        ,   ":program: [... flags/options ...]"
-        ,   0, 0, 0
-        ,   clasp_showHeaderByFILE, clasp_showBodyByFILE, stdout
-        ,   0  /* flags */
-        ,   76 /* console width */
-        ,   -2 /* indent size */
-        ,   1  /* blank line between args? */
-        );
+    return clasp::main::invoke(argc, argv, [](clasp_arguments_t const* args) {
+
+        if (clasp::flag_specified(args, "--help"))
+        {
+            return clasp::showUsage(
+                args
+            ,   NULL /* toolName inferred from process */
+            ,   "CLASP (http://github.com/synesissoftware/CLASP)"
+            ,   "Copyright Matthew Wilson and Synesis Information Systems"
+            ,   "illustrates minimal usage functionality"
+            ,   NULL /* toolName inferred from process/specifications */
+            ,   PROGRAM_VER_ARGLIST
+            );
+        }
+
+        if (clasp::flag_specified(args, "--version"))
+        {
+            return clasp::showVersion(args, PROGRAM_VER_ARGLIST);
+        }
+
+
+        std::cout << "args=" << args << std::endl;
+
 
         return EXIT_SUCCESS;
-    }
-
-    if (clasp::flag_specified(args, "--version"))
-    {
-        clasp_showVersion(
-            args
-        ,   NULL /* toolName inferred from process */
-        ,   0, 0, 0
-        ,   clasp_showHeaderByFILE, stdout
-        ,   0 /* flags */
-        );
-
-        return EXIT_SUCCESS;
-    }
-
-    std::cout
-        << "args={ numArguments="
-        << args->numArguments
-        << ", numFlagsAndOptions="
-        << args->numFlagsAndOptions
-        << ", numFlags="
-        << args->numFlags
-        << ", numOptions="
-        << args->numOptions
-        << ", numValues="
-        << args->numValues
-        << ", }"
-        << std::endl;
-
-    return EXIT_SUCCESS;
-}
-
-int main(int argc, char** argv)
-{
-    unsigned const cflags = 0;
-
-    return clasp::main::invoke(argc, argv, main1, "minimal_usage_xx", Specifications, cflags);
+    }, NULL, Specifications, 0);
 }
 ```
 
@@ -232,22 +208,22 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 ### Dependencies
 
-* [STLSoft 1.11](http://github.com/synesissoftware/STLSoft-1.11/)
+* [STLSoft 1.11](https://github.com/synesissoftware/STLSoft/)
 
 
 #### Development Dependencies (required for testing)
 
-* [xTests](http://github.com/synesissoftware/xTests/)
+* [xTests](https://github.com/synesissoftware/xTests/)
 
 
 ### Related projects
 
 Projects in which **CLASP** is used include:
 
-* [chomp](http://github.com/sistools/chomp/)
-* [lstrip](http://github.com/sistools/lstrip/)
-* [rstrip](http://github.com/sistools/rstrip/)
-* [libCLImate](http://github.com/synesissoftware/libCLImate/)
+* [chomp](https://github.com/sistools/chomp/)
+* [lstrip](https://github.com/sistools/lstrip/)
+* [rstrip](https://github.com/sistools/rstrip/)
+* [libCLImate](https://github.com/synesissoftware/libCLImate/)
 
 
 ### License

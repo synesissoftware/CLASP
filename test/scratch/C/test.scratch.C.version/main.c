@@ -44,7 +44,7 @@ static clasp_specification_t const Specifications[] =
  * main()
  */
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
     clasp_arguments_t const* args;
 
