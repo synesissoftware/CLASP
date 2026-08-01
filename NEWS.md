@@ -2,7 +2,7 @@
 
 | Date                  | News Item                                     |
 | --------------------- | --------------------------------------------- |
-| 31st July 2026        | Release of 0.15.0-rc1                         |
+| 2nd August 2026       | Release of 0.15.0-rc1                         |
 | 11th March 2025       | Release of 0.15.0-alpha6                      |
 | 10th March 2025       | Release of 0.15.0-alpha5                      |
 | 10th March 2025       | Release of 0.15.0-alpha4                      |
