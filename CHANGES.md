@@ -1,6 +1,11 @@
 # **CLASP** Changes <!-- omit in toc -->
 
 
+## 0.15.0 - 9th August 2026
+
+0.15.0
+
+
 ## 0.15.0 (rc 1) - 2nd August 2026
 
 * improved definition of `CLASP_VER` (and associated preprocesor object-like macros);
