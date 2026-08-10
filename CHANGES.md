@@ -1,4 +1,4 @@
-# **CLASP** Changes <!-- omit in toc -->
+# CLASP - CHANGES <!-- omit in toc -->
 
 
 ## 0.15.0 - 9th August 2026
