@@ -1,6 +1,12 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.15.1 - 2nd September 2026
+
+* Fixed **`CLASP_VER`** composite to use **`CLASP_VER_AB`** (left referencing retired **`CLASP_VER_ALPHABETA`** after the 0.15.0 rename);
+* Added unit test **test.unit.version** covering **`CLASP_VER`** and component macros;
+
+
 ## 0.15.0 - 9th August 2026
 
 0.15.0
