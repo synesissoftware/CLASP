@@ -2,6 +2,7 @@
 
 | Date                  | News Item                                     |
 | --------------------- | --------------------------------------------- |
+| 2nd September 2026      | Release of 0.15.1                         |
 | 9th August 2026       | [Release of 0.15.0](https://github.com/synesissoftware/CLASP/releases/tag/0.15.0) |
 | 2nd August 2026       | Release of 0.15.0-rc1                         |
 | 11th March 2025       | Release of 0.15.0-alpha6                      |
