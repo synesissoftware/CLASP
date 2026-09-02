@@ -12,7 +12,6 @@ on:
       - rc4
       - rc5
       - update
-      - version-fix
   pull_request:
 
 concurrency:
