@@ -5,13 +5,14 @@ on:
     branches:
       - master
       - dev
+      - boilerplate
       - rc1
       - rc2
       - rc3
       - rc4
       - rc5
       - update
-      - boilerplate
+      - version-fix
   pull_request:
 
 concurrency:
