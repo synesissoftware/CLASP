@@ -667,7 +667,7 @@ static void TEST_clasp_showHeader_NORMAL()
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(7u, lines.size()));
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -692,7 +692,7 @@ static void TEST_clasp_showHeader_NORMAL()
         ,   flags
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(7u, lines.size()));
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -743,7 +743,7 @@ static void TEST_clasp_showHeader_MULTILINE_USAGE()
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(8u, lines.size()));
+        REQUIRE(TEST_INT_EQ(8u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -769,7 +769,7 @@ static void TEST_clasp_showHeader_MULTILINE_USAGE()
         ,   flags
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(7u, lines.size()));
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -820,7 +820,7 @@ static void TEST_clasp_showHeader_PROGRAMNAME_INFERRED_IN_USAGE()
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(7u, lines.size()));
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp-inferred version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -845,7 +845,7 @@ static void TEST_clasp_showHeader_PROGRAMNAME_INFERRED_IN_USAGE()
         ,   flags
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(7u, lines.size()));
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp-inferred version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -898,7 +898,7 @@ static void TEST_clasp_showHeader_TOOLNAME_INFERRED_FROM_PROCESS()
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(7u, lines.size()));
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ(processName + " version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -923,7 +923,7 @@ static void TEST_clasp_showHeader_TOOLNAME_INFERRED_FROM_PROCESS()
         ,   flags
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(7u, lines.size()));
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -943,7 +943,7 @@ static void TEST_showBody_null_specifications()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0u, lines.size()));
+    REQUIRE(TEST_INT_EQ(0u, lines.size()));
 }
 
 static void TEST_showBody_empty_specifications()
@@ -958,7 +958,7 @@ static void TEST_showBody_empty_specifications()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0u, lines.size()));
+    REQUIRE(TEST_INT_EQ(0u, lines.size()));
 }
 
 static void TEST_showBody_single_flag()
@@ -975,11 +975,11 @@ static void TEST_showBody_single_flag()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
+    REQUIRE(TEST_INT_EQ(4u, lines.size()));
+    TEST_MS_EQ("Flags:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--flag1", lines[2]);
+    TEST_MS_EQ("this is a flag", lines[3]);
 }
 
 static void TEST_showBody_single_option()
@@ -996,11 +996,11 @@ static void TEST_showBody_single_option()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Options:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[3]);
+    REQUIRE(TEST_INT_EQ(4u, lines.size()));
+    TEST_MS_EQ("Options:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--option1=<value>", lines[2]);
+    TEST_MS_EQ("this is an option", lines[3]);
 }
 
 static void TEST_showBody_one_flag_one_option()
@@ -1018,13 +1018,13 @@ static void TEST_showBody_one_flag_one_option()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags and options:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[4]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
+    REQUIRE(TEST_INT_EQ(6u, lines.size()));
+    TEST_MS_EQ("Flags and options:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--flag1", lines[2]);
+    TEST_MS_EQ("this is a flag", lines[3]);
+    TEST_MS_EQ("--option1=<value>", lines[4]);
+    TEST_MS_EQ("this is an option", lines[5]);
 }
 
 static void TEST_showBody_one_flag_one_option_infinite_length()
@@ -1042,13 +1042,13 @@ static void TEST_showBody_one_flag_one_option_infinite_length()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags and options:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[4]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
+    REQUIRE(TEST_INT_EQ(6u, lines.size()));
+    TEST_MS_EQ("Flags and options:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--flag1", lines[2]);
+    TEST_MS_EQ("this is a flag", lines[3]);
+    TEST_MS_EQ("--option1=<value>", lines[4]);
+    TEST_MS_EQ("this is an option", lines[5]);
 }
 
 static void TEST_showBody_one_flag_one_option_zero_length()
@@ -1066,13 +1066,13 @@ static void TEST_showBody_one_flag_one_option_zero_length()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags and options:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[4]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
+    REQUIRE(TEST_INT_EQ(6u, lines.size()));
+    TEST_MS_EQ("Flags and options:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--flag1", lines[2]);
+    TEST_MS_EQ("this is a flag", lines[3]);
+    TEST_MS_EQ("--option1=<value>", lines[4]);
+    TEST_MS_EQ("this is an option", lines[5]);
 }
 
 static void TEST_showBody_one_option_one_flag()
@@ -1090,13 +1090,13 @@ static void TEST_showBody_one_option_one_flag()
 
     strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags and options:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[3]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[4]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[5]);
+    REQUIRE(TEST_INT_EQ(6u, lines.size()));
+    TEST_MS_EQ("Flags and options:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--option1=<value>", lines[2]);
+    TEST_MS_EQ("this is an option", lines[3]);
+    TEST_MS_EQ("--flag1", lines[4]);
+    TEST_MS_EQ("this is a flag", lines[5]);
 }
 
 static void TEST_showBody_single_flag_changing_positiveTabSizes()
@@ -1114,69 +1114,69 @@ static void TEST_showBody_single_flag_changing_positiveTabSizes()
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
+        REQUIRE(TEST_INT_EQ(4u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ("--flag1", lines[2]);
+        TEST_MS_EQ("this is a flag", lines[3]);
     }
 
     for (tabSize = 1; 34 != tabSize; ++tabSize)
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis is a flag", lines[3]);
+        REQUIRE(TEST_INT_EQ(4u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ("\t--flag1", lines[2]);
+        TEST_MS_EQ("\t\tthis is a flag", lines[3]);
     }
     for (tabSize = 34; 36 != tabSize; ++tabSize)
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(5u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis is a", lines[3]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tflag", lines[4]);
+        REQUIRE(TEST_INT_EQ(5u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ("\t--flag1", lines[2]);
+        TEST_MS_EQ("\t\tthis is a", lines[3]);
+        TEST_MS_EQ("\t\tflag", lines[4]);
     }
     for (tabSize = 36; 37 != tabSize; ++tabSize)
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(5u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis is", lines[3]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\ta flag", lines[4]);
+        REQUIRE(TEST_INT_EQ(5u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ("\t--flag1", lines[2]);
+        TEST_MS_EQ("\t\tthis is", lines[3]);
+        TEST_MS_EQ("\t\ta flag", lines[4]);
     }
     for (tabSize = 37; 38 != tabSize; ++tabSize)
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis", lines[3]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tis a", lines[4]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tflag", lines[5]);
+        REQUIRE(TEST_INT_EQ(6u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ("\t--flag1", lines[2]);
+        TEST_MS_EQ("\t\tthis", lines[3]);
+        TEST_MS_EQ("\t\tis a", lines[4]);
+        TEST_MS_EQ("\t\tflag", lines[5]);
     }
     for (tabSize = 38; 80 != tabSize; ++tabSize)
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(7u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t--flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tthis", lines[3]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tis", lines[4]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\ta", lines[5]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("\t\tflag", lines[6]);
+        REQUIRE(TEST_INT_EQ(7u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ("\t--flag1", lines[2]);
+        TEST_MS_EQ("\t\tthis", lines[3]);
+        TEST_MS_EQ("\t\tis", lines[4]);
+        TEST_MS_EQ("\t\ta", lines[5]);
+        TEST_MS_EQ("\t\tflag", lines[6]);
     }
 }
 
@@ -1196,22 +1196,22 @@ static void TEST_showBody_single_flag_changing_consoleWidths()
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL(" --flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  this is a flag", lines[3]);
+        REQUIRE(TEST_INT_EQ(4u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ(" --flag1", lines[2]);
+        TEST_MS_EQ("  this is a flag", lines[3]);
     }
     for (consoleWidth = 12; consoleWidth != 16; ++consoleWidth)
     {
         strings_t lines = get_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(5u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL(" --flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  this is a", lines[3]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  flag", lines[4]);
+        REQUIRE(TEST_INT_EQ(5u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ(" --flag1", lines[2]);
+        TEST_MS_EQ("  this is a", lines[3]);
+        TEST_MS_EQ("  flag", lines[4]);
     }
 }
 
@@ -1224,7 +1224,7 @@ static void TEST_clasp_show_body_NULL_SPECIFICATIONS()
 
     strings_t lines = get_show_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0u, lines.size()));
+    REQUIRE(TEST_INT_EQ(0u, lines.size()));
 }
 
 static void TEST_clasp_show_body_SINGLE_FLAG()
@@ -1241,11 +1241,11 @@ static void TEST_clasp_show_body_SINGLE_FLAG()
 
     strings_t lines = get_show_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
+    REQUIRE(TEST_INT_EQ(4u, lines.size()));
+    TEST_MS_EQ("Flags:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--flag1", lines[2]);
+    TEST_MS_EQ("this is a flag", lines[3]);
 }
 
 static void TEST_clasp_show_body_ONE_FLAG_ONE_OPTION_INFINITE_LENGTH()
@@ -1263,13 +1263,13 @@ static void TEST_clasp_show_body_ONE_FLAG_ONE_OPTION_INFINITE_LENGTH()
 
     strings_t lines = get_show_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(6u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags and options:", lines[0]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--flag1", lines[2]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is a flag", lines[3]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("--option1=<value>", lines[4]);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL("this is an option", lines[5]);
+    REQUIRE(TEST_INT_EQ(6u, lines.size()));
+    TEST_MS_EQ("Flags and options:", lines[0]);
+    TEST_MS_EQ("", lines[1]);
+    TEST_MS_EQ("--flag1", lines[2]);
+    TEST_MS_EQ("this is a flag", lines[3]);
+    TEST_MS_EQ("--option1=<value>", lines[4]);
+    TEST_MS_EQ("this is an option", lines[5]);
 }
 
 static void TEST_clasp_show_body_SINGLE_FLAG_CHANGING_CONSOLEWIDTHS()
@@ -1288,22 +1288,22 @@ static void TEST_clasp_show_body_SINGLE_FLAG_CHANGING_CONSOLEWIDTHS()
     {
         strings_t lines = get_show_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(4u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL(" --flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  this is a flag", lines[3]);
+        REQUIRE(TEST_INT_EQ(4u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ(" --flag1", lines[2]);
+        TEST_MS_EQ("  this is a flag", lines[3]);
     }
     for (consoleWidth = 12; consoleWidth != 16; ++consoleWidth)
     {
         strings_t lines = get_show_body_lines(specifications, consoleWidth, tabSize, showBlanksBetweenItems);
 
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(5u, lines.size()));
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("Flags:", lines[0]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", lines[1]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL(" --flag1", lines[2]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  this is a", lines[3]);
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("  flag", lines[4]);
+        REQUIRE(TEST_INT_EQ(5u, lines.size()));
+        TEST_MS_EQ("Flags:", lines[0]);
+        TEST_MS_EQ("", lines[1]);
+        TEST_MS_EQ(" --flag1", lines[2]);
+        TEST_MS_EQ("  this is a", lines[3]);
+        TEST_MS_EQ("  flag", lines[4]);
     }
 }
 
@@ -1347,7 +1347,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_NORMAL_AND_ZERO_TABS_AND_N
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1381,7 +1381,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_NORMAL_AND_ZERO_TABS_AND_N
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1438,7 +1438,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_NORMAL_AND_neg2_TABS_AND_N
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1472,7 +1472,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_NORMAL_AND_neg2_TABS_AND_N
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1529,7 +1529,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_MULTILINE_USAGE_AND_ZERO_T
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(14u, lines.size()));
+        REQUIRE(TEST_INT_EQ(14u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1564,7 +1564,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_MULTILINE_USAGE_AND_ZERO_T
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1621,7 +1621,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_PROGRAMNAME_INFERRED_IN_US
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp-inferred version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1655,7 +1655,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_PROGRAMNAME_INFERRED_IN_US
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("myapp-inferred version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1714,7 +1714,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_TOOLNAME_INFERRED_FROM_PRO
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ(processName + " version 1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);
@@ -1748,7 +1748,7 @@ static void TEST_clasp_showUsage_AND_clasp_show_usage_TOOLNAME_INFERRED_FROM_PRO
         ,   blanksBetweenItems
         );
 
-        REQUIRE(TEST_INTEGER_EQUAL(13u, lines.size()));
+        REQUIRE(TEST_INT_EQ(13u, lines.size()));
         TEST_MS_EQ("My tools", lines[0]);
         TEST_MS_EQ("1.2.3.0", lines[1]);
         TEST_MS_EQ("Copyright (c) Me! 2025", lines[2]);

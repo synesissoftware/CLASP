@@ -37,7 +37,7 @@
 #include <clasp/clasp.h>
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/string/string_slice.h>
@@ -283,7 +283,7 @@ static void test_header_with_LLLLL()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -307,11 +307,11 @@ static void test_header_with_LLLLL()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=toolname; S=summary; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
     }
 }
 
@@ -329,7 +329,7 @@ static void test_header_with_RRRRR()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -353,11 +353,11 @@ static void test_header_with_RRRRR()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=TOOLNAME; S=SUMMARY; C=COPYRIGHT; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=TOOLNAME; S=SUMMARY; C=COPYRIGHT; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
     }
 }
 
@@ -375,7 +375,7 @@ static void test_header_with_RLLLL()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -399,11 +399,11 @@ static void test_header_with_RLLLL()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=TOOLNAME; S=summary; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=TOOLNAME; S=summary; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
     }
 }
 
@@ -421,7 +421,7 @@ static void test_header_with_LRLLL()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -445,11 +445,11 @@ static void test_header_with_LRLLL()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=SUMMARY; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=toolname; S=SUMMARY; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
     }
 }
 
@@ -467,7 +467,7 @@ static void test_header_with_LLLRL()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -491,11 +491,11 @@ static void test_header_with_LLLRL()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=DESCRIPTION; U=usage; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=toolname; S=summary; C=copyright; D=DESCRIPTION; U=usage; v=0.1.01.0000", buff);
     }
 }
 
@@ -513,7 +513,7 @@ static void test_header_with_rLLLL()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -537,11 +537,11 @@ static void test_header_with_rLLLL()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=@unknown-identifier@; S=summary; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=@unknown-identifier@; S=summary; C=copyright; D=description; U=usage; v=0.1.01.0000", buff);
     }
 }
 
@@ -559,7 +559,7 @@ static void test_header_with_LLrLL()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -583,11 +583,11 @@ static void test_header_with_LLrLL()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=@unknown-identifier@; D=description; U=usage; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=toolname; S=summary; C=@unknown-identifier@; D=description; U=usage; v=0.1.01.0000", buff);
     }
 }
 
@@ -605,7 +605,7 @@ static void test_header_with_LLLLr()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -629,11 +629,11 @@ static void test_header_with_LLLLr()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=@unknown-identifier@; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=toolname; S=summary; C=copyright; D=description; U=@unknown-identifier@; v=0.1.01.0000", buff);
     }
 }
 
@@ -651,7 +651,7 @@ static void test_header_with_rRRRR(void)
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -675,11 +675,11 @@ static void test_header_with_rRRRR(void)
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=@unknown-identifier@; S=SUMMARY; C=COPYRIGHT; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=@unknown-identifier@; S=SUMMARY; C=COPYRIGHT; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
     }
 }
 
@@ -697,7 +697,7 @@ static void test_header_with_RrRRR(void)
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -721,11 +721,11 @@ static void test_header_with_RrRRR(void)
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=TOOLNAME; S=@unknown-identifier@; C=COPYRIGHT; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=TOOLNAME; S=@unknown-identifier@; C=COPYRIGHT; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
     }
 }
 
@@ -743,7 +743,7 @@ static void test_header_with_RRrRR(void)
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -767,11 +767,11 @@ static void test_header_with_RRrRR(void)
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=TOOLNAME; S=SUMMARY; C=@unknown-identifier@; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=TOOLNAME; S=SUMMARY; C=@unknown-identifier@; D=DESCRIPTION; U=USAGE; v=0.1.01.0000", buff);
     }
 }
 
@@ -789,7 +789,7 @@ static void test_header_with_RRRrR(void)
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -813,11 +813,11 @@ static void test_header_with_RRRrR(void)
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=TOOLNAME; S=SUMMARY; C=COPYRIGHT; D=@unknown-identifier@; U=USAGE; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=TOOLNAME; S=SUMMARY; C=COPYRIGHT; D=@unknown-identifier@; U=USAGE; v=0.1.01.0000", buff);
     }
 }
 
@@ -835,7 +835,7 @@ static void test_header_with_RRRRr(void)
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -859,11 +859,11 @@ static void test_header_with_RRRRr(void)
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=TOOLNAME; S=SUMMARY; C=COPYRIGHT; D=DESCRIPTION; U=@unknown-identifier@; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=TOOLNAME; S=SUMMARY; C=COPYRIGHT; D=DESCRIPTION; U=@unknown-identifier@; v=0.1.01.0000", buff);
     }
 }
 
@@ -890,7 +890,7 @@ static void test_body_1()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -908,11 +908,11 @@ static void test_body_1()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("", buff);
+        TEST_MS_EQ("", buff);
     }
 }
 
@@ -936,7 +936,7 @@ static void test_body_2()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -954,11 +954,11 @@ static void test_body_2()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("    -h\n    --help\n        shows this help and terminates\n", buff);
+        TEST_MS_EQ("    -h\n    --help\n        shows this help and terminates\n", buff);
     }
 }
 
@@ -982,7 +982,7 @@ static void test_body_3()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -1000,11 +1000,11 @@ static void test_body_3()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("    -h\n    --help\n        shows this help and terminates\n", buff);
+        TEST_MS_EQ("    -h\n    --help\n        shows this help and terminates\n", buff);
     }
 }
 
@@ -1029,7 +1029,7 @@ static void test_body_4()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -1047,11 +1047,11 @@ static void test_body_4()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("    -h\n    --help\n        @unknown-identifier@\n    --version\n        shows version and terminates\n", buff);
+        TEST_MS_EQ("    -h\n    --help\n        @unknown-identifier@\n    --version\n        shows version and terminates\n", buff);
     }
 }
 
@@ -1076,7 +1076,7 @@ static void test_body_5()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -1094,11 +1094,11 @@ static void test_body_5()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("    -h\n    --help\n        shows this help and terminates\n    --version\n        @unknown-identifier@\n", buff);
+        TEST_MS_EQ("    -h\n    --help\n        shows this help and terminates\n    --version\n        @unknown-identifier@\n", buff);
     }
 }
 
@@ -1124,7 +1124,7 @@ static void test_expanded_usage_1()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -1148,11 +1148,11 @@ static void test_expanded_usage_1()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n    abc\n\n    def; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n    abc\n\n    def; v=0.1.01.0000", buff);
     }
 }
 
@@ -1170,7 +1170,7 @@ static void test_expanded_usage_2()
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -1194,11 +1194,11 @@ static void test_expanded_usage_2()
                 ,   0
                 );
 
-        XTESTS_TEST_INTEGER_EQUAL(0, r);
+        TEST_INT_EQ(0, r);
 
         clasp_releaseArguments(args);
 
-        XTESTS_TEST_MULTIBYTE_STRING_EQUAL("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n\tabc\n\n\tdef; v=0.1.01.0000", buff);
+        TEST_MS_EQ("T=toolname; S=summary; C=copyright; D=description; U=USAGE:\n\n\tabc\n\n\tdef; v=0.1.01.0000", buff);
     }
 }
 

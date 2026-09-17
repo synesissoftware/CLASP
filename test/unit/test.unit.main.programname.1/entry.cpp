@@ -41,7 +41,7 @@ static FILE* Test_stderr = Real_stderr; /* NOTE: this assignment here is solely 
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -156,7 +156,7 @@ static void run_test_(
     {
         int const e = errno;
 
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
+        TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
 
         return;
     }
@@ -170,15 +170,15 @@ static void run_test_(
                     ,   flags
                     );
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_NOT_EQUAL(0, r));
+    REQUIRE(TEST_INT_NE(0, r));
 
     ::fflush(Test_stderr);
     ::fclose(Test_stderr);
 
     platformstl::file_lines     lines(Test_path);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(1u, lines.size()));
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL(expectedLine0, lines[0]);
+    REQUIRE(TEST_INT_EQ(1u, lines.size()));
+    TEST_MS_EQ(expectedLine0, lines[0]);
 }
 
 static void test_1_0()

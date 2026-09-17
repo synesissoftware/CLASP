@@ -22,7 +22,7 @@
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -179,11 +179,11 @@ static void test_parse_Colour_missing_option_empty_default_C_style_string()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr;
 
-    XTESTS_TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, ""));
+    TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, ""));
 }
 
 static void test_parse_Colour_missing_option_empty_default_std_string()
@@ -199,11 +199,11 @@ static void test_parse_Colour_missing_option_empty_default_std_string()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr;
 
-    XTESTS_TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("")));
+    TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("")));
 }
 
 static void test_parse_Colour_missing_option_default_C_style_string()
@@ -219,12 +219,12 @@ static void test_parse_Colour_missing_option_default_C_style_string()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour();
 
-    XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "yellow"));
-    XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
+    TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "yellow"));
+    TEST_ENUM_EQ(Colour_Yellow, clr);
 }
 
 static void test_parse_Colour_missing_option_default_std_string()
@@ -240,12 +240,12 @@ static void test_parse_Colour_missing_option_default_std_string()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour();
 
-    XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("yellow")));
-    XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
+    TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("yellow")));
+    TEST_ENUM_EQ(Colour_Yellow, clr);
 }
 
 #if 1
@@ -263,12 +263,12 @@ static void test_parse_Colour_missing_option_default_UDT()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour();
 
-    XTESTS_TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, Colour_Yellow));
-    XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
+    TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, Colour_Yellow));
+    TEST_ENUM_EQ(Colour_Yellow, clr);
 }
 #endif
 
@@ -287,12 +287,12 @@ static void test_parse_Colour_missing_option_value_default_C_style_string()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour();
 
-    XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "yellow"));
-    XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
+    TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "yellow"));
+    TEST_ENUM_EQ(Colour_Yellow, clr);
 }
 
 static void test_parse_Colour_missing_option_value_default_std_string()
@@ -310,12 +310,12 @@ static void test_parse_Colour_missing_option_value_default_std_string()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour();
 
-    XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("yellow")));
-    XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
+    TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, std::string("yellow")));
+    TEST_ENUM_EQ(Colour_Yellow, clr);
 }
 
 #if 1
@@ -335,12 +335,12 @@ static void test_parse_Colour_missing_option_value_default_UDT()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour();
 
-    XTESTS_TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, Colour_Yellow));
-    XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
+    TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, Colour_Yellow));
+    TEST_ENUM_EQ(Colour_Yellow, clr);
 }
 #endif
 
@@ -359,12 +359,12 @@ static void test_parse_Colour_valid_option_value()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour(0);
 
-    XTESTS_TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "green"));
-    XTESTS_TEST_ENUM_EQUAL(Colour_Yellow, clr);
+    TEST_BOOLEAN_TRUE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "green"));
+    TEST_ENUM_EQ(Colour_Yellow, clr);
 }
 
 static void test_parse_Colour_invalid_option_value_default_C_style_string()
@@ -382,12 +382,12 @@ static void test_parse_Colour_invalid_option_value_default_C_style_string()
     arguments_t const*  args;
     int const           cr = clasp::parseArguments(flags, argc, argv, NULL, NULL, &args);
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, cr));
+    REQUIRE(TEST_INT_EQ(0, cr));
 
     Colour              clr = Colour(0);
 
-    XTESTS_TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "green"));
-    XTESTS_TEST_ENUM_EQUAL(Colour(0), clr);
+    TEST_BOOLEAN_FALSE(clasp::check_option(args, "--colour", &clr, &parse_Colour, NULL, "green"));
+    TEST_ENUM_EQ(Colour(0), clr);
 }
 
 static void test_1_3()
