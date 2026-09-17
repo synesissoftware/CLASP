@@ -4,7 +4,7 @@
  * Purpose: Unit-tests exceptional inputs
  *
  * Created: 7th March 2013
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -80,7 +80,7 @@ namespace
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 namespace
@@ -308,7 +308,7 @@ static void test_1_1_unrecognised()
 
     static clasp::specification_t const s_specifications[] =
     {
-      CLASP_SPECIFICATION_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     struct main_

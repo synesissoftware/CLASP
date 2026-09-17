@@ -4,7 +4,7 @@
  * Purpose: Component test for search-specs
  *
  * Created: 12th September 2014
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -53,7 +53,7 @@ static void* setupParam = NULL;
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 static

@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for CLASP C++ API
  *
  * Created: 16th July 2009
- * Updated: 31st July 2026
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -89,7 +89,7 @@ clasp_diagnostic_context_t const*   s_ctxt;
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 int main(int argc, char **argv)

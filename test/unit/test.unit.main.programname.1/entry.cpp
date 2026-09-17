@@ -4,7 +4,7 @@
  * Purpose: Unit-test program name in failure conditions
  *
  * Created: 9th March 2013
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -78,7 +78,7 @@ namespace
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 namespace

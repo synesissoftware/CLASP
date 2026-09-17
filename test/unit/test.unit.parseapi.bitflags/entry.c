@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP bit-flags functionality
  *
  * Created: 11th December 2011
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -52,28 +52,28 @@ static void test_1_2(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 int main(int argc, char **argv)
 {
-  int retCode = EXIT_SUCCESS;
-  int verbosity = 2;
+    int retCode = EXIT_SUCCESS;
+    int verbosity = 2;
 
-  XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
+    XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-  if (XTESTS_START_RUNNER("test.unit.parseapi.bitflags", verbosity))
-  {
-    XTESTS_RUN_CASE(test_1_0);
-    XTESTS_RUN_CASE(test_1_1);
-    XTESTS_RUN_CASE(test_1_2);
+    if (XTESTS_START_RUNNER("test.unit.parseapi.bitflags", verbosity))
+    {
+        XTESTS_RUN_CASE(test_1_0);
+        XTESTS_RUN_CASE(test_1_1);
+        XTESTS_RUN_CASE(test_1_2);
 
-    XTESTS_PRINT_RESULTS();
+        XTESTS_PRINT_RESULTS();
 
-    XTESTS_END_RUNNER_UPDATE_EXITCODE(&retCode);
-  }
+        XTESTS_END_RUNNER_UPDATE_EXITCODE(&retCode);
+    }
 
-  return retCode;
+    return retCode;
 }
 
 

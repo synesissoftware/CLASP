@@ -4,7 +4,7 @@
  * Purpose: Component test for USAGE by Windows resources
  *
  * Created: 7th March 2012
- * Updated: 31st July 2026
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -104,7 +104,7 @@ char* s_argv0 = NULL;
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 static

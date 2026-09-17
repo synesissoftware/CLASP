@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for custom type(s).
  *
  * Created: 12th September 2014
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -77,52 +77,52 @@ static void test_1_19();
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 int main(int argc, char **argv)
 {
-  int retCode = EXIT_SUCCESS;
-  int verbosity = 2;
+    int retCode = EXIT_SUCCESS;
+    int verbosity = 2;
 
-  XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
+    XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-  if (XTESTS_START_RUNNER("test.unit.custom_types", verbosity))
-  {
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_C_style_string);
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_std_string);
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_default_C_style_string);
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_default_std_string);
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_default_UDT);
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_value_default_C_style_string);
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_value_default_std_string);
-    XTESTS_RUN_CASE(test_parse_Colour_missing_option_value_default_UDT);
-    XTESTS_RUN_CASE(test_parse_Colour_valid_option_value);
-    XTESTS_RUN_CASE(test_parse_Colour_invalid_option_value_default_C_style_string);
-    XTESTS_RUN_CASE(test_1_3);
-    XTESTS_RUN_CASE(test_1_4);
-    XTESTS_RUN_CASE(test_1_5);
-    XTESTS_RUN_CASE(test_1_6);
-    XTESTS_RUN_CASE(test_1_7);
-    XTESTS_RUN_CASE(test_1_8);
-    XTESTS_RUN_CASE(test_1_9);
-    XTESTS_RUN_CASE(test_1_10);
-    XTESTS_RUN_CASE(test_1_11);
-    XTESTS_RUN_CASE(test_1_12);
-    XTESTS_RUN_CASE(test_1_13);
-    XTESTS_RUN_CASE(test_1_14);
-    XTESTS_RUN_CASE(test_1_15);
-    XTESTS_RUN_CASE(test_1_16);
-    XTESTS_RUN_CASE(test_1_17);
-    XTESTS_RUN_CASE(test_1_18);
-    XTESTS_RUN_CASE(test_1_19);
+    if (XTESTS_START_RUNNER("test.unit.custom_types", verbosity))
+    {
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_C_style_string);
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_std_string);
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_default_C_style_string);
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_default_std_string);
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_default_UDT);
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_value_default_C_style_string);
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_value_default_std_string);
+        XTESTS_RUN_CASE(test_parse_Colour_missing_option_value_default_UDT);
+        XTESTS_RUN_CASE(test_parse_Colour_valid_option_value);
+        XTESTS_RUN_CASE(test_parse_Colour_invalid_option_value_default_C_style_string);
+        XTESTS_RUN_CASE(test_1_3);
+        XTESTS_RUN_CASE(test_1_4);
+        XTESTS_RUN_CASE(test_1_5);
+        XTESTS_RUN_CASE(test_1_6);
+        XTESTS_RUN_CASE(test_1_7);
+        XTESTS_RUN_CASE(test_1_8);
+        XTESTS_RUN_CASE(test_1_9);
+        XTESTS_RUN_CASE(test_1_10);
+        XTESTS_RUN_CASE(test_1_11);
+        XTESTS_RUN_CASE(test_1_12);
+        XTESTS_RUN_CASE(test_1_13);
+        XTESTS_RUN_CASE(test_1_14);
+        XTESTS_RUN_CASE(test_1_15);
+        XTESTS_RUN_CASE(test_1_16);
+        XTESTS_RUN_CASE(test_1_17);
+        XTESTS_RUN_CASE(test_1_18);
+        XTESTS_RUN_CASE(test_1_19);
 
-    XTESTS_PRINT_RESULTS();
+        XTESTS_PRINT_RESULTS();
 
-    XTESTS_END_RUNNER_UPDATE_EXITCODE(&retCode);
-  }
+        XTESTS_END_RUNNER_UPDATE_EXITCODE(&retCode);
+    }
 
-  return retCode;
+    return retCode;
 }
 
 

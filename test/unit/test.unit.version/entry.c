@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP version macros.
  *
  * Created: 2nd September 2026
- * Updated: 2nd September 2026
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -36,7 +36,7 @@ static void test_CLASP_VER_composite(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 int main(int argc, char **argv)
