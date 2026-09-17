@@ -1,6 +1,12 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.15.2 - 18th September 2026
+
+* Converted automated tests to **xTests** terse assertion macros;
+* Added **tidying** to **ci.yml** push branches;
+
+
 ## 0.15.1 - 2nd September 2026
 
 * Fixed **`CLASP_VER`** composite to use **`CLASP_VER_AB`** (left referencing retired **`CLASP_VER_ALPHABETA`** after the 0.15.0 rename);
