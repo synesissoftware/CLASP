@@ -1,8 +1,20 @@
-# **CLASP** Changes <!-- omit in toc -->
+# CLASP - CHANGES <!-- omit in toc -->
 
 
-## 0.15.0 (rc 1) - 31st July 2026
+## 0.15.1 - 2nd September 2026
 
+* Fixed **`CLASP_VER`** composite to use **`CLASP_VER_AB`** (left referencing retired **`CLASP_VER_ALPHABETA`** after the 0.15.0 rename);
+* Added unit test **test.unit.version** covering **`CLASP_VER`** and component macros;
+
+
+## 0.15.0 - 9th August 2026
+
+0.15.0
+
+
+## 0.15.0 (rc 1) - 2nd August 2026
+
+* improved definition of `CLASP_VER` (and associated preprocesor object-like macros);
 * Added modular GitHub Actions CI (**ci.yml** / **ci-cell.yml**) with install-smoke coverage;
 * Removed **HISTORY.md** (content merged into **CHANGES.md**);
 * Modernised **CHANGES.md** (version-first headings; trailing semicolons);
