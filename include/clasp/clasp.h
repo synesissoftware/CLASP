@@ -643,7 +643,7 @@ struct clasp_argument_t
     clasp_argtype_t             type;               /*!< The type: CLASP_ARGTYPE_VALUE, CLASP_ARGTYPE_OPTION, or CLASP_ARGTYPE_FLAG */
     int                         cmdLineIndex;       /*!< The index of the argument with the original command-line */
     int                         numGivenHyphens;    /*!< The number of hyphens present in the original argument */
-    int                         aliasIndex;         /*!< The index of the matching specification, if any; otherwise -1 */
+    int                         aliasIndex;         /*!< The index of the matching specification, if any; otherwise -1. \note The name is vestigial and would ideally be changed to `specIndex`, but cannot because this is in the ABI */
     int                         flags;              /*!< Internal use only */
 };
 #ifndef __cplusplus
