@@ -16,7 +16,7 @@ See instructions in [INSTALL.md](./INSTALL.md).
 
 ## Q2: "Does CLASP have its own unit-tests?"
 
-Yes, under the **./test/unit** and **./test/unit** directorie.
+Yes, under the **./test/unit** and **./test/component** directories.
 
 
 <!-- ########################### end of file ########################### -->
