@@ -1,10 +1,11 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
-## 0.15.2 - 18th September 2026
+## 0.15.2 - 20th September 2026
 
 * Converted automated tests to **xTests** terse assertion macros;
 * Added **tidying** to **ci.yml** push branches;
+* fleshed out **NEWS.md** contents;
 
 
 ## 0.15.1 - 2nd September 2026
