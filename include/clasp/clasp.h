@@ -83,7 +83,7 @@
 
 #define CLASP_VER_MAJOR       0
 #define CLASP_VER_MINOR       15
-#define CLASP_VER_PATCH       4
+#define CLASP_VER_PATCH       3
 #define CLASP_VER_ALPHABETA   0xFF
 
 #define CLASP_VER \
