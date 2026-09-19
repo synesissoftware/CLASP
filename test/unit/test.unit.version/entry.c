@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP version macros.
  *
  * Created: 2nd September 2026
- * Updated: 18th September 2026
+ * Updated: 19th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -69,29 +69,32 @@ static void test_CLASP_VER_components(void)
     TEST_INT_EQ(0, CLASP_VER_MAJOR);
     TEST_INT_EQ(15, CLASP_VER_MINOR);
     TEST_INT_EQ(2, CLASP_VER_PATCH);
+    TEST_INT_EQ(0xFF, CLASP_VER_ALPHABETA);
     TEST_INT_EQ(0xFF, CLASP_VER_AB);
 
     TEST_INT_EQ(CLASP_VER_PATCH, CLASP_VER_REVISION);
+    TEST_INT_EQ(CLASP_VER_ALPHABETA, CLASP_VER_AB);
 }
 
 static void test_CLASP_VER_composite(void)
 {
     /* Evaluating CLASP_VER as an expression catches composite-macro defects
-     * (e.g. referencing a retired CLASP_VER_ALPHABETA symbol).
+     * (e.g. referencing an undefined discriminator symbol).
      */
     unsigned const ver = (unsigned)CLASP_VER;
 
     TEST_INT_EQ(CLASP_VER_MAJOR, (ver >> 24) & 0xff);
     TEST_INT_EQ(CLASP_VER_MINOR, (ver >> 16) & 0xff);
     TEST_INT_EQ(CLASP_VER_PATCH, (ver >>  8) & 0xff);
-    TEST_INT_EQ(CLASP_VER_AB,    (ver >>  0) & 0xff);
+    TEST_INT_EQ(CLASP_VER_ALPHABETA, (ver >>  0) & 0xff);
+    TEST_INT_EQ(CLASP_VER_AB,        (ver >>  0) & 0xff);
 
     TEST_INT_EQ(
         (unsigned)(0
-            | (CLASP_VER_MAJOR << 24)
-            | (CLASP_VER_MINOR << 16)
-            | (CLASP_VER_PATCH <<  8)
-            | (CLASP_VER_AB    <<  0)
+            | (CLASP_VER_MAJOR     << 24)
+            | (CLASP_VER_MINOR     << 16)
+            | (CLASP_VER_PATCH     <<  8)
+            | (CLASP_VER_ALPHABETA <<  0)
         )
     ,   ver
     );
