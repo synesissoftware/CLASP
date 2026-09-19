@@ -71,24 +71,33 @@
  *
  * The patch number of the CLASP library
  *
+ * \def CLASP_VER_ALPHABETA
+ *
+ * The alpha/beta number of the CLASP library, in the range 1-0xFE for
+ * prerelease versions, and 0xFF for a released version
+ *
  * \def CLASP_VER
  *
  * The composite version of the CLASP library
  */
 
-#define CLASP_VER_MAJOR     0
-#define CLASP_VER_MINOR     15
-#define CLASP_VER_PATCH     2
-#define CLASP_VER_REVISION  CLASP_VER_PATCH
-#define CLASP_VER_AB        0xFF
+#define CLASP_VER_MAJOR       0
+#define CLASP_VER_MINOR       15
+#define CLASP_VER_PATCH       2
+#define CLASP_VER_ALPHABETA   0xFF
 
 #define CLASP_VER \
     (0\
         |   (   CLASP_VER_MAJOR       << 24   ) \
         |   (   CLASP_VER_MINOR       << 16   ) \
         |   (   CLASP_VER_PATCH       <<  8   ) \
-        |   (   CLASP_VER_AB          <<  0   ) \
+        |   (   CLASP_VER_ALPHABETA   <<  0   ) \
     )
+
+#ifndef CLASP_DOCUMENTATION_SKIP_SECTION
+# define CLASP_VER_REVISION                                 CLASP_VER_PATCH
+# define CLASP_VER_AB                                       CLASP_VER_ALPHABETA
+#endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
 /* /////////////////////////////////////////////////////////////////////////
