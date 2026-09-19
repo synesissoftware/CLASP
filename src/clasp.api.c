@@ -933,25 +933,25 @@ clasp_calculate_sizes_(
                             { size_t j; for (j = 1; '\0' != arg[j]; ++j)
                             {
                                 clasp_char_t                    flag[3] = { '-', '?', '\0' };
-                                clasp_specification_t const*    flagAlias;
+                                clasp_specification_t const*    flagSpec;
 
                                 flag[1]     =   arg[j];
-                                flagAlias   =   clasp_lookup_spec_for_name_(specifications, flag, 2u, flags);
+                                flagSpec    =   clasp_lookup_spec_for_name_(specifications, flag, 2u, flags);
 
-                                if (NULL != flagAlias &&
-                                    NULL != flagAlias->mappedArgument)
+                                if (NULL != flagSpec &&
+                                    NULL != flagSpec->mappedArgument)
                                 {
                                     clasp_char_t const* equal4;
 
-                                    if ('-' == flagAlias->mappedArgument[0] &&
-                                        NULL != (equal4 = clasp_strchreq_(flagAlias->mappedArgument, flags)))
+                                    if ('-' == flagSpec->mappedArgument[0] &&
+                                        NULL != (equal4 = clasp_strchreq_(flagSpec->mappedArgument, flags)))
                                     {
                                     }
                                     else
                                     {
                                     }
 
-                                    *cbStrings += 1 + clasp_strlen_(flagAlias->mappedArgument);
+                                    *cbStrings += 1 + clasp_strlen_(flagSpec->mappedArgument);
                                 }
                                 else
                                 {
@@ -1903,12 +1903,12 @@ clasp_parseArguments_NoWild_(
                             { size_t j; for (j = 1; '\0' != arg[j]; ++j)
                             {
                                 clasp_char_t                    flag[3] = { '-', '?', '\0' };
-                                clasp_specification_t const*    flagAlias;
+                                clasp_specification_t const*    flagSpec;
 
                                 flag[1]     =   arg[j];
-                                flagAlias   =   clasp_lookup_spec_for_name_(specifications, flag, 2u, flags);
+                                flagSpec    =   clasp_lookup_spec_for_name_(specifications, flag, 2u, flags);
 
-                                if (NULL != flagAlias)
+                                if (NULL != flagSpec)
                                 {
                                     /* This is similar to the above
                                      * processing with the exception that we
@@ -1917,14 +1917,14 @@ clasp_parseArguments_NoWild_(
 
                                     clasp_char_t const* equal8;
 
-                                    if (NULL != flagAlias->mappedArgument &&
-                                        '-' == flagAlias->mappedArgument[0] &&
-                                        NULL != (equal8 = clasp_strchreq_(flagAlias->mappedArgument, flags)))
+                                    if (NULL != flagSpec->mappedArgument &&
+                                        '-' == flagSpec->mappedArgument[0] &&
+                                        NULL != (equal8 = clasp_strchreq_(flagSpec->mappedArgument, flags)))
                                     {
-                                        const size_t nameLen = stlsoft_static_cast(size_t, equal8 - flagAlias->mappedArgument);
+                                        const size_t nameLen = stlsoft_static_cast(size_t, equal8 - flagSpec->mappedArgument);
 
                                         currentArg->resolvedName.len    =   nameLen;
-                                        currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, flagAlias->mappedArgument, nameLen);
+                                        currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, flagSpec->mappedArgument, nameLen);
                                         currentArg->givenName.len       =   argLen;
                                         currentArg->givenName.ptr       =   givenName;
                                         currentArg->value.len           =   clasp_strlen_(equal8 + 1);
@@ -1933,10 +1933,10 @@ clasp_parseArguments_NoWild_(
                                     }
                                     else
                                     {
-                                        if (NULL != flagAlias->mappedArgument)
+                                        if (NULL != flagSpec->mappedArgument)
                                         {
-                                            currentArg->resolvedName.len    =   clasp_strlen_(flagAlias->mappedArgument);
-                                            currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, flagAlias->mappedArgument, currentArg->resolvedName.len);
+                                            currentArg->resolvedName.len    =   clasp_strlen_(flagSpec->mappedArgument);
+                                            currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, flagSpec->mappedArgument, currentArg->resolvedName.len);
                                         }
                                         else
                                         {
@@ -1947,11 +1947,11 @@ clasp_parseArguments_NoWild_(
                                         currentArg->givenName.ptr       =   givenName;
                                         currentArg->value.len           =   0;
                                         currentArg->value.ptr           =   NULL;
-                                        currentArg->type                =   flagAlias->type;
+                                        currentArg->type                =   flagSpec->type;
                                     }
                                     currentArg->cmdLineIndex        =   i;
                                     currentArg->numGivenHyphens     =   1;
-                                    currentArg->aliasIndex          =   clasp_evaluate_specification_index_(specifications, flagAlias);
+                                    currentArg->aliasIndex          =   clasp_evaluate_specification_index_(specifications, flagSpec);
                                     currentArg->flags               =   0;
 
                                     switch (currentArg->type)
