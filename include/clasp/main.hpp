@@ -54,9 +54,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
-# define CLASP_VER_CLASP_HPP_MAIN_MINOR     0
-# define CLASP_VER_CLASP_HPP_MAIN_REVISION  3
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      45
+# define CLASP_VER_CLASP_HPP_MAIN_MINOR     1
+# define CLASP_VER_CLASP_HPP_MAIN_REVISION  1
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      46
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -377,6 +377,67 @@ invoke(
         argc
     ,   argv
     ,   pfnMain
+    ,   programName
+    ,   specifications
+    ,   flags
+    ,   ctxt
+    ,   usageHelpSuffix
+    );
+}
+
+/** Parses the command-line (specified in \c argc and \c argv) and invokes
+ * caller-supplied CLASP main function (\c pfnMain) according to the given
+ * arguments.
+ *
+ * This overload accepts a callback that takes
+ * <code>clasp::arguments_t const&</code> rather than a pointer.
+ *
+ * \param argc \c argc passed to <code>main()</code>
+ * \param argv \c argv passed to <code>main()</code>
+ * \param specifications Pointer to an specifications array that will be
+ *   passed to clasp::parseArguments()
+ * \param pfnMain Caller-supplied CLASP main function that will be invoked
+ * \param programName Specifies the name of the program, which will be
+ *   inferred heuristically if NULL or empty
+ * \param flags Flags that will be passed to clasp::parseArguments()
+ * \param ctxt
+ * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
+ *   semicolon-space appended after the exception information, or NULL for
+ *   no suffix
+ *
+ * \note Behaviour, exception policy, and program-name inference match the
+ *   primary <code>invoke()</code> overload.
+ *
+ * \pre argc > 0
+ * \pre NULL != argv
+ * \pre NULL != pfnMain
+ */
+inline
+int
+invoke(
+    int                                 argc
+,   clasp::char_t const* const*         argv
+,   clasp::specification_t const        specifications[]
+,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const& args)
+,   clasp::char_t const*                programName     =   NULL
+,   unsigned                            flags           =   0
+,   clasp::diagnostic_context_t const*  ctxt            =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
+)
+{
+    static int (STLSOFT_CDECL *s_pfnMain)(clasp::arguments_t const& args) = pfnMain;
+
+    struct adaptor {
+        static int STLSOFT_CDECL fn(clasp::arguments_t const* args)
+        {
+            return s_pfnMain(*args);
+        }
+    };
+
+    return invoke(
+        argc
+    ,   argv
+    ,   &adaptor::fn
     ,   programName
     ,   specifications
     ,   flags

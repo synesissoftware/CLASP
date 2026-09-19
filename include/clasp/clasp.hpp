@@ -8,7 +8,7 @@
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
 # define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
-# define CLASP_VER_CLASP_HPP_CLASP_REVISION 2
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     71
+# define CLASP_VER_CLASP_HPP_CLASP_REVISION 3
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     72
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -2686,6 +2686,32 @@ flag_specified(
 
     return ::clasp::ximpl::flag_specified_(
         args
+    ,   CLASP_INVOKE_c_str_data_(name), CLASP_INVOKE_c_str_len_(name)
+    ,   markUsedIfFound
+    );
+}
+
+/** Evaluates whether the named flag (or option) is specified, and
+ * (optionally) marks it as used if so
+ *
+ * \param args Non-mutating reference to the arguments structure, obtained
+ *   from call to parseArguments() / clasp_parseArguments()
+ * \param name Name of the flag (or option). May not be NULL or empty
+ * \param markUsedIfFound If true, the flag (or option) is mark used if
+ *   found
+ */
+template <typename S>
+bool
+flag_specified(
+    clasp_arguments_t const&    args
+,   S const&                    name
+,   bool                        markUsedIfFound = true
+)
+{
+    CLASP_DECLARE_c_str_datalen_PAIR_();
+
+    return ::clasp::ximpl::flag_specified_(
+        &args
     ,   CLASP_INVOKE_c_str_data_(name), CLASP_INVOKE_c_str_len_(name)
     ,   markUsedIfFound
     );

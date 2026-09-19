@@ -2,11 +2,12 @@
 
 | Date                | News Item                 | Details                                                        |
 | ------------------- | ------------------------- | -------------------------------------------------------------- |
-| 20th September 2026 | [Release of 0.15.3](https://github.com/synesissoftware/CLASP/releases/tag/0.15.3) | C++ API uses namespace type aliases                            |
+| 21st September 2026 | [Release of 0.16.0-alpha1](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha1) | C++ API accepts references to CLASP types |
+| 20th September 2026 | [Release of 0.15.3](https://github.com/synesissoftware/CLASP/releases/tag/0.15.3) | C++ API uses namespace type aliases |
 | 19th September 2026 | [Release of 0.15.2](https://github.com/synesissoftware/CLASP/releases/tag/0.15.2) | Terse xTests; `--no-cpp` CMake; restored `CLASP_VER_ALPHABETA` |
-| 2nd September 2026  | [Release of 0.15.1](https://github.com/synesissoftware/CLASP/releases/tag/0.15.1) | Fixed `CLASP_VER` composite; version unit test                 |
-| 9th August 2026     | [Release of 0.15.0](https://github.com/synesissoftware/CLASP/releases/tag/0.15.0) | Promoted 0.15.0-rc1 to stable                                  |
-| 2nd August 2026     | [Release of 0.15.0-rc1](https://github.com/synesissoftware/CLASP/releases/tag/0.15.0-rc1) | Modular CI; `CLASP_VER`; docs modernisation                    |
+| 2nd September 2026  | [Release of 0.15.1](https://github.com/synesissoftware/CLASP/releases/tag/0.15.1) | Fixed `CLASP_VER` composite; version unit test |
+| 9th August 2026     | [Release of 0.15.0](https://github.com/synesissoftware/CLASP/releases/tag/0.15.0) | Promoted 0.15.0-rc1 to stable |
+| 2nd August 2026     | [Release of 0.15.0-rc1](https://github.com/synesissoftware/CLASP/releases/tag/0.15.0-rc1) | Modular CI; `CLASP_VER`; docs modernisation |
 | 11th March 2025     | Release of 0.15.0-alpha6  | Usage tests/fixes; C90; empty-alias defect                     |
 | 10th March 2025     | Release of 0.15.0-alpha5  | Visual C++ compatibility                                       |
 | 10th March 2025     | Release of 0.15.0-alpha4  | Stock `CLASP_STOCK_FLAG_HELP()` / `CLASP_STOCK_FLAG_VERSION()` |

@@ -30,33 +30,34 @@
 
 ## Introduction
 
-**CLASP** - **C**ommand-**L**ine **A**rgument **S**orting and **P**arsing - is a small, simple
-C-language library for parsing command-line arguments, along with a C++
-header-only API.
+**CLASP** - **C**ommand-**L**ine **A**rgument **S**orting and **P**arsing -
+is a small, simple C-language library for parsing command-line arguments,
+along with a C++ header-only API.
 
 The features of the library are:
 
-- arguments are parsed according to the following taxonomy:
-  - **flags**, which express yes/no (or true/false, or on/off) choices, and begin with one or more hyphens and have no value, e.g. ```--verbose```, ```-v```;
-  - **values**, which express an unnamed value, and do not begin with a hyphen, e.g. ```..```, ```makefile```;
-  - **options**, which express a named value, and take one of the forms:
-    - a single argument comprising a hyphen-prefixed name ```=```-separated from a value, e.g.  ```--root-dir=~```; or
-    - a pair of consecutive arguments comprising a hyphen-prefixed name and a value, e.g. ```-r ~```. (This option requires use of **specifications**;)
+- **ARGUMENTS** are parsed according to the following taxonomy:
+  - **FLAGS**, which express yes/no (or true/false, or on/off) choices, and begin with one or more hyphens and have no associated value, e.g. ```--verbose```, ```-v```;
+  - **VALUES**, which express an unnamed value, and do not begin with a hyphen, e.g. ```..```, ```makefile```;
+  - **OPTIONS**, which express a named value, and take one of the forms:
+    - a single argument comprising a hyphen-prefixed name separated from a value by ```=```, e.g.  ```--root-dir=~```; or
+    - a pair of consecutive (i.e. space-separated) arguments comprising a hyphen-prefixed name and a value, e.g. ```-r ~```. (This option requires use of **SPECIFICATIONS**;)
 - support for the standard UNIX ```--``` argument, which causes all subsequent arguments to be interpreted as values;
-- support for the standard UNIX ```-``` argument, allowing it to be interpreted as a value, despite beginning with a hyphen. This is often used to indicate to a program that it should use standard-input or standard-output rather than a named file path;
-- a simple protocol whereby flags and options may have aliases, e.g. specifying alias ```-v``` for ```--verbose``` allows either to be specified on the command-line, while the discriminating code need only check for the ```--verbose``` full form;
-- combination of flags' single letter forms (or aliases) for succinct, e.g. if ```-x``` is an alias for ```--extract```, ```-l``` is an alias for ```--form=list```, and ```-p``` for ```---include-all-patterns```, and the command line contains the composite argument ```-xpl```, this is equivalent to and processed as if received ```--extract ---include-all-patterns --form=list```. Note that if an existing flag or option with the name ```-xpl``` then the combined intrepretation is not considered;
-- wildcards are expanded on Windows (since its command-interpreter does not do wildcard expansion);
-- library functions that automatically provide usage and version functionality, including flag/option, aliases, help string, and valid values, facilitating implenentation of standard ```--help``` and ```--version``` flags;
-- an overarching principal of the design is that command-line processing must be separable from the rest of the program logic, hence:
+- support for the standard UNIX ```-``` argument, allowing it to be interpreted as a value, despite beginning with a hyphen. This is commonly used by a program to stand for the standard-input or standard-output streams (rather than a named file input/output path);
+- a simple protocol whereby *FLAGS* and *OPTIONS* may have *ALIASES*, e.g. specifying the alias ```-v``` for the flag ```--verbose``` allows either to be specified on the command-line, while the discriminating code need only check for the ```--verbose``` full form;
+- combination of FLAGS' single letter forms (or aliases) for succinct, e.g. if ```-x``` is an alias for ```--extract```, ```-l``` is an alias for ```--form=list```, and ```-p``` for ```---include-all-patterns```, and the command line contains the composite argument ```-xpl```, this is equivalent to and processed as if the program received ```--extract ---include-all-patterns --form=list```. NOTE: if a flag or option exists with the name ```-xpl``` then the combined interpretation is not considered;
+- wildcards may be expanded on Windows (since its batch command-interpreter does not do wildcard expansion);
+- library functions that automatically provide usage and version functionality based on the program's SPECIFICATIONS, including flag/option, aliases, help string, and valid values, facilitating implementation of standard ```--help``` and ```--version``` flags;
+- an overarching principle of the design is that command-line processing must be separable from the rest of the program logic, hence:
   - the specification of flags and options is done declaratively, in an array of `clasp_specification_t`;
   - there is a rich set of functions for discovering flags, options, and values, and eliciting their _values_ in different data types;
 - apart from memory allocation (of which there is only one), the library is no-fail, so can never be a source of program failure, allowing it to form a reliable part of C/C++ CLI program frameworks;
-- the core (C) library has no non-standard dependencies on UNIX; on Windows, wildcard expansion may optionally use [**recls**](https://github.com/synesissoftware/recls/) (disabled by default in the CMake build via `CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS`);
-- the C++ API depends on the [**STLSoft**](https://github.com/synesissoftware/STLSoft/) library;
+- has minimal or no dependencies:
+  - the core (C) library has no non-standard dependencies on UNIX; on Windows, wildcard expansion may optionally use [**recls**](https://github.com/synesissoftware/recls/) (disabled by default in the CMake build via `CLASP_CMDLINE_ARGS_NO_RECLS_ON_WINDOWS`);
+  - the C++ API depends on the [**STLSoft**](https://github.com/synesissoftware/STLSoft/) library;
 
 
-The design of the library is discussed in detail in the article "_An Introduction to CLASP, part 1: C_", Matthew Wilson, [CVu](http://accu.org/index.php/journals/c77/), January 2012. (For those of you not subscribers to the [ACCU](http://accu.org/)'s [CVu](http://accu.org/index.php/journals/c77/) journal, this article will be made available on the [Synesis Software](http://www.synesis.com.au) website before end of September.)
+The design of the library is discussed in detail in the article "_An Introduction to CLASP, part 1: C_", Matthew Wilson, [CVu](http://accu.org/index.php/journals/c77/), January 2012. (For those of you not subscribers to the [ACCU](http://accu.org/)'s [CVu](http://accu.org/index.php/journals/c77/) journal, this article will be made available on the new Synesis Information Systems website before end of 2026.)
 
 
 ## Installation
@@ -158,7 +159,7 @@ static clasp::specification_t const Specifications[] =
 
 int main(int argc, char* argv[])
 {
-    return clasp::main::invoke(argc, argv, [](clasp::arguments_t const* args) {
+    return clasp::main::invoke(argc, argv, Specifications, [](clasp::arguments_t const& args) {
 
         if (clasp::flag_specified(args, "--help"))
         {
@@ -183,7 +184,7 @@ int main(int argc, char* argv[])
 
 
         return EXIT_SUCCESS;
-    }, NULL, Specifications, 0);
+    });
 }
 ```
 

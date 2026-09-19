@@ -13,6 +13,9 @@
 * [ ] review Usage API dependencies;
 * [ ] add new show-usage and show-version functions that operate off structure (`clasp_usageinfo_t`);
 * [ ] stream insertion operators should take into account alignment and wide;
+* [ ] optional (opt-in) use of woad;
+* [x] ~~~reference-forms of callbacks in C++ API~~~ - ✅;
+* [ ] non-STLSoft version of C++ API;
 
 
 ## Performance improvements
