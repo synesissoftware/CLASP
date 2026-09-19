@@ -1090,7 +1090,7 @@ clasp_add_flag_to_area_(
 
 static
 int
-clasp_is_valid_alias_section_range_(
+clasp_is_valid_spec_section_range_(
     clasp_argtype_t t
 )
 {
@@ -1210,7 +1210,7 @@ clasp_parseArguments(
                 ; /* valid */
             }
             else
-            if (clasp_is_valid_alias_section_range_(specification->type))
+            if (clasp_is_valid_spec_section_range_(specification->type))
             {
                 ; /* valid */
             }
