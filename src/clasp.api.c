@@ -4,11 +4,11 @@
  * Purpose: CLASP API.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -389,10 +389,10 @@ clasp_lookup_alias_(
  * alias, then for non-defaulted mapped arguments, then for defaulted
  * mapped arguments.
  *
- * \param specifications The specifications array
- * \param arg Pointer to the argument
- * \param cchArg Length of the argument
- * \param flags
+ * \param specifications The specifications array;
+ * \param arg Pointer to the argument;
+ * \param cchArg Length of the argument;
+ * \param flags Flags that control the lookup;
  */
 static
 clasp_specification_t const*
