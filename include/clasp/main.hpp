@@ -4,11 +4,11 @@
  * Purpose: main() entry-point helper functions.
  *
  * Created: 29th December 2010
- * Updated: 12th July 2024
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2024, Matthew Wilson
+ * Copyright (c) 2010-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
 # define CLASP_VER_CLASP_HPP_MAIN_MINOR     0
 # define CLASP_VER_CLASP_HPP_MAIN_REVISION  2
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      43
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      44
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -119,7 +119,7 @@ namespace main
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * typedefs
+ * macros
  */
 
 #ifdef CLASP_DOCUMENTATION_SKIP_SECTION
@@ -192,8 +192,9 @@ invoke_(
     {
         stlsoft::error_desc e(r);
 
-        /* Diagnostic log statement */
+        /* Diagnostic log statement - only if Pantheios included */
 #ifdef PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS
+
         pantheios_logprintf(PANTHEIOS_SEV_ALERT, PANTHEIOS_LITERAL_STRING("%s: could not start program: arguments parsing failed: %s"), programName, e.c_str());
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
 
@@ -211,18 +212,20 @@ invoke_(
 #ifdef PANTHEIOS_INCL_PANTHEIOS_HPP_PANTHEIOS
 
             log_DEBUG(PANTHEIOS_LITERAL_STRING("entering main("), args(argc, argv, args::arg0FileOnly), PANTHEIOS_LITERAL_STRING(")"));
-
 #endif /* Pantheios C++ API */
 
             return pfnMain(clargs);
         }
         catch(clasp::clasp_exception &x)
         {
-            /* Diagnostic log statement */
+            /* Diagnostic log statement - only if Pantheios included */
 #ifdef PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS
+
 # ifdef STLSOFT_CF_RTTI_SUPPORT
+
             pantheios_logprintf(PANTHEIOS_SEV_DEBUG, PANTHEIOS_LITERAL_STRING("%s: invalid-command-line (%s): %s"), programName, typeid(x).name(), x.what());
 # else /* ? STLSOFT_CF_RTTI_SUPPORT */
+
             pantheios_logprintf(PANTHEIOS_SEV_DEBUG, PANTHEIOS_LITERAL_STRING("%s: invalid-command-line: %s"), programName, x.what());
 # endif /* STLSOFT_CF_RTTI_SUPPORT */
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
@@ -242,7 +245,6 @@ invoke_(
         return EXIT_FAILURE;
     }
 }
-
 } /* namespace ximpl */
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
@@ -307,17 +309,17 @@ invoke(
     {
         programName = NULL;
     }
-
 #ifdef CLASP_MAIN_DEFAULT_PROGRAM_NAME
+
     if (NULL == programName)
     {
         programName = CLASP_MAIN_DEFAULT_PROGRAM_NAME;
     }
 #endif /* CLASP_MAIN_DEFAULT_PROGRAM_NAME */
-
 #if !defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     defined(PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS) && \
     PANTHEIOS_VER >= 0x010001d6
+
     if (NULL == programName)
     {
 # ifndef PANTHEIOS_NO_NAMESPACE
@@ -333,8 +335,10 @@ invoke(
 #if (STLSOFT_LEAD_VER >= 0x010a0000) && \
     (   !defined(CLASP_USE_WIDE_STRINGS) || \
         STLSOFT_LEAD_VER >= 0x010a0113)
+
         programName = platformstl_ns_qual(get_executable_name_from_path)(argv[0]).ptr;
 # else
+
         programName = argv[0];
 # endif
     }
@@ -344,7 +348,16 @@ invoke(
         programName = argv[0];
     }
 
-    return ximpl::invoke_(argc, argv, pfnMain, programName, specifications, flags, ctxt, usageHelpSuffix);
+    return ximpl::invoke_(
+        argc
+    ,   argv
+    ,   pfnMain
+    ,   programName
+    ,   specifications
+    ,   flags
+    ,   ctxt
+    ,   usageHelpSuffix
+    );
 }
 
 inline
@@ -371,6 +384,7 @@ invoke(
     ,   usageHelpSuffix
     );
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
