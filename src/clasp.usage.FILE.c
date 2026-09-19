@@ -4,11 +4,11 @@
  * Purpose: CLASP usage (FILE) facilities.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -105,10 +105,10 @@ clasp_longOptionName_strlen_(clasp_char_t const* s, unsigned flags)
 }
 
 static size_t clasp_find_matching_primary_(
-    clasp_alias_t const     specifications[]
-,   size_t                  numSpecifications
-,   clasp_alias_t const*    alias
-,   unsigned                flags
+    clasp_specification_t const     specifications[]
+,   size_t                          numSpecifications
+,   clasp_specification_t const*    alias
+,   unsigned                        flags
 )
 {
     size_t  numberOfMatches     = 0;
@@ -131,7 +131,7 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = 0; i != numSpecifications; ++i)
     {
-        clasp_alias_t const* alias2 = specifications + i;
+        clasp_specification_t const* alias2 = specifications + i;
 
         if (clasp_is_valid_specification_type_(alias2->type))
         {
@@ -161,7 +161,7 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_alias_t const* alias2 = specifications + i;
+        clasp_specification_t const* alias2 = specifications + i;
 
         if (clasp_is_valid_specification_type_(alias2->type))
         {
@@ -199,7 +199,7 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_alias_t const* alias2 = specifications + i;
+        clasp_specification_t const* alias2 = specifications + i;
 
         if (clasp_is_valid_specification_type_(alias2->type))
         {
@@ -232,7 +232,7 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_alias_t const* alias2 = specifications + i;
+        clasp_specification_t const* alias2 = specifications + i;
 
         if (clasp_is_valid_specification_type_(alias2->type))
         {
@@ -264,7 +264,7 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_alias_t const* alias2 = specifications + i;
+        clasp_specification_t const* alias2 = specifications + i;
 
         if (clasp_is_valid_specification_type_(alias2->type))
         {
@@ -403,7 +403,7 @@ CLASP_CALL(void)
 clasp_showVersionByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const         specifications[]
+,   clasp_specification_t const specifications[]
 )
 {
     clasp_show_version_by_FILE(
@@ -417,7 +417,7 @@ CLASP_CALL(void)
 clasp_show_version_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
-,   clasp_alias_t const                 specifications[]
+,   clasp_specification_t const         specifications[]
 )
 {
     FILE*                 stm         =   (FILE*)info->param;
@@ -465,7 +465,7 @@ CLASP_CALL(void)
 clasp_showHeaderByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const         specifications[]
+,   clasp_specification_t const specifications[]
 )
 {
     clasp_show_header_by_FILE(
@@ -479,7 +479,7 @@ CLASP_CALL(void)
 clasp_show_header_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
-,   clasp_alias_t const                 specifications[]
+,   clasp_specification_t const         specifications[]
 )
 {
     FILE*                       stm     =   (FILE*)info->param;
@@ -525,7 +525,7 @@ CLASP_CALL(void)
 clasp_showBodyByFILE(
     clasp_arguments_t const*    args
 ,   clasp_usageinfo_t const*    info
-,   clasp_alias_t const         specifications[]
+,   clasp_specification_t const specifications[]
 )
 {
     clasp_show_body_by_FILE(
@@ -539,7 +539,7 @@ CLASP_CALL(void)
 clasp_show_body_by_FILE(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_usageinfo_t const*            info
-,   clasp_alias_t const                 specifications[]
+,   clasp_specification_t const         specifications[]
 )
 {
     FILE*                       stm                 =   (FILE*)info->param;
@@ -604,7 +604,7 @@ clasp_show_body_by_FILE(
 
     { size_t i; for (i = 0; i != numSpecifications; ++i)
     {
-        clasp_alias_t const* alias = specifications + i;
+        clasp_specification_t const* alias = specifications + i;
 
         if (CLASP_ARGTYPE_TACIT_ == alias->type)
         {
@@ -661,7 +661,7 @@ clasp_show_body_by_FILE(
              */
             { size_t j; for (j = 0; j != numSpecifications; ++j)
             {
-                clasp_alias_t const* alias2 = specifications + j;
+                clasp_specification_t const* alias2 = specifications + j;
 
                 if (j != i)
                 {

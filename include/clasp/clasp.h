@@ -54,8 +54,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      3
-# define CLASP_VER_CLASP_H_CLASP_REVISION   8
-# define CLASP_VER_CLASP_H_CLASP_EDIT       115
+# define CLASP_VER_CLASP_H_CLASP_REVISION   9
+# define CLASP_VER_CLASP_H_CLASP_EDIT       116
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -83,7 +83,7 @@
 
 #define CLASP_VER_MAJOR       0
 #define CLASP_VER_MINOR       15
-#define CLASP_VER_PATCH       3
+#define CLASP_VER_PATCH       4
 #define CLASP_VER_ALPHABETA   0xFF
 
 #define CLASP_VER \
@@ -1890,23 +1890,23 @@ namespace clasp {
     inline
     int
     showUsage(
-        clasp_arguments_t const*    args
-    ,   clasp_alias_t const*        specifications
-    ,   clasp_char_t const*         toolName
-    ,   clasp_char_t const*         summary
-    ,   clasp_char_t const*         copyright
-    ,   clasp_char_t const*         description
-    ,   clasp_char_t const*         usage
-    ,   int                         major
-    ,   int                         minor
-    ,   int                         revision
-    ,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void*                       param
-    ,   int                         flags
-    ,   int                         consoleWidth
-    ,   int                         tabSize
-    ,   int                         blanksBetweenItems
+        clasp_arguments_t const*        args
+    ,   clasp_specification_t const*    specifications
+    ,   clasp_char_t const*             toolName
+    ,   clasp_char_t const*             summary
+    ,   clasp_char_t const*             copyright
+    ,   clasp_char_t const*             description
+    ,   clasp_char_t const*             usage
+    ,   int                             major
+    ,   int                             minor
+    ,   int                             revision
+    ,   void                          (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const* )
+    ,   void                          (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const* )
+    ,   void*                           param
+    ,   int                             flags
+    ,   int                             consoleWidth
+    ,   int                             tabSize
+    ,   int                             blanksBetweenItems
     )
     {
         return clasp_showUsage(
@@ -1933,19 +1933,19 @@ namespace clasp {
     inline
     int
     showUsage(
-        clasp_arguments_t const*    args
-    ,   clasp_alias_t const*        specifications
-    ,   clasp_char_t const*         toolName
-    ,   clasp_char_t const*         summary
-    ,   clasp_char_t const*         copyright
-    ,   clasp_char_t const*         description
-    ,   clasp_char_t const*         usage
-    ,   int                         major
-    ,   int                         minor
-    ,   int                         revision
-    ,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void*                       param
+        clasp_arguments_t const*        args
+    ,   clasp_specification_t const*    specifications
+    ,   clasp_char_t const*             toolName
+    ,   clasp_char_t const*             summary
+    ,   clasp_char_t const*             copyright
+    ,   clasp_char_t const*             description
+    ,   clasp_char_t const*             usage
+    ,   int                             major
+    ,   int                             minor
+    ,   int                             revision
+    ,   void                          (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const* )
+    ,   void                          (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const* )
+    ,   void*                           param
     )
     {
         return clasp_showUsage(
@@ -1972,16 +1972,16 @@ namespace clasp {
     inline
     int
     showUsage(
-        clasp_arguments_t const*    args
-    ,   clasp_alias_t const*        specifications
-    ,   clasp_char_t const*         toolName
-    ,   clasp_char_t const*         summary
-    ,   clasp_char_t const*         copyright
-    ,   clasp_char_t const*         description
-    ,   clasp_char_t const*         usage
-    ,   int                         major
-    ,   int                         minor
-    ,   int                         revision
+        clasp_arguments_t const*        args
+    ,   clasp_specification_t const*    specifications
+    ,   clasp_char_t const*             toolName
+    ,   clasp_char_t const*             summary
+    ,   clasp_char_t const*             copyright
+    ,   clasp_char_t const*             description
+    ,   clasp_char_t const*             usage
+    ,   int                             major
+    ,   int                             minor
+    ,   int                             revision
     )
     {
         return clasp_showUsage(
