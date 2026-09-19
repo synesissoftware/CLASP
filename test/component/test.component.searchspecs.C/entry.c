@@ -4,7 +4,7 @@
  * Purpose: Component test for search-specs
  *
  * Created: 12th September 2014
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -24,7 +24,7 @@
 #include <clasp/clasp.h>
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -53,7 +53,7 @@ static void* setupParam = NULL;
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 static
@@ -189,13 +189,13 @@ static void test_1_0(void)
 
     if (ENOMEM == r)
     {
-        XTESTS_TEST_FAIL("out of memory");
+        TEST_FAIL("out of memory");
     }
     else
     {
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, r));
-        XTESTS_TEST_INTEGER_EQUAL( 0, searchspecs->flags);
-        XTESTS_TEST_INTEGER_EQUAL(0u, searchspecs->numSpecs);
+        REQUIRE(TEST_INT_EQ(0, r));
+        TEST_INT_EQ( 0, searchspecs->flags);
+        TEST_INT_EQ(0u, searchspecs->numSpecs);
     }
 }
 
@@ -220,15 +220,15 @@ static void test_1_1(void)
 
     if (ENOMEM == r)
     {
-        XTESTS_TEST_FAIL("out of memory");
+        TEST_FAIL("out of memory");
     }
     else
     {
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(0, r));
-        XTESTS_TEST_INTEGER_EQUAL( 0, searchspecs->flags);
-        XTESTS_REQUIRE(XTESTS_TEST_INTEGER_EQUAL(1u, searchspecs->numSpecs));
+        REQUIRE(TEST_INT_EQ(0, r));
+        TEST_INT_EQ( 0, searchspecs->flags);
+        REQUIRE(TEST_INT_EQ(1u, searchspecs->numSpecs));
 
-        XTESTS_TEST_INTEGER_EQUAL(1u, searchspecs->specs[0].directory.len);
+        TEST_INT_EQ(1u, searchspecs->specs[0].directory.len);
     }
 }
 
