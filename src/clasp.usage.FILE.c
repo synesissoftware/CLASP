@@ -131,15 +131,15 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = 0; i != numSpecifications; ++i)
     {
-        clasp_specification_t const* alias2 = specifications + i;
+        clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(alias2->type))
+        if (clasp_is_valid_specification_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
-            size_t  lenLong2    =   clasp_longOptionName_strlen_(alias2->mappedArgument, flags);
+            size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
             {
                 if (1u == ++numberOfMatches)
                 {
@@ -161,29 +161,29 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_specification_t const* alias2 = specifications + i;
+        clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(alias2->type))
+        if (clasp_is_valid_specification_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
-            size_t  lenLong2    =   clasp_longOptionName_strlen_(alias2->mappedArgument, flags);
+            size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
             {
-                clasp_char_t const* const equal = clasp_strchreq_(alias2->mappedArgument, flags);
+                clasp_char_t const* const equal = clasp_strchreq_(spec2->mappedArgument, flags);
 
                 if (NULL != equal)
                 {
                     ;
                 }
-                else if (   NULL == alias2->help ||
-                            '\0' == alias2->help[0])
+                else if (   NULL == spec2->help ||
+                            '\0' == spec2->help[0])
                 {
                     ;
                 }
-                else if (   NULL != alias2->name &&
-                            '\0' != alias2->name[0])
+                else if (   NULL != spec2->name &&
+                            '\0' != spec2->name[0])
                 {
                     ;
                 }
@@ -199,24 +199,24 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_specification_t const* alias2 = specifications + i;
+        clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(alias2->type))
+        if (clasp_is_valid_specification_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
-            size_t  lenLong2    =   clasp_longOptionName_strlen_(alias2->mappedArgument, flags);
+            size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
             {
-                clasp_char_t const* const equal = clasp_strchreq_(alias2->mappedArgument, flags);
+                clasp_char_t const* const equal = clasp_strchreq_(spec2->mappedArgument, flags);
 
                 if (NULL != equal)
                 {
                     ;
                 }
-                else if (   NULL == alias2->help ||
-                            '\0' == alias2->help[0])
+                else if (   NULL == spec2->help ||
+                            '\0' == spec2->help[0])
                 {
                     ;
                 }
@@ -232,23 +232,23 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_specification_t const* alias2 = specifications + i;
+        clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(alias2->type))
+        if (clasp_is_valid_specification_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
-            size_t  lenLong2    =   clasp_longOptionName_strlen_(alias2->mappedArgument, flags);
+            size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
             {
-                if (NULL == alias2->help ||
-                    '\0' == alias2->help[0])
+                if (NULL == spec2->help ||
+                    '\0' == spec2->help[0])
                 {
                     ;
                 }
-                else if (NULL != alias2->name &&
-                        '\0' != alias2->name[0])
+                else if (NULL != spec2->name &&
+                        '\0' != spec2->name[0])
                 {
                     ;
                 }
@@ -264,18 +264,18 @@ static size_t clasp_find_matching_primary_(
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {
-        clasp_specification_t const* alias2 = specifications + i;
+        clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(alias2->type))
+        if (clasp_is_valid_specification_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
-            size_t  lenLong2    =   clasp_longOptionName_strlen_(alias2->mappedArgument, flags);
+            size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
             {
-                if (NULL == alias2->help ||
-                    '\0' == alias2->help[0])
+                if (NULL == spec2->help ||
+                    '\0' == spec2->help[0])
                 {
                     ;
                 }
@@ -604,24 +604,24 @@ clasp_show_body_by_FILE(
 
     { size_t i; for (i = 0; i != numSpecifications; ++i)
     {
-        clasp_specification_t const* alias = specifications + i;
+        clasp_specification_t const* spec = specifications + i;
 
-        if (CLASP_ARGTYPE_TACIT_ == alias->type)
+        if (CLASP_ARGTYPE_TACIT_ == spec->type)
         {
             break;
         }
         else
-        if (CLASP_ARGTYPE_GAP_ == alias->type)
+        if (CLASP_ARGTYPE_GAP_ == spec->type)
         {
             if (0 != i)
             {
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
             }
 
-            if (NULL != alias->help &&
-                '\0' != alias->help[0])
+            if (NULL != spec->help &&
+                '\0' != spec->help[0])
             {
-    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s\n"), (int)prefixLen, prefixPtr, alias->help);
+    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s\n"), (int)prefixLen, prefixPtr, spec->help);
     clasp_fprintf_(stm, CLASP_LITERAL_("\n"));
             }
 
@@ -629,10 +629,10 @@ clasp_show_body_by_FILE(
         }
         else
         {
-            size_t const    primaryIndex    =   clasp_find_matching_primary_(specifications, numSpecifications, alias, flags);
+            size_t const    primaryIndex    =   clasp_find_matching_primary_(specifications, numSpecifications, spec, flags);
 
-            clasp_char_t const* const   equals      =   (NULL == alias->mappedArgument) ? NULL : clasp_strchreq_(alias->mappedArgument, flags);
-            size_t const                maLen       =   (NULL == alias->mappedArgument) ? 0u : (NULL == equals) ? clasp_strlen_(alias->mappedArgument) : (size_t)(equals - alias->mappedArgument);
+            clasp_char_t const* const   equals      =   (NULL == spec->mappedArgument) ? NULL : clasp_strchreq_(spec->mappedArgument, flags);
+            size_t const                maLen       =   (NULL == spec->mappedArgument) ? 0u : (NULL == equals) ? clasp_strlen_(spec->mappedArgument) : (size_t)(equals - spec->mappedArgument);
             clasp_char_t const* const   defValue    =   (NULL != equals) ? (equals + 1) : NULL;
             size_t const                defValLen   =   (NULL == defValue) ? 0u : clasp_strlen_(defValue);
 
@@ -660,37 +660,37 @@ clasp_show_body_by_FILE(
              */
             { size_t j; for (j = 0; j != numSpecifications; ++j)
             {
-                clasp_specification_t const* alias2 = specifications + j;
+                clasp_specification_t const* spec2 = specifications + j;
 
                 if (j != i)
                 {
-                    if (NULL != alias->mappedArgument &&
-                        NULL != alias2->mappedArgument)
+                    if (NULL != spec->mappedArgument &&
+                        NULL != spec2->mappedArgument)
                     {
-                        size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
-                        size_t  lenLong2    =   clasp_longOptionName_strlen_(alias2->mappedArgument, flags);
+                        size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
+                        size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
                         if (lenLong1 == lenLong2 &&
-                            0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
+                            0 == clasp_strncmp_(spec->mappedArgument, spec2->mappedArgument, lenLong1))
                         {
-                            if (NULL != alias2->name &&
-                                '\0' != alias2->name[0])
+                            if (NULL != spec2->name &&
+                                '\0' != spec2->name[0])
                             {
-                                clasp_char_t const* const equal = clasp_strchreq_(alias2->mappedArgument, flags);
+                                clasp_char_t const* const equal = clasp_strchreq_(spec2->mappedArgument, flags);
 
                                 if (NULL != equal)
                                 {
-    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s => %s\n"), (int)prefixLen, prefixPtr, alias2->name, alias2->mappedArgument);
+    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s => %s\n"), (int)prefixLen, prefixPtr, spec2->name, spec2->mappedArgument);
                                 }
                                 else
                                 {
-                                    if (CLASP_ARGTYPE_OPTION == alias->type)
+                                    if (CLASP_ARGTYPE_OPTION == spec->type)
                                     {
-    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s <value>\n"), (int)prefixLen, prefixPtr, alias2->name);
+    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s <value>\n"), (int)prefixLen, prefixPtr, spec2->name);
                                     }
                                     else
                                     {
-    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s\n"), (int)prefixLen, prefixPtr, alias2->name);
+    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s\n"), (int)prefixLen, prefixPtr, spec2->name);
                                     }
                                 }
                             }
@@ -699,23 +699,23 @@ clasp_show_body_by_FILE(
                 }
             }}
 
-            if (NULL != alias->name &&
-                '\0' != alias->name[0])
+            if (NULL != spec->name &&
+                '\0' != spec->name[0])
             {
-                size_t  lenShort    =   clasp_longOptionName_strlen_(alias->name, flags);
-                size_t  lenLong     =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
+                size_t  lenShort    =   clasp_longOptionName_strlen_(spec->name, flags);
+                size_t  lenLong     =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
 
                 if (lenShort != lenLong ||
-                    0 != clasp_strncmp_(alias->name, alias->mappedArgument, lenLong))
+                    0 != clasp_strncmp_(spec->name, spec->mappedArgument, lenLong))
                 {
-    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s%s\n"), (int)prefixLen, prefixPtr, alias->name, (alias->type == CLASP_ARGTYPE_OPTION) ? CLASP_LITERAL_(" <value>") : CLASP_LITERAL_(""));
+    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%s%s\n"), (int)prefixLen, prefixPtr, spec->name, (spec->type == CLASP_ARGTYPE_OPTION) ? CLASP_LITERAL_(" <value>") : CLASP_LITERAL_(""));
                 }
             }
-            if ((alias->type == CLASP_ARGTYPE_OPTION) &&
-                NULL != alias->valueSet &&
-                '\0' != alias->valueSet[0])
+            if ((spec->type == CLASP_ARGTYPE_OPTION) &&
+                NULL != spec->valueSet &&
+                '\0' != spec->valueSet[0])
             {
-                clasp_char_t* valueSet = clasp_strdup_raw_(1 + alias->valueSet);
+                clasp_char_t* valueSet = clasp_strdup_raw_(1 + spec->valueSet);
 
                 if (NULL == valueSet)
                 {
@@ -748,10 +748,10 @@ clasp_show_body_by_FILE(
                         clasp_char_t*       tok;
                         struct
                         strtok_savectxt_t   sc;
-                        const int           allowOthers =   (alias->valueSet[0] == valueSet[len - 1]);
+                        const int           allowOthers =   (spec->valueSet[0] == valueSet[len - 1]);
                         size_t              braceIndex  =   0;
 
-                        delim[0]    =   alias->valueSet[0];
+                        delim[0]    =   spec->valueSet[0];
                         delim[1]    =   '\0';
 
                         braces[0]   =   bracePairs[braceIndex][0];
@@ -782,8 +782,8 @@ clasp_show_body_by_FILE(
                        /* PPPmmmmVV           bbOO                DD*/
     , CLASP_LITERAL_("%*s%.*s%s as one of %s%s%s%s\n")
     , (int)prefixLen, prefixPtr
-    , (int)maLen, alias->mappedArgument
-    , (alias->type == CLASP_ARGTYPE_OPTION)
+    , (int)maLen, spec->mappedArgument
+    , (spec->type == CLASP_ARGTYPE_OPTION)
         ? CLASP_LITERAL_("=<value>")
         : CLASP_LITERAL_("")
     , buff
@@ -806,11 +806,11 @@ clasp_show_body_by_FILE(
             else
             {
 print_plain:
-    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%.*s%s\n"), (int)prefixLen, prefixPtr, (int)maLen, alias->mappedArgument, (alias->type == CLASP_ARGTYPE_OPTION) ? CLASP_LITERAL_("=<value>") : CLASP_LITERAL_(""));
+    clasp_fprintf_(stm, CLASP_LITERAL_("%*s%.*s%s\n"), (int)prefixLen, prefixPtr, (int)maLen, spec->mappedArgument, (spec->type == CLASP_ARGTYPE_OPTION) ? CLASP_LITERAL_("=<value>") : CLASP_LITERAL_(""));
             }
-            if (NULL != alias->help)
+            if (NULL != spec->help)
             {
-    clasp_show_split_option_help_limit_width_by_FILE_(ctxt, alias->help, stm, info->width, info->assumedTabWidth);
+    clasp_show_split_option_help_limit_width_by_FILE_(ctxt, spec->help, stm, info->width, info->assumedTabWidth);
             }
             { int l; for (l = 0; l != info->blanksBetweenItems; ++l)
             {

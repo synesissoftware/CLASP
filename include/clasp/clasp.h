@@ -637,7 +637,7 @@ typedef enum clasp_argtype_t clasp_argtype_t;
  */
 struct clasp_argument_t
 {
-    clasp_slice_t               resolvedName;       /*!< The resolved name of the argument, based on the specifications, or the given name if no matching alias */
+    clasp_slice_t               resolvedName;       /*!< The resolved name of the argument, based on the specifications, or the given name if no matching specification */
     clasp_slice_t               givenName;          /*!< The actual name of the argument given */
     clasp_slice_t               value;              /*!< The value, if any */
     clasp_argtype_t             type;               /*!< The type: CLASP_ARGTYPE_VALUE, CLASP_ARGTYPE_OPTION, or CLASP_ARGTYPE_FLAG */

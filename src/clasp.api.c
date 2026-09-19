@@ -362,11 +362,11 @@ clasp_diagnostic_context_from_args_(
 
     return &argsx->ctxt;
 }
-
 #if 0
+
 static
 clasp_specification_t const*
-clasp_lookup_alias_len_(
+clasp_lookup_spec_len_(
     clasp_specification_t const specifications[]
 ,   clasp_char_t const*         arg
 ,   size_t                      cchArg
@@ -375,19 +375,19 @@ clasp_lookup_alias_len_(
 
 static
 clasp_specification_t const*
-clasp_lookup_alias_(
+clasp_lookup_specification_(
     clasp_specification_t const specifications[]
 ,   clasp_char_t const*         arg
 ,   unsigned                    flags
 )
 {
-    return clasp_lookup_alias_len_(specifications, arg, clasp_strlen_(arg), flags);
+    return clasp_lookup_spec_len_(specifications, arg, clasp_strlen_(arg), flags);
 }
 #endif
 
-/* Looks up the given alias in the specifications vector, searching first
- * for the alias, then for non-defaulted mapped arguments, then for
- * defaulted mapped arguments.
+/* Looks up the given item in the specifications vector, searching first for
+ * the alias, then for non-defaulted mapped arguments, then for defaulted
+ * mapped arguments.
  *
  * \param specifications The specifications array;
  * \param arg Pointer to the argument;
@@ -396,7 +396,7 @@ clasp_lookup_alias_(
  */
 static
 clasp_specification_t const*
-clasp_lookup_alias_len_(
+clasp_lookup_spec_len_(
     clasp_specification_t const specifications[]
 ,   clasp_char_t const*         arg
 ,   size_t                      cchArg
@@ -411,34 +411,34 @@ clasp_lookup_alias_len_(
 
         /* search in the specifications */
 
-        { clasp_specification_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
+        { clasp_specification_t const* spec = specifications; for (; CLASP_ARGTYPE_INVALID != spec->type; ++spec)
         {
-            if (NULL != alias->name)
+            if (NULL != spec->name)
             {
-                if (0 == clasp_strncmp_(alias->name, arg, cchArg))
+                if (0 == clasp_strncmp_(spec->name, arg, cchArg))
                 {
-                    return alias;
+                    return spec;
                 }
             }
         }}
 
         /* search in the mappedArgument(s), but only those that don't have default values */
 
-        { clasp_specification_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
+        { clasp_specification_t const* spec = specifications; for (; CLASP_ARGTYPE_INVALID != spec->type; ++spec)
         {
-            if (NULL != alias->mappedArgument)
+            if (NULL != spec->mappedArgument)
             {
-                clasp_char_t const* const equal = clasp_strchreq_(alias->mappedArgument, flags);
+                clasp_char_t const* const equal = clasp_strchreq_(spec->mappedArgument, flags);
 
                 if (NULL == equal)
                 {
-                    const size_t len = clasp_strlen_(alias->mappedArgument);
+                    const size_t len = clasp_strlen_(spec->mappedArgument);
 
                     if (len == cchArg)
                     {
-                        if (0 == clasp_strncmp_(alias->mappedArgument, arg, cchArg))
+                        if (0 == clasp_strncmp_(spec->mappedArgument, arg, cchArg))
                         {
-                            return alias;
+                            return spec;
                         }
                     }
                 }
@@ -447,20 +447,20 @@ clasp_lookup_alias_len_(
 
         /* search in the mappedArgument(s), but only those that do have default values */
 
-        { clasp_specification_t const* alias = specifications; for (; CLASP_ARGTYPE_INVALID != alias->type; ++alias)
+        { clasp_specification_t const* spec = specifications; for (; CLASP_ARGTYPE_INVALID != spec->type; ++spec)
         {
-            if (NULL != alias->mappedArgument)
+            if (NULL != spec->mappedArgument)
             {
-                clasp_char_t const* const equal = clasp_strchreq_(alias->mappedArgument, flags);
+                clasp_char_t const* const equal = clasp_strchreq_(spec->mappedArgument, flags);
 
                 if (NULL != equal)
                 {
-                    const size_t len = (size_t)(equal - alias->mappedArgument);
+                    const size_t len = (size_t)(equal - spec->mappedArgument);
 
                     if (len == cchArg &&
-                        0 == clasp_strncmp_(alias->mappedArgument, arg, cchArg))
+                        0 == clasp_strncmp_(spec->mappedArgument, arg, cchArg))
                     {
-                        return alias;
+                        return spec;
                     }
                 }
             }
@@ -685,7 +685,7 @@ clasp_calculate_sizes_(
 
                     if (NULL != equal1)
                     {
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal1 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, (size_t)(equal1 - arg), flags);
 
                         if (NULL != alias)
                         {
@@ -714,7 +714,7 @@ clasp_calculate_sizes_(
                     {
                         /* = sign not specified */
 
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias)
                         {
@@ -730,7 +730,9 @@ clasp_calculate_sizes_(
                             }
                             else
                             {
-                                /* not implicitly an option, so guided by the alias */
+                                /* not implicitly an option, so guided by
+                                 * the specification.
+                                 */
 
                                 if (CLASP_ARGTYPE_OPTION == alias->type)
                                 {
@@ -748,7 +750,7 @@ clasp_calculate_sizes_(
 
                                     if (!CLASP_STRING_NULL_OR_EMPTY_(alias->name) &&
                                         0 != nextArgLen &&
-                                        NULL == clasp_lookup_alias_len_(specifications, nextArg, nextArgLen, flags))
+                                        NULL == clasp_lookup_spec_len_(specifications, nextArg, nextArgLen, flags))
                                     {
                                         nextArgumentIsValue = clasp_true_v;
                                     }
@@ -806,7 +808,7 @@ clasp_calculate_sizes_(
 
                     if (NULL != equal2)
                     {
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal2 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, (size_t)(equal2 - arg), flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -840,7 +842,7 @@ clasp_calculate_sizes_(
                     {
                         /* work out whether option or flag */
 
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias)
                         {
@@ -920,7 +922,7 @@ clasp_calculate_sizes_(
                                 clasp_specification_t const*    flagAlias;
 
                                 flag[1]     =   arg[j];
-                                flagAlias   =   clasp_lookup_alias_len_(specifications, flag, 2u, flags);
+                                flagAlias   =   clasp_lookup_spec_len_(specifications, flag, 2u, flags);
 
                                 if (NULL != flagAlias &&
                                     NULL != flagAlias->mappedArgument)
@@ -1532,7 +1534,7 @@ clasp_parseArguments_NoWild_(
                     {
                         const size_t nameLen = stlsoft_static_cast(size_t, equal5 - arg);
 
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal5 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, (size_t)(equal5 - arg), flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -1571,7 +1573,7 @@ clasp_parseArguments_NoWild_(
                     {
                         /* = sign not specified */
 
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -1593,7 +1595,9 @@ clasp_parseArguments_NoWild_(
                             }
                             else
                             {
-                                /* not implicitly an option, so guided by the alias */
+                                /* not implicitly an option, so guided by
+                                 * the specification.
+                                 */
 
                                 currentArg->resolvedName.len    =   clasp_strlen_(alias->mappedArgument);
                                 currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, alias->mappedArgument, currentArg->resolvedName.len);
@@ -1616,7 +1620,7 @@ clasp_parseArguments_NoWild_(
 
                                     if (!CLASP_STRING_NULL_OR_EMPTY_(alias->name) &&
                                         0 != nextArgLen &&
-                                        NULL == clasp_lookup_alias_len_(specifications, nextArg, nextArgLen, flags))
+                                        NULL == clasp_lookup_spec_len_(specifications, nextArg, nextArgLen, flags))
                                     {
                                         nextArgumentIsValue = clasp_true_v;
                                     }
@@ -1723,7 +1727,7 @@ clasp_parseArguments_NoWild_(
                     {
                         const size_t nameLen = stlsoft_static_cast(size_t, equal6 - arg);
 
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, (size_t)(equal6 - arg), flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, (size_t)(equal6 - arg), flags);
 
                         if (NULL != alias &&
                             !CLASP_STRING_NULL_OR_EMPTY_(alias->mappedArgument))
@@ -1785,7 +1789,7 @@ clasp_parseArguments_NoWild_(
                     {
                         /* work out whether option or flag */
 
-                        clasp_specification_t const* const alias = clasp_lookup_alias_len_(specifications, arg, argLen, flags);
+                        clasp_specification_t const* const alias = clasp_lookup_spec_len_(specifications, arg, argLen, flags);
 
                         if (NULL != alias)
                         {
@@ -1838,7 +1842,7 @@ clasp_parseArguments_NoWild_(
 
                                 if (nextArgumentIsValue)
                                 {
-                                    currentArg->type = CLASP_ARGTYPE_OPTION; /* Ignore the alias' type here */
+                                    currentArg->type = CLASP_ARGTYPE_OPTION; /* Ignore the specification's type here */
                                 }
 
                                 currentArg->flags               =   0;
@@ -1884,7 +1888,7 @@ clasp_parseArguments_NoWild_(
                                 clasp_specification_t const*    flagAlias;
 
                                 flag[1]     =   arg[j];
-                                flagAlias   =   clasp_lookup_alias_len_(specifications, flag, 2u, flags);
+                                flagAlias   =   clasp_lookup_spec_len_(specifications, flag, 2u, flags);
 
                                 if (NULL != flagAlias)
                                 {
@@ -2144,7 +2148,7 @@ clasp_reportUnrecognisedFlagsAndOptions(
     for (i = 0; i != args->numFlagsAndOptions; ++i)
     {
         clasp_argument_t const* const       arg     =   &args->flagsAndOptions[i];
-        clasp_specification_t const* const  alias   =   clasp_lookup_alias_len_(specifications, arg->resolvedName.ptr, arg->resolvedName.len, flags);
+        clasp_specification_t const* const  alias   =   clasp_lookup_spec_len_(specifications, arg->resolvedName.ptr, arg->resolvedName.len, flags);
 
         if (NULL == alias)
         {
