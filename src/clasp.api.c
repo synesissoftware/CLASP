@@ -145,6 +145,7 @@ clasp_count_flags_and_options_(
         switch (p->type)
         {
         default:
+
             /* fall through */
         case CLASP_ARGTYPE_VALUE:
 
@@ -270,37 +271,48 @@ compare_clasp_argument_t_(
         switch (lhs->type)
         {
         default:
+
             CLASP_ASSERT(0);
         case CLASP_ARGTYPE_VALUE:
+
             switch (rhs->type)
             {
             default:
             case CLASP_ARGTYPE_VALUE:
+
                 CLASP_ASSERT(0);
             case CLASP_ARGTYPE_OPTION:
             case CLASP_ARGTYPE_FLAG:
+
                 return +1;
             }
         case CLASP_ARGTYPE_OPTION:
+
             switch (rhs->type)
             {
             default:
             case CLASP_ARGTYPE_OPTION:
+
                 CLASP_ASSERT(0);
             case CLASP_ARGTYPE_VALUE:
+
                 return -1;
             case CLASP_ARGTYPE_FLAG:
+
                 return +1;
             }
             break;
         case CLASP_ARGTYPE_FLAG:
+
             switch (rhs->type)
             {
             default:
             case CLASP_ARGTYPE_FLAG:
+
                 CLASP_ASSERT(0);
             case CLASP_ARGTYPE_VALUE:
             case CLASP_ARGTYPE_OPTION:
+
                 return -1;
             }
             break;
@@ -1857,13 +1869,17 @@ clasp_parseArguments_NoWild_(
                             switch (currentArg->type)
                             {
                             default:
+
                                 CLASP_ASSERT(0);
                             case CLASP_ARGTYPE_VALUE:
+
                                 CLASP_ASSERT(0);
                             case CLASP_ARGTYPE_OPTION:
+
                                 ++numOptions;
                                 break;
                             case CLASP_ARGTYPE_FLAG:
+
                                 ++numFlags;
                                 break;
                             }
@@ -1941,13 +1957,17 @@ clasp_parseArguments_NoWild_(
                                     switch (currentArg->type)
                                     {
                                     default:
+
                                         CLASP_ASSERT(0);
                                     case CLASP_ARGTYPE_VALUE:
+
                                         CLASP_ASSERT(0);
                                     case CLASP_ARGTYPE_OPTION:
+
                                         ++numOptions;
                                         break;
                                     case CLASP_ARGTYPE_FLAG:
+
                                         ++numFlags;
                                         break;
                                     }
