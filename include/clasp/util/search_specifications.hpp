@@ -4,11 +4,11 @@
  * Purpose: Utility class for processing search specifications.
  *
  * Created: 20th May 2010
- * Updated: 12th July 2024
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2024, Matthew Wilson
+ * Copyright (c) 2010-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -192,7 +192,7 @@ public: // Operations
 
   /** Pushes an element to create/update a search specification.
    *
-   * \param element A directory or a pattern(s).
+   * \param element A directory or a pattern(s);
    *
    * \return Indicates whether the directory or pattern(s) .
    * \retval A corresponding search specification was created/updated.
@@ -339,7 +339,7 @@ public:
 
   /** Pushes a directory element to create/update a search specification.
    *
-   * \param element The directory.
+   * \param element The directory;
    */
   void push_directory(string_type const& element)
   {
@@ -348,7 +348,7 @@ public:
 
   /** Pushes a patterns element to create/update a search specification.
    *
-   * \param element The patterns.
+   * \param element The patterns;
    */
   void push_patterns(string_type const& element)
   {
@@ -403,7 +403,7 @@ public:
   /** Applies the given pattern(s) to any specifications that have empty
    * patterns
    *
-   * \param defaultPatterns The default pattern(s)
+   * \param defaultPatterns The default pattern(s);
    */
   void apply_default_patterns(string_type const& defaultPatterns)
   {
@@ -440,7 +440,7 @@ public: // Attributes
   /** Obtains a non-mutating (const) reference to the search specification
    * at the given index.
    *
-   * \param index The
+   * \param index The;
    *
    * \pre index < size()
    */

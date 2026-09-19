@@ -261,18 +261,18 @@ invoke_(
  * caller-supplied CLASP main function (\c pfnMain) according to the given
  * arguments.
  *
- * \param argc \c argc passed to <code>main()</code>
- * \param argv \c argv passed to <code>main()</code>
- * \param pfnMain Caller-supplied CLASP main function that will be invoked
+ * \param argc \c argc passed to <code>main()</code>;
+ * \param argv \c argv passed to <code>main()</code>;
+ * \param pfnMain Caller-supplied CLASP main function that will be invoked;
  * \param programName Specifies the name of the program, which will be
- *   inferred heuristically if NULL or empty
- * \param specifications Pointer to an specifications array that will be passed to
- *   clasp::parseArguments()
- * \param flags Flags that will be passed to clasp::parseArguments()
+ *   inferred heuristically if \c NULL or empty;
+ * \param specifications Pointer to an specifications array that will be
+ *   passed to clasp::parseArguments();
+ * \param flags Flags that will be passed to clasp::parseArguments();
  * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
- *   semicolon-space appended after the exception information, or NULL for
- *   no suffix
- * \param ctxt
+ *   semicolon-space appended after the exception information, or \c NULL
+ *   for no suffix;
+ * \param ctxt Diagnostic context. May be \c NULL;
  *
  * \note If use of the Pantheios diagnostic logging API library is detected,
  *   via Pantheios C and/or C++ API main headers - pantheios/pantheios.h and

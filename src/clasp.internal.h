@@ -4,11 +4,11 @@
  * Purpose: CLASP internal common header.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -226,7 +226,7 @@ clasp_count_flags_and_options_(
 
 /* Duplicates a string.
  *
- * \param ctxt The diagnostic context. May not be NULL;
+ * \param ctxt The diagnostic context. May not be \c NULL;
  * param s The string to be duplicated;
  */
 clasp_char_t* clasp_strdup_(
@@ -257,8 +257,8 @@ clasp_strchreq_(
 
 /* Counts the number of instances of c in s
  *
- * \param s String to search
- * \param c Character for which to search
+ * \param s String to search;
+ * \param c Character for which to search;
  *
  * \pre (NULL != s)
  * \pre ('\0' != c)
@@ -271,9 +271,9 @@ clasp_strcount_(
 
 /* Counts the number of instances of c in s to length n
  *
- * \param s String to search
- * \param n Maximum number of characters to search
- * \param c Character for which to search
+ * \param s String to search;
+ * \param n Maximum number of characters to search;
+ * \param c Character for which to search;
  *
  * \pre (NULL != s)
  * \pre ('\0' != c)

@@ -4,11 +4,11 @@
  * Purpose: CLASP usage facilities.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -376,11 +376,11 @@ clasp_find_replacement_mappedArgument_(
  * writes the index and length into the variables provided in the given
  * pointers.
  *
- * \param usage The usage string. May not be NULL;
- * \param ix_start Pointer of a variable into which to write the index, if
- *  a replacement is found. 0 is written if not found. May not be NULL;
+ * \param usage The usage string. May not be \c NULL;
+ * \param ix_start Pointer of a variable into which to write the index, if a
+ *   replacement is found. 0 is written if not found. May not be \c NULL;
  * \param len Pointer of a variable into which to write the length, if a
- *  replacement is found. 0 is written if not found. May not be NULL;
+ *   replacement is found. 0 is written if not found. May not be \c NULL;
  */
 static
 int
