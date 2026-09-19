@@ -918,6 +918,7 @@ public: /** Construction */
  * \param argv The <code>argv</code>
  * \param specifications Variable-length array of clasp_specification_t
  *   entries that define the specifications used in parsing. May be \c NULL
+ * \param ctxt Diagnostic context. May be \c NULL;
  * \param args Receives a pointer to the parsed results structure
  *
  * \return An error code indicating the status of the function
@@ -982,10 +983,10 @@ clasp_reportUnrecognisedFlagsAndOptions(
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
  *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
  * \param nSkip Number of unused flag arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   writing into <code>*firstUnusedArg</code>;
  *
  * \return The number of remaining unused flagss (after skipping the
  *   first \c nSkip instances).
@@ -1007,10 +1008,10 @@ clasp_reportUnusedFlags(
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
  *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
  * \param nSkip Number of unused option arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   writing into <code>*firstUnusedArg</code>;
  *
  * \return The number of remaining unused options (after skipping the
  *   first \c nSkip instances).
@@ -1032,10 +1033,10 @@ clasp_reportUnusedOptions(
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
  *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
  * \param nSkip Number of unused flag/option arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   writing into <code>*firstUnusedArg</code>;
  *
  * \return The number of remaining unused flags/options (after skipping the
  *   first \c nSkip instances).
@@ -1045,7 +1046,7 @@ clasp_reportUnusedOptions(
 CLASP_CALL(size_t)
 clasp_reportUnusedFlagsAndOptions(
     clasp_arguments_t const*  args
-,   clasp_argument_t const**  nextUnusedArg
+,   clasp_argument_t const**  firstUnusedArg
 ,   unsigned                  nSkip /* = 0 */
 );
 
@@ -1057,10 +1058,10 @@ clasp_reportUnusedFlagsAndOptions(
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
  *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
  * \param nSkip Number of unused value arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   writing into <code>*firstUnusedArg</code>;
  *
  * \return The number of remaining unused values (after skipping the
  *   first \c nSkip instances).
@@ -1082,10 +1083,10 @@ clasp_reportUnusedValues(
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
  *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
  * \param nSkip Number of unused arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   writing into <code>*firstUnusedArg</code>;
  *
  * \return The number of remaining unused arguments (after skipping the
  *   first \c nSkip instances).
@@ -1129,6 +1130,7 @@ clasp_argumentIsUsed(
  * given flag.
  *
  * \param args Pointer to the clasp_arguments_t instance.
+ * \param mappedArgumentName The argument mapped name;
  *
  * \retval 0 if the flag is not specified
  * \retval !0 if the flag is specified
@@ -1199,6 +1201,7 @@ clasp_checkAllFlags(
  *
  * \param args Pointer to the clasp_arguments_t instance.
  * \param specifications Pointer to the specification array
+ * \param bitMask mask of flags to consider;
  * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
  *   not NULL, it is assumed to be initialised.
  *

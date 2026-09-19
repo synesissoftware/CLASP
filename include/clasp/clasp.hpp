@@ -4,11 +4,11 @@
  * Purpose: C++ layer for the CLASP library.
  *
  * Created: 31st July 2008
- * Updated: 11th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -2520,10 +2520,10 @@ check_next_option(
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ * \param name Name of the flag or option for which to search;
  * \param bitmask Pointer to a variable whose value will be adjusted
  *   according to the presence/absence of the flag/option
- * \param offValue The value to be included into <code>*bitmask</code> if the
+ * \param onValue The value to be included into <code>*bitmask</code> if the
  *   flag/option is present (and specified to be on/true/1)
  * \param offValue The value to be removed from <code>*bitmask</code> if the
  *   flag/option is missing, or specified to be off/false/0
@@ -2557,10 +2557,10 @@ check_flag(
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ * \param name Name of the flag or option for which to search;
  * \param bitmask Pointer to a variable whose value will be adjusted
  *   according to the presence/absence of the flag/option
- * \param offValue The value to be included into <code>*bitmask</code> if the
+ * \param onValue The value to be included into <code>*bitmask</code> if the
  *   flag/option is present (and specified to be on/true/1)
  *
  * \pre (NULL != args)
@@ -2589,7 +2589,7 @@ check_flag(
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ * \param name Name of the flag or option for which to search;
  * \param flagVar <strong>true</strong> if the flag/option is present (and
  *  specified to be on/true/1); <strong>false</strong> otherwise.
  *
@@ -2940,8 +2940,8 @@ check_value(
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
  * \param index The index of the putative value to be obtained
- * \param pslice Pointer to a variable to receive the value's value's
- *   pointer (if found). May not be NULL
+ * \param pptr Pointer to a variable to receive the value's value's pointer
+ *   (if found). May not be \c NULL;
  * \param plen Pointer to a variable to receive the value's value's
  *   length (if found). May be NULL
  *
