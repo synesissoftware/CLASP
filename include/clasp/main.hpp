@@ -4,7 +4,7 @@
  * Purpose: main() entry-point helper functions.
  *
  * Created: 29th December 2010
- * Updated: 19th September 2026
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
 # define CLASP_VER_CLASP_HPP_MAIN_MINOR     1
 # define CLASP_VER_CLASP_HPP_MAIN_REVISION  0
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      44
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      46
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -160,13 +160,13 @@ inline
 int
 invoke_(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
-,   clasp_char_t const*                 programName
+,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt
-,   clasp_char_t const*                 usageHelpSuffix
+,   clasp::char_t const*                usageHelpSuffix
 )
 {
     /* Using declarations */
@@ -198,8 +198,9 @@ invoke_(
     {
         stlsoft::error_desc e(r);
 
-        /* Diagnostic log statement */
+        /* Diagnostic log statement - only if Pantheios included */
 #ifdef PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS
+
         pantheios_logprintf(PANTHEIOS_SEV_ALERT, PANTHEIOS_LITERAL_STRING("%s: could not start program: arguments parsing failed: %s"), programName, e.c_str());
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
 
@@ -217,18 +218,20 @@ invoke_(
 #ifdef PANTHEIOS_INCL_PANTHEIOS_HPP_PANTHEIOS
 
             log_DEBUG(PANTHEIOS_LITERAL_STRING("entering main("), args(argc, argv, args::arg0FileOnly), PANTHEIOS_LITERAL_STRING(")"));
-
 #endif /* Pantheios C++ API */
 
             return pfnMain(clargs);
         }
         catch(clasp::clasp_exception &x)
         {
-            /* Diagnostic log statement */
+            /* Diagnostic log statement - only if Pantheios included */
 #ifdef PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS
+
 # ifdef STLSOFT_CF_RTTI_SUPPORT
+
             pantheios_logprintf(PANTHEIOS_SEV_DEBUG, PANTHEIOS_LITERAL_STRING("%s: invalid-command-line (%s): %s"), programName, typeid(x).name(), x.what());
 # else /* ? STLSOFT_CF_RTTI_SUPPORT */
+
             pantheios_logprintf(PANTHEIOS_SEV_DEBUG, PANTHEIOS_LITERAL_STRING("%s: invalid-command-line: %s"), programName, x.what());
 # endif /* STLSOFT_CF_RTTI_SUPPORT */
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
@@ -248,7 +251,6 @@ invoke_(
         return EXIT_FAILURE;
     }
 }
-
 } /* namespace ximpl */
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
@@ -299,13 +301,13 @@ inline
 int
 invoke(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   pfnMain_t                           pfnMain
-,   clasp_char_t const*                 programName
+,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
-,   clasp_char_t const*                 usageHelpSuffix =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
     if (NULL != programName &&
@@ -369,13 +371,13 @@ inline
 int
 invoke(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   clasp::specification_t const        specifications[]
 ,   pfnMain_t                           pfnMain
-,   clasp_char_t const*                 programName     =   NULL
+,   clasp::char_t const*                programName     =   NULL
 ,   unsigned                            flags           =   0
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
-,   clasp_char_t const*                 usageHelpSuffix =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
     return invoke(
@@ -389,6 +391,7 @@ invoke(
     ,   usageHelpSuffix
     );
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * namespace

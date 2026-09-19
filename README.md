@@ -161,7 +161,7 @@ int main(int argc, char* argv[])
 #include <cstdlib>
 #include <iostream>
 
-static clasp_specification_t const Specifications[] =
+static clasp::specification_t const Specifications[] =
 {
     CLASP_GAP_SECTION("standard flags:"),
     CLASP_STOCK_FLAG_HELP,
@@ -172,7 +172,7 @@ static clasp_specification_t const Specifications[] =
 
 int main(int argc, char* argv[])
 {
-    return clasp::main::invoke(argc, argv, [](clasp_arguments_t const* args) {
+    return clasp::main::invoke(argc, argv, [](clasp::arguments_t const* args) {
 
         if (clasp::flag_specified(args, "--help"))
         {

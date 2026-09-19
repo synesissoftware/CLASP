@@ -2,7 +2,7 @@
 
 | Date                | News Item                 | Details                                                        |
 | ------------------- | ------------------------- | -------------------------------------------------------------- |
-| 20th September 2026 | [Release of 0.15.3](https://github.com/synesissoftware/CLASP/releases/tag/0.15.3) | Doxygen |
+| 20th September 2026 | [Release of 0.15.3](https://github.com/synesissoftware/CLASP/releases/tag/0.15.3) | Doxygen; C++ API uses namespace type aliases                            |
 | 19th September 2026 | [Release of 0.15.2](https://github.com/synesissoftware/CLASP/releases/tag/0.15.2) | Terse xTests; `--no-cpp` CMake; restored `CLASP_VER_ALPHABETA` |
 | 2nd September 2026  | [Release of 0.15.1](https://github.com/synesissoftware/CLASP/releases/tag/0.15.1) | Fixed `CLASP_VER` composite; version unit test |
 | 9th August 2026     | [Release of 0.15.0](https://github.com/synesissoftware/CLASP/releases/tag/0.15.0) | Promoted 0.15.0-rc1 to stable |
