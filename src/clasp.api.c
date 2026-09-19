@@ -510,7 +510,7 @@ clasp_is_recognised_option_or_flag_(
 
 static
 clasp_bool_t
-clasp_check_alias_duplicates_(
+clasp_check_spec_duplicates_(
     clasp_diagnostic_context_t const*   ctxt
 ,   clasp_specification_t const         specifications[]
 )
@@ -1241,7 +1241,7 @@ clasp_parseArguments(
         }}
     }
 
-    if (!clasp_check_alias_duplicates_(ctxt, specifications))
+    if (!clasp_check_spec_duplicates_(ctxt, specifications))
     {
         return EINVAL;
     }
