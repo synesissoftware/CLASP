@@ -178,12 +178,12 @@ static size_t clasp_find_matching_primary_(
                     ;
                 }
                 else if (   NULL == alias2->help ||
-                            '\0' == *alias2->help)
+                            '\0' == alias2->help[0])
                 {
                     ;
                 }
                 else if (   NULL != alias2->name &&
-                            '\0' != *alias2->name)
+                            '\0' != alias2->name[0])
                 {
                     ;
                 }
@@ -216,7 +216,7 @@ static size_t clasp_find_matching_primary_(
                     ;
                 }
                 else if (   NULL == alias2->help ||
-                            '\0' == *alias2->help)
+                            '\0' == alias2->help[0])
                 {
                     ;
                 }
@@ -243,12 +243,12 @@ static size_t clasp_find_matching_primary_(
                 0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
             {
                 if (NULL == alias2->help ||
-                    '\0' == *alias2->help)
+                    '\0' == alias2->help[0])
                 {
                     ;
                 }
                 else if (NULL != alias2->name &&
-                        '\0' != *alias2->name)
+                        '\0' != alias2->name[0])
                 {
                     ;
                 }
@@ -275,7 +275,7 @@ static size_t clasp_find_matching_primary_(
                 0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
             {
                 if (NULL == alias2->help ||
-                    '\0' == *alias2->help)
+                    '\0' == alias2->help[0])
                 {
                     ;
                 }
@@ -675,7 +675,7 @@ clasp_show_body_by_FILE(
                             0 == clasp_strncmp_(alias->mappedArgument, alias2->mappedArgument, lenLong1))
                         {
                             if (NULL != alias2->name &&
-                                '\0' != *alias2->name)
+                                '\0' != alias2->name[0])
                             {
                                 clasp_char_t const* const equal = clasp_strchreq_(alias2->mappedArgument, flags);
 
@@ -701,7 +701,7 @@ clasp_show_body_by_FILE(
             }}
 
             if (NULL != alias->name &&
-                '\0' != *alias->name)
+                '\0' != alias->name[0])
             {
                 size_t  lenShort    =   clasp_longOptionName_strlen_(alias->name, flags);
                 size_t  lenLong     =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
@@ -714,7 +714,7 @@ clasp_show_body_by_FILE(
             }
             if ((alias->type == CLASP_ARGTYPE_OPTION) &&
                 NULL != alias->valueSet &&
-                '\0' != *alias->valueSet)
+                '\0' != alias->valueSet[0])
             {
                 clasp_char_t* valueSet = clasp_strdup_raw_(1 + alias->valueSet);
 
