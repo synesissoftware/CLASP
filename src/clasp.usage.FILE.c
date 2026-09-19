@@ -636,14 +636,13 @@ clasp_show_body_by_FILE(
             clasp_char_t const* const   defValue    =   (NULL != equals) ? (equals + 1) : NULL;
             size_t const                defValLen   =   (NULL == defValue) ? 0u : clasp_strlen_(defValue);
 
-            /* So as to avoid allocating memory, or maintaining
-             * complex relationships between what is an alias and
-             * what is the 'primary' argument, we process each
-             * item by identifying its corresponding primary (which
-             * may be itself).
+            /* So as to avoid allocating memory, or maintaining complex
+             * relationships between what is an alias and what is the
+             * 'primary' argument, we process each item by identifying its
+             * corresponding primary (which may be itself).
              *
-             * once the primary is identified, search all elements
-             * including this one and display any matching specifications
+             * once the primary is identified, search all elements including
+             * this one and display any matching specifications
              *
              * then display this primary
              */

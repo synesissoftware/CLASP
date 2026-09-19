@@ -385,9 +385,9 @@ clasp_lookup_alias_(
 }
 #endif
 
-/* Looks up the given alias in the specifications vector, searching first for the
- * alias, then for non-defaulted mapped arguments, then for defaulted
- * mapped arguments.
+/* Looks up the given alias in the specifications vector, searching first
+ * for the alias, then for non-defaulted mapped arguments, then for
+ * defaulted mapped arguments.
  *
  * \param specifications The specifications array;
  * \param arg Pointer to the argument;
@@ -634,9 +634,8 @@ clasp_calculate_sizes_(
 
     *cbStrings += 1 + programName.len;
 
-    /* process all the arguments, incrementing, where
-     * appropriate, *numArgs, and adding the required
-     * string size (including nul-terminators) to
+    /* process all the arguments, incrementing, where appropriate, *numArgs,
+     * and adding the required string size (including nul-terminators) to
      * cbStrings
      */
 
@@ -673,13 +672,13 @@ clasp_calculate_sizes_(
                 }
                 else
                 {
-                    /* Need to work out whether it is an option, in order
-                     * to work out whether to see whether the next argument
-                     * is a value
+                    /* Need to work out whether it is an option, in order to
+                     * work out whether to see whether the next argument is
+                     * a value.
                      *
                      * Also, we need to check whether it has an equal AND it
                      * has an alias, in which case we must translate the
-                     * name before calculating
+                     * name before calculating.
                      */
 
                     clasp_char_t const* const equal1 = clasp_strchreq_(arg + 2, flags);
@@ -778,8 +777,8 @@ clasp_calculate_sizes_(
                     }
 
                     /* The size is the same whether or not an equal is
-                     * specified, because if it is the '=' will have to
-                     * be replaced by a nul-terminator
+                     * specified, because if it is the '=' will have to be
+                     * replaced by a nul-terminator.
                      */
 
                     *cbStrings += 1u + argLen;
@@ -792,9 +791,9 @@ clasp_calculate_sizes_(
                 if ('\0' == arg[1])
                 {
                     /* This is the special option with no name, which is
-                     * usually used to indicate that the program should
-                     * read from stdin; we don't ascribe any special meaning
-                     * to it here
+                     * usually used to indicate that the program should read
+                     * from stdin; we don't ascribe any special meaning to
+                     * it here.
                      */
 
                     ++*numArgs;
@@ -907,8 +906,8 @@ clasp_calculate_sizes_(
                         }
                         else
                         {
-                            /* It's one or more flags, any of which may also be
-                             * specifications
+                            /* It's one or more flags, any of which may also
+                             * be specifications.
                              */
                             const size_t n = argLen - 1;
 
@@ -965,8 +964,8 @@ clasp_calculate_sizes_(
 
     if (nextArgumentIsValue)
     {
-        /* A separate value argument is required, but not provided. We
-         * will indicate this to the caller by having an empty value
+        /* A separate value argument is required, but not provided. We will
+         * indicate this to the caller by having an empty value.
          */
 
         ++*numArgs;
@@ -1524,7 +1523,7 @@ clasp_parseArguments_NoWild_(
                 else
                 {
                     /* Now work out whether there's an associated value. If
-                     * there is, we will need to allocate the length
+                     * there is, we will need to allocate the length.
                      */
 
                     clasp_char_t const* const equal5 = clasp_strchreq_(arg + 2, flags);
@@ -1686,8 +1685,8 @@ clasp_parseArguments_NoWild_(
                 if ('\0' == arg[1])
                 {
                     /* This is the special option with no name, which is
-                     * usually used to indicate that the program should
-                     * read from stdin
+                     * usually used to indicate that the program should read
+                     * from stdin.
                      */
 
                     currentArg->resolvedName.len    =   1;
@@ -1870,8 +1869,8 @@ clasp_parseArguments_NoWild_(
                         }
                         else
                         {
-                            /* It's one or more flags, any of which may also be
-                             * specifications
+                            /* It's one or more flags, any of which may also
+                             * be specifications.
                              */
                             const size_t                n           =   argLen - 1;
                             clasp_char_t const* const   givenName   =   clasp_add_string_to_area_(&currentString, arg, argLen);
@@ -1889,8 +1888,9 @@ clasp_parseArguments_NoWild_(
 
                                 if (NULL != flagAlias)
                                 {
-                                    /* This is similar to the above processing with the exception
-                                     * that we do not account for following values
+                                    /* This is similar to the above
+                                     * processing with the exception that we
+                                     * do not account for following values.
                                      */
 
                                     clasp_char_t const* equal8;
@@ -1995,8 +1995,8 @@ clasp_parseArguments_NoWild_(
 
     if (nextArgumentIsValue)
     {
-        /* A separate value argument is required, but not provided. We
-         * will indicate this to the caller by having an empty value
+        /* A separate value argument is required, but not provided. We will
+         * indicate this to the caller by having an empty value.
          */
 
         currentArg->value.len       =   0;

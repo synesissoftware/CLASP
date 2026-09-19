@@ -288,8 +288,8 @@ invoke_(
  *   <code>pantheios_getProcessIdentity</code>); otherwise 3. The name
  *   "process" is used.
  *
- * \exception <any> All exceptions not derived from clasp::clasp_exception are
- *   passed through to the caller uncaught.
+ * \exception <any> All exceptions not derived from clasp::clasp_exception
+ *   are passed through to the caller uncaught.
  *
  * \pre argc > 0
  * \pre NULL != argv

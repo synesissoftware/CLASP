@@ -122,7 +122,8 @@ install(TARGETS core
 )
 
 # for now, we just include xtests.h, as it's not clear how to use the
-# PUBLIC_HEADER mechanism to install files into subdirectories (such as xtests/util/temp_file.hpp)
+# PUBLIC_HEADER mechanism to install files into subdirectories (such as
+# xtests/util/temp_file.hpp)
 
 # additional headers into specific sub-directories
 

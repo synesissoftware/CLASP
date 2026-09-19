@@ -4,11 +4,11 @@
  * Purpose: CLASP diagnostics facilities.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -137,8 +137,8 @@ clasp_verify_context_(
 
     *r = 0;
 
-    /* Check the context, and ensure that it specifies all the
-     * memory functions, or none of them
+    /* Check the context, and ensure that it specifies all the memory
+     * functions, or none of them.
      */
     if (NULL != ctxt)
     {
@@ -154,8 +154,7 @@ clasp_verify_context_(
             *r = EINVAL;
         }
 
-        /* If all ok, now copy over the three groups of
-         * fields
+        /* If all ok, now copy over the three groups of fields
          */
 
         local->context       =   NULL;

@@ -151,8 +151,8 @@
  * Defaults to no symbol. Can be defined to a symbol appropriate to the
  * operating system and linkage model. e.g. on Windows you might choose to
  * define it to <code>__declspec(dllexport)</code> when building System Tool
- * Args and to <code>__declspec(dllimport)</code> in client code using System
- * Tool Args.
+ * Args and to <code>__declspec(dllimport)</code> in client code using
+ * System Tool Args.
  *
  * Used in the CLASP_CALL() macro.
  */
@@ -320,7 +320,7 @@
 
 /* We do not enforce that a neutral / non-recognised platform is a problem,
  * because the CLASP library does not rely on any platform-specific
- * features
+ * features.
  */
 # endif /* platform */
 #endif /* !CLASP_OVERRIDE_PLATFORM */
@@ -365,9 +365,10 @@
  *
  * NOTE: as of 0.11, the automatic discrimination of wide-string builds on
  * Windows is removed, because it is more common (and standards-conforming)
- * to use a multibyte main - int main(int argc, char* argv[]) - than the wide
- * main - int _wmain(int argc, wchar_t* argv[]). If you wish to use a wide
- * main, and therefore wide CLASP, you must define CLASP_USE_WIDE_STRINGS.
+ * to use a multibyte main - int main(int argc, char* argv[]) - than the
+ * wide main - int _wmain(int argc, wchar_t* argv[]). If you wish to use a
+ * wide main, and therefore wide CLASP, you must define
+ * CLASP_USE_WIDE_STRINGS.
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
@@ -676,8 +677,8 @@ typedef struct clasp_arguments_t                            clasp_arguments_t;
 /** Structure that defines a specification for a short option or flag; also
  *   used to define help information for all flags and options
  *
- * \note Specifying an entry whose <code>type</code> field has the
- *   value <code>-1</code> terminates the array
+ * \note Specifying an entry whose <code>type</code> field has the value
+ *   <code>-1</code> terminates the array
  */
 struct clasp_specification_t
 {
@@ -727,8 +728,8 @@ typedef clasp_specification_t                               clasp_alias_t;
 
 /** \def CLASP_FLAG_ALIAS(alias, mappedArgument)
  *
- * Equivalent to CLASP_FLAG(), but omits the need to specify an
- * empty/NULL help argument
+ * Equivalent to CLASP_FLAG(), but omits the need to specify an empty/NULL
+ * help argument
  */
 # define CLASP_FLAG_ALIAS(alias, mappedArgument)            CLASP_FLAG((alias), (mappedArgument), NULL)
 
@@ -750,8 +751,8 @@ typedef clasp_specification_t                               clasp_alias_t;
 
 /** \def CLASP_OPTION_ALIAS(alias, mappedArgument)
  *
- * Equivalent to CLASP_OPTION(), but omits the need to specify an
- * empty/NULL help argument
+ * Equivalent to CLASP_OPTION(), but omits the need to specify an empty/NULL
+ * help argument
  */
 # define CLASP_OPTION_ALIAS(alias, mappedArgument)          CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
 
@@ -784,8 +785,8 @@ typedef clasp_specification_t                               clasp_alias_t;
 
 /** \def CLASP_GAP_SECTION(sectionLabel)
  *
- * Defines a section label, that will be displayed by
- * the functions in the \ref group__clasp__api_usage.
+ * Defines a section label, that will be displayed by the functions in the
+ * \ref group__clasp__api_usage.
  *
  * \param sectionLabel A literal character C-style string that serves as a
  *   section label. May be the empty string;
@@ -969,8 +970,8 @@ clasp_getSpecifications(
     clasp_arguments_t const*            args
 );
 
-/** Reports how many flags/options are not recognised relative to the
- * given \c specifications array, and returns a pointer to the \c nSkip'th
+/** Reports how many flags/options are not recognised relative to the given
+ * \c specifications array, and returns a pointer to the \c nSkip'th
  * unrecognised instance.
  *
  * \pre NULL != args
@@ -984,9 +985,8 @@ clasp_reportUnrecognisedFlagsAndOptions(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many flags arguments were not used by the
- * application, and returns a pointer to the first unused flag
- * argument.
+/** Reports how many flags arguments were not used by the application, and
+ * returns a pointer to the first unused flag argument.
  *
  * \ingroup group__clasp__api_parsing
  *
@@ -997,8 +997,8 @@ clasp_reportUnrecognisedFlagsAndOptions(
  * \param nSkip Number of unused flag arguments to skip before writing into
  *   <code>*firstUnusedArg</code>;
  *
- * \return The number of remaining unused flagss (after skipping the
- *   first \c nSkip instances).
+ * \return The number of remaining unused flagss (after skipping the first
+ *   \c nSkip instances).
  *
  * \pre NULL != args
  */
@@ -1009,9 +1009,8 @@ clasp_reportUnusedFlags(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many option arguments were not used by the
- * application, and returns a pointer to the first unused option
- * argument.
+/** Reports how many option arguments were not used by the application, and
+ * returns a pointer to the first unused option argument.
  *
  * \ingroup group__clasp__api_parsing
  *
@@ -1022,8 +1021,8 @@ clasp_reportUnusedFlags(
  * \param nSkip Number of unused option arguments to skip before writing
  *   into <code>*firstUnusedArg</code>;
  *
- * \return The number of remaining unused options (after skipping the
- *   first \c nSkip instances).
+ * \return The number of remaining unused options (after skipping the first
+ *   \c nSkip instances).
  *
  * \pre NULL != args
  */
@@ -1034,9 +1033,8 @@ clasp_reportUnusedOptions(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many flag/option arguments were not used by the
- * application, and returns a pointer to the first unused flag/option
- * argument.
+/** Reports how many flag/option arguments were not used by the application,
+ * and returns a pointer to the first unused flag/option argument.
  *
  * \ingroup group__clasp__api_parsing
  *
@@ -1059,9 +1057,8 @@ clasp_reportUnusedFlagsAndOptions(
 ,   unsigned                  nSkip /* = 0 */
 );
 
-/** Reports how many value arguments were not used by the
- * application, and returns a pointer to the first unused value
- * argument.
+/** Reports how many value arguments were not used by the application, and
+ * returns a pointer to the first unused value argument.
  *
  * \ingroup group__clasp__api_parsing
  *
@@ -1072,8 +1069,8 @@ clasp_reportUnusedFlagsAndOptions(
  * \param nSkip Number of unused value arguments to skip before writing into
  *   <code>*firstUnusedArg</code>;
  *
- * \return The number of remaining unused values (after skipping the
- *   first \c nSkip instances).
+ * \return The number of remaining unused values (after skipping the first
+ *   \c nSkip instances).
  *
  * \pre NULL != args
  */
@@ -1084,9 +1081,8 @@ clasp_reportUnusedValues(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many arguments were not used by the
- * application, and returns a pointer to the first unused
- * argument.
+/** Reports how many arguments were not used by the application, and returns
+ * a pointer to the first unused argument.
  *
  * \ingroup group__clasp__api_parsing
  *
@@ -1214,9 +1210,9 @@ clasp_checkAllFlags(
  * \param bitFlags Optional pointer to a bit-flags variable. May be \c NULL.
  *   If not \c NULL, it is assumed to be initialised;
  *
- * \note If \c bitFlags is not NULL, it is assumed to be initialised (whether
- *   to 0, or a mask representing previous calculation), and bit-flags from
- *   any found flag arguments will be OR'd into it.
+ * \note If \c bitFlags is not NULL, it is assumed to be initialised
+ *   (whether to 0, or a mask representing previous calculation), and
+ *   bit-flags from any found flag arguments will be OR'd into it.
  *
  * \note All flags found will be marked as used.
  *
@@ -1303,8 +1299,8 @@ clasp_valueIsTreatedHyphen(
  *
  * \ingroup group__clasp__api_parsing
  *
- * clasp_parseArguments() flag used to prevent the double-hyphen argument \c "--"
- * from being recognised as a special modifier.
+ * clasp_parseArguments() flag used to prevent the double-hyphen argument
+ * \c "--" from being recognised as a special modifier.
  *
  * Normally the \c "--" argument is interpreted to mean that all subsequent
  * arguments are treated as values, regardless of whether they're prefixed
@@ -1317,14 +1313,14 @@ clasp_valueIsTreatedHyphen(
  *
  * \ingroup group__clasp__api_parsing
  *
- * clasp_parseArguments() flag used to cause the single-hyphen argument \c "-"
- * to be recognised as a value.
+ * clasp_parseArguments() flag used to cause the single-hyphen argument
+ * \c "-" to be recognised as a value.
  *
  * Normally the \c "-" argument is interpreted as a flag/option, requiring
- * that client code examine the flags and options in addition to the
- * values, in order to process a sequence of files including stdin (as
- * represented by \c "-"). Specifying this flag causes it to appear in
- * the values, so all values can be processed together.
+ * that client code examine the flags and options in addition to the values,
+ * in order to process a sequence of files including stdin (as represented
+ * by \c "-"). Specifying this flag causes it to appear in the values, so
+ * all values can be processed together.
  *
  * \note To avoid ambiguity, a \c "-" transformed in this way will have
  *   non-empty \c resolvedName and \c givenName fields
@@ -1339,9 +1335,9 @@ clasp_valueIsTreatedHyphen(
  * wildcards on Windows.
  *
  * Because the Windows shell does not automatically expand wildcards,
- * clasp_parseArguments() performs this function on any values containing '?'
- * or '*' before returning the arguments. If that is not required, it can
- * be suppressed.
+ * clasp_parseArguments() performs this function on any values containing
+ * '?' or '*' before returning the arguments. If that is not required, it
+ * can be suppressed.
  *
  * \note Specifying this flag does not remove the requirement to link the
  *   <a href="http://recls.org/">recls</a> library along with clasp to
@@ -1386,8 +1382,8 @@ clasp_valueIsTreatedHyphen(
 
 /** \def CLASP_STOCK_FLAG_HELP
  *
- * Defines a CLASP_FLAG() specification for the "--help" de-facto
- * standard flag.
+ * Defines a CLASP_FLAG() specification for the "--help" de-facto standard
+ * flag.
  */
 #define CLASP_STOCK_FLAG_HELP                               CLASP_FLAG(NULL, "--help", "Show this help and terminate.")
 /** \def CLASP_STOCK_FLAG_VERSION
@@ -1590,8 +1586,8 @@ clasp_showHeader(
 ,   int                             blanksBetweenItems
 );
 
-/** Displays body part of the usage (aka help) information for the
- * program, according to the given parameters.
+/** Displays body part of the usage (aka help) information for the program,
+ * according to the given parameters.
  *
  * \param args The arguments obtained from parsing the command-line. May not
  *   be \c NULL;
@@ -1681,7 +1677,7 @@ clasp_countAliases(
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
-/**  Stock function that shows version to a <code>FILE*</code>
+/** Stock function that shows version to a <code>FILE*</code>
  */
 CLASP_CALL(void)
 clasp_showVersionByFILE(
@@ -1690,7 +1686,7 @@ clasp_showVersionByFILE(
 ,   clasp_specification_t const specifications[]
 );
 
-/**  Stock function that shows header to a <code>FILE*</code>
+/** Stock function that shows header to a <code>FILE*</code>
  */
 CLASP_CALL(void)
 clasp_showHeaderByFILE(
@@ -1699,7 +1695,7 @@ clasp_showHeaderByFILE(
 ,   clasp_specification_t const specifications[]
 );
 
-/**  Stock function that shows body to a <code>FILE*</code>
+/** Stock function that shows body to a <code>FILE*</code>
  */
 CLASP_CALL(void)
 clasp_showBodyByFILE(
