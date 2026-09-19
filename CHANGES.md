@@ -9,6 +9,8 @@
 * Added scratch program **test/scratch/versions**;
 * Fleshed out **NEWS.md** chronology with a **Details** column;
 * Corrected **INSTALL.md** include paths, step numbering, and dependency notes (**C** core has no **STLSoft** requirement; **C++** API / tests do);
+* Added **`--no-cpp`** / **`-C`** to **prepare_cmake.sh** and gated **STLSoft** discovery on **`NO_CLASP_CPP_API`** / **`BUILD_TESTING`** (so a **C**-only configure needs neither **STLSoft** nor **xTests**);
+* Unified **prepare_cmake.sh** MinGW / default configure into a single **`cmake`** invocation (**`CMakeGeneratorArgs`**; all **`-D`** options always passed);
 * Fixed **FAQ.md** test-directory description;
 * Applied **misc-dev-scripts** **0.6.0** editor/Git/`.sis` drop-in templates on **boilerplate**;
 * Restored historical **.gitignore** patterns as a sorted union with **misc-dev-scripts** gold section layout;

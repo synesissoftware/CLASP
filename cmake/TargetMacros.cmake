@@ -63,10 +63,18 @@ function(define_example_program program_name entry_point_source_name)
 		${entry_point_source_name}
 	)
 
+	if(NO_CLASP_CPP_API)
+
+		set(_clasp_WANT_STLSOFT 0)
+	else(NO_CLASP_CPP_API)
+
+		set(_clasp_WANT_STLSOFT 1)
+	endif(NO_CLASP_CPP_API)
+
 	target_link_libraries(${program_name}
 		PRIVATE
 			core
-			$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+			$<IF:${_clasp_WANT_STLSOFT},$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>,>
 	)
 
 	if(WIN32)

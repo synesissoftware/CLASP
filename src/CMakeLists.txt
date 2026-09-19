@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for CLASP core library
 #
 # Created:  ...
-# Updated:  20th March 2025
+# Updated:  19th September 2026
 #
 # ######################################################################## #
 
@@ -82,10 +82,21 @@ target_include_directories(core
 		$<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(core
-	PRIVATE
-		$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
-)
+if(NOT NO_CLASP_CPP_API)
+
+	target_link_libraries(core
+		PRIVATE
+			$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+	)
+
+	if(DEFINED STLSOFT_INCLUDE_DIR)
+
+		target_include_directories(core
+			PUBLIC
+				${STLSOFT_INCLUDE_DIR}
+		)
+	endif()
+endif()
 
 
 target_compile_options(core
@@ -115,54 +126,23 @@ install(TARGETS core
 
 # additional headers into specific sub-directories
 
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
+if(NO_CLASP_CPP_API)
 
-install(
-	DIRECTORY ${CMAKE_SOURCE_DIR}/include/
-	DESTINATION include
-	FILES_MATCHING
-	PATTERN "*.h*"
-)
+	install(
+		DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+		DESTINATION include
+		FILES_MATCHING
+		PATTERN "*.h"
+	)
+else(NO_CLASP_CPP_API)
 
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "*.hpp"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "[im]*.h"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
-#     DESTINATION include/${PROJECT_NAME_LOWER}
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/internal
-#     DESTINATION include/${PROJECT_NAME_LOWER}
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
-
-# install(
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/systemtools
-#     DESTINATION include
-#     FILES_MATCHING
-#     PATTERN "*.h*"
-# )
+	install(
+		DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+		DESTINATION include
+		FILES_MATCHING
+		PATTERN "*.h*"
+	)
+endif(NO_CLASP_CPP_API)
 
 
 # ############################## end of file ############################# #

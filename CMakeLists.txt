@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for CLASP
 #
 # Created:  8th January 2021
-# Updated:  9th March 2025
+# Updated:  19th September 2026
 #
 # ######################################################################## #
 
@@ -108,37 +108,55 @@ option(BUILD_TESTING "Build tests" ON)
 # dependencies
 #
 # required:
-# - STLSoft;
+# - (none for the C core);
 #
 # optional:
+# - STLSoft - required unless NO_CLASP_CPP_API is specified, and by xTests
+#    (for testing);
 # - xTests - required for testing;
 
 
 # ############################
 # STLSoft
 
-if(DEFINED STLSOFT)
+if(BUILD_TESTING OR NOT NO_CLASP_CPP_API)
 
-	message("-- STLSOFT provided as CMake variable with value '${STLSOFT}'")
+	if(NO_CLASP_CPP_API)
 
-	set(STLSOFT_INCLUDE_DIR ${STLSOFT}/include)
-elseif(DEFINED ENV{STLSOFT})
+		message("-- NO_CLASP_CPP_API=ON (C++ API disabled); STLSoft still required for testing")
+	endif()
 
-	message("-- STLSOFT provided as environment variable with value '$ENV{STLSOFT}'")
+	if(NOT DEFINED STLSOFT AND NOT DEFINED ENV{STLSOFT})
 
-	set(STLSOFT_INCLUDE_DIR $ENV{STLSOFT}/include)
+		set(STLSoft_REQUIRED_VERSION_ 1.11)
+
+		find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
+
+		message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
+	else()
+
+		if(DEFINED STLSOFT)
+
+			message("-- STLSOFT provided as CMake variable with value '${STLSOFT}'")
+
+			set(STLSOFT_INCLUDE_DIR ${STLSOFT}/include)
+		else()
+
+			message("-- STLSOFT provided as environment variable with value '$ENV{STLSOFT}'")
+
+			set(STLSOFT_INCLUDE_DIR $ENV{STLSOFT}/include)
+		endif()
+
+		get_filename_component(STLSOFT_INCLUDE_DIR "${STLSOFT_INCLUDE_DIR}" ABSOLUTE)
+
+		include_directories(${STLSOFT_INCLUDE_DIR})
+	endif()
 else()
 
-	set(STLSoft_REQUIRED_VERSION_ 1.11)
+	if(NO_CLASP_CPP_API)
 
-	find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
-endif()
-
-if(DEFINED STLSOFT_INCLUDE_DIR)
-
-	include_directories(${STLSOFT_INCLUDE_DIR})
+		message("-- NO_CLASP_CPP_API=ON and BUILD_TESTING=OFF; STLSoft not required")
+	endif()
 endif()
 
 

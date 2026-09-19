@@ -34,7 +34,10 @@ endif()
 
 
 add_subdirectory(C)
-add_subdirectory(C++)
+if(NOT NO_CLASP_CPP_API)
+
+	add_subdirectory(C++)
+endif()
 add_subdirectory(cvu)
 
 

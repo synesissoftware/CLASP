@@ -31,28 +31,27 @@ The primary choice for installation is by use of **CMake**.
    $ git clone https://github.com/synesissoftware/CLASP/
    ```
 
-2. Prepare the CMake configuration, via the **prepare_cmake.sh** script, as
-   in:
+2. Prepare the CMake configuration, via the **prepare_cmake.sh** script.
+
+   For a minimal **C** API-only install (no **STLSoft** / **xTests**
+   required):
 
    ```bash
    $ cd ~/open-source/CLASP
-   $ ./prepare_cmake.sh
+   $ ./prepare_cmake.sh --no-cpp --disable-testing -v
    ```
 
-   **NOTE**: if you intend only to build the library then you can eschew
-   building of examples (`-E`) and tests (`-T`) and use the command:
+   For a full build including the **C++** API, examples, and tests, install
+   **STLSoft** 1.11 (and **xTests** for tests) via their own **CMake**
+   scripts first, then:
 
    ```bash
    $ cd ~/open-source/CLASP
-   $ ./prepare_cmake.sh -E -T
+   $ ./prepare_cmake.sh -v
    ```
 
-   The installed **C** library itself does not require **STLSoft**. The
-   current CMake tree still expects
-   [**STLSoft**](https://github.com/synesissoftware/STLSoft) 1.11 (or later)
-   at configure time because examples / tests (and the C++ API headers) use
-   it. With testing enabled you will also need
-   [**xTests**](https://github.com/synesissoftware/xTests) (0.25 or later).
+   If **STLSoft** is available as a source tree rather than an installed
+   **CMake** package, pass its root with `--stlsoft-root-dir` / `-s`.
 
    (**Hint**: execute `$ ./prepare_cmake.sh --help` for more information.)
 
