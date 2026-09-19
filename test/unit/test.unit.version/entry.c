@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP version macros.
  *
  * Created: 2nd September 2026
- * Updated: 19th September 2026
+ * Updated: 20th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -68,7 +68,7 @@ static void test_CLASP_VER_components(void)
 {
     TEST_INT_EQ(0, CLASP_VER_MAJOR);
     TEST_INT_EQ(15, CLASP_VER_MINOR);
-    TEST_INT_EQ(2, CLASP_VER_PATCH);
+    TEST_INT_EQ(3, CLASP_VER_PATCH);
     TEST_INT_EQ(0xFF, CLASP_VER_ALPHABETA);
     TEST_INT_EQ(0xFF, CLASP_VER_AB);
 

@@ -1,6 +1,12 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.15.3 - 20th September 2026
+
+* Added Doxygen packaging: **Doxyfile**, **doc/mainpage.md**, **generate_doxygen.sh**;
+* Added missing Doxygen `group__utility` in **clasp.h** so linkage macros group in generated docs;
+
+
 ## 0.15.2 - 19th September 2026
 
 * Bumped version to **0.15.2**;
