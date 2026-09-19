@@ -1,6 +1,15 @@
 # CLASP - Installation and Use <!-- omit in toc -->
 
-**CLASP** is a classic-form C library (with a C++ API), insofar as it has implementation files in its **src** directory and header files in its **include/CLASP** directory. Thus, once "installed", one must simply include **CLASP/CLASP.h** (or one of the utility headers), and compile-in or link-in the implementation. There are several ways to do this:
+**CLASP** is a classic-form C library (with a C++ API), insofar as it has
+implementation files in its **src** directory and header files in its
+**include/clasp** directory. Thus, once "installed", one must simply include
+**clasp/clasp.h** (or one of the utility headers), and compile-in or link-in
+the implementation.
+
+The **C** API / core library has no non-standard dependencies (on Windows,
+wildcard expansion may optionally use **recls**, which is disabled by default
+in the CMake build). The **C++** API depends on **STLSoft** 1.11 (or later).
+Building the project's tests additionally requires **xTests** 0.25 (or later).
 
 
 ## Table of Contents <!-- omit in toc -->
@@ -22,22 +31,29 @@ The primary choice for installation is by use of **CMake**.
    $ git clone https://github.com/synesissoftware/CLASP/
    ```
 
-2. Prepare the CMake configuration, via the **prepare_cmake.sh** script, as
-   in:
+2. Prepare the CMake configuration, via the **prepare_cmake.sh** script.
+
+   For a minimal **C** API-only install (no **STLSoft** / **xTests**
+   required):
 
    ```bash
    $ cd ~/open-source/CLASP
-   $ ./prepare_cmake.sh
+   $ ./prepare_cmake.sh --no-cpp --disable-testing -v
    ```
 
-   **NOTE**: if you intend only to build the library then you can eschew building of examples (`-E`) and tests (`-T`) and use the command:
+   For a full build including the **C++** API, examples, and tests, install
+   **STLSoft** 1.11 (and **xTests** for tests) via their own **CMake**
+   scripts first, then:
 
    ```bash
    $ cd ~/open-source/CLASP
-   $ ./prepare_cmake.sh -E -T
+   $ ./prepare_cmake.sh -v
    ```
 
-   You will still need [**STLSoft**](https://github.com/synesissoftware/STLSoft) (1.11 or later).
+   If **STLSoft** is available as a source tree rather than an installed
+   **CMake** package, pass its root with `--stlsoft-root-dir` / `-s`.
+
+   (**Hint**: execute `$ ./prepare_cmake.sh --help` for more information.)
 
 3. Run a build of the generated **CMake**-derived build files via the
    **build_cmake.sh** script, as in:
@@ -46,24 +62,23 @@ The primary choice for installation is by use of **CMake**.
    $ ./build_cmake.sh
    ```
 
-   (**NOTE**: if you provide the flag `--run-make` (=== `-m`) in step 3 then you do
-   not need this step.)
+   (**NOTE**: if you provide the flag `--run-make` (=== `-m`) in step 2 then
+   you do not need this step.)
 
-4. As a check, execute the built test program files via the
-   **build_run_all_unit_tests.sh** script, as in:
+4. As a check (when testing was not disabled), execute the built test
+   programs via **run_all_unit_tests.sh**, as in:
 
    ```bash
    $ ./run_all_unit_tests.sh
    ```
 
-6. Install the library on the host, via `cmake`, as in:
-
+5. Install the library on the host, via `cmake`, as in:
 
    ```bash
    $ sudo cmake --install ${SIS_CMAKE_BUILD_DIR:-./_build} --config Release
    ```
 
-7. Then to use the library, it is a simple matter as follows:
+6. Then to use the library, it is a simple matter as follows:
 
    1. Assuming a simplest possible program to verify the installation:
 
@@ -88,7 +103,7 @@ The primary choice for installation is by use of **CMake**.
 
    2. Compile your project against **CLASP**:
 
-      Due to the installation step (Step 6 above) there is no requirement
+      Due to the installation step (Step 5 above) there is no requirement
       for an explicit include directory for **CLASP**:
 
       ```bash
@@ -97,7 +112,7 @@ The primary choice for installation is by use of **CMake**.
 
    3. Link your project against **CLASP**:
 
-      Due to the installation step (Step 6 above) there is no requirement
+      Due to the installation step (Step 5 above) there is no requirement
       for an explicit library directory for **CLASP**:
 
       ```bash
@@ -116,4 +131,3 @@ The primary choice for installation is by use of **CMake**.
 
 
 <!-- ########################### end of file ########################### -->
-

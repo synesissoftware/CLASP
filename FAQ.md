@@ -14,9 +14,18 @@ it will be used to create one.
 
 See instructions in [INSTALL.md](./INSTALL.md).
 
+For a **C** API-only build (no **STLSoft** / **xTests**):
+
+```bash
+$ ./prepare_cmake.sh --no-cpp --disable-testing
+```
+
+**NOTE**: **`--no-cpp`** alone still configures tests, and tests still need
+**STLSoft** (via **xTests**). Add **`--disable-testing`** / **`-T`** to
+elide both.
 ## Q2: "Does CLASP have its own unit-tests?"
 
-Yes, under the **./test/unit** and **./test/unit** directorie.
+Yes, under the **./test/unit** and **./test/component** directories.
 
 
 <!-- ########################### end of file ########################### -->

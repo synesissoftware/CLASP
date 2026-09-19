@@ -1,6 +1,22 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.15.2 - 19th September 2026
+
+* Bumped version to **0.15.2**;
+* Restored **`CLASP_VER_ALPHABETA`** as the primary prerelease discriminator (**`CLASP_VER`** composite uses it; **`CLASP_VER_AB`** / **`CLASP_VER_REVISION`** remain as aliases of **`CLASP_VER_ALPHABETA`** / **`CLASP_VER_PATCH`**);
+* Converted automated tests to **xTests** terse assertion macros;
+* Added scratch program **test/scratch/versions**;
+* Fleshed out **NEWS.md** chronology with a **Details** column;
+* Corrected **INSTALL.md** include paths, step numbering, and dependency notes (**C** core has no **STLSoft** requirement; **C++** API / tests do);
+* Added **`--no-cpp`** / **`-C`** to **prepare_cmake.sh** and gated **STLSoft** discovery on **`NO_CLASP_CPP_API`** / **`BUILD_TESTING`** (so a **C**-only configure needs neither **STLSoft** nor **xTests**);
+* Unified **prepare_cmake.sh** MinGW / default configure into a single **`cmake`** invocation (**`CMakeGeneratorArgs`**; all **`-D`** options always passed);
+* Fixed **FAQ.md** test-directory description;
+* Applied **misc-dev-scripts** **0.6.0** editor/Git/`.sis` drop-in templates on **boilerplate**;
+* Restored historical **.gitignore** patterns as a sorted union with **misc-dev-scripts** gold section layout;
+* Added **tidying** to **ci.yml** push branches;
+
+
 ## 0.15.1 - 2nd September 2026
 
 * Fixed **`CLASP_VER`** composite to use **`CLASP_VER_AB`** (left referencing retired **`CLASP_VER_ALPHABETA`** after the 0.15.0 rename);

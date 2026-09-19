@@ -12,6 +12,7 @@ Configuration=Release
 ExamplesDisabled=0
 MSVC_MT=0
 MinGW=0
+NO_cxx=0
 RunMake=0
 STLSoftDirGiven=
 TestingDisabled=0
@@ -47,6 +48,10 @@ while [[ $# -gt 0 ]]; do
     --msvc-mt)
 
       MSVC_MT=1
+      ;;
+    --no-cpp|-C)
+
+      NO_cxx=1
       ;;
     --run-make|-m)
 
@@ -85,10 +90,23 @@ Flags/options:
 
     -T
     --disable-testing
-        disables building of tests (by setting BUILD_TESTING=OFF)
+        disables building of tests (by setting BUILD_TESTING=OFF). Unless
+        testing is disabled the STLSoft and xTests libraries will be
+        required to be available to CMake
 
     --mingw
         uses explicitly the "MinGW Makefiles" generator
+
+    --msvc-mt
+        when using Visual C++ (MSVC), the static runtime library will be
+        selected; the default is the dynamic runtime library
+
+    -C
+    --no-cpp
+        does not install, prepare, or use C++ API (which requires STLSoft).
+        Does not by itself remove the STLSoft requirement: testing still
+        needs STLSoft (via xTests). Combine with -T/--disable-testing for a
+        configure that needs neither STLSoft nor xTests
 
     -m
     --run-make
@@ -133,34 +151,34 @@ echo "Executing CMake (in ${CMakeDir})"
 
 if [ $ExamplesDisabled -eq 0 ]; then CMakeBuildExamplesFlag="ON" ; else CMakeBuildExamplesFlag="OFF" ; fi
 if [ $MSVC_MT -eq 0 ]; then CMakeMsvcMtFlag="OFF" ; else CMakeMsvcMtFlag="ON" ; fi
+if [ $NO_cxx -eq 0 ]; then CMakeNoCppApiFlag="OFF" ; else CMakeNoCppApiFlag="ON" ; fi
 if [ -z $STLSoftDirGiven ]; then CMakeSTLSoftVariable="" ; else CMakeSTLSoftVariable="-DSTLSOFT=$STLSoftDirGiven/" ; fi
 if [ $TestingDisabled -eq 0 ]; then CMakeBuildTestingFlag="ON" ; else CMakeBuildTestingFlag="OFF" ; fi
 if [ $VerboseMakefile -eq 0 ]; then CMakeVerboseMakefileFlag="OFF" ; else CMakeVerboseMakefileFlag="ON" ; fi
 
+# NOTE: the generator is the *only* thing that may differ between the MinGW
+# and the default paths; every -D option is passed in both cases, so that no
+# flag can be silently ignored according to the generator selected.
+
+CMakeGeneratorArgs=()
+
 if [ $MinGW -ne 0 ]; then
 
-  cmake \
-    $CMakeSTLSoftVariable \
-    -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
-    -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
-    -DCMAKE_BUILD_TYPE=$Configuration \
-    -G "MinGW Makefiles" \
-    -S $Dir \
-    -B $CMakeDir \
-    || (cd ->/dev/null ; exit 1)
-else
-
-  cmake \
-    $CMakeSTLSoftVariable \
-    -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
-    -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
-    -DCMAKE_BUILD_TYPE=$Configuration \
-    -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
-    -DMSVC_USE_MT:BOOL=$CMakeMsvcMtFlag \
-    -S $Dir \
-    -B $CMakeDir \
-    || (cd ->/dev/null ; exit 1)
+  CMakeGeneratorArgs=(-G "MinGW Makefiles")
 fi
+
+cmake \
+  $CMakeSTLSoftVariable \
+  -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
+  -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
+  -DCMAKE_BUILD_TYPE=$Configuration \
+  -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
+  -DMSVC_USE_MT:BOOL=$CMakeMsvcMtFlag \
+  -DNO_CLASP_CPP_API:BOOL=$CMakeNoCppApiFlag \
+  "${CMakeGeneratorArgs[@]}" \
+  -S "$Dir" \
+  -B "$CMakeDir" \
+  || (cd ->/dev/null ; exit 1)
 
 status=0
 
@@ -184,4 +202,3 @@ exit $status
 
 
 # ############################## end of file ############################# #
-

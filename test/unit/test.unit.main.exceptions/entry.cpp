@@ -4,7 +4,7 @@
  * Purpose: Unit-tests exceptional inputs
  *
  * Created: 7th March 2013
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -41,7 +41,7 @@ static FILE* Test_stderr = Real_stderr; /* NOTE: this assignment here is solely 
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -80,7 +80,7 @@ namespace
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 namespace
@@ -157,7 +157,7 @@ static void run_test_(
     {
         int const e = errno;
 
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
+        TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
 
         return;
     }
@@ -171,7 +171,7 @@ static void run_test_(
                     ,   flags
                     );
 
-    XTESTS_REQUIRE(XTESTS_TEST_INTEGER_NOT_EQUAL(0, r));
+    REQUIRE(TEST_INT_NE(0, r));
 
     ::fflush(Test_stderr);
     ::fclose(Test_stderr);
@@ -180,7 +180,7 @@ static void run_test_(
 
     if (!XTESTS_NS_C_QUAL(xTests_hasRequiredConditionFailed()))
     {
-        XTESTS_REQUIRE(XTESTS_NS_CPP_QUAL(xtests_test_integer(file, line, function, "", 1u, lines.size(), XTESTS_NS_C_QUAL(xtestsComparisonEqual))));
+        REQUIRE(XTESTS_NS_CPP_QUAL(xtests_test_integer(file, line, function, "", 1u, lines.size(), XTESTS_NS_C_QUAL(xtestsComparisonEqual))));
     }
 
     if (!XTESTS_NS_C_QUAL(xTests_hasRequiredConditionFailed()))
@@ -211,7 +211,7 @@ static void test_1_0()
             try
             {
                 clasp::require_option(args, "--unknown", &o);
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
             }
             catch(std::bad_alloc&)
             {
@@ -219,12 +219,12 @@ static void test_1_0()
             }
             catch(clasp::missing_option_exception&)
             {
-                XTESTS_TEST_PASSED();
+                TEST_PASSED();
                 throw;
             }
             catch(std::exception&)
             {
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
                 throw;
             }
 
@@ -264,7 +264,7 @@ static void test_1_1()
             try
             {
                 clasp::verify_all_options_used(args);
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
             }
             catch(std::bad_alloc&)
             {
@@ -272,12 +272,12 @@ static void test_1_1()
             }
             catch(clasp::unused_argument_exception&)
             {
-                XTESTS_TEST_PASSED();
+                TEST_PASSED();
                 throw;
             }
             catch(std::exception&)
             {
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
                 throw;
             }
 
@@ -308,7 +308,7 @@ static void test_1_1_unrecognised()
 
     static clasp::specification_t const s_specifications[] =
     {
-      CLASP_SPECIFICATION_ARRAY_TERMINATOR
+        CLASP_SPECIFICATION_ARRAY_TERMINATOR
     };
 
     struct main_
@@ -322,7 +322,7 @@ static void test_1_1_unrecognised()
             try
             {
                 clasp::verify_all_flags_and_options_are_recognised(args, s_specifications);
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
             }
             catch(std::bad_alloc&)
             {
@@ -330,12 +330,12 @@ static void test_1_1_unrecognised()
             }
             catch(clasp::unrecognised_argument_exception&)
             {
-                XTESTS_TEST_PASSED();
+                TEST_PASSED();
                 throw;
             }
             catch(std::exception&)
             {
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
                 throw;
             }
 
@@ -377,7 +377,7 @@ static void test_1_2()
             try
             {
                 clasp::require_option(args, "--opt", &opt);
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
             }
             catch(std::bad_alloc&)
             {
@@ -385,12 +385,12 @@ static void test_1_2()
             }
             catch(clasp::missing_option_value_exception&)
             {
-                XTESTS_TEST_PASSED();
+                TEST_PASSED();
                 throw;
             }
             catch(std::exception&)
             {
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
                 throw;
             }
 
@@ -432,7 +432,7 @@ static void test_1_3()
             try
             {
                 clasp::require_option(args, "--opt", &opt);
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
             }
             catch(std::bad_alloc&)
             {
@@ -440,12 +440,12 @@ static void test_1_3()
             }
             catch(clasp::invalid_option_value_exception&)
             {
-                XTESTS_TEST_PASSED();
+                TEST_PASSED();
                 throw;
             }
             catch(std::exception&)
             {
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
                 throw;
             }
 
@@ -526,7 +526,7 @@ static void test_1_6()
             try
             {
                 clasp::require_option(args, "--opt-real-1", &or1);
-                XTESTS_TEST_FLOATINGPOINT_EQUAL(-1.1, or1);
+                TEST_FP_EQ(-1.1, or1);
             }
             catch(std::bad_alloc&)
             {
@@ -534,13 +534,13 @@ static void test_1_6()
             }
             catch(std::exception&)
             {
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
             }
 
             try
             {
                 clasp::require_option(args, "--opt-real-2", &or2);
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
             }
             catch(std::bad_alloc&)
             {
@@ -548,12 +548,12 @@ static void test_1_6()
             }
             catch(clasp::invalid_option_value_exception&)
             {
-                XTESTS_TEST_PASSED();
+                TEST_PASSED();
                 throw;
             }
             catch(std::exception&)
             {
-                XTESTS_TEST_FAIL("should not get here");
+                TEST_FAIL("should not get here");
                 throw;
             }
 

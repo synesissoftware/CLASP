@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP bit-flags functionality
  *
  * Created: 11th December 2011
- * Updated: 10th March 2025
+ * Updated: 17th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -21,7 +21,7 @@
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -52,28 +52,28 @@ static void test_1_2(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 int main(int argc, char **argv)
 {
-  int retCode = EXIT_SUCCESS;
-  int verbosity = 2;
+    int retCode = EXIT_SUCCESS;
+    int verbosity = 2;
 
-  XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
+    XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-  if (XTESTS_START_RUNNER("test.unit.parseapi.bitflags", verbosity))
-  {
-    XTESTS_RUN_CASE(test_1_0);
-    XTESTS_RUN_CASE(test_1_1);
-    XTESTS_RUN_CASE(test_1_2);
+    if (XTESTS_START_RUNNER("test.unit.parseapi.bitflags", verbosity))
+    {
+        XTESTS_RUN_CASE(test_1_0);
+        XTESTS_RUN_CASE(test_1_1);
+        XTESTS_RUN_CASE(test_1_2);
 
-    XTESTS_PRINT_RESULTS();
+        XTESTS_PRINT_RESULTS();
 
-    XTESTS_END_RUNNER_UPDATE_EXITCODE(&retCode);
-  }
+        XTESTS_END_RUNNER_UPDATE_EXITCODE(&retCode);
+    }
 
-  return retCode;
+    return retCode;
 }
 
 
@@ -100,7 +100,7 @@ static void test_1_0(void)
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -115,16 +115,16 @@ static void test_1_0(void)
         int const flags0007 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0007, NULL);
         int const flags0008 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0008, NULL);
 
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAll);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAny);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0001);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0002);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0003);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0004);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0005);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0006);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0007);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0008);
+        TEST_INT_EQ(0x0000, flagsAll);
+        TEST_INT_EQ(0x0000, flagsAny);
+        TEST_INT_EQ(0x0000, flags0001);
+        TEST_INT_EQ(0x0000, flags0002);
+        TEST_INT_EQ(0x0000, flags0003);
+        TEST_INT_EQ(0x0000, flags0004);
+        TEST_INT_EQ(0x0000, flags0005);
+        TEST_INT_EQ(0x0000, flags0006);
+        TEST_INT_EQ(0x0000, flags0007);
+        TEST_INT_EQ(0x0000, flags0008);
 
         clasp_releaseArguments(args);
     }
@@ -153,7 +153,7 @@ static void test_1_1(void)
 
     if (0 != cr)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+        TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
     }
     else
     {
@@ -168,16 +168,16 @@ static void test_1_1(void)
         int const flags0007 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0007, NULL);
         int const flags0008 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0008, NULL);
 
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAll);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flagsAny);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0001);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0002);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0003);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0004);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0005);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0006);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0007);
-        XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0008);
+        TEST_INT_EQ(0x0000, flagsAll);
+        TEST_INT_EQ(0x0000, flagsAny);
+        TEST_INT_EQ(0x0000, flags0001);
+        TEST_INT_EQ(0x0000, flags0002);
+        TEST_INT_EQ(0x0000, flags0003);
+        TEST_INT_EQ(0x0000, flags0004);
+        TEST_INT_EQ(0x0000, flags0005);
+        TEST_INT_EQ(0x0000, flags0006);
+        TEST_INT_EQ(0x0000, flags0007);
+        TEST_INT_EQ(0x0000, flags0008);
 
         clasp_releaseArguments(args);
     }
@@ -210,13 +210,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flagsAll  =   clasp_checkAllFlags(args, Specifications, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0001, flagsAll);
+            TEST_INT_EQ(0x0001, flagsAll);
 
             clasp_releaseArguments(args);
         }
@@ -228,13 +228,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flagsAny  =   clasp_checkAllMatchingFlags(args, Specifications, ~(int)0, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0001, flagsAny);
+            TEST_INT_EQ(0x0001, flagsAny);
 
             clasp_releaseArguments(args);
         }
@@ -246,13 +246,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0001 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0001, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0001);
+            TEST_INT_EQ(0x0001, flags0001);
 
             clasp_releaseArguments(args);
         }
@@ -264,13 +264,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0002 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0002, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0002);
+            TEST_INT_EQ(0x0000, flags0002);
 
             clasp_releaseArguments(args);
         }
@@ -282,13 +282,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0003 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0003, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0003);
+            TEST_INT_EQ(0x0001, flags0003);
 
             clasp_releaseArguments(args);
         }
@@ -300,13 +300,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0004 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0004, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0004);
+            TEST_INT_EQ(0x0000, flags0004);
 
             clasp_releaseArguments(args);
         }
@@ -318,13 +318,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0005 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0005, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0005);
+            TEST_INT_EQ(0x0001, flags0005);
 
             clasp_releaseArguments(args);
         }
@@ -336,13 +336,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0006 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0006, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0006);
+            TEST_INT_EQ(0x0000, flags0006);
 
             clasp_releaseArguments(args);
         }
@@ -354,13 +354,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0007 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0007, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0001, flags0007);
+            TEST_INT_EQ(0x0001, flags0007);
 
             clasp_releaseArguments(args);
         }
@@ -372,13 +372,13 @@ static void test_1_2(void)
 
         if (0 != cr)
         {
-            XTESTS_TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
+            TEST_FAIL_WITH_QUALIFIER("failed to initialise CLASP", strerror(cr));
         }
         else
         {
             int const flags0008 =   clasp_checkAllMatchingFlags(args, Specifications, 0x0008, NULL);
 
-            XTESTS_TEST_INTEGER_EQUAL(0x0000, flags0008);
+            TEST_INT_EQ(0x0000, flags0008);
 
             clasp_releaseArguments(args);
         }
