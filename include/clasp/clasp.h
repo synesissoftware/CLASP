@@ -54,8 +54,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      3
-# define CLASP_VER_CLASP_H_CLASP_REVISION   8
-# define CLASP_VER_CLASP_H_CLASP_EDIT       115
+# define CLASP_VER_CLASP_H_CLASP_REVISION   9
+# define CLASP_VER_CLASP_H_CLASP_EDIT       116
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -127,6 +127,13 @@
  */
 
 /** \defgroup group__clasp__api_usage CLASP Usage API
+ *
+ *
+ */
+
+/** \defgroup group__utility CLASP Utility
+ *
+ *
  */
 
 
@@ -144,8 +151,8 @@
  * Defaults to no symbol. Can be defined to a symbol appropriate to the
  * operating system and linkage model. e.g. on Windows you might choose to
  * define it to <code>__declspec(dllexport)</code> when building System Tool
- * Args and to <code>__declspec(dllimport)</code> in client code using System
- * Tool Args.
+ * Args and to <code>__declspec(dllimport)</code> in client code using
+ * System Tool Args.
  *
  * Used in the CLASP_CALL() macro.
  */
@@ -313,7 +320,7 @@
 
 /* We do not enforce that a neutral / non-recognised platform is a problem,
  * because the CLASP library does not rely on any platform-specific
- * features
+ * features.
  */
 # endif /* platform */
 #endif /* !CLASP_OVERRIDE_PLATFORM */
@@ -358,9 +365,10 @@
  *
  * NOTE: as of 0.11, the automatic discrimination of wide-string builds on
  * Windows is removed, because it is more common (and standards-conforming)
- * to use a multibyte main - int main(int argc, char* argv[]) - than the wide
- * main - int _wmain(int argc, wchar_t* argv[]). If you wish to use a wide
- * main, and therefore wide CLASP, you must define CLASP_USE_WIDE_STRINGS.
+ * to use a multibyte main - int main(int argc, char* argv[]) - than the
+ * wide main - int _wmain(int argc, wchar_t* argv[]). If you wish to use a
+ * wide main, and therefore wide CLASP, you must define
+ * CLASP_USE_WIDE_STRINGS.
  */
 
 #ifdef CLASP_USE_WIDE_STRINGS
@@ -629,7 +637,7 @@ typedef enum clasp_argtype_t clasp_argtype_t;
  */
 struct clasp_argument_t
 {
-    clasp_slice_t               resolvedName;       /*!< The resolved name of the argument, based on the specifications, or the given name if no matching alias */
+    clasp_slice_t               resolvedName;       /*!< The resolved name of the argument, based on the specifications, or the given name if no matching specification */
     clasp_slice_t               givenName;          /*!< The actual name of the argument given */
     clasp_slice_t               value;              /*!< The value, if any */
     clasp_argtype_t             type;               /*!< The type: CLASP_ARGTYPE_VALUE, CLASP_ARGTYPE_OPTION, or CLASP_ARGTYPE_FLAG */
@@ -669,8 +677,8 @@ typedef struct clasp_arguments_t                            clasp_arguments_t;
 /** Structure that defines a specification for a short option or flag; also
  *   used to define help information for all flags and options
  *
- * \note Specifying an entry whose <code>type</code> field has the
- *   value <code>-1</code> terminates the array
+ * \note Specifying an entry whose <code>type</code> field has the value
+ *   <code>-1</code> terminates the array
  */
 struct clasp_specification_t
 {
@@ -694,9 +702,11 @@ typedef clasp_specification_t                               clasp_alias_t;
  *
  * Defines a flag specification in the specification array.
  *
- * \param alias The flag alias, e.g. "-i"
- * \param mappedArgument The flag mapped argument / full name, e.g. "--ignore-case"
- * \param help The help assocated with the flag, e.g. "Causes items to be compared in a case-insensitive fashion"
+ * \param alias The flag alias, e.g. "-i";
+ * \param mappedArgument The flag mapped argument / full name, e.g.
+ *   "--ignore-case";
+ * \param help The help assocated with the flag, e.g. "Causes items to be
+ *   compared in a case-insensitive fashion";
  *
  */
 # define CLASP_FLAG(alias, mappedArgument, help)            { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, 0 }
@@ -705,18 +715,21 @@ typedef clasp_specification_t                               clasp_alias_t;
  *
  * Defines a bit-flag specification in the specification array.
  *
- * \param alias The flag alias, e.g. "-i"
- * \param mappedArgument The flag mapped argument / full name, e.g. "--ignore-case"
- * \param bitFlags The bit-flag(s) associated with the flag, e.g. MYTOOL_F_IGNORE_CASE
- * \param help The help assocated with the flag, e.g. "Causes items to be compared in a case-insensitive fashion"
+ * \param alias The flag alias, e.g. "-i";
+ * \param mappedArgument The flag mapped argument / full name, e.g.
+ *   "--ignore-case";
+ * \param bitFlags The bit-flag(s) associated with the flag, e.g.
+ *   MYTOOL_F_IGNORE_CASE;
+ * \param help The help assocated with the flag, e.g. "Causes items to be
+ *   compared in a case-insensitive fashion";
  *
  */
 # define CLASP_BIT_FLAG(alias, mappedArgument, bitFlags, help)  { CLASP_ARGTYPE_FLAG, alias, mappedArgument, help, NULL, bitFlags }
 
 /** \def CLASP_FLAG_ALIAS(alias, mappedArgument)
  *
- * Equivalent to CLASP_FLAG(), but omits the need to specify an
- * empty/NULL help argument
+ * Equivalent to CLASP_FLAG(), but omits the need to specify an empty/NULL
+ * help argument
  */
 # define CLASP_FLAG_ALIAS(alias, mappedArgument)            CLASP_FLAG((alias), (mappedArgument), NULL)
 
@@ -724,18 +737,22 @@ typedef clasp_specification_t                               clasp_alias_t;
  *
  * Defines a option specification in the specification array.
  *
- * \param alias The option alias, e.g. "-i"
- * \param mappedArgument The option mapped argument / full name, e.g. "--verbosity"
- * \param help The help assocated with the option, e.g. "The extent of user output"
- * \param valueSet The char-separated list of options; first char is separator; if separator is trailing, indicates value may also be any-other-value
+ * \param alias The option alias, e.g. "-i";
+ * \param mappedArgument The option mapped argument / full name, e.g.
+ *   "--verbosity";
+ * \param help The help assocated with the option, e.g. "The extent of user
+ *   output";
+ * \param valueSet The char-separated list of options; first char is
+ *   separator; if separator is trailing, indicates value may also be
+ *   any-other-value;
  *
  */
 # define CLASP_OPTION(alias, mappedArgument, help, valueSet)    { CLASP_ARGTYPE_OPTION, alias, mappedArgument, help, valueSet, 0 }
 
 /** \def CLASP_OPTION_ALIAS(alias, mappedArgument)
  *
- * Equivalent to CLASP_OPTION(), but omits the need to specify an
- * empty/NULL help argument
+ * Equivalent to CLASP_OPTION(), but omits the need to specify an empty/NULL
+ * help argument
  */
 # define CLASP_OPTION_ALIAS(alias, mappedArgument)          CLASP_OPTION((alias), (mappedArgument), NULL, NULL)
 
@@ -752,7 +769,7 @@ typedef clasp_specification_t                               clasp_alias_t;
  *
  * Defines a group section
  *
- * \param N any positive number in the range +1 - +1000
+ * \param N any positive number in the range +1 - +1000;
  *
  * \note Items in sections with -ve numbers will not be listed in usage.
  */
@@ -768,11 +785,11 @@ typedef clasp_specification_t                               clasp_alias_t;
 
 /** \def CLASP_GAP_SECTION(sectionLabel)
  *
- * Defines a section label, that will be displayed by
- * the functions in the \ref group__clasp__api_usage.
+ * Defines a section label, that will be displayed by the functions in the
+ * \ref group__clasp__api_usage.
  *
  * \param sectionLabel A literal character C-style string that serves as a
- *   section label. May be the empty string.
+ *   section label. May be the empty string;
  */
 # define CLASP_GAP_SECTION(sectionLabel)                    { CLASP_ARGTYPE_CAST_(CLASP_ARGTYPE_GAP_), NULL, NULL, sectionLabel, NULL, 0 }
 
@@ -905,13 +922,14 @@ public: /** Construction */
  *
  * \ingroup group__clasp__api_parsing
  *
- * \param flags Flags that control the parsing behaviour
+ * \param flags Flags that control the parsing behaviour;
  * \param argc The <code>argc</code> argument passed to main(). Must be 1 or
- *   more; undefined behaviour otherwise
- * \param argv The <code>argv</code>
+ *   more; undefined behaviour otherwise;
+ * \param argv The <code>argv</code>;
  * \param specifications Variable-length array of clasp_specification_t
- *   entries that define the specifications used in parsing. May be \c NULL
- * \param args Receives a pointer to the parsed results structure
+ *   entries that define the specifications used in parsing. May be \c NULL;
+ * \param ctxt Diagnostic context. May be \c NULL;
+ * \param args Receives a pointer to the parsed results structure;
  *
  * \return An error code indicating the status of the function
  * \retval 0 The function succeeded
@@ -935,7 +953,7 @@ clasp_parseArguments(
  * \ingroup group__clasp__api_parsing
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
- *   call to clasp_parseArguments()
+ *   call to clasp_parseArguments();
  */
 CLASP_CALL(void)
 clasp_releaseArguments(
@@ -952,8 +970,8 @@ clasp_getSpecifications(
     clasp_arguments_t const*            args
 );
 
-/** Reports how many flags/options are not recognised relative to the
- * given \c specifications array, and returns a pointer to the \c nSkip'th
+/** Reports how many flags/options are not recognised relative to the given
+ * \c specifications array, and returns a pointer to the \c nSkip'th
  * unrecognised instance.
  *
  * \pre NULL != args
@@ -967,21 +985,20 @@ clasp_reportUnrecognisedFlagsAndOptions(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many flags arguments were not used by the
- * application, and returns a pointer to the first unused flag
- * argument.
+/** Reports how many flags arguments were not used by the application, and
+ * returns a pointer to the first unused flag argument.
  *
  * \ingroup group__clasp__api_parsing
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
- *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
- * \param nSkip Number of unused flag arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   call to clasp_parseArguments();
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
+ * \param nSkip Number of unused flag arguments to skip before writing into
+ *   <code>*firstUnusedArg</code>;
  *
- * \return The number of remaining unused flagss (after skipping the
- *   first \c nSkip instances).
+ * \return The number of remaining unused flagss (after skipping the first
+ *   \c nSkip instances).
  *
  * \pre NULL != args
  */
@@ -992,21 +1009,20 @@ clasp_reportUnusedFlags(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many option arguments were not used by the
- * application, and returns a pointer to the first unused option
- * argument.
+/** Reports how many option arguments were not used by the application, and
+ * returns a pointer to the first unused option argument.
  *
  * \ingroup group__clasp__api_parsing
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
- *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
- * \param nSkip Number of unused option arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   call to clasp_parseArguments();
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
+ * \param nSkip Number of unused option arguments to skip before writing
+ *   into <code>*firstUnusedArg</code>;
  *
- * \return The number of remaining unused options (after skipping the
- *   first \c nSkip instances).
+ * \return The number of remaining unused options (after skipping the first
+ *   \c nSkip instances).
  *
  * \pre NULL != args
  */
@@ -1017,18 +1033,17 @@ clasp_reportUnusedOptions(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many flag/option arguments were not used by the
- * application, and returns a pointer to the first unused flag/option
- * argument.
+/** Reports how many flag/option arguments were not used by the application,
+ * and returns a pointer to the first unused flag/option argument.
  *
  * \ingroup group__clasp__api_parsing
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
- *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
+ *   call to clasp_parseArguments();
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
  * \param nSkip Number of unused flag/option arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   writing into <code>*firstUnusedArg</code>;
  *
  * \return The number of remaining unused flags/options (after skipping the
  *   first \c nSkip instances).
@@ -1038,25 +1053,24 @@ clasp_reportUnusedOptions(
 CLASP_CALL(size_t)
 clasp_reportUnusedFlagsAndOptions(
     clasp_arguments_t const*  args
-,   clasp_argument_t const**  nextUnusedArg
+,   clasp_argument_t const**  firstUnusedArg
 ,   unsigned                  nSkip /* = 0 */
 );
 
-/** Reports how many value arguments were not used by the
- * application, and returns a pointer to the first unused value
- * argument.
+/** Reports how many value arguments were not used by the application, and
+ * returns a pointer to the first unused value argument.
  *
  * \ingroup group__clasp__api_parsing
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
- *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
- * \param nSkip Number of unused value arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   call to clasp_parseArguments();
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
+ * \param nSkip Number of unused value arguments to skip before writing into
+ *   <code>*firstUnusedArg</code>;
  *
- * \return The number of remaining unused values (after skipping the
- *   first \c nSkip instances).
+ * \return The number of remaining unused values (after skipping the first
+ *   \c nSkip instances).
  *
  * \pre NULL != args
  */
@@ -1067,18 +1081,17 @@ clasp_reportUnusedValues(
 ,   unsigned                    nSkip /* = 0 */
 );
 
-/** Reports how many arguments were not used by the
- * application, and returns a pointer to the first unused
- * argument.
+/** Reports how many arguments were not used by the application, and returns
+ * a pointer to the first unused argument.
  *
  * \ingroup group__clasp__api_parsing
  *
  * \param args The clasp-arguments structure pointer allocated by a previous
- *   call to clasp_parseArguments()
- * \param nextUnusedArg Pointer to a variable to receive a pointer to the
- *   next unused argument (after the first \c nSkip have been skipped)
- * \param nSkip Number of unused arguments to skip before
- *   writing into <code>*nextUnusedArg</code>.
+ *   call to clasp_parseArguments();
+ * \param firstUnusedArg Pointer to a variable to receive a pointer to the
+ *   first unused argument (after the first \c nSkip have been skipped);
+ * \param nSkip Number of unused arguments to skip before writing into
+ *   <code>*firstUnusedArg</code>;
  *
  * \return The number of remaining unused arguments (after skipping the
  *   first \c nSkip instances).
@@ -1121,7 +1134,8 @@ clasp_argumentIsUsed(
 /** Indicates whether a given set of command-line arguments contains the
  * given flag.
  *
- * \param args Pointer to the clasp_arguments_t instance.
+ * \param args Pointer to the clasp_arguments_t instance;
+ * \param mappedArgumentName The argument mapped name;
  *
  * \retval 0 if the flag is not specified
  * \retval !0 if the flag is specified
@@ -1163,10 +1177,10 @@ clasp_checkFlag(
 /** Checks arguments for all declared flags, combining their \c bitFlags
  * value into the given \c bitFlags variable.
  *
- * \param args Pointer to the clasp_arguments_t instance.
- * \param specifications Pointer to the specification array
- * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
- *   not NULL, it is assumed to be initialised.
+ * \param args Pointer to the clasp_arguments_t instance;
+ * \param specifications Pointer to the specification array;
+ * \param bitFlags Optional pointer to a bit-flags variable. May be \c NULL.
+ *   If not \c NULL, it is assumed to be initialised;
  *
  * \return The OR-combination of <code>*bitFlags</code> (if given) and the
  *   flag values of all declared flags in \c args
@@ -1190,14 +1204,15 @@ clasp_checkAllFlags(
 /** Checks arguments for all flags matching the \c bitMask, combining their
  * \c bitFlags value into the given \c bitFlags variable.
  *
- * \param args Pointer to the clasp_arguments_t instance.
- * \param specifications Pointer to the specification array
- * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
- *   not NULL, it is assumed to be initialised.
+ * \param args Pointer to the clasp_arguments_t instance;
+ * \param specifications Pointer to the specification array;
+ * \param bitMask mask of flags to consider;
+ * \param bitFlags Optional pointer to a bit-flags variable. May be \c NULL.
+ *   If not \c NULL, it is assumed to be initialised;
  *
- * \note If \c bitFlags is not NULL, it is assumed to be initialised (whether
- *   to 0, or a mask representing previous calculation), and bit-flags from
- *   any found flag arguments will be OR'd into it.
+ * \note If \c bitFlags is not NULL, it is assumed to be initialised
+ *   (whether to 0, or a mask representing previous calculation), and
+ *   bit-flags from any found flag arguments will be OR'd into it.
  *
  * \note All flags found will be marked as used.
  *
@@ -1214,10 +1229,10 @@ clasp_checkAllMatchingFlags(
 
 /** Finds the nth flag/option argument matching the given mapped name.
  *
- * \param args Pointer to the clasp_arguments_t instance.
- * \param mappedArgumentName The argument mapped name.
+ * \param args Pointer to the clasp_arguments_t instance;
+ * \param mappedArgumentName The argument mapped name;
  * \param nSkip Number of instances of the given name to skip before
- *   returning found instance.
+ *   returning found instance;
  */
 CLASP_CALL(clasp_argument_t const*)
 clasp_findFlagOrOption(
@@ -1231,11 +1246,14 @@ clasp_findFlagOrOption(
  * providing to the caller the value pointer and/or the value length and/or
  * the argument.
  *
- * \param args Pointer to the clasp_arguments_t instance. May not be NULL.
- * \param index Index of the argument.
- * \param pptr Optional pointer to a variable to receive the value pointer.
- * \param plen Optional pointer to a variable that receives the value length.
- * \param parg Optional pointer to a variable to receive the argument pointer.
+ * \param args Pointer to the clasp_arguments_t instance. May not be
+ *   \c NULL;
+ * \param index Index of the argument;
+ * \param pptr Optional pointer to a variable to receive the value pointer;
+ * \param plen Optional pointer to a variable that receives the value
+ *   length;
+ * \param parg Optional pointer to a variable to receive the argument
+ *   pointer;
  *
  * \retval 0 if a value at the given index exists
  * \retval !0 if a value at the given index does not exist
@@ -1258,7 +1276,7 @@ clasp_checkValue(
 /** Indicates whether the given variable points to an argument that
  * represents a treated hyphen.
  *
- * \param arg
+ * \param arg The argument;
  *
  * \pre (NULL != arg)
  *
@@ -1281,8 +1299,8 @@ clasp_valueIsTreatedHyphen(
  *
  * \ingroup group__clasp__api_parsing
  *
- * clasp_parseArguments() flag used to prevent the double-hyphen argument \c "--"
- * from being recognised as a special modifier.
+ * clasp_parseArguments() flag used to prevent the double-hyphen argument
+ * \c "--" from being recognised as a special modifier.
  *
  * Normally the \c "--" argument is interpreted to mean that all subsequent
  * arguments are treated as values, regardless of whether they're prefixed
@@ -1295,14 +1313,14 @@ clasp_valueIsTreatedHyphen(
  *
  * \ingroup group__clasp__api_parsing
  *
- * clasp_parseArguments() flag used to cause the single-hyphen argument \c "-"
- * to be recognised as a value.
+ * clasp_parseArguments() flag used to cause the single-hyphen argument
+ * \c "-" to be recognised as a value.
  *
  * Normally the \c "-" argument is interpreted as a flag/option, requiring
- * that client code examine the flags and options in addition to the
- * values, in order to process a sequence of files including stdin (as
- * represented by \c "-"). Specifying this flag causes it to appear in
- * the values, so all values can be processed together.
+ * that client code examine the flags and options in addition to the values,
+ * in order to process a sequence of files including stdin (as represented
+ * by \c "-"). Specifying this flag causes it to appear in the values, so
+ * all values can be processed together.
  *
  * \note To avoid ambiguity, a \c "-" transformed in this way will have
  *   non-empty \c resolvedName and \c givenName fields
@@ -1317,9 +1335,9 @@ clasp_valueIsTreatedHyphen(
  * wildcards on Windows.
  *
  * Because the Windows shell does not automatically expand wildcards,
- * clasp_parseArguments() performs this function on any values containing '?'
- * or '*' before returning the arguments. If that is not required, it can
- * be suppressed.
+ * clasp_parseArguments() performs this function on any values containing
+ * '?' or '*' before returning the arguments. If that is not required, it
+ * can be suppressed.
  *
  * \note Specifying this flag does not remove the requirement to link the
  *   <a href="http://recls.org/">recls</a> library along with clasp to
@@ -1364,8 +1382,8 @@ clasp_valueIsTreatedHyphen(
 
 /** \def CLASP_STOCK_FLAG_HELP
  *
- * Defines a CLASP_FLAG() specification for the "--help" de-facto
- * standard flag.
+ * Defines a CLASP_FLAG() specification for the "--help" de-facto standard
+ * flag.
  */
 #define CLASP_STOCK_FLAG_HELP                               CLASP_FLAG(NULL, "--help", "Show this help and terminate.")
 /** \def CLASP_STOCK_FLAG_VERSION
@@ -1447,36 +1465,43 @@ typedef struct clasp_usageinfo_t                            clasp_usageinfo_t;
  * given parameters.
  *
  * \param args The arguments obtained from parsing the command-line. May not
- *  be NULL;
+ *   be \c NULL;
  * \param specifications The specifications used in parsing the
- *  command-line. May be NULL, in which case it will be inferred from args;
- * \param toolName The program name. May be NULL, in which case it will be
- *  inferred from the process-name (via args);
- * \param summary A string to stand as a summary line. May be NULL as long
- *  as pfnHeader is compatible with that;
- * \param copyright A string to stand as a copyright line. May be NULL as
- *  long as pfnHeader is compatible with that;
- * \param description A string to stand as a description line. May be NULL
- *  as long as pfnHeader is compatible with that;
- * \param usage A string to stand as a usage line. May be NULL, in which
- *  case the CLASP API will supply a pro-forma string (taking into account
- *  whether specifications contains any flags and/or options). May also
- *  contain the string ":program:", in which case the value of toolName
- *  (including if it was inferred) will be used as replacement;
+ *   command-line. May be \c NULL, in which case it will be inferred from
+ *   args;
+ * \param toolName The program name. May be \c NULL, in which case it will
+ *   be inferred from the process-name (via args);
+ * \param summary A string to stand as a summary line. May be \c NULL as
+ *   long as pfnHeader is compatible with that;
+ * \param copyright A string to stand as a copyright line. May be \c NULL as
+ *   long as pfnHeader is compatible with that;
+ * \param description A string to stand as a description line. May be
+ *   \c NULL as long as pfnHeader is compatible with that;
+ * \param usage A string to stand as a usage line. May be \c NULL, in which
+ *   case the CLASP API will supply a pro-forma string (taking into account
+ *   whether specifications contains any flags and/or options). May also
+ *   contain the string ":program:", in which case the value of toolName
+ *   (including if it was inferred) will be used as replacement;
  * \param major The major version number;
  * \param minor The minor version number;
  * \param revision The patch/revision version number;
  * \param pfnHeader The callback function to write the header structure. The
- *  stock function clasp_showHeaderByFILE() is provided, in which case the
- *  value stdout should be passed for param;
+ *   stock function clasp_showHeaderByFILE() is provided, in which case the
+ *   value stdout should be passed for param;
  * \param pfnBody The callback function to write the body structure. The
- *  stock function clasp_showBodyByFILE() is provided, in which case the
- *  value stdout should be passed for param;
- * \param param User-defined parameter to be passed to \c pfnHeader and \c pfnBody;
+ *   stock function clasp_showBodyByFILE() is provided, in which case the
+ *   value stdout should be passed for param;
+ * \param param User-defined parameter to be passed to \c pfnHeader and
+ *   \c pfnBody;
  * \param flags Flags that moderate the behaviour of the function;
- * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries);
- * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
- * \param blanksBetweenItems The number of blank lines to insert between each item;
+ * \param consoleWidth The width, in characters, of the console. STLSoft
+ *   users may use the return value of
+ *   <code>platformstl_C_get_console_width()</code> (part of the
+ *   <a href="http://stlsoft.org/">STLSoft</a> libraries);
+ * \param tabSize The size of tabs on the console. If less than 1 then
+ *   <code>-tabSize</code> spaces are used instead of a tab character;
+ * \param blanksBetweenItems The number of blank lines to insert between
+ *   each item;
  *
  * \retval 0 The operation completed successfully;
  */
@@ -1505,33 +1530,39 @@ clasp_showUsage(
  * program, according to the given parameters.
  *
  * \param args The arguments obtained from parsing the command-line. May not
- *  be NULL;
+ *   be \c NULL;
  * \param specifications The specifications used in parsing the
- *  command-line. May be NULL, in which case it will be inferred from args;
- * \param toolName The program name. May be NULL, in which case it will be
- *  inferred from the process-name (via args);
- * \param summary A string to stand as a summary line. May be NULL as long
- *  as pfnHeader is compatible with that;
- * \param copyright A string to stand as a copyright line. May be NULL as
- *  long as pfnHeader is compatible with that;
- * \param description A string to stand as a description line. May be NULL
- *  as long as pfnHeader is compatible with that;
- * \param usage A string to stand as a usage line. May be NULL, in which
- *  case the CLASP API will supply a pro-forma string (taking into account
- *  whether specifications contains any flags and/or options). May also
- *  contain the string ":program:", in which case the value of toolName
- *  (including if it was inferred) will be used as replacement;
+ *   command-line. May be \c NULL, in which case it will be inferred from
+ *   args;
+ * \param toolName The program name. May be \c NULL, in which case it will
+ *   be inferred from the process-name (via args);
+ * \param summary A string to stand as a summary line. May be \c NULL as
+ *   long as pfnHeader is compatible with that;
+ * \param copyright A string to stand as a copyright line. May be \c NULL as
+ *   long as pfnHeader is compatible with that;
+ * \param description A string to stand as a description line. May be
+ *   \c NULL as long as pfnHeader is compatible with that;
+ * \param usage A string to stand as a usage line. May be \c NULL, in which
+ *   case the CLASP API will supply a pro-forma string (taking into account
+ *   whether specifications contains any flags and/or options). May also
+ *   contain the string ":program:", in which case the value of toolName
+ *   (including if it was inferred) will be used as replacement;
  * \param major The major version number;
  * \param minor The minor version number;
  * \param revision The patch/revision version number;
  * \param pfnHeader The callback function to write the header structure. The
- *  stock function clasp_showHeaderByFILE() is provided, in which case the
- *  value stdout should be passed for param;
+ *   stock function clasp_showHeaderByFILE() is provided, in which case the
+ *   value stdout should be passed for param;
  * \param param User-defined parameter to be passed to \c pfnHeader;
  * \param flags Flags that moderate the behaviour of the function;
- * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries);
- * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
- * \param blanksBetweenItems The number of blank lines to insert between each item;
+ * \param consoleWidth The width, in characters, of the console. STLSoft
+ *   users may use the return value of
+ *   <code>platformstl_C_get_console_width()</code> (part of the
+ *   <a href="http://stlsoft.org/">STLSoft</a> libraries);
+ * \param tabSize The size of tabs on the console. If less than 1 then
+ *   <code>-tabSize</code> spaces are used instead of a tab character;
+ * \param blanksBetweenItems The number of blank lines to insert between
+ *   each item;
  *
  * \retval 0 The operation completed successfully;
  */
@@ -1555,21 +1586,27 @@ clasp_showHeader(
 ,   int                             blanksBetweenItems
 );
 
-/** Displays body part of the usage (aka help) information for the
- * program, according to the given parameters.
+/** Displays body part of the usage (aka help) information for the program,
+ * according to the given parameters.
  *
  * \param args The arguments obtained from parsing the command-line. May not
- *  be NULL;
+ *   be \c NULL;
  * \param specifications The specifications used in parsing the
- *  command-line. May be NULL, in which case it will be inferred from args;
+ *   command-line. May be \c NULL, in which case it will be inferred from
+ *   args;
  * \param pfnBody The callback function to write the body structure. The
- *  stock function clasp_showBodyByFILE() is provided, in which case the
- *  value stdout should be passed for param;
+ *   stock function clasp_showBodyByFILE() is provided, in which case the
+ *   value stdout should be passed for param;
  * \param param User-defined parameter to be passed to \c pfnBody;
  * \param flags Flags that moderate the behaviour of the function;
- * \param consoleWidth The width, in characters, of the console. STLSoft users may use the return value of <code>platformstl_C_get_console_width()</code> (part of the <a href="http://stlsoft.org/">STLSoft</a> libraries);
- * \param tabSize The size of tabs on the console. If less than 1 then <code>-tabSize</code> spaces are used instead of a tab character;
- * \param blanksBetweenItems The number of blank lines to insert between each item;
+ * \param consoleWidth The width, in characters, of the console. STLSoft
+ *   users may use the return value of
+ *   <code>platformstl_C_get_console_width()</code> (part of the
+ *   <a href="http://stlsoft.org/">STLSoft</a> libraries);
+ * \param tabSize The size of tabs on the console. If less than 1 then
+ *   <code>-tabSize</code> spaces are used instead of a tab character;
+ * \param blanksBetweenItems The number of blank lines to insert between
+ *   each item;
  *
  * \retval 0 The operation completed successfully;
  */
@@ -1589,15 +1626,15 @@ clasp_showBody(
  * parameters.
  *
  * \param args The arguments obtained from parsing the command-line. May not
- *  be NULL;
- * \param toolName The program name. May be NULL, in which case it will be
- *  inferred from the process-name (via args);
+ *   be \c NULL;
+ * \param toolName The program name. May be \c NULL, in which case it will
+ *   be inferred from the process-name (via args);
  * \param major The major version number;
  * \param minor The minor version number;
  * \param revision The patch/revision version number;
  * \param pfnVersion The callback function to write the version structure.
- *  The stock function clasp_showVersionByFILE() is provided, in which case
- *  the value stdout should be passed for param;
+ *   The stock function clasp_showVersionByFILE() is provided, in which case
+ *   the value stdout should be passed for param;
  * \param param User-defined parameter to be passed to \c pfnVersion;
  * \param flags Flags that moderate the behaviour of the function;
  *
@@ -1620,7 +1657,7 @@ clasp_showVersion(
  *
  * \ingroup group__clasp__api_usage
  *
- * \param specifications Pointer to the specification array
+ * \param specifications Pointer to the specification array;
  */
 CLASP_CALL(size_t)
 clasp_countSpecifications(
@@ -1640,7 +1677,7 @@ clasp_countAliases(
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
-/**  Stock function that shows version to a <code>FILE*</code>
+/** Stock function that shows version to a <code>FILE*</code>
  */
 CLASP_CALL(void)
 clasp_showVersionByFILE(
@@ -1649,7 +1686,7 @@ clasp_showVersionByFILE(
 ,   clasp_specification_t const specifications[]
 );
 
-/**  Stock function that shows header to a <code>FILE*</code>
+/** Stock function that shows header to a <code>FILE*</code>
  */
 CLASP_CALL(void)
 clasp_showHeaderByFILE(
@@ -1658,7 +1695,7 @@ clasp_showHeaderByFILE(
 ,   clasp_specification_t const specifications[]
 );
 
-/**  Stock function that shows body to a <code>FILE*</code>
+/** Stock function that shows body to a <code>FILE*</code>
  */
 CLASP_CALL(void)
 clasp_showBodyByFILE(

@@ -8,7 +8,7 @@
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -315,9 +315,9 @@ namespace ximpl
 {
     /* The atoi_helper and atol_helper classes were removed from
      * STLSoft 1.12+, as they are superceded by the flecxx project's
-     * facilities; but rather than introduce another dependency the
-     * original classes are borrowed into CLASP here with permission
-     * (which was easy to get, since I am the author of both).
+     * facilities; but rather than introduce another dependency the original
+     * classes are borrowed into CLASP here with permission (which was easy
+     * to get, since I am the author of both).
      */
 
     struct atoi_helper
@@ -1718,13 +1718,14 @@ namespace ximpl
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1754,13 +1755,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1791,13 +1793,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1829,13 +1832,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1865,13 +1869,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1901,13 +1906,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1936,13 +1942,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1972,13 +1979,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2007,13 +2015,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2042,13 +2051,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2077,13 +2087,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2114,15 +2125,16 @@ check_option(
  * then the appropriate default is used
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param optionNotSpecifiedDefaultValue The default value to be written
- *   into <code>*result</code> if the named option does not exist
- * \param valueNotSpecifiedDefaultValue The default value to be written
- *   into <code>*result</code> if the named option does not have a value
+ *   into <code>*result</code> if the named option does not exist;
+ * \param valueNotSpecifiedDefaultValue The default value to be written into
+ *   <code>*result</code> if the named option does not have a value;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2241,13 +2253,14 @@ check_flags_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2277,13 +2290,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2312,11 +2326,12 @@ check_next_option(
 /** Checks whether the given option exists, and elicits its value if so
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result
+ *   write the result;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2346,11 +2361,12 @@ check_option(
  * arguments, and elicits its value if so
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result
+ *   write the result;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2380,13 +2396,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2416,13 +2433,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2451,13 +2469,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2487,13 +2506,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2518,18 +2538,19 @@ check_next_option(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   adjusts the given bitmask accordingly
+/** Evaluates whether a flag (or a boolean option) is specified, and adjusts
+ *   the given bitmask accordingly
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag or option for which to search;
  * \param bitmask Pointer to a variable whose value will be adjusted
- *   according to the presence/absence of the flag/option
- * \param offValue The value to be included into <code>*bitmask</code> if the
- *   flag/option is present (and specified to be on/true/1)
+ *   according to the presence/absence of the flag/option;
+ * \param onValue The value to be included into <code>*bitmask</code> if the
+ *   flag/option is present (and specified to be on/true/1);
  * \param offValue The value to be removed from <code>*bitmask</code> if the
- *   flag/option is missing, or specified to be off/false/0
+ *   flag/option is missing, or specified to be off/false/0;
  *
  * \pre (NULL != args)
  * \pre (NULL != bitmask)
@@ -2555,16 +2576,17 @@ check_flag(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   adjusts the given bitmask accordingly
+/** Evaluates whether a flag (or a boolean option) is specified, and adjusts
+ *   the given bitmask accordingly
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag or option for which to search;
  * \param bitmask Pointer to a variable whose value will be adjusted
- *   according to the presence/absence of the flag/option
- * \param offValue The value to be included into <code>*bitmask</code> if the
- *   flag/option is present (and specified to be on/true/1)
+ *   according to the presence/absence of the flag/option;
+ * \param onValue The value to be included into <code>*bitmask</code> if the
+ *   flag/option is present (and specified to be on/true/1);
  *
  * \pre (NULL != args)
  * \pre (NULL != bitmask)
@@ -2587,14 +2609,15 @@ check_flag(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   sets the given boolean flag variable accordingly.
+/** Evaluates whether a flag (or a boolean option) is specified, and sets
+ *   the given boolean flag variable accordingly.
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag or option for which to search;
  * \param flagVar <strong>true</strong> if the flag/option is present (and
- *  specified to be on/true/1); <strong>false</strong> otherwise.
+ *   specified to be on/true/1); <strong>false</strong> otherwise;
  *
  * \pre (NULL != args)
  * \pre (NULL != flagVar)
@@ -2633,9 +2656,9 @@ check_flag(
  * value into the given \c bitFlags variable.
  *
  * \param args Pointer to the arguments_t instance;
- * \param specifications Pointer to the specification array
- * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
- *   not NULL, it is assumed to be initialised.
+ * \param specifications Pointer to the specification array;
+ * \param bitFlags Optional pointer to a bit-flags variable. May be \c NULL.
+ *   If not \c NULL, it is assumed to be initialised;
  *
  * \return The OR-combination of <code>*bitFlags</code> (if given) and the
  *   flag values of all declared flags in \c args
@@ -2667,10 +2690,11 @@ check_all_flags(
  * (optionally) marks it as used if so
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param name Name of the flag (or option). May not be NULL or empty
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag (or option). May not be \c NULL or empty;
  * \param markUsedIfFound If true, the flag (or option) is mark used if
- *   found
+ *   found;
  *
  * \pre (NULL != args)
  */
@@ -2695,11 +2719,12 @@ flag_specified(
  * exists
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param name Name of the flag or option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
- * \param after Point after which to start search. May be NULL, in which
- *   case search starts at beginning of <code>flagsAndOptions</code> field
+ *   interpreted as a string. May not be \c NULL or empty;
+ * \param after Point after which to start search. May be \c NULL, in which
+ *   case search starts at beginning of <code>flagsAndOptions</code> field;
  *
  * \pre (NULL != args)
  */
@@ -2739,19 +2764,20 @@ find_flag_or_option(
  * default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param pfn Caller-supplied that can convert the found option's value to
- *   the required type, returning true if so; returning false or throwing
- *   a caller-defined exception otherwise. May not be NULL
+ *   the required type, returning true if so; returning false or throwing a
+ *   caller-defined exception otherwise. May not be \c NULL;
  * \param param Caller-supplied parameter that is passed back to the
- *   caller-supplied function. May be any value, including NULL, and is
- *   not examined in any way by CLASP
+ *   caller-supplied function. May be any value, including \c NULL, and is
+ *   not examined in any way by CLASP;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \return Indicates whether the given value, or the default value, is a
  *   valid value, as indicated by a \c true return from \c pfn
@@ -2815,11 +2841,12 @@ check_option(
  * exception if it cannot be found
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2857,14 +2884,15 @@ require_option(
  * exception if it cannot be found
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param missingMessage Optional message to use in exception thrown when
- *   the named option cannot be found. May be NULL, in which case a default
- *   message is used
+ *   the named option cannot be found. May be \c NULL, in which case a
+ *   default message is used;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2903,10 +2931,11 @@ require_option(
 /** Checks for the presence of a value with the given index
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param index The index of the putative value to be obtained
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param index The index of the putative value to be obtained;
  * \param pslice Pointer to a slice variable to be assigned the value's
- *   value, if found
+ *   value, if found;
  *
  * \pre (NULL != args)
  * \pre (NULL != pslice)
@@ -2941,12 +2970,13 @@ check_value(
 /** Checks for the presence of a value with the given index
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param index The index of the putative value to be obtained
- * \param pslice Pointer to a variable to receive the value's value's
- *   pointer (if found). May not be NULL
- * \param plen Pointer to a variable to receive the value's value's
- *   length (if found). May be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param index The index of the putative value to be obtained;
+ * \param pptr Pointer to a variable to receive the value's value's pointer
+ *   (if found). May not be \c NULL;
+ * \param plen Pointer to a variable to receive the value's value's length
+ *   (if found). May be \c NULL;
  *
  * \pre (NULL != args)
  * \pre (NULL != pptr)
@@ -2981,8 +3011,9 @@ check_value(
 /** Mark flag/option as used
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param usedArg Argument to be marked as used
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param usedArg Argument to be marked as used;
  *
  * \note This is necessary only when manual processing of the \c args
  *   parameter's fields is conducted by the user
@@ -3000,8 +3031,9 @@ use_flag_or_option(
 /** Mark flag/option as used
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param usedArg Argument to be marked as used
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param usedArg Argument to be marked as used;
  *
  * \note This is necessary only when manual processing of the \c args
  *   parameter's fields is conducted by the user
@@ -3020,12 +3052,13 @@ use_flag_or_option(
  * \c specifications parameter
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param specifications A pointer to a properly-formed specification array.
- *   May not be NULL.
+ *   May not be \c NULL;
  *
- * \exception clasp::unrecognised_argument_exception Thrown if an argument is
- *   unrecognised
+ * \exception clasp::unrecognised_argument_exception Thrown if an argument
+ *   is unrecognised
  */
 inline
 void
@@ -3049,12 +3082,13 @@ verify_all_flags_and_options_are_recognised(
 }
 
 
-/** Verifies that all flags and options have been used, throwing an instance of
- * clasp::unused_argument_exception if one or more have not been used (and
- * are therefore unrecognised).
+/** Verifies that all flags and options have been used, throwing an instance
+ * of clasp::unused_argument_exception if one or more have not been used
+ * (and are therefore unrecognised).
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  *
  * \exception clasp::unused_argument_exception Thrown if an argument is
  *   unused
@@ -3082,11 +3116,12 @@ verify_all_flags_and_options_used(
 /** [DEPRECATED]
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  *
- * \deprecated This function is now obsolete, and will be removed from a future
- *   version of CLASP; instead
- *   use \link clasp::verify_all_flags_and_options_used verify_all_flags_and_options_used()\endlink.
+ * \deprecated This function is now obsolete, and will be removed from a
+ *   future version of CLASP; instead use
+ *   \link clasp::verify_all_flags_and_options_used verify_all_flags_and_options_used()\endlink.
  */
 inline
 void

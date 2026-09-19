@@ -138,9 +138,9 @@ public: // Construction
   /**
    *
    * \note When no default directory is specified, all pattern elements
-   *  pushed (via push_element()) prior to an explicit pushed directory
-   *  will be recorded and then prefixed to any explicit patterns pushed
-   *  for each directory.
+   *  pushed (via push_element()) prior to an explicit pushed directory will
+   *  be recorded and then prefixed to any explicit patterns pushed for each
+   *  directory.
    */
   search_specifications()
     : m_specifications()
@@ -149,8 +149,8 @@ public: // Construction
   /**
    *
    * \note When a default directory is specified, all pattern elements
-   *  pushed (via push_element()) prior to an explicit pushed directory
-   *  will be applied to the default directory in the 0th specification.
+   *  pushed (via push_element()) prior to an explicit pushed directory will
+   *  be applied to the default directory in the 0th specification.
    */
   search_specifications(string_type const& defaultDirectory)
     : m_specifications()
@@ -176,8 +176,8 @@ public:
   }
 
 public: // Operations
-  /** Causes enough internal storage to be allocated such that no more
-   * storage will be required for \c n elements.
+  /** Causes enough internal storage to be allocated such that no more storage
+   * will be required for \c n elements.
    */
   void reserve(size_type n)
   {
@@ -192,9 +192,9 @@ public: // Operations
 
   /** Pushes an element to create/update a search specification.
    *
-   * \param element A directory or a pattern(s).
+   * \param element A directory or a pattern(s);
    *
-   * \return Indicates whether the directory or pattern(s) .
+   * \return Indicates whether the directory or pattern(s).
    * \retval A corresponding search specification was created/updated.
    * \retval false The element could not be identified as either a directory
    *   or pattern(s), and no corresponding search specification was
@@ -339,7 +339,7 @@ public:
 
   /** Pushes a directory element to create/update a search specification.
    *
-   * \param element The directory.
+   * \param element The directory;
    */
   void push_directory(string_type const& element)
   {
@@ -348,7 +348,7 @@ public:
 
   /** Pushes a patterns element to create/update a search specification.
    *
-   * \param element The patterns.
+   * \param element The patterns;
    */
   void push_patterns(string_type const& element)
   {
@@ -403,7 +403,7 @@ public:
   /** Applies the given pattern(s) to any specifications that have empty
    * patterns
    *
-   * \param defaultPatterns The default pattern(s)
+   * \param defaultPatterns The default pattern(s);
    */
   void apply_default_patterns(string_type const& defaultPatterns)
   {
@@ -429,18 +429,18 @@ public: // Attributes
 
   /** The number of search specifications
    *
-   * \note If a default directory is specified, this will always
-   *   be at least 1
+   * \note If a default directory is specified, this will always be at least
+   *   1
    */
   size_type size() const
   {
     return m_specifications.size();
   }
 
-  /** Obtains a non-mutating (const) reference to the search specification
-   * at the given index.
+  /** Obtains a non-mutating (const) reference to the search specification at
+   * the given index.
    *
-   * \param index The
+   * \param index The index;
    *
    * \pre index < size()
    */
