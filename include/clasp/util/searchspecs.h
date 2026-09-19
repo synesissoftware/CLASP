@@ -4,11 +4,11 @@
  * Purpose: The CLASP::Util::SearchSpecs library API.
  *
  * Created: 7th March 2012
- * Updated: 9th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2012-2024, Matthew Wilson
+ * Copyright (c) 2012-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -104,8 +104,8 @@ typedef struct clasp_util_searchspecs_t                     clasp_util_searchspe
 /**
  *
  * \retval 0 The operation succeeded
- * \retval !0 The operation succeeded. The value is an errno value indicating
- *   the cause for failure.
+ * \retval !0 The operation succeeded. The value is an errno value
+ *   indicating the cause for failure.
  *
  * \pre (NULL != searchspecs)
  * \pre (0 == numValues || NULL != values)

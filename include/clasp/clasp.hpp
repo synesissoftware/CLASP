@@ -315,9 +315,9 @@ namespace ximpl
 {
     /* The atoi_helper and atol_helper classes were removed from
      * STLSoft 1.12+, as they are superceded by the flecxx project's
-     * facilities; but rather than introduce another dependency the
-     * original classes are borrowed into CLASP here with permission
-     * (which was easy to get, since I am the author of both).
+     * facilities; but rather than introduce another dependency the original
+     * classes are borrowed into CLASP here with permission (which was easy
+     * to get, since I am the author of both).
      */
 
     struct atoi_helper
@@ -2535,8 +2535,8 @@ check_next_option(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   adjusts the given bitmask accordingly
+/** Evaluates whether a flag (or a boolean option) is specified, and adjusts
+ *   the given bitmask accordingly
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be
@@ -2573,8 +2573,8 @@ check_flag(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   adjusts the given bitmask accordingly
+/** Evaluates whether a flag (or a boolean option) is specified, and adjusts
+ *   the given bitmask accordingly
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be
@@ -2606,8 +2606,8 @@ check_flag(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   sets the given boolean flag variable accordingly.
+/** Evaluates whether a flag (or a boolean option) is specified, and sets
+ *   the given boolean flag variable accordingly.
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be
@@ -3054,8 +3054,8 @@ use_flag_or_option(
  * \param specifications A pointer to a properly-formed specification array.
  *   May not be \c NULL;
  *
- * \exception clasp::unrecognised_argument_exception Thrown if an argument is
- *   unrecognised
+ * \exception clasp::unrecognised_argument_exception Thrown if an argument
+ *   is unrecognised
  */
 inline
 void
@@ -3079,9 +3079,9 @@ verify_all_flags_and_options_are_recognised(
 }
 
 
-/** Verifies that all flags and options have been used, throwing an instance of
- * clasp::unused_argument_exception if one or more have not been used (and
- * are therefore unrecognised).
+/** Verifies that all flags and options have been used, throwing an instance
+ * of clasp::unused_argument_exception if one or more have not been used
+ * (and are therefore unrecognised).
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
  *   from call to parseArguments() / clasp_parseArguments(). May not be
@@ -3116,9 +3116,9 @@ verify_all_flags_and_options_used(
  *   from call to parseArguments() / clasp_parseArguments(). May not be
  *   \c NULL;
  *
- * \deprecated This function is now obsolete, and will be removed from a future
- *   version of CLASP; instead
- *   use \link clasp::verify_all_flags_and_options_used verify_all_flags_and_options_used()\endlink.
+ * \deprecated This function is now obsolete, and will be removed from a
+ *   future version of CLASP; instead use
+ *   \link clasp::verify_all_flags_and_options_used verify_all_flags_and_options_used()\endlink.
  */
 inline
 void
