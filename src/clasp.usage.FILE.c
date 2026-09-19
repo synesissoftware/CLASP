@@ -80,7 +80,7 @@ clasp_strcat_X_(clasp_char_t* s1, clasp_char_t const* s2)
 
 static
 int
-clasp_is_valid_specification_type_(clasp_argtype_t t)
+clasp_evaluate_spec_index_clasp_is_valid_spec_type_(clasp_argtype_t t)
 {
     switch (t)
     {
@@ -115,7 +115,7 @@ static size_t clasp_find_matching_primary_(
     size_t  firstMatchingIndex  = 0;
     size_t  lastMatchingIndex   = 0;
 
-    CLASP_ASSERT(clasp_is_valid_specification_type_(spec->type));
+    CLASP_ASSERT(clasp_evaluate_spec_index_clasp_is_valid_spec_type_(spec->type));
 
     /* Algorithm:
      *
@@ -133,7 +133,7 @@ static size_t clasp_find_matching_primary_(
     {
         clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(spec2->type))
+        if (clasp_evaluate_spec_index_clasp_is_valid_spec_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
@@ -163,7 +163,7 @@ static size_t clasp_find_matching_primary_(
     {
         clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(spec2->type))
+        if (clasp_evaluate_spec_index_clasp_is_valid_spec_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
@@ -201,7 +201,7 @@ static size_t clasp_find_matching_primary_(
     {
         clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(spec2->type))
+        if (clasp_evaluate_spec_index_clasp_is_valid_spec_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
@@ -234,7 +234,7 @@ static size_t clasp_find_matching_primary_(
     {
         clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(spec2->type))
+        if (clasp_evaluate_spec_index_clasp_is_valid_spec_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
@@ -266,7 +266,7 @@ static size_t clasp_find_matching_primary_(
     {
         clasp_specification_t const* spec2 = specifications + i;
 
-        if (clasp_is_valid_specification_type_(spec2->type))
+        if (clasp_evaluate_spec_index_clasp_is_valid_spec_type_(spec2->type))
         {
             size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);

@@ -164,7 +164,7 @@ clasp_count_flags_and_options_(
 
 static
 int
-clasp_evaluate_specification_index_(
+clasp_evaluate_spec_index_(
     clasp_specification_t const     specifications[]
 ,   clasp_specification_t const*    spec
 )
@@ -1576,7 +1576,7 @@ clasp_parseArguments_NoWild_(
 
                         if (NULL != spec)
                         {
-                            currentArg->aliasIndex      =   clasp_evaluate_specification_index_(specifications, spec);
+                            currentArg->aliasIndex      =   clasp_evaluate_spec_index_(specifications, spec);
                         }
                         else
                         {
@@ -1679,7 +1679,7 @@ clasp_parseArguments_NoWild_(
 
                         if (NULL != spec)
                         {
-                            currentArg->aliasIndex      =   clasp_evaluate_specification_index_(specifications, spec);
+                            currentArg->aliasIndex      =   clasp_evaluate_spec_index_(specifications, spec);
                         }
                         else
                         {
@@ -1769,7 +1769,7 @@ clasp_parseArguments_NoWild_(
                         currentArg->numGivenHyphens     =   1;
                         if (NULL != spec)
                         {
-                            currentArg->aliasIndex      =   clasp_evaluate_specification_index_(specifications, spec);
+                            currentArg->aliasIndex      =   clasp_evaluate_spec_index_(specifications, spec);
                         }
                         else
                         {
@@ -1864,7 +1864,7 @@ clasp_parseArguments_NoWild_(
 
                             currentArg->cmdLineIndex    =   i;
                             currentArg->numGivenHyphens =   1;
-                            currentArg->aliasIndex      =   clasp_evaluate_specification_index_(specifications, spec);
+                            currentArg->aliasIndex      =   clasp_evaluate_spec_index_(specifications, spec);
 
                             switch (currentArg->type)
                             {
@@ -1951,7 +1951,7 @@ clasp_parseArguments_NoWild_(
                                     }
                                     currentArg->cmdLineIndex        =   i;
                                     currentArg->numGivenHyphens     =   1;
-                                    currentArg->aliasIndex          =   clasp_evaluate_specification_index_(specifications, flagSpec);
+                                    currentArg->aliasIndex          =   clasp_evaluate_spec_index_(specifications, flagSpec);
                                     currentArg->flags               =   0;
 
                                     switch (currentArg->type)
