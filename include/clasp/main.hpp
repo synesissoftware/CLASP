@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
 # define CLASP_VER_CLASP_HPP_MAIN_MINOR     0
-# define CLASP_VER_CLASP_HPP_MAIN_REVISION  2
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      44
+# define CLASP_VER_CLASP_HPP_MAIN_REVISION  3
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      45
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -154,13 +154,13 @@ inline
 int
 invoke_(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
-,   clasp_char_t const*                 programName
+,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt
-,   clasp_char_t const*                 usageHelpSuffix
+,   clasp::char_t const*                usageHelpSuffix
 )
 {
     /* Using declarations */
@@ -295,13 +295,13 @@ inline
 int
 invoke(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
-,   clasp_char_t const*                 programName
+,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
-,   clasp_char_t const*                 usageHelpSuffix =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
     if (NULL != programName &&
@@ -364,13 +364,13 @@ inline
 int
 invoke(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   clasp::specification_t const        specifications[]
 ,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
-,   clasp_char_t const*                 programName     =   NULL
+,   clasp::char_t const*                programName     =   NULL
 ,   unsigned                            flags           =   0
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
-,   clasp_char_t const*                 usageHelpSuffix =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
     return invoke(

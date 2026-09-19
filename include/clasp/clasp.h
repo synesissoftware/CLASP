@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 19th September 2026
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -54,8 +54,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      3
-# define CLASP_VER_CLASP_H_CLASP_REVISION   7
-# define CLASP_VER_CLASP_H_CLASP_EDIT       114
+# define CLASP_VER_CLASP_H_CLASP_REVISION   8
+# define CLASP_VER_CLASP_H_CLASP_EDIT       115
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -83,7 +83,7 @@
 
 #define CLASP_VER_MAJOR       0
 #define CLASP_VER_MINOR       15
-#define CLASP_VER_PATCH       2
+#define CLASP_VER_PATCH       3
 #define CLASP_VER_ALPHABETA   0xFF
 
 #define CLASP_VER \
@@ -1800,14 +1800,15 @@ namespace clasp {
 #  include <clasp/internal/shim_macros.h>
 # endif /* CLASP_DOCUMENTATION_SKIP_SECTION */
 
-    typedef ::clasp_alias_t                                     alias_t;
-    typedef ::clasp_argtype_t                                   argtype_t;
-    typedef ::clasp_argument_t                                  argument_t;
-    typedef ::clasp_arguments_t                                 arguments_t;
-    typedef ::clasp_char_t                                      char_t;
-    typedef ::clasp_diagnostic_context_t                        diagnostic_context_t;
-    typedef ::clasp_slice_t                                     slice_t;
-    typedef ::clasp_specification_t                             specification_t;
+    typedef ::clasp_alias_t                                 alias_t;
+    typedef ::clasp_argtype_t                               argtype_t;
+    typedef ::clasp_argument_t                              argument_t;
+    typedef ::clasp_arguments_t                             arguments_t;
+    typedef ::clasp_char_t                                  char_t;
+    typedef ::clasp_diagnostic_context_t                    diagnostic_context_t;
+    typedef ::clasp_slice_t                                 slice_t;
+    typedef ::clasp_specification_t                         specification_t;
+    typedef ::clasp_usageinfo_t                             usageinfo_t;
 
     inline
     int
@@ -1849,23 +1850,23 @@ namespace clasp {
     inline
     int
     showUsage(
-        clasp_arguments_t const*    args
-    ,   clasp_alias_t const*        specifications
-    ,   clasp_char_t const*         toolName
-    ,   clasp_char_t const*         summary
-    ,   clasp_char_t const*         copyright
-    ,   clasp_char_t const*         description
-    ,   clasp_char_t const*         usage
-    ,   int                         major
-    ,   int                         minor
-    ,   int                         revision
-    ,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void*                       param
-    ,   int                         flags
-    ,   int                         consoleWidth
-    ,   int                         tabSize
-    ,   int                         blanksBetweenItems
+        arguments_t const*  args
+    ,   alias_t const*      specifications
+    ,   char_t const*       toolName
+    ,   char_t const*       summary
+    ,   char_t const*       copyright
+    ,   char_t const*       description
+    ,   char_t const*       usage
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
+    ,   void              (*pfnHeader)(arguments_t const*, usageinfo_t const* , alias_t const* )
+    ,   void              (*pfnBody)(arguments_t const*, usageinfo_t const* , alias_t const* )
+    ,   void*               param
+    ,   int                 flags
+    ,   int                 consoleWidth
+    ,   int                 tabSize
+    ,   int                 blanksBetweenItems
     )
     {
         return clasp_showUsage(
@@ -1892,19 +1893,19 @@ namespace clasp {
     inline
     int
     showUsage(
-        clasp_arguments_t const*    args
-    ,   clasp_alias_t const*        specifications
-    ,   clasp_char_t const*         toolName
-    ,   clasp_char_t const*         summary
-    ,   clasp_char_t const*         copyright
-    ,   clasp_char_t const*         description
-    ,   clasp_char_t const*         usage
-    ,   int                         major
-    ,   int                         minor
-    ,   int                         revision
-    ,   void                      (*pfnHeader)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void                      (*pfnBody)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_alias_t const* )
-    ,   void*                       param
+        arguments_t const*  args
+    ,   alias_t const*      specifications
+    ,   char_t const*       toolName
+    ,   char_t const*       summary
+    ,   char_t const*       copyright
+    ,   char_t const*       description
+    ,   char_t const*       usage
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
+    ,   void              (*pfnHeader)(arguments_t const*, usageinfo_t const* , alias_t const* )
+    ,   void              (*pfnBody)(arguments_t const*, usageinfo_t const* , alias_t const* )
+    ,   void*               param
     )
     {
         return clasp_showUsage(
@@ -1931,16 +1932,16 @@ namespace clasp {
     inline
     int
     showUsage(
-        clasp_arguments_t const*    args
-    ,   clasp_alias_t const*        specifications
-    ,   clasp_char_t const*         toolName
-    ,   clasp_char_t const*         summary
-    ,   clasp_char_t const*         copyright
-    ,   clasp_char_t const*         description
-    ,   clasp_char_t const*         usage
-    ,   int                         major
-    ,   int                         minor
-    ,   int                         revision
+        arguments_t const*  args
+    ,   alias_t const*      specifications
+    ,   char_t const*       toolName
+    ,   char_t const*       summary
+    ,   char_t const*       copyright
+    ,   char_t const*       description
+    ,   char_t const*       usage
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
     )
     {
         return clasp_showUsage(
@@ -1967,15 +1968,15 @@ namespace clasp {
     inline
     int
     showUsage(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         toolName
-    ,   clasp_char_t const*         summary
-    ,   clasp_char_t const*         copyright
-    ,   clasp_char_t const*         description
-    ,   clasp_char_t const*         usage
-    ,   int                         major
-    ,   int                         minor
-    ,   int                         revision
+        arguments_t const*  args
+    ,   char_t const*       toolName
+    ,   char_t const*       summary
+    ,   char_t const*       copyright
+    ,   char_t const*       description
+    ,   char_t const*       usage
+    ,   int                 major
+    ,   int                 minor
+    ,   int                 revision
     )
     {
         return clasp_showUsage(
@@ -2007,7 +2008,7 @@ namespace clasp {
     ,   int                 major
     ,   int                 minor
     ,   int                 revision
-    ,   void              (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+    ,   void              (*pfnVersion)(arguments_t const*, usageinfo_t const* , specification_t const[] )
     ,   void*               param
     ,   int                 flags
     )
@@ -2032,7 +2033,7 @@ namespace clasp {
     ,   int                 major
     ,   int                 minor
     ,   int                 revision
-    ,   void              (*pfnVersion)(clasp_arguments_t const*, clasp_usageinfo_t const* , clasp_specification_t const[] )
+    ,   void              (*pfnVersion)(arguments_t const*, usageinfo_t const* , specification_t const[] )
     ,   void*               param
     )
     {

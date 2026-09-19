@@ -4,11 +4,11 @@
  * Purpose: Utility class for processing search specifications.
  *
  * Created: 20th May 2010
- * Updated: 12th July 2024
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2024, Matthew Wilson
+ * Copyright (c) 2010-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR       0
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    3
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        24
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    4
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        25
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -97,7 +97,7 @@ class search_specifications
 {
 public: // Member Types
   /// The character type
-  typedef clasp_char_t                                      char_type;
+  typedef char_t                                            char_type;
   /// The string type
   typedef clasp_string_t                                    string_type;
   /// The boolean type
@@ -160,14 +160,14 @@ private:
   void operator =(class_type const&);
 public:
   static search_specifications from_values(
-    clasp_arguments_t const* args
+    arguments_t const* args
   )
   {
     search_specifications specs;
 
     { for (size_t i = 0; i != args->numValues; ++i)
     {
-      clasp_argument_t const& value = args->values[i];
+      argument_t const& value = args->values[i];
 
       specs.push_element(string_type(value.value.ptr, value.value.len));
     }}
@@ -251,8 +251,8 @@ private:
 
     element_is_::element_type type = element_is_::elementIsUnknown;
 
-    static clasp_char_t const   dot1[]  =   { '.', '\0' };
-    static clasp_char_t const   dot2[]  =   { '.', '.', '\0' };
+    static char_t const         dot1[]  =   { '.', '\0' };
+    static char_t const         dot2[]  =   { '.', '.', '\0' };
 
     // Is dots directory?
     if (dot1 == element ||
