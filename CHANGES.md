@@ -1,6 +1,12 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## Unreleased
+
+* Applied **misc-dev-scripts** **0.6.0** editor/Git/`.sis` drop-in templates on **boilerplate**;
+* Restored historical **.gitignore** patterns as a sorted union with **misc-dev-scripts** gold section layout;
+
+
 ## 0.15.1 - 2nd September 2026
 
 * Fixed **`CLASP_VER`** composite to use **`CLASP_VER_AB`** (left referencing retired **`CLASP_VER_ALPHABETA`** after the 0.15.0 rename);
