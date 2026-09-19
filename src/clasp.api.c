@@ -392,7 +392,7 @@ clasp_lookup_alias_(
  * \param specifications The specifications array;
  * \param arg Pointer to the argument;
  * \param cchArg Length of the argument;
- * \param flags ;
+ * \param flags Flags that control the lookup;
  */
 static
 clasp_specification_t const*

@@ -76,6 +76,12 @@ mkdir -p "${CMakeDir}/doxygen"
   echo "# Output directory (overridden by ${Basename})"
   echo "OUTPUT_DIRECTORY = ${CMakeDir}/doxygen"
 } | doxygen -
+DoxygenResult=$?
+
+if [[ $DoxygenResult -ne 0 ]]; then
+
+  exit "$DoxygenResult"
+fi
 
 echo "${ProjectName} API documentation written to ${CMakeDir}/doxygen/html/index.html"
 
