@@ -4,7 +4,7 @@
  * Purpose: CLASP usage (FILE) facilities.
  *
  * Created: 4th June 2008
- * Updated: 19th September 2026
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -107,7 +107,7 @@ clasp_longOptionName_strlen_(clasp_char_t const* s, unsigned flags)
 static size_t clasp_find_matching_primary_(
     clasp_specification_t const     specifications[]
 ,   size_t                          numSpecifications
-,   clasp_specification_t const*    alias
+,   clasp_specification_t const*    spec
 ,   unsigned                        flags
 )
 {
@@ -115,7 +115,7 @@ static size_t clasp_find_matching_primary_(
     size_t  firstMatchingIndex  = 0;
     size_t  lastMatchingIndex   = 0;
 
-    CLASP_ASSERT(clasp_is_valid_specification_type_(alias->type));
+    CLASP_ASSERT(clasp_is_valid_specification_type_(spec->type));
 
     /* Algorithm:
      *
@@ -135,11 +135,11 @@ static size_t clasp_find_matching_primary_(
 
         if (clasp_is_valid_specification_type_(spec2->type))
         {
-            size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
+            size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(spec->mappedArgument, spec2->mappedArgument, lenLong1))
             {
                 if (1u == ++numberOfMatches)
                 {
@@ -165,11 +165,11 @@ static size_t clasp_find_matching_primary_(
 
         if (clasp_is_valid_specification_type_(spec2->type))
         {
-            size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
+            size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(spec->mappedArgument, spec2->mappedArgument, lenLong1))
             {
                 clasp_char_t const* const equal = clasp_strchreq_(spec2->mappedArgument, flags);
 
@@ -203,11 +203,11 @@ static size_t clasp_find_matching_primary_(
 
         if (clasp_is_valid_specification_type_(spec2->type))
         {
-            size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
+            size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(spec->mappedArgument, spec2->mappedArgument, lenLong1))
             {
                 clasp_char_t const* const equal = clasp_strchreq_(spec2->mappedArgument, flags);
 
@@ -236,11 +236,11 @@ static size_t clasp_find_matching_primary_(
 
         if (clasp_is_valid_specification_type_(spec2->type))
         {
-            size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
+            size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(spec->mappedArgument, spec2->mappedArgument, lenLong1))
             {
                 if (NULL == spec2->help ||
                     '\0' == spec2->help[0])
@@ -268,11 +268,11 @@ static size_t clasp_find_matching_primary_(
 
         if (clasp_is_valid_specification_type_(spec2->type))
         {
-            size_t  lenLong1    =   clasp_longOptionName_strlen_(alias->mappedArgument, flags);
+            size_t  lenLong1    =   clasp_longOptionName_strlen_(spec->mappedArgument, flags);
             size_t  lenLong2    =   clasp_longOptionName_strlen_(spec2->mappedArgument, flags);
 
             if (lenLong1 == lenLong2 &&
-                0 == clasp_strncmp_(alias->mappedArgument, spec2->mappedArgument, lenLong1))
+                0 == clasp_strncmp_(spec->mappedArgument, spec2->mappedArgument, lenLong1))
             {
                 if (NULL == spec2->help ||
                     '\0' == spec2->help[0])
