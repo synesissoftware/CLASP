@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP version macros.
  *
  * Created: 2nd September 2026
- * Updated: 2nd September 2026
+ * Updated: 18th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -21,7 +21,7 @@
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* Standard C header files */
 #include <stdlib.h>
@@ -36,7 +36,7 @@ static void test_CLASP_VER_composite(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 int main(int argc, char **argv)
@@ -66,12 +66,12 @@ int main(int argc, char **argv)
 
 static void test_CLASP_VER_components(void)
 {
-    XTESTS_TEST_INTEGER_EQUAL(0, CLASP_VER_MAJOR);
-    XTESTS_TEST_INTEGER_EQUAL(15, CLASP_VER_MINOR);
-    XTESTS_TEST_INTEGER_EQUAL(1, CLASP_VER_PATCH);
-    XTESTS_TEST_INTEGER_EQUAL(0xFF, CLASP_VER_AB);
+    TEST_INT_EQ(0, CLASP_VER_MAJOR);
+    TEST_INT_EQ(15, CLASP_VER_MINOR);
+    TEST_INT_EQ(2, CLASP_VER_PATCH);
+    TEST_INT_EQ(0xFF, CLASP_VER_AB);
 
-    XTESTS_TEST_INTEGER_EQUAL(CLASP_VER_PATCH, CLASP_VER_REVISION);
+    TEST_INT_EQ(CLASP_VER_PATCH, CLASP_VER_REVISION);
 }
 
 static void test_CLASP_VER_composite(void)
@@ -81,12 +81,12 @@ static void test_CLASP_VER_composite(void)
      */
     unsigned const ver = (unsigned)CLASP_VER;
 
-    XTESTS_TEST_INTEGER_EQUAL(CLASP_VER_MAJOR, (ver >> 24) & 0xff);
-    XTESTS_TEST_INTEGER_EQUAL(CLASP_VER_MINOR, (ver >> 16) & 0xff);
-    XTESTS_TEST_INTEGER_EQUAL(CLASP_VER_PATCH, (ver >>  8) & 0xff);
-    XTESTS_TEST_INTEGER_EQUAL(CLASP_VER_AB,    (ver >>  0) & 0xff);
+    TEST_INT_EQ(CLASP_VER_MAJOR, (ver >> 24) & 0xff);
+    TEST_INT_EQ(CLASP_VER_MINOR, (ver >> 16) & 0xff);
+    TEST_INT_EQ(CLASP_VER_PATCH, (ver >>  8) & 0xff);
+    TEST_INT_EQ(CLASP_VER_AB,    (ver >>  0) & 0xff);
 
-    XTESTS_TEST_INTEGER_EQUAL(
+    TEST_INT_EQ(
         (unsigned)(0
             | (CLASP_VER_MAJOR << 24)
             | (CLASP_VER_MINOR << 16)

@@ -1,10 +1,13 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
-## Unreleased
+## 0.15.2 - 20th September 2026
 
+* Converted automated tests to **xTests** terse assertion macros;
+* fleshed out **NEWS.md** contents;
 * Applied **misc-dev-scripts** **0.6.0** editor/Git/`.sis` drop-in templates on **boilerplate**;
 * Restored historical **.gitignore** patterns as a sorted union with **misc-dev-scripts** gold section layout;
+* Added **tidying** to **ci.yml** push branches;
 
 
 ## 0.15.1 - 2nd September 2026
