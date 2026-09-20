@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
 # define CLASP_VER_CLASP_HPP_MAIN_MINOR     1
-# define CLASP_VER_CLASP_HPP_MAIN_REVISION  1
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      46
+# define CLASP_VER_CLASP_HPP_MAIN_REVISION  2
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      48
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -140,6 +140,18 @@ namespace main
  * typedefs
  */
 
+/** Function pointer to a
+ * <code>clasp_main(clasp::arguments_t const* args)</code> that may be
+ * passed to clasp::main::invoke() overload.
+ */
+typedef int (STLSOFT_CDECL *pfnMain_t)(clasp::arguments_t const* args);
+
+/** Function pointer to a
+ * <code>clasp_main(clasp::arguments_t const& args)</code> that may be
+ * passed to clasp::main::invoke() overload.
+ */
+typedef int (STLSOFT_CDECL *pfnMainRef_t)(clasp::arguments_t const& args);
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * implementation functions
@@ -151,11 +163,82 @@ namespace ximpl
 {
 
 inline
+clasp::char_t const*
+resolve_program_name_(
+    clasp::char_t const*        programName
+,   clasp::char_t const* const* argv
+)
+{
+    assert(NULL != argv);
+
+    if (NULL != programName &&
+        '\0' == programName[0])
+    {
+        programName = NULL;
+    }
+#ifdef CLASP_MAIN_DEFAULT_PROGRAM_NAME
+
+    if (NULL == programName)
+    {
+        programName = CLASP_MAIN_DEFAULT_PROGRAM_NAME;
+    }
+#endif /* CLASP_MAIN_DEFAULT_PROGRAM_NAME */
+#if !defined(PANTHEIOS_USE_WIDE_STRINGS) && \
+    defined(PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS) && \
+    PANTHEIOS_VER >= 0x010001d6
+
+    if (NULL == programName)
+    {
+# ifndef PANTHEIOS_NO_NAMESPACE
+
+        using pantheios::pantheios_getProcessIdentity;
+# endif /* !PANTHEIOS_NO_NAMESPACE */
+
+        programName = pantheios_getProcessIdentity();
+    }
+#endif
+
+    if (NULL == programName)
+    {
+#if (STLSOFT_LEAD_VER >= 0x010a0000) && \
+    (   !defined(CLASP_USE_WIDE_STRINGS) || \
+        STLSOFT_LEAD_VER >= 0x010a0113)
+
+        programName = platformstl_ns_qual(get_executable_name_from_path)(argv[0]).ptr;
+#else
+
+        programName = argv[0];
+#endif
+    }
+
+    if (NULL == programName)
+    {
+        programName = argv[0];
+    }
+
+    return programName;
+}
+
+struct invoke_ref_adaptor_t
+{
+    pfnMainRef_t pfn;
+
+    int operator ()(clasp::arguments_t const* args) const
+    {
+        assert(NULL != args);
+        assert(NULL != pfn);
+
+        return pfn(*args);
+    }
+};
+
+template <typename F>
+inline
 int
 invoke_(
     int                                 argc
 ,   clasp::char_t const* const*         argv
-,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
+,   F                                   pfnMain
 ,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
@@ -181,7 +264,6 @@ invoke_(
 
     assert(argc > 0);
     assert(NULL != argv);
-    assert(NULL != pfnMain);
     assert(NULL != programName);
 
     clasp::arguments_t const* clargs;
@@ -257,18 +339,18 @@ invoke_(
  * caller-supplied CLASP main function (\c pfnMain) according to the given
  * arguments.
  *
- * \param argc \c argc passed to <code>main()</code>
- * \param argv \c argv passed to <code>main()</code>
- * \param pfnMain Caller-supplied CLASP main function that will be invoked
+ * \param argc \c argc passed to <code>main()</code>;
+ * \param argv \c argv passed to <code>main()</code>;
+ * \param pfnMain Caller-supplied CLASP main function that will be invoked;
  * \param programName Specifies the name of the program, which will be
- *   inferred heuristically if NULL or empty
- * \param specifications Pointer to an specifications array that will be passed to
- *   clasp::parseArguments()
- * \param flags Flags that will be passed to clasp::parseArguments()
+ *   inferred heuristically if \c NULL or empty;
+ * \param specifications Pointer to an specifications array that will be
+ *   passed to clasp::parseArguments();
+ * \param flags Flags that will be passed to clasp::parseArguments();
  * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
- *   semicolon-space appended after the exception information, or NULL for
- *   no suffix
- * \param ctxt
+ *   semicolon-space appended after the exception information, or \c NULL
+ *   for no suffix;
+ * \param ctxt Diagnostic context. May be \c NULL;
  *
  * \note If use of the Pantheios diagnostic logging API library is detected,
  *   via Pantheios C and/or C++ API main headers - pantheios/pantheios.h and
@@ -284,8 +366,8 @@ invoke_(
  *   <code>pantheios_getProcessIdentity</code>); otherwise 3. The name
  *   "process" is used.
  *
- * \exceptions * All exceptions not derived from clasp::clasp_exception are
- *   passed through to the caller uncaught.
+ * \exception <any> All exceptions not derived from clasp::clasp_exception
+ *   are passed through to the caller uncaught.
  *
  * \pre argc > 0
  * \pre NULL != argv
@@ -296,7 +378,7 @@ int
 invoke(
     int                                 argc
 ,   clasp::char_t const* const*         argv
-,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
+,   pfnMain_t                           pfnMain
 ,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
@@ -304,54 +386,73 @@ invoke(
 ,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
-    if (NULL != programName &&
-        '\0' == programName[0])
-    {
-        programName = NULL;
-    }
-#ifdef CLASP_MAIN_DEFAULT_PROGRAM_NAME
+    assert(NULL != pfnMain);
 
-    if (NULL == programName)
-    {
-        programName = CLASP_MAIN_DEFAULT_PROGRAM_NAME;
-    }
-#endif /* CLASP_MAIN_DEFAULT_PROGRAM_NAME */
-#if !defined(PANTHEIOS_USE_WIDE_STRINGS) && \
-    defined(PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS) && \
-    PANTHEIOS_VER >= 0x010001d6
-
-    if (NULL == programName)
-    {
-# ifndef PANTHEIOS_NO_NAMESPACE
-        using pantheios::pantheios_getProcessIdentity;
-# endif /* !PANTHEIOS_NO_NAMESPACE */
-
-        programName = pantheios_getProcessIdentity();
-    }
-#endif
-
-    if (NULL == programName)
-    {
-#if (STLSOFT_LEAD_VER >= 0x010a0000) && \
-    (   !defined(CLASP_USE_WIDE_STRINGS) || \
-        STLSOFT_LEAD_VER >= 0x010a0113)
-
-        programName = platformstl_ns_qual(get_executable_name_from_path)(argv[0]).ptr;
-# else
-
-        programName = argv[0];
-# endif
-    }
-
-    if (NULL == programName)
-    {
-        programName = argv[0];
-    }
+    programName = ximpl::resolve_program_name_(programName, argv);
 
     return ximpl::invoke_(
         argc
     ,   argv
     ,   pfnMain
+    ,   programName
+    ,   specifications
+    ,   flags
+    ,   ctxt
+    ,   usageHelpSuffix
+    );
+}
+
+/** Parses the command-line (specified in \c argc and \c argv) and invokes
+ * caller-supplied CLASP main function (\c pfnMain) according to the given
+ * arguments.
+ *
+ * This overload accepts a callback that takes
+ * <code>clasp::arguments_t const&</code> rather than a pointer, with the
+ * same argument order as the primary pointer-callback overload.
+ *
+ * \param argc \c argc passed to <code>main()</code>;
+ * \param argv \c argv passed to <code>main()</code>;
+ * \param pfnMain Caller-supplied CLASP main function that will be invoked;
+ * \param programName Specifies the name of the program, which will be
+ *   inferred heuristically if \c NULL or empty;
+ * \param specifications Pointer to an specifications array that will be
+ *   passed to clasp::parseArguments();
+ * \param flags Flags that will be passed to clasp::parseArguments();
+ * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
+ *   semicolon-space appended after the exception information, or \c NULL
+ *   for no suffix;
+ * \param ctxt Diagnostic context. May be \c NULL;
+ *
+ * \note Behaviour, exception policy, and program-name inference match the
+ *   primary <code>invoke()</code> overload.
+ *
+ * \pre argc > 0
+ * \pre NULL != argv
+ * \pre NULL != pfnMain
+ */
+inline
+int
+invoke(
+    int                                 argc
+,   clasp::char_t const* const*         argv
+,   pfnMainRef_t                        pfnMain
+,   clasp::char_t const*                programName
+,   clasp::specification_t const        specifications[]
+,   unsigned                            flags
+,   clasp::diagnostic_context_t const*  ctxt            =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
+)
+{
+    assert(NULL != pfnMain);
+
+    programName = ximpl::resolve_program_name_(programName, argv);
+
+    ximpl::invoke_ref_adaptor_t const adaptor = { pfnMain };
+
+    return ximpl::invoke_(
+        argc
+    ,   argv
+    ,   adaptor
     ,   programName
     ,   specifications
     ,   flags
@@ -366,7 +467,7 @@ invoke(
     int                                 argc
 ,   clasp::char_t const* const*         argv
 ,   clasp::specification_t const        specifications[]
-,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
+,   pfnMain_t                           pfnMain
 ,   clasp::char_t const*                programName     =   NULL
 ,   unsigned                            flags           =   0
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
@@ -418,26 +519,17 @@ invoke(
     int                                 argc
 ,   clasp::char_t const* const*         argv
 ,   clasp::specification_t const        specifications[]
-,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const& args)
+,   pfnMainRef_t                        pfnMain
 ,   clasp::char_t const*                programName     =   NULL
 ,   unsigned                            flags           =   0
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
 ,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
-    static int (STLSOFT_CDECL *s_pfnMain)(clasp::arguments_t const& args) = pfnMain;
-
-    struct adaptor {
-        static int STLSOFT_CDECL fn(clasp::arguments_t const* args)
-        {
-            return s_pfnMain(*args);
-        }
-    };
-
     return invoke(
         argc
     ,   argv
-    ,   &adaptor::fn
+    ,   pfnMain
     ,   programName
     ,   specifications
     ,   flags
