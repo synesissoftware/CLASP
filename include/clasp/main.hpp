@@ -4,11 +4,11 @@
  * Purpose: main() entry-point helper functions.
  *
  * Created: 29th December 2010
- * Updated: 12th July 2024
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2024, Matthew Wilson
+ * Copyright (c) 2010-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,9 +54,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
-# define CLASP_VER_CLASP_HPP_MAIN_MINOR     0
-# define CLASP_VER_CLASP_HPP_MAIN_REVISION  2
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      43
+# define CLASP_VER_CLASP_HPP_MAIN_MINOR     1
+# define CLASP_VER_CLASP_HPP_MAIN_REVISION  0
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      46
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -119,7 +119,7 @@ namespace main
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * typedefs
+ * macros
  */
 
 #ifdef CLASP_DOCUMENTATION_SKIP_SECTION
@@ -140,6 +140,12 @@ namespace main
  * typedefs
  */
 
+/** Function pointer to a
+ * <code>clasp_main(clasp::arguments_t const* args)</code> that may be
+ * passed to clasp::main::invoke() overload.
+ */
+typedef int (STLSOFT_CDECL *pfnMain_t)(clasp::arguments_t const* args);
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * implementation functions
@@ -154,13 +160,13 @@ inline
 int
 invoke_(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   int (STLSOFT_CDECL*                 pfnMain)(clasp::arguments_t const* args)
-,   clasp_char_t const*                 programName
+,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt
-,   clasp_char_t const*                 usageHelpSuffix
+,   clasp::char_t const*                usageHelpSuffix
 )
 {
     /* Using declarations */
@@ -192,8 +198,9 @@ invoke_(
     {
         stlsoft::error_desc e(r);
 
-        /* Diagnostic log statement */
+        /* Diagnostic log statement - only if Pantheios included */
 #ifdef PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS
+
         pantheios_logprintf(PANTHEIOS_SEV_ALERT, PANTHEIOS_LITERAL_STRING("%s: could not start program: arguments parsing failed: %s"), programName, e.c_str());
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
 
@@ -211,18 +218,20 @@ invoke_(
 #ifdef PANTHEIOS_INCL_PANTHEIOS_HPP_PANTHEIOS
 
             log_DEBUG(PANTHEIOS_LITERAL_STRING("entering main("), args(argc, argv, args::arg0FileOnly), PANTHEIOS_LITERAL_STRING(")"));
-
 #endif /* Pantheios C++ API */
 
             return pfnMain(clargs);
         }
         catch(clasp::clasp_exception &x)
         {
-            /* Diagnostic log statement */
+            /* Diagnostic log statement - only if Pantheios included */
 #ifdef PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS
+
 # ifdef STLSOFT_CF_RTTI_SUPPORT
+
             pantheios_logprintf(PANTHEIOS_SEV_DEBUG, PANTHEIOS_LITERAL_STRING("%s: invalid-command-line (%s): %s"), programName, typeid(x).name(), x.what());
 # else /* ? STLSOFT_CF_RTTI_SUPPORT */
+
             pantheios_logprintf(PANTHEIOS_SEV_DEBUG, PANTHEIOS_LITERAL_STRING("%s: invalid-command-line: %s"), programName, x.what());
 # endif /* STLSOFT_CF_RTTI_SUPPORT */
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
@@ -242,7 +251,6 @@ invoke_(
         return EXIT_FAILURE;
     }
 }
-
 } /* namespace ximpl */
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
@@ -255,18 +263,18 @@ invoke_(
  * caller-supplied CLASP main function (\c pfnMain) according to the given
  * arguments.
  *
- * \param argc \c argc passed to <code>main()</code>
- * \param argv \c argv passed to <code>main()</code>
- * \param pfnMain Caller-supplied CLASP main function that will be invoked
+ * \param argc \c argc passed to <code>main()</code>;
+ * \param argv \c argv passed to <code>main()</code>;
+ * \param pfnMain Caller-supplied CLASP main function that will be invoked;
  * \param programName Specifies the name of the program, which will be
- *   inferred heuristically if NULL or empty
- * \param specifications Pointer to an specifications array that will be passed to
- *   clasp::parseArguments()
- * \param flags Flags that will be passed to clasp::parseArguments()
+ *   inferred heuristically if \c NULL or empty;
+ * \param specifications Pointer to an specifications array that will be
+ *   passed to clasp::parseArguments();
+ * \param flags Flags that will be passed to clasp::parseArguments();
  * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
- *   semicolon-space appended after the exception information, or NULL for
- *   no suffix
- * \param ctxt
+ *   semicolon-space appended after the exception information, or \c NULL
+ *   for no suffix;
+ * \param ctxt Diagnostic context. May be \c NULL;
  *
  * \note If use of the Pantheios diagnostic logging API library is detected,
  *   via Pantheios C and/or C++ API main headers - pantheios/pantheios.h and
@@ -282,8 +290,8 @@ invoke_(
  *   <code>pantheios_getProcessIdentity</code>); otherwise 3. The name
  *   "process" is used.
  *
- * \exceptions * All exceptions not derived from clasp::clasp_exception are
- *   passed through to the caller uncaught.
+ * \exception <any> All exceptions not derived from clasp::clasp_exception
+ *   are passed through to the caller uncaught.
  *
  * \pre argc > 0
  * \pre NULL != argv
@@ -293,13 +301,13 @@ inline
 int
 invoke(
     int                                 argc
-,   clasp_char_t const* const*          argv
-,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
-,   clasp_char_t const*                 programName
+,   clasp::char_t const* const*         argv
+,   pfnMain_t                           pfnMain
+,   clasp::char_t const*                programName
 ,   clasp::specification_t const        specifications[]
 ,   unsigned                            flags
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
-,   clasp_char_t const*                 usageHelpSuffix =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
     if (NULL != programName &&
@@ -307,20 +315,21 @@ invoke(
     {
         programName = NULL;
     }
-
 #ifdef CLASP_MAIN_DEFAULT_PROGRAM_NAME
+
     if (NULL == programName)
     {
         programName = CLASP_MAIN_DEFAULT_PROGRAM_NAME;
     }
 #endif /* CLASP_MAIN_DEFAULT_PROGRAM_NAME */
-
 #if !defined(PANTHEIOS_USE_WIDE_STRINGS) && \
     defined(PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS) && \
     PANTHEIOS_VER >= 0x010001d6
+
     if (NULL == programName)
     {
 # ifndef PANTHEIOS_NO_NAMESPACE
+
         using pantheios::pantheios_getProcessIdentity;
 # endif /* !PANTHEIOS_NO_NAMESPACE */
 
@@ -333,10 +342,12 @@ invoke(
 #if (STLSOFT_LEAD_VER >= 0x010a0000) && \
     (   !defined(CLASP_USE_WIDE_STRINGS) || \
         STLSOFT_LEAD_VER >= 0x010a0113)
+
         programName = platformstl_ns_qual(get_executable_name_from_path)(argv[0]).ptr;
-# else
+#else
+
         programName = argv[0];
-# endif
+#endif
     }
 
     if (NULL == programName)
@@ -344,20 +355,29 @@ invoke(
         programName = argv[0];
     }
 
-    return ximpl::invoke_(argc, argv, pfnMain, programName, specifications, flags, ctxt, usageHelpSuffix);
+    return ximpl::invoke_(
+        argc
+    ,   argv
+    ,   pfnMain
+    ,   programName
+    ,   specifications
+    ,   flags
+    ,   ctxt
+    ,   usageHelpSuffix
+    );
 }
 
 inline
 int
 invoke(
     int                                 argc
-,   clasp_char_t const* const*          argv
+,   clasp::char_t const* const*         argv
 ,   clasp::specification_t const        specifications[]
-,   int                 (STLSOFT_CDECL *pfnMain)(clasp::arguments_t const* args)
-,   clasp_char_t const*                 programName     =   NULL
+,   pfnMain_t                           pfnMain
+,   clasp::char_t const*                programName     =   NULL
 ,   unsigned                            flags           =   0
 ,   clasp::diagnostic_context_t const*  ctxt            =   NULL
-,   clasp_char_t const*                 usageHelpSuffix =   NULL
+,   clasp::char_t const*                usageHelpSuffix =   NULL
 )
 {
     return invoke(
@@ -371,6 +391,7 @@ invoke(
     ,   usageHelpSuffix
     );
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * namespace

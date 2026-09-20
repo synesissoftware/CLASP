@@ -15,6 +15,7 @@
 
 - [Introduction](#introduction)
 - [Installation](#installation)
+  - [API documentation (Doxygen)](#api-documentation-doxygen)
 - [Components](#components)
   - [C API / core library](#c-api--core-library)
   - [C++ API](#c-api)
@@ -63,6 +64,19 @@ The design of the library is discussed in detail in the article "_An Introductio
 
 Detailed instructions — via **CMake** — are provided in the accompanying
 [INSTALL.md](./INSTALL.md) file.
+
+
+### API documentation (Doxygen)
+
+HTML API reference for the public headers may be generated locally:
+
+```bash
+./generate_doxygen.sh
+```
+
+Open `_build/doxygen/html/index.html` in a browser (or
+`<build-dir>/doxygen/html/index.html` when `SIS_CMAKE_BUILD_DIR` is set).
+Requires [Doxygen](https://www.doxygen.nl/) on `PATH`.
 
 
 ## Components
@@ -147,7 +161,7 @@ int main(int argc, char* argv[])
 #include <cstdlib>
 #include <iostream>
 
-static clasp_specification_t const Specifications[] =
+static clasp::specification_t const Specifications[] =
 {
     CLASP_GAP_SECTION("standard flags:"),
     CLASP_STOCK_FLAG_HELP,
@@ -158,7 +172,7 @@ static clasp_specification_t const Specifications[] =
 
 int main(int argc, char* argv[])
 {
-    return clasp::main::invoke(argc, argv, [](clasp_arguments_t const* args) {
+    return clasp::main::invoke(argc, argv, [](clasp::arguments_t const* args) {
 
         if (clasp::flag_specified(args, "--help"))
         {

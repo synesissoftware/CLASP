@@ -1,6 +1,14 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.15.3 - 20th September 2026
+
+* Added Doxygen packaging: **Doxyfile**, **doc/mainpage.md**, **generate_doxygen.sh**;
+* Added missing Doxygen `group__utility` in **clasp.h** so linkage macros group in generated docs;
+* Added Doxygen generation to **ci.yml**, with warnings rejected via **Doxyfile** `WARN_AS_ERROR`;
+* C++ API uses namespace aliases (**`char_t`**, **`arguments_t`**, **`argument_t`**, **`usageinfo_t`**) in place of C **`clasp_*`** type names in **clasp.h**, **clasp.hpp**, **main.hpp**, and **search_specifications.hpp**;
+
+
 ## 0.15.2 - 19th September 2026
 
 * Bumped version to **0.15.2**;

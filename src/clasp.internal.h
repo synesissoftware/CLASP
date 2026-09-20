@@ -4,11 +4,11 @@
  * Purpose: CLASP internal common header.
  *
  * Created: 4th June 2008
- * Updated: 11th March 2025
+ * Updated: 19th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -181,6 +181,9 @@ clasp_useArgument_(
 ,   clasp_argument_t const*     arg
 );
 
+/** Counts the number of flag specifications and the number of options
+ * specifications.
+ */
 void
 clasp_count_flags_and_options_(
     clasp_specification_t const     specifications[]
@@ -226,7 +229,7 @@ clasp_count_flags_and_options_(
 
 /* Duplicates a string.
  *
- * \param ctxt The diagnostic context. May not be NULL;
+ * \param ctxt The diagnostic context. May not be \c NULL;
  * param s The string to be duplicated;
  */
 clasp_char_t* clasp_strdup_(
@@ -242,9 +245,9 @@ clasp_char_t* clasp_strdup_raw_(
     clasp_char_t const* s
 );
 
-/* This function controls whether the library recognises just an equals
- * sign ('='), or both an equals sign '=' and a colon (':') as separating
- * an option name and value.
+/* This function controls whether the library recognises just an equals sign
+ * ('='), or both an equals sign '=' and a colon (':') as separating an
+ * option name and value.
  *
  * \param s The string to be examined;
  * \param flags Flags that moderate the behaviour of the function;
@@ -257,8 +260,8 @@ clasp_strchreq_(
 
 /* Counts the number of instances of c in s
  *
- * \param s String to search
- * \param c Character for which to search
+ * \param s String to search;
+ * \param c Character for which to search;
  *
  * \pre (NULL != s)
  * \pre ('\0' != c)
@@ -271,9 +274,9 @@ clasp_strcount_(
 
 /* Counts the number of instances of c in s to length n
  *
- * \param s String to search
- * \param n Maximum number of characters to search
- * \param c Character for which to search
+ * \param s String to search;
+ * \param n Maximum number of characters to search;
+ * \param c Character for which to search;
  *
  * \pre (NULL != s)
  * \pre ('\0' != c)
@@ -285,9 +288,8 @@ clasp_strncount_(
 ,   clasp_char_t        c
 );
 
-/* Searches for the last occurence of n in a section of a
- * string - s[0, n) - and returns a pointer to it, or NULL if it could not
- * be found
+/* Searches for the last occurence of n in a section of a string - s[0, n) -
+ * and returns a pointer to it, or NULL if it could not be found
  *
  * \pre (NULL != s || 0 == n)
  * \pre ('\0' != c)
@@ -332,8 +334,8 @@ clasp_strtok_r_(
 ,   struct strtok_savectxt_t*   savectxt
 );
 
-/* string tokenisation a la strtok_r, except that the blanks are
- * preserved (and returned as empty, not null, strings)
+/* string tokenisation a la strtok_r, except that the blanks are preserved
+ * (and returned as empty, not null, strings)
  *
  * \pre (NULL != s)
  * \pre (NULL != delim)

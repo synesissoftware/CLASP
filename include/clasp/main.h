@@ -4,11 +4,11 @@
  * Purpose: main() entry-point helper functions.
  *
  * Created: 29th December 2010
- * Updated: 15th January 2025
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2010-2025, Matthew Wilson
+ * Copyright (c) 2010-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_H_MAIN_MAJOR       2
 # define CLASP_VER_CLASP_H_MAIN_MINOR       0
 # define CLASP_VER_CLASP_H_MAIN_REVISION    3
-# define CLASP_VER_CLASP_H_MAIN_EDIT        21
+# define CLASP_VER_CLASP_H_MAIN_EDIT        22
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -203,11 +203,26 @@ clasp_main_invoke(
 {
     clasp_arguments_t const* args;
 
-    int r = clasp_parseArguments(flags, argc, argv, specifications, ctxt, &args);
+    int const r = clasp_parseArguments(flags, argc, argv, specifications, ctxt, &args);
 
     if (r != 0)
     {
         clasp_char_t const* const e = clasp_main_internal_strerror_(r);
+
+#if !defined(PANTHEIOS_USE_WIDE_STRINGS) && \
+    defined(PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS) && \
+    PANTHEIOS_VER >= 0x010001d6
+
+        if (NULL == programName)
+        {
+# ifndef PANTHEIOS_NO_NAMESPACE
+
+            using pantheios::pantheios_getProcessIdentity;
+# endif /* !PANTHEIOS_NO_NAMESPACE */
+
+            programName = pantheios_getProcessIdentity();
+        }
+#endif
 
         if (NULL == programName)
         {
@@ -216,6 +231,7 @@ clasp_main_invoke(
 
         /* Diagnostic logging */
 #if defined(PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS)
+
         pantheios_logprintf(PANTHEIOS_SEV_ALERT, PANTHEIOS_LITERAL_STRING("%s: could not start program: arguments parsing failed: "), programName, e);
 #endif /* PANTHEIOS_INCL_PANTHEIOS_H_PANTHEIOS */
 
@@ -246,7 +262,6 @@ clasp_main_invoke(
 #endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
 #endif /* !CLASP_INCL_CLASP_H_MAIN */
-
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

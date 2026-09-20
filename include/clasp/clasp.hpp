@@ -4,11 +4,11 @@
  * Purpose: C++ layer for the CLASP library.
  *
  * Created: 31st July 2008
- * Updated: 11th March 2025
+ * Updated: 20th September 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
- * Copyright (c) 2008-2025, Matthew Wilson
+ * Copyright (c) 2008-2026, Matthew Wilson
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
 # define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
-# define CLASP_VER_CLASP_HPP_CLASP_REVISION 1
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     70
+# define CLASP_VER_CLASP_HPP_CLASP_REVISION 2
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     71
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -133,7 +133,7 @@ namespace clasp
  */
 
 typedef std::basic_string<
-    clasp_char_t
+    char_t
 >                                                           clasp_string_t;
 
 
@@ -315,9 +315,9 @@ namespace ximpl
 {
     /* The atoi_helper and atol_helper classes were removed from
      * STLSoft 1.12+, as they are superceded by the flecxx project's
-     * facilities; but rather than introduce another dependency the
-     * original classes are borrowed into CLASP here with permission
-     * (which was easy to get, since I am the author of both).
+     * facilities; but rather than introduce another dependency the original
+     * classes are borrowed into CLASP here with permission (which was easy
+     * to get, since I am the author of both).
      */
 
     struct atoi_helper
@@ -390,7 +390,7 @@ namespace ximpl
     struct integer_conversion_traits_<int>
     {
     public:
-        static int convert(clasp_char_t const* str)
+        static int convert(char_t const* str)
         {
             return atoi_helper::call(str);
         }
@@ -402,7 +402,7 @@ namespace ximpl
     struct integer_conversion_traits_<unsigned>
     {
     public:
-        static unsigned convert(clasp_char_t const* str)
+        static unsigned convert(char_t const* str)
         {
             return atol_helper::call(str);
         }
@@ -413,7 +413,7 @@ namespace ximpl
     struct integer_conversion_traits_<long>
     {
     public:
-        static int convert(clasp_char_t const* str)
+        static int convert(char_t const* str)
         {
             return atol_helper::call(str);
         }
@@ -423,7 +423,7 @@ namespace ximpl
     struct integer_conversion_traits_<size_t>
     {
     public:
-        static size_t convert(clasp_char_t const* str)
+        static size_t convert(char_t const* str)
         {
             return atoul_helper::call(str);
         }
@@ -433,7 +433,10 @@ namespace ximpl
 
     struct boolean_conversion_traits_
     {
-        static bool convert(clasp_slice_t const& str, bool* wasStrictlyCorrect = NULL)
+        static bool convert(
+            slice_t const&  str
+        ,   bool*           wasStrictlyCorrect = NULL
+        )
         {
             bool  wasStrictlyCorrect_;
 
@@ -580,10 +583,10 @@ namespace ximpl
     };
 
     inline
-    clasp_char_t const*
+    char_t const*
     empty_string_()
     {
-        static clasp_char_t const s_empty[1] = { '\0' };
+        static char_t const s_empty[1] = { '\0' };
 
         return s_empty;
     }
@@ -591,8 +594,8 @@ namespace ximpl
     inline
     void
     throw_missing_option_exception_(
-        clasp_char_t const* optionName
-    ,   char const*         missingMessage
+        char_t const*   optionName
+    ,   char const*     missingMessage
     )
     {
         char const* defaultMessage = "required option is not found";
@@ -610,8 +613,8 @@ namespace ximpl
     inline
     void
     throw_missing_option_value_exception_(
-        clasp_char_t const* optionName
-    ,   char const*         missingMessage
+        char_t const*   optionName
+    ,   char const*     missingMessage
     )
     {
         char const* defaultMessage = "value is missing for option";
@@ -629,8 +632,8 @@ namespace ximpl
     inline
     void
     throw_invalid_option_value_exception_(
-        char const*         message
-    ,   clasp_char_t const* optionName
+        char const*     message
+    ,   char_t const*   optionName
     )
     {
         throw invalid_option_value_exception(message, optionName);
@@ -640,8 +643,8 @@ namespace ximpl
     inline
     void
     throw_invalid_option_value_exception_if_(
-        char const*         message
-    ,   clasp_char_t const* optionName
+        char const*     message
+    ,   char_t const*   optionName
     )
     {
         throw_invalid_option_value_exception_(message, optionName);
@@ -651,24 +654,24 @@ namespace ximpl
     inline
     void
     throw_invalid_option_value_exception_if_<0>(
-        char const*         /*message*/
-    ,   clasp_char_t const* /*optionName*/
+        char const*   /*message*/
+    ,   char_t const* /*optionName*/
     )
     {}
 
     template <typename I>
     bool check_option_integer_(
-        clasp_arguments_t const*    args
-    ,   bool                        ignoreUsed
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   I*                          result
-    ,   I const&                    defaultValue
+        arguments_t const*  args
+    ,   bool                ignoreUsed
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   I*                  result
+    ,   I const&            defaultValue
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
@@ -677,7 +680,7 @@ namespace ximpl
             }
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -718,19 +721,19 @@ namespace ximpl
     template <typename I>
     void
     require_option_integer_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   I*                          result
-    ,   char const*                 missingMessage
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   I*                  result
+    ,   char const*         missingMessage
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -776,17 +779,17 @@ namespace ximpl
     inline
     bool
     check_option_real_(
-        clasp_arguments_t const*    args
-    ,   bool                        ignoreUsed
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   double*                     result
-    ,   double const&               defaultValue
+        arguments_t const*  args
+    ,   bool                ignoreUsed
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   double*             result
+    ,   double const&       defaultValue
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
@@ -795,7 +798,7 @@ namespace ximpl
             }
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -805,8 +808,8 @@ namespace ximpl
                 }
                 else
                 {
-                    clasp_char_t*   endptr;
-                    double          res = strtod_helper::call(arg.value.ptr, &endptr);
+                    char_t* endptr;
+                    double  res = strtod_helper::call(arg.value.ptr, &endptr);
 
                     if (NULL != endptr &&
                         endptr != arg.value.ptr + arg.value.len)
@@ -829,19 +832,19 @@ namespace ximpl
     inline
     void
     require_option_real_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   double*                     result
-    ,   char const*                 missingMessage
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   double*             result
+    ,   char const*         missingMessage
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -851,8 +854,8 @@ namespace ximpl
                 }
                 else
                 {
-                    clasp_char_t*   endptr;
-                    double          res = strtod_helper::call(arg.value.ptr, &endptr);
+                    char_t* endptr;
+                    double  res = strtod_helper::call(arg.value.ptr, &endptr);
 
                     if (NULL != endptr &&
                         endptr != arg.value.ptr + arg.value.len)
@@ -873,19 +876,19 @@ namespace ximpl
     inline
     void
     require_option_cstring_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   clasp_char_t const**        result
-    ,   char const*                 missingMessage
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   char_t const**      result
+    ,   char const*         missingMessage
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -908,18 +911,18 @@ namespace ximpl
     inline
     bool
     check_option_boolean_(
-        clasp_arguments_t const*    args
-    ,   bool                        ignoreUsed
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   bool*                       result
-    ,   bool                        optionNotSpecifiedDefaultValue
-    ,   bool const*                 valueNotSpecifiedDefaultValue
+        arguments_t const*  args
+    ,   bool                ignoreUsed
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   bool*               result
+    ,   bool                optionNotSpecifiedDefaultValue
+    ,   bool const*         valueNotSpecifiedDefaultValue
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
@@ -928,7 +931,7 @@ namespace ximpl
             }
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -959,17 +962,17 @@ namespace ximpl
     inline
     bool
     check_option_cstring_(
-        clasp_arguments_t const*    args
-    ,   bool                        ignoreUsed
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   clasp_char_t const**        result
-    ,   clasp_char_t const*         defaultValue
+        arguments_t const*  args
+    ,   bool                ignoreUsed
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   char_t const**      result
+    ,   char_t const*       defaultValue
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (ignoreUsed &&
                 clasp_argumentIsUsed(args, &arg))
@@ -978,7 +981,7 @@ namespace ximpl
             }
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -996,19 +999,19 @@ namespace ximpl
     inline
     bool
     check_option_string_t_(
-        clasp_arguments_t const*    args
-    ,   bool                        ignoreUsed
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   clasp_string_t&             result
-    ,   clasp_char_t const*         defaultValue
-    ,   size_t                      defaultValueLen
+        arguments_t const*  args
+    ,   bool                ignoreUsed
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   clasp_string_t&     result
+    ,   char_t const*       defaultValue
+    ,   size_t              defaultValueLen
     )
     {
         CLASP_DECLARE_c_str_datalen_PAIR_();
 
-        clasp_char_t const* p;
-        bool const          r = check_option_cstring_(args, ignoreUsed, optionName, optionNameLen, &p, defaultValue);
+        char_t const*   p;
+        bool const      r = check_option_cstring_(args, ignoreUsed, optionName, optionNameLen, &p, defaultValue);
 
         if (r)
         {
@@ -1026,25 +1029,25 @@ namespace ximpl
     inline
     bool
     check_option_fn_defaultIsString_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   R*                          result
-    ,   clasp_char_t const*         defaultValue
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   R*                  result
+    ,   char_t const*       defaultValue
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -1074,27 +1077,27 @@ namespace ximpl
     inline
     bool
     check_option_fn_defaultIsR_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   R*                          result
-    ,   R const&                    defaultValue
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   R*                  result
+    ,   R const&            defaultValue
     )
     {
-        clasp_char_t const* v = NULL;
+        char_t const* v = NULL;
 
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -1133,17 +1136,17 @@ namespace ximpl
     bool
     check_option_with_fn_default_is_same_type_(
         stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   R*                          result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   R const&                    defaultValue
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   R*                  result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   R const&            defaultValue
     );
 
     template<
@@ -1153,17 +1156,17 @@ namespace ximpl
     bool
     check_option_with_fn_default_is_same_type_(
         stlsoft::no_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   R1*                         result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R1*                 result
-                                    )
-    ,   void*                       param
-    ,   S2 const&                   defaultValue
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   R1*                 result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R1*             result
+                            )
+    ,   void*               param
+    ,   S2 const&           defaultValue
     );
 
 
@@ -1177,16 +1180,16 @@ namespace ximpl
     bool
     check_option_D_maybe_integral_(
         ::stlsoft::no_type
-    ,   clasp_arguments_t const*    args
-    ,   S const&                    optionName
-    ,   R*                          result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   D const&                    defaultValue
+    ,   arguments_t const*  args
+    ,   S const&            optionName
+    ,   R*                  result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   D const&            defaultValue
     )
     {
         return
@@ -1210,16 +1213,16 @@ namespace ximpl
     bool
     check_option_D_maybe_integral_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   S const&                    optionName
-    ,   R*                          result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   D const&                    defaultValue
+    ,   arguments_t const*  args
+    ,   S const&            optionName
+    ,   R*                  result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   D const&            defaultValue
     )
     {
         return
@@ -1243,20 +1246,20 @@ namespace ximpl
     bool
     check_option_D_maybe_literal_string_(
         ::stlsoft::no_type
-    ,   clasp_arguments_t const*    args
-    ,   S const&                    optionName
-    ,   R*                          result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   D const&                    defaultValue
+    ,   arguments_t const*  args
+    ,   S const&            optionName
+    ,   R*                  result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   D const&            defaultValue
     )
     {
-        typedef ::stlsoft::is_integral_type<R>  iit_R_t;
-        typedef ::stlsoft::is_integral_type<D>  iit_D_t;
+        typedef ::stlsoft::is_integral_type<R>              iit_R_t;
+        typedef ::stlsoft::is_integral_type<D>              iit_D_t;
 
         enum
         {
@@ -1288,16 +1291,16 @@ namespace ximpl
     bool
     check_option_D_maybe_literal_string_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   S const&                    optionName
-    ,   R*                          result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   D const&                    defaultValue
+    ,   arguments_t const*  args
+    ,   S const&            optionName
+    ,   R*                  result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   D const&            defaultValue
     )
     {
         return
@@ -1321,16 +1324,16 @@ namespace ximpl
     bool
     check_option_maybe_R_and_D_maybe_same_type_(
         ::stlsoft::no_type
-    ,   clasp_arguments_t const*    args
-    ,   S const&                    optionName
-    ,   R*                          result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   D const&                    defaultValue
+    ,   arguments_t const*  args
+    ,   S const&            optionName
+    ,   R*                  result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   D const&            defaultValue
     )
     {
         typedef ::stlsoft::is_same_type<char*, D>           ist_1_t;
@@ -1366,16 +1369,16 @@ namespace ximpl
     bool
     check_option_maybe_R_and_D_maybe_same_type_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   S const&                    optionName
-    ,   R*                          result
-    ,   bool                      (*pfn)(
-                                        void*               param
-                                    ,   clasp_char_t const* parsedValue
-                                    ,   R*                  result
-                                    )
-    ,   void*                       param
-    ,   D const&                    defaultValue
+    ,   arguments_t const*  args
+    ,   S const&            optionName
+    ,   R*                  result
+    ,   bool              (*pfn)(
+                                void*           param
+                            ,   char_t const*   parsedValue
+                            ,   R*              result
+                            )
+    ,   void*               param
+    ,   D const&            defaultValue
     )
     {
         return
@@ -1395,19 +1398,19 @@ namespace ximpl
     inline
     void
     require_option_boolean_(
-        clasp_arguments_t const*  args
-    ,   clasp_char_t const*       optionName
-    ,   size_t                    optionNameLen
-    ,   bool*                     result
-    ,   char const*               missingMessage
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   bool*               result
+    ,   char const*         missingMessage
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -1426,19 +1429,19 @@ namespace ximpl
     inline
     void
     require_option_string_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   S2*                         result
-    ,   char const*                 missingMessage
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   S2*                 result
+    ,   char const*         missingMessage
     )
     {
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -1462,11 +1465,11 @@ namespace ximpl
     void
     require_option_dispatch_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   int*                        result
-    ,   char const*                 missingMessage
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   int*                result
+    ,   char const*         missingMessage
     )
     {
         ::clasp::ximpl::require_option_integer_(args, optionName, optionNameLen, result, missingMessage);
@@ -1478,11 +1481,11 @@ namespace ximpl
     void
     require_option_dispatch_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   unsigned*                   result
-    ,   char const*                 missingMessage
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   unsigned*           result
+    ,   char const*         missingMessage
     )
     {
         ::clasp::ximpl::require_option_integer_(args, optionName, optionNameLen, result, missingMessage);
@@ -1493,11 +1496,11 @@ namespace ximpl
     void
         require_option_dispatch_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   long*                       result
-    ,   char const*                 missingMessage
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   long*               result
+    ,   char const*         missingMessage
     )
     {
         ::clasp::ximpl::require_option_integer_(args, optionName, optionNameLen, result, missingMessage);
@@ -1507,11 +1510,11 @@ namespace ximpl
     void
     require_option_dispatch_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   size_t*                     result
-    ,   char const*                 missingMessage
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   size_t*             result
+    ,   char const*         missingMessage
     )
     {
         ::clasp::ximpl::require_option_integer_(args, optionName, optionNameLen, result, missingMessage);
@@ -1521,11 +1524,11 @@ namespace ximpl
     void
     require_option_dispatch_(
         ::stlsoft::yes_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   double*                     result
-    ,   char const*                 missingMessage
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   double*             result
+    ,   char const*         missingMessage
     )
     {
         ::clasp::ximpl::require_option_real_(args, optionName, optionNameLen, result, missingMessage);
@@ -1535,11 +1538,11 @@ namespace ximpl
     void
     require_option_dispatch_(
         ::stlsoft::no_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   clasp_char_t const**        result
-    ,   char const*                 missingMessage
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   char_t const**      result
+    ,   char const*         missingMessage
     )
     {
         ::clasp::ximpl::require_option_cstring_(args, optionName, optionNameLen, result, missingMessage);
@@ -1550,11 +1553,11 @@ namespace ximpl
     void
     require_option_dispatch_(
         ::stlsoft::no_type
-    ,   clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   R*                          result
-    ,   char const*                 missingMessage
+    ,   arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   R*                  result
+    ,   char const*         missingMessage
     )
     {
         ::clasp::ximpl::require_option_string_(args, optionName, optionNameLen, result, missingMessage);
@@ -1563,12 +1566,12 @@ namespace ximpl
     inline
     bool
     check_flag_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   int*                        bitmask
-    ,   int                         onValue
-    ,   int                         offValue
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   int*                bitmask
+    ,   int                 onValue
+    ,   int                 offValue
     )
     {
         // A boolean value may be had either from a flag, or from an option
@@ -1583,10 +1586,10 @@ namespace ximpl
         // 1. check flags first
         { for (size_t i = 0; i != args->numFlags; ++i)
         {
-            clasp_argument_t const& arg = args->flags[i];
+            argument_t const& arg = args->flags[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -1599,10 +1602,10 @@ namespace ximpl
         // 2. check options, but be strict about the values
         { for (size_t i = 0; i != args->numOptions; ++i)
         {
-            clasp_argument_t const& arg = args->options[i];
+            argument_t const& arg = args->options[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -1636,18 +1639,18 @@ namespace ximpl
     inline
     bool
     flag_specified_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   bool                        markUsedIfFound
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   bool                markUsedIfFound
     )
     {
         { for (size_t i = 0; i != args->numFlags; ++i)
         {
-            clasp_argument_t const& arg = args->flags[i];
+            argument_t const& arg = args->flags[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 if (markUsedIfFound)
                 {
@@ -1662,22 +1665,22 @@ namespace ximpl
     }
 
     inline
-    clasp_argument_t const*
+    argument_t const*
     find_flag_or_option_(
-        clasp_arguments_t const*  args
-    ,   clasp_char_t const*       optionName
-    ,   size_t                    optionNameLen
-    ,   clasp_argument_t const*   after
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   argument_t const*   after
     )
     {
         STLSOFT_ASSERT(NULL == after || (after >= &args->flagsAndOptions[0] && after < &args->flagsAndOptions[0] + args->numFlagsAndOptions));
 
         { for (size_t i = (NULL == after) ? 0u : (after - &args->flagsAndOptions[0]); i != args->numFlagsAndOptions; ++i)
         {
-            clasp_argument_t const& arg = args->flagsAndOptions[i];
+            argument_t const& arg = args->flagsAndOptions[i];
 
             if (arg.resolvedName.len == optionNameLen &&
-                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(clasp_char_t)))
+                0 == ::memcmp(arg.resolvedName.ptr, optionName, optionNameLen * sizeof(char_t)))
             {
                 clasp_useArgument(args, &arg);
 
@@ -1693,12 +1696,12 @@ namespace ximpl
     inline
     bool
     check_flags_option_(
-        clasp_arguments_t const*    args
-    ,   clasp_char_t const*         optionName
-    ,   size_t                      optionNameLen
-    ,   int*                        result
-    ,   int                         flagValue
-    ,   int                         defaultValue
+        arguments_t const*  args
+    ,   char_t const*       optionName
+    ,   size_t              optionNameLen
+    ,   int*                result
+    ,   int                 flagValue
+    ,   int                 defaultValue
     )
     {
     }
@@ -1715,13 +1718,14 @@ namespace ximpl
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1729,10 +1733,10 @@ namespace ximpl
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   int*                        result
-,   int                         defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   int*                result
+,   int                 defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -1751,13 +1755,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1765,10 +1770,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   int*                        result
-,   int                         defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   int*                result
+,   int                 defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -1788,13 +1793,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1802,10 +1808,10 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   unsigned*                   result
-,   unsigned                    defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   unsigned*           result
+,   unsigned            defaultValue
 )
 {
     STLSOFT_MESSAGE_STATIC_ASSERT(sizeof(unsigned) != sizeof(std::size_t), "cannot overload when unsigned types same size");
@@ -1826,13 +1832,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1840,10 +1847,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   unsigned*                   result
-,   unsigned                    defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   unsigned*           result
+,   unsigned            defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -1862,13 +1869,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1876,10 +1884,10 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   long*                       result
-,   long                        defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   long*               result
+,   long                defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -1898,13 +1906,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1912,10 +1921,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   long*                       result
-,   long                        defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   long*               result
+,   long                defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -1933,13 +1942,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1947,10 +1957,10 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   size_t*                     result
-,   size_t                      defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   size_t*             result
+,   size_t              defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -1969,13 +1979,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -1983,10 +1994,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   size_t*                     result
-,   size_t                      defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   size_t*             result
+,   size_t              defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2004,13 +2015,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2018,10 +2030,10 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   double*                     result
-,   double                      defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   double*             result
+,   double              defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2039,13 +2051,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2053,10 +2066,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   double*                     result
-,   double                      defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   double*             result
+,   double              defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2074,13 +2087,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2088,10 +2102,10 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   bool*                       result
-,   bool                        defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   bool*               result
+,   bool                defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2111,15 +2125,16 @@ check_option(
  * then the appropriate default is used
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param optionNotSpecifiedDefaultValue The default value to be written
- *   into <code>*result</code> if the named option does not exist
- * \param valueNotSpecifiedDefaultValue The default value to be written
- *   into <code>*result</code> if the named option does not have a value
+ *   into <code>*result</code> if the named option does not exist;
+ * \param valueNotSpecifiedDefaultValue The default value to be written into
+ *   <code>*result</code> if the named option does not have a value;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2127,11 +2142,11 @@ check_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   bool*                       result
-,   bool                        optionNotSpecifiedDefaultValue
-,   bool                        valueNotSpecifiedDefaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   bool*               result
+,   bool                optionNotSpecifiedDefaultValue
+,   bool                valueNotSpecifiedDefaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2154,11 +2169,11 @@ check_option(
 template <typename S>
 bool
 check_flags_option(
-    clasp_arguments_t const*  args
-,   S const&                  optionName
-,   int*                      result
-,   int                       flagValue
-,   int                       defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   int*                result
+,   int                 flagValue
+,   int                 defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2197,10 +2212,10 @@ check_flags_option(
 template <typename S>
 bool
 check_flags_option(
-    clasp_arguments_t const*  args
-,   S const&                  optionName
-,   int*                      result
-,   int                       flagValue
+    arguments_t const*  args
+,   S const&            optionName
+,   int*                result
+,   int                 flagValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2238,13 +2253,14 @@ check_flags_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2252,10 +2268,10 @@ check_flags_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_char_t const**        result
-,   clasp_char_t const*         defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   char_t const**      result
+,   char_t const*       defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2274,13 +2290,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2288,10 +2305,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_char_t const**        result
-,   clasp_char_t const*         defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   char_t const**      result
+,   char_t const*       defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2309,11 +2326,12 @@ check_next_option(
 /** Checks whether the given option exists, and elicits its value if so
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result
+ *   write the result;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2321,14 +2339,14 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_string_t&             result
+    arguments_t const*  args
+,   S const&            optionName
+,   clasp_string_t&     result
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    static clasp_char_t const defaultValue[1] = { '\0' };
+    static char_t const defaultValue[1] = { '\0' };
 
     return ::clasp::ximpl::check_option_string_t_(
         args
@@ -2343,11 +2361,12 @@ check_option(
  * arguments, and elicits its value if so
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result
+ *   write the result;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2355,14 +2374,14 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_string_t&             result
+    arguments_t const*  args
+,   S const&            optionName
+,   clasp_string_t&     result
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
 
-    static clasp_char_t const defaultValue[1] = { '\0' };
+    static char_t const defaultValue[1] = { '\0' };
 
     return ::clasp::ximpl::check_option_string_t_(
         args
@@ -2377,13 +2396,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2391,10 +2411,10 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_string_t&             result
-,   clasp_string_t const&       defaultValue
+    arguments_t const*    args
+,   S const&              optionName
+,   clasp_string_t&       result
+,   clasp_string_t const& defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2413,13 +2433,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2427,10 +2448,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_string_t&             result
-,   clasp_string_t const&       defaultValue
+    arguments_t const*      args
+,   S const&                optionName
+,   clasp_string_t&         result
+,   clasp_string_t const&   defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2448,13 +2469,14 @@ check_next_option(
  * not, sets the result to be the given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2462,10 +2484,10 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_string_t&             result
-,   clasp_char_t const*         defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   clasp_string_t&     result
+,   char_t const*       defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2484,13 +2506,14 @@ check_option(
  * given default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Mutating reference to a string class instance into which to
- *   write the result, if found, or the default value, if not
+ *   write the result, if found, or the default value, if not;
  * \param defaultValue The default value to be written into
- *   <code>result</code> if the named option does not exist
+ *   <code>result</code> if the named option does not exist;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2498,10 +2521,10 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   clasp_string_t&             result
-,   clasp_char_t const*         defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   clasp_string_t&     result
+,   char_t const*       defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2515,18 +2538,19 @@ check_next_option(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   adjusts the given bitmask accordingly
+/** Evaluates whether a flag (or a boolean option) is specified, and adjusts
+ *   the given bitmask accordingly
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag or option for which to search;
  * \param bitmask Pointer to a variable whose value will be adjusted
- *   according to the presence/absence of the flag/option
- * \param offValue The value to be included into <code>*bitmask</code> if the
- *   flag/option is present (and specified to be on/true/1)
+ *   according to the presence/absence of the flag/option;
+ * \param onValue The value to be included into <code>*bitmask</code> if the
+ *   flag/option is present (and specified to be on/true/1);
  * \param offValue The value to be removed from <code>*bitmask</code> if the
- *   flag/option is missing, or specified to be off/false/0
+ *   flag/option is missing, or specified to be off/false/0;
  *
  * \pre (NULL != args)
  * \pre (NULL != bitmask)
@@ -2534,11 +2558,11 @@ check_next_option(
 template <typename S>
 bool
 check_flag(
-    clasp_arguments_t const*    args
-,   S const&                    name
-,   int*                        bitmask
-,   int                         onValue
-,   int                         offValue
+    arguments_t const*  args
+,   S const&            name
+,   int*                bitmask
+,   int                 onValue
+,   int                 offValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2552,16 +2576,17 @@ check_flag(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   adjusts the given bitmask accordingly
+/** Evaluates whether a flag (or a boolean option) is specified, and adjusts
+ *   the given bitmask accordingly
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag or option for which to search;
  * \param bitmask Pointer to a variable whose value will be adjusted
- *   according to the presence/absence of the flag/option
- * \param offValue The value to be included into <code>*bitmask</code> if the
- *   flag/option is present (and specified to be on/true/1)
+ *   according to the presence/absence of the flag/option;
+ * \param onValue The value to be included into <code>*bitmask</code> if the
+ *   flag/option is present (and specified to be on/true/1);
  *
  * \pre (NULL != args)
  * \pre (NULL != bitmask)
@@ -2569,10 +2594,10 @@ check_flag(
 template <typename S>
 bool
 check_flag(
-    clasp_arguments_t const*    args
-,   S const&                    name
-,   int*                        bitmask
-,   int                         onValue
+    arguments_t const*  args
+,   S const&            name
+,   int*                bitmask
+,   int                 onValue
 )
 {
     return check_flag(
@@ -2584,14 +2609,15 @@ check_flag(
     );
 }
 
-/** Evaluates whether a flag (or a boolean option) is specified, and
- *   sets the given boolean flag variable accordingly.
+/** Evaluates whether a flag (or a boolean option) is specified, and sets
+ *   the given boolean flag variable accordingly.
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param S name Name of the flag or option to search for
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag or option for which to search;
  * \param flagVar <strong>true</strong> if the flag/option is present (and
- *  specified to be on/true/1); <strong>false</strong> otherwise.
+ *   specified to be on/true/1); <strong>false</strong> otherwise;
  *
  * \pre (NULL != args)
  * \pre (NULL != flagVar)
@@ -2599,9 +2625,9 @@ check_flag(
 template <typename S>
 bool
 check_flag(
-    clasp_arguments_t const*    args
-,   S const&                    name
-,   bool*                       flagVar
+    arguments_t const*  args
+,   S const&            name
+,   bool*               flagVar
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2629,10 +2655,10 @@ check_flag(
 /** Checks arguments for all declared flags, combining their \c bitFlags
  * value into the given \c bitFlags variable.
  *
- * \param args Pointer to the clasp_arguments_t instance.
- * \param specifications Pointer to the specification array
- * \param bitFlags Optional pointer to a bit-flags variable. May be NULL. If
- *   not NULL, it is assumed to be initialised.
+ * \param args Pointer to the arguments_t instance;
+ * \param specifications Pointer to the specification array;
+ * \param bitFlags Optional pointer to a bit-flags variable. May be \c NULL.
+ *   If not \c NULL, it is assumed to be initialised;
  *
  * \return The OR-combination of <code>*bitFlags</code> (if given) and the
  *   flag values of all declared flags in \c args
@@ -2651,9 +2677,9 @@ check_flag(
 inline
 int
 check_all_flags(
-    clasp_arguments_t const*    args
-,   clasp_specification_t const specifications[]
-,   int*                        bitFlags  = NULL
+    arguments_t const*      args
+,   specification_t const   specifications[]
+,   int*                    bitFlags = NULL
 )
 {
     return clasp_checkAllFlags(args, specifications, bitFlags);
@@ -2664,19 +2690,20 @@ check_all_flags(
  * (optionally) marks it as used if so
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param name Name of the flag (or option). May not be NULL or empty
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param name Name of the flag (or option). May not be \c NULL or empty;
  * \param markUsedIfFound If true, the flag (or option) is mark used if
- *   found
+ *   found;
  *
  * \pre (NULL != args)
  */
 template <typename S>
 bool
 flag_specified(
-    clasp_arguments_t const*    args
-,   S const&                    name
-,   bool                        markUsedIfFound = true
+    arguments_t const*  args
+,   S const&            name
+,   bool                markUsedIfFound = true
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2692,20 +2719,21 @@ flag_specified(
  * exists
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param name Name of the flag or option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
- * \param after Point after which to start search. May be NULL, in which
- *   case search starts at beginning of <code>flagsAndOptions</code> field
+ *   interpreted as a string. May not be \c NULL or empty;
+ * \param after Point after which to start search. May be \c NULL, in which
+ *   case search starts at beginning of <code>flagsAndOptions</code> field;
  *
  * \pre (NULL != args)
  */
 template <typename S>
-clasp_argument_t const*
+argument_t const*
 find_flag_or_option(
-    clasp_arguments_t const*  args
-,   S const&                  name
-,   clasp_argument_t const*   after
+    arguments_t const*  args
+,   S const&            name
+,   argument_t const*   after
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2736,19 +2764,20 @@ find_flag_or_option(
  * default value
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param pfn Caller-supplied that can convert the found option's value to
- *   the required type, returning true if so; returning false or throwing
- *   a caller-defined exception otherwise. May not be NULL
+ *   the required type, returning true if so; returning false or throwing a
+ *   caller-defined exception otherwise. May not be \c NULL;
  * \param param Caller-supplied parameter that is passed back to the
- *   caller-supplied function. May be any value, including NULL, and is
- *   not examined in any way by CLASP
+ *   caller-supplied function. May be any value, including \c NULL, and is
+ *   not examined in any way by CLASP;
  * \param defaultValue The default value to be written into
- *   <code>*result</code> if the named option does not exist
+ *   <code>*result</code> if the named option does not exist;
  *
  * \return Indicates whether the given value, or the default value, is a
  *   valid value, as indicated by a \c true return from \c pfn
@@ -2769,16 +2798,16 @@ template<
 >
 bool
 check_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   R*                          result
-,   bool                      (*pfn)(
-                                    void*               param
-                                ,   clasp_char_t const* parsedValue
-                                ,   R*                  result
-                                )
-,   void*                       param
-,   D const&                    defaultValue
+    arguments_t const*  args
+,   S const&            optionName
+,   R*                  result
+,   bool              (*pfn)(
+                            void*           param
+                        ,   char_t const*   parsedValue
+                        ,   R*              result
+                        )
+,   void*               param
+,   D const&            defaultValue
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2812,11 +2841,12 @@ check_option(
  * exception if it cannot be found
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2830,9 +2860,9 @@ check_option(
 template <typename S, typename R>
 void
 require_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   R*                          result
+    arguments_t const*  args
+,   S const&            optionName
+,   R*                  result
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2854,14 +2884,15 @@ require_option(
  * exception if it cannot be found
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param optionName Name of the option. Must be of a type which may be
- *   interpreted as a string. May not be NULL or empty
+ *   interpreted as a string. May not be \c NULL or empty;
  * \param result Pointer to a variable into which to write the result, if
- *   found, or the default value, if not. May not be NULL
+ *   found, or the default value, if not. May not be \c NULL;
  * \param missingMessage Optional message to use in exception thrown when
- *   the named option cannot be found. May be NULL, in which case a default
- *   message is used
+ *   the named option cannot be found. May be \c NULL, in which case a
+ *   default message is used;
  *
  * \pre (NULL != args)
  * \pre (NULL != result)
@@ -2875,10 +2906,10 @@ require_option(
 template <typename S, typename R>
 void
 require_option(
-    clasp_arguments_t const*    args
-,   S const&                    optionName
-,   R*                          result
-,   char const*                 missingMessage
+    arguments_t const*  args
+,   S const&            optionName
+,   R*                  result
+,   char const*         missingMessage
 )
 {
     CLASP_DECLARE_c_str_datalen_PAIR_();
@@ -2900,10 +2931,11 @@ require_option(
 /** Checks for the presence of a value with the given index
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param index The index of the putative value to be obtained
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param index The index of the putative value to be obtained;
  * \param pslice Pointer to a slice variable to be assigned the value's
- *   value, if found
+ *   value, if found;
  *
  * \pre (NULL != args)
  * \pre (NULL != pslice)
@@ -2911,9 +2943,9 @@ require_option(
 inline
 bool
 check_value(
-    clasp_arguments_t const*    args
-,   size_t                      index
-,   clasp_slice_t*              pslice
+    arguments_t const*  args
+,   size_t              index
+,   slice_t*            pslice
 )
 {
     STLSOFT_ASSERT(NULL != args);
@@ -2938,12 +2970,13 @@ check_value(
 /** Checks for the presence of a value with the given index
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param index The index of the putative value to be obtained
- * \param pslice Pointer to a variable to receive the value's value's
- *   pointer (if found). May not be NULL
- * \param plen Pointer to a variable to receive the value's value's
- *   length (if found). May be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param index The index of the putative value to be obtained;
+ * \param pptr Pointer to a variable to receive the value's value's pointer
+ *   (if found). May not be \c NULL;
+ * \param plen Pointer to a variable to receive the value's value's length
+ *   (if found). May be \c NULL;
  *
  * \pre (NULL != args)
  * \pre (NULL != pptr)
@@ -2951,10 +2984,10 @@ check_value(
 inline
 bool
 check_value(
-    clasp_arguments_t const*    args
-,   size_t                      index
-,   clasp_char_t const**        pptr
-,   size_t*                     plen
+    arguments_t const*  args
+,   size_t              index
+,   char_t const**      pptr
+,   size_t*             plen
 )
 {
     STLSOFT_ASSERT(NULL != args);
@@ -2966,8 +2999,8 @@ check_value(
         plen = &dummy_;
     }
 
-    clasp_slice_t   slice;
-    bool            r = check_value(args, index, &slice);
+    slice_t slice;
+    bool    r = check_value(args, index, &slice);
 
     *pptr   =   slice.ptr;
     *plen   =   slice.len;
@@ -2978,8 +3011,9 @@ check_value(
 /** Mark flag/option as used
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param usedArg Argument to be marked as used
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param usedArg Argument to be marked as used;
  *
  * \note This is necessary only when manual processing of the \c args
  *   parameter's fields is conducted by the user
@@ -2987,8 +3021,8 @@ check_value(
 inline
 void
 use_flag_or_option(
-    clasp_arguments_t const*  args
-,   clasp_argument_t const*   usedArg
+    arguments_t const*  args
+,   argument_t const*   usedArg
 )
 {
     clasp_useArgument(args, usedArg);
@@ -2997,8 +3031,9 @@ use_flag_or_option(
 /** Mark flag/option as used
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
- * \param usedArg Argument to be marked as used
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
+ * \param usedArg Argument to be marked as used;
  *
  * \note This is necessary only when manual processing of the \c args
  *   parameter's fields is conducted by the user
@@ -3006,8 +3041,8 @@ use_flag_or_option(
 inline
 void
 use_flag_or_option(
-    clasp_arguments_t const*  args
-,   clasp_argument_t const&   usedArg
+    arguments_t const*  args
+,   argument_t const&   usedArg
 )
 {
     clasp_useArgument(args, &usedArg);
@@ -3017,22 +3052,23 @@ use_flag_or_option(
  * \c specifications parameter
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  * \param specifications A pointer to a properly-formed specification array.
- *   May not be NULL.
+ *   May not be \c NULL;
  *
- * \exception clasp::unrecognised_argument_exception Thrown if an argument is
- *   unrecognised
+ * \exception clasp::unrecognised_argument_exception Thrown if an argument
+ *   is unrecognised
  */
 inline
 void
 verify_all_flags_and_options_are_recognised(
-    clasp_arguments_t const*    args
-,   clasp_specification_t const specifications[]
+    arguments_t const*      args
+,   specification_t const   specifications[]
 )
 {
-    clasp_argument_t const* firstUnrecognisedArg;
-    size_t const            n = clasp_reportUnrecognisedFlagsAndOptions(args, specifications, &firstUnrecognisedArg, 0);
+    argument_t const*   firstUnrecognisedArg;
+    size_t const        n = clasp_reportUnrecognisedFlagsAndOptions(args, specifications, &firstUnrecognisedArg, 0);
 
     if (0u != n)
     {
@@ -3046,12 +3082,13 @@ verify_all_flags_and_options_are_recognised(
 }
 
 
-/** Verifies that all flags and options have been used, throwing an instance of
- * clasp::unused_argument_exception if one or more have not been used (and
- * are therefore unrecognised).
+/** Verifies that all flags and options have been used, throwing an instance
+ * of clasp::unused_argument_exception if one or more have not been used
+ * (and are therefore unrecognised).
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  *
  * \exception clasp::unused_argument_exception Thrown if an argument is
  *   unused
@@ -3059,11 +3096,11 @@ verify_all_flags_and_options_are_recognised(
 inline
 void
 verify_all_flags_and_options_used(
-    clasp_arguments_t const* args
+    arguments_t const* args
 )
 {
-    clasp_argument_t const* firstUnusedArg;
-    size_t const            n = clasp_reportUnusedFlagsAndOptions(args, &firstUnusedArg, 0);
+    argument_t const*   firstUnusedArg;
+    size_t const        n = clasp_reportUnusedFlagsAndOptions(args, &firstUnusedArg, 0);
 
     if (0u != n)
     {
@@ -3079,16 +3116,17 @@ verify_all_flags_and_options_used(
 /** [DEPRECATED]
  *
  * \param args Non-mutating pointer to the arguments structure, obtained
- *   from call to parseArguments() / clasp_parseArguments(). May not be NULL
+ *   from call to parseArguments() / clasp_parseArguments(). May not be
+ *   \c NULL;
  *
- * \deprecated This function is now obsolete, and will be removed from a future
- *   version of CLASP; instead
- *   use \link clasp::verify_all_flags_and_options_used verify_all_flags_and_options_used()\endlink.
+ * \deprecated This function is now obsolete, and will be removed from a
+ *   future version of CLASP; instead use
+ *   \link clasp::verify_all_flags_and_options_used verify_all_flags_and_options_used()\endlink.
  */
 inline
 void
 verify_all_options_used(
-    clasp_arguments_t const* args
+    arguments_t const* args
 )
 {
     verify_all_flags_and_options_used(args);
