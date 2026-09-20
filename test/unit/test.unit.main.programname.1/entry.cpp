@@ -166,9 +166,9 @@ static void run_test_(
     int const r = clasp::main::invoke(
                         argc
                     ,   argv
+                    ,   specifications
                     ,   pfnMain
                     ,   programNameArgument
-                    ,   specifications
                     ,   flags
                     );
 

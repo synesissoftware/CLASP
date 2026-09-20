@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_HPP_MAIN_MAJOR     2
 # define CLASP_VER_CLASP_HPP_MAIN_MINOR     1
 # define CLASP_VER_CLASP_HPP_MAIN_REVISION  2
-# define CLASP_VER_CLASP_HPP_MAIN_EDIT      48
+# define CLASP_VER_CLASP_HPP_MAIN_EDIT      51
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -335,43 +335,10 @@ invoke_(
  * functions
  */
 
-/** Parses the command-line (specified in \c argc and \c argv) and invokes
- * caller-supplied CLASP main function (\c pfnMain) according to the given
- * arguments.
+/** \overload
  *
- * \param argc \c argc passed to <code>main()</code>;
- * \param argv \c argv passed to <code>main()</code>;
- * \param pfnMain Caller-supplied CLASP main function that will be invoked;
- * \param programName Specifies the name of the program, which will be
- *   inferred heuristically if \c NULL or empty;
- * \param specifications Pointer to an specifications array that will be
- *   passed to clasp::parseArguments();
- * \param flags Flags that will be passed to clasp::parseArguments();
- * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
- *   semicolon-space appended after the exception information, or \c NULL
- *   for no suffix;
- * \param ctxt Diagnostic context. May be \c NULL;
- *
- * \note If use of the Pantheios diagnostic logging API library is detected,
- *   via Pantheios C and/or C++ API main headers - pantheios/pantheios.h and
- *   pantheios/pantheios.hpp, respectively - then diagnostic logging
- *   statements are issued to Pantheios in addition to the contingent
- *   reports issued to the standard error stream in conditions of failure.
- * \note If no program name is specified (\c programName \c NULL or empty)
- *   then one will be assumed according to the following algorithm: 1. If
- *   the preprocessor symbol \c CLASP_MAIN_DEFAULT_PROGRAM_NAME is defined
- *   (and it is not-<code>NULL</code>), then it is user; otherwise, 2. If
- *   Pantheios 1.0.1 beta 214 or later is detected (see other note), then
- *   the diagnostic logging process identity is used (elicited via
- *   <code>pantheios_getProcessIdentity</code>); otherwise 3. The name
- *   "process" is used.
- *
- * \exception <any> All exceptions not derived from clasp::clasp_exception
- *   are passed through to the caller uncaught.
- *
- * \pre argc > 0
- * \pre NULL != argv
- * \pre NULL != pfnMain
+ * This overload takes the callback before the specifications array, and
+ * does not default \c programName or \c flags.
  */
 inline
 int
@@ -402,33 +369,11 @@ invoke(
     );
 }
 
-/** Parses the command-line (specified in \c argc and \c argv) and invokes
- * caller-supplied CLASP main function (\c pfnMain) according to the given
- * arguments.
+/** \overload
  *
  * This overload accepts a callback that takes
  * <code>clasp::arguments_t const&</code> rather than a pointer, with the
- * same argument order as the primary pointer-callback overload.
- *
- * \param argc \c argc passed to <code>main()</code>;
- * \param argv \c argv passed to <code>main()</code>;
- * \param pfnMain Caller-supplied CLASP main function that will be invoked;
- * \param programName Specifies the name of the program, which will be
- *   inferred heuristically if \c NULL or empty;
- * \param specifications Pointer to an specifications array that will be
- *   passed to clasp::parseArguments();
- * \param flags Flags that will be passed to clasp::parseArguments();
- * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
- *   semicolon-space appended after the exception information, or \c NULL
- *   for no suffix;
- * \param ctxt Diagnostic context. May be \c NULL;
- *
- * \note Behaviour, exception policy, and program-name inference match the
- *   primary <code>invoke()</code> overload.
- *
- * \pre argc > 0
- * \pre NULL != argv
- * \pre NULL != pfnMain
+ * callback before the specifications array.
  */
 inline
 int
@@ -461,6 +406,44 @@ invoke(
     );
 }
 
+/** Parses the command-line (specified in \c argc and \c argv) and invokes
+ * caller-supplied CLASP main function (\c pfnMain) according to the given
+ * arguments.
+ *
+ * \param argc \c argc passed to <code>main()</code>;
+ * \param argv \c argv passed to <code>main()</code>;
+ * \param specifications Pointer to an specifications array that will be
+ *   passed to clasp::parseArguments();
+ * \param pfnMain Caller-supplied CLASP main function that will be invoked;
+ * \param programName Specifies the name of the program, which will be
+ *   inferred heuristically if \c NULL or empty;
+ * \param flags Flags that will be passed to clasp::parseArguments();
+ * \param ctxt Diagnostic context. May be \c NULL;
+ * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
+ *   semicolon-space appended after the exception information, or \c NULL
+ *   for no suffix;
+ *
+ * \note If use of the Pantheios diagnostic logging API library is detected,
+ *   via Pantheios C and/or C++ API main headers - pantheios/pantheios.h and
+ *   pantheios/pantheios.hpp, respectively - then diagnostic logging
+ *   statements are issued to Pantheios in addition to the contingent
+ *   reports issued to the standard error stream in conditions of failure.
+ * \note If no program name is specified (\c programName \c NULL or empty)
+ *   then one will be assumed according to the following algorithm: 1. If
+ *   the preprocessor symbol \c CLASP_MAIN_DEFAULT_PROGRAM_NAME is defined
+ *   (and it is not-<code>NULL</code>), then it is user; otherwise, 2. If
+ *   Pantheios 1.0.1 beta 214 or later is detected (see other note), then
+ *   the diagnostic logging process identity is used (elicited via
+ *   <code>pantheios_getProcessIdentity</code>); otherwise 3. The name
+ *   "process" is used.
+ *
+ * \exception <any> All exceptions not derived from clasp::clasp_exception
+ *   are passed through to the caller uncaught.
+ *
+ * \pre argc > 0
+ * \pre NULL != argv
+ * \pre NULL != pfnMain
+ */
 inline
 int
 invoke(
@@ -486,32 +469,12 @@ invoke(
     );
 }
 
-/** Parses the command-line (specified in \c argc and \c argv) and invokes
- * caller-supplied CLASP main function (\c pfnMain) according to the given
- * arguments.
+/** \overload
  *
  * This overload accepts a callback that takes
- * <code>clasp::arguments_t const&</code> rather than a pointer.
- *
- * \param argc \c argc passed to <code>main()</code>
- * \param argv \c argv passed to <code>main()</code>
- * \param specifications Pointer to an specifications array that will be
- *   passed to clasp::parseArguments()
- * \param pfnMain Caller-supplied CLASP main function that will be invoked
- * \param programName Specifies the name of the program, which will be
- *   inferred heuristically if NULL or empty
- * \param flags Flags that will be passed to clasp::parseArguments()
- * \param ctxt
- * \param usageHelpSuffix Suffix such as "use --help for usage" that will be
- *   semicolon-space appended after the exception information, or NULL for
- *   no suffix
- *
- * \note Behaviour, exception policy, and program-name inference match the
- *   primary <code>invoke()</code> overload.
- *
- * \pre argc > 0
- * \pre NULL != argv
- * \pre NULL != pfnMain
+ * <code>clasp::arguments_t const&</code> rather than a pointer, with the
+ * specifications array before the callback and defaults for \c programName
+ * and \c flags.
  */
 inline
 int
