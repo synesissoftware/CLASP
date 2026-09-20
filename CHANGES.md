@@ -1,6 +1,16 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0-alpha1 - 21st September 2026
+
+* Increased flexibility of the C++ API to accept references to CLASP types as well as pointers;
+* Added **`clasp::arguments_adaptor_t`** so C++ helpers accept **`arguments_t`** by (nonmutating) pointer or by (nonmutating) reference;
+* Added **`clasp::main::invoke()`** overloads whose callbacks take **`arguments_t const&`** (pfnMain-first and specifications-first);
+* Added **`clasp::flag_specified()`** overload taking **`arguments_t const&`**;
+* Added stream inserter for **`clasp_arguments_t const&`**;
+* Updated **README.md** C++ example and **examples/C++/minimal_usage_xx** to use reference forms;
+
+
 ## 0.15.3 - 20th September 2026
 
 * Added Doxygen packaging: **Doxyfile**, **doc/mainpage.md**, **generate_doxygen.sh**;
