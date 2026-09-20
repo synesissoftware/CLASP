@@ -162,6 +162,8 @@ clasp_count_flags_and_options_(
     }}
 }
 
+/** Obtains the index for the given specification in the specifications.
+ */
 static
 int
 clasp_evaluate_spec_index_(
@@ -246,6 +248,9 @@ RECLS_CALLCONV_DEFAULT clasp_recls_callback(
 }
 #endif /* CLASP_CMDLINE_ARGS_USE_RECLS */
 
+/** Argument comparison function, sorting primarily by type, and then by
+ * cmdLineIndex, then by resolvedName.
+ */
 static
 int
 compare_clasp_argument_t_(
@@ -320,6 +325,8 @@ compare_clasp_argument_t_(
     }
 }
 
+/** `qsort()`-compatible argument comparison function.
+ */
 static
 int
 compare_clasp_argument_t(
@@ -331,6 +338,10 @@ compare_clasp_argument_t(
 }
 
 
+/** Internal structure that provides an expanded memory block containing all
+ * aspects of a parsed command-line, including the publicly-visible
+ * arguments (of type `clasp_arguments_t`).
+ */
 struct clasp_arguments_x_t
 {
     /* Memory:
@@ -341,20 +352,23 @@ struct clasp_arguments_x_t
      * |      strings         |
      */
 
-    clasp_arguments_t           claspArgs;
-    clasp_diagnostic_context_t  ctxt;
-    size_t                      cb;
-    clasp_char_t*               stringsBase;
-    void*                       reserved0;
-    size_t                      reserved1;
-    void const*                 specifications;
-    size_t                      reserved2;
-    clasp_argument_t            args[1];
+    clasp_arguments_t           claspArgs;      /* The publicly-visible arguments. */
+    clasp_diagnostic_context_t  ctxt;           /* The diagnostic context. */
+    size_t                      cb;             /* The size of the structure */
+    clasp_char_t*               stringsBase;    /* Pointer to the first string, which follows after the arguments array. */
+    void*                       reserved0;      /* Reserved. Must be zero. */
+    size_t                      reserved1;      /* Reserved. Must be zero. */
+    void const*                 specifications; /* (External) pointer to the specifications, which are NOT copied. */
+    size_t                      reserved2;      /* Reserved. Must be zero. */
+    clasp_argument_t            args[1];        /* Start of the arguments array. */
 };
 #ifndef __cplusplus
 typedef struct clasp_arguments_x_t                          clasp_arguments_x_t;
 #endif /* !__cplusplus */
 
+/** Obtain a pointer to the internal storage structure from the given
+ * arguments.
+ */
 clasp_arguments_x_t*
 clasp_argsx_from_args_(
     clasp_arguments_t const* args
@@ -365,6 +379,8 @@ clasp_argsx_from_args_(
     return (clasp_arguments_x_t*)stlsoft_const_cast(clasp_arguments_t*, args);
 }
 
+/** Obtain a pointer to the diagnostic context for the given arguments.
+ */
 clasp_diagnostic_context_t const*
 clasp_diagnostic_context_from_args_(
     clasp_arguments_t const* args
@@ -397,9 +413,9 @@ clasp_lookup_specification_(
 }
 #endif
 
-/* Looks up the given item in the specifications vector, searching first for
- * by name, then for non-defaulted mapped arguments, then for defaulted
- * mapped arguments.
+/* Looks up the given item in the specifications vector, searching first by
+ * name, then for non-defaulted mapped arguments, then for defaulted mapped
+ * arguments.
  *
  * \param specifications The specifications array;
  * \param arg Pointer to the argument;
@@ -483,8 +499,8 @@ clasp_lookup_spec_for_name_(
 
     return NULL;
 }
-
 #if 0
+
 static
 clasp_bool_t
 clasp_is_recognised_option_or_flag_(
@@ -535,6 +551,7 @@ clasp_check_spec_duplicates_(
                     return clasp_false_v;
                 }
 #if 0
+
                 if (0 == clasp_strcmp_(from->mappedArgument, to->mappedArgument))
                 {
                     CLASP_LOG_PRINTF(ctxt, CLASP_SEVIX_ERROR, CLASP_LITERAL_("programming error: duplicate argument name: %s"), from->mappedArgument);

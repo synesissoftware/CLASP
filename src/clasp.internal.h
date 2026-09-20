@@ -181,6 +181,9 @@ clasp_useArgument_(
 ,   clasp_argument_t const*     arg
 );
 
+/** Counts the number of flag specifications and the number of options
+ * specifications.
+ */
 void
 clasp_count_flags_and_options_(
     clasp_specification_t const     specifications[]
