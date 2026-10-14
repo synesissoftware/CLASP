@@ -13,17 +13,18 @@ target_link_libraries(test.component.usage.resources.C
 		$<IF:$<VERSION_LESS:${xTests_VERSION},"0.23">,xTests::xTests.core,xTests::core>
 )
 
-target_compile_options(test.component.usage.resources.C PRIVATE
-	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-		-Werror -Wall -Wextra -pedantic
-	>
-	$<$<CXX_COMPILER_ID:GNU>:
-		-Wno-incompatible-pointer-types
-		-Wno-unused-but-set-variable
-	>
-	$<$<CXX_COMPILER_ID:MSVC>:
-		/WX /W4
-	>
+target_compile_options(test.component.usage.resources.C
+	PRIVATE
+		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+			-Werror -Wall -Wextra -pedantic
+		>
+		$<$<CXX_COMPILER_ID:GNU>:
+			-Wno-incompatible-pointer-types
+			-Wno-unused-but-set-variable
+		>
+		$<$<CXX_COMPILER_ID:MSVC>:
+			/WX /W4
+		>
 )
 
 
