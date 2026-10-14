@@ -4,7 +4,7 @@
  * Purpose: Illustrates a minimal use of CLASP in a C++ program.
  *
  * Created: 9th March 2025
- * Updated: 11th March 2025
+ * Updated: 20th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -51,7 +51,7 @@ static clasp_specification_t const Specifications[] =
 
 int main(int argc, char* argv[])
 {
-    return clasp::main::invoke(argc, argv, Specifications, [](clasp_arguments_t const* args) {
+    return clasp::main::invoke(argc, argv, Specifications, [](clasp::arguments_t const& args) {
 
         if (clasp::flag_specified(args, "--help"))
         {
@@ -80,5 +80,5 @@ int main(int argc, char* argv[])
 }
 
 
- /* ///////////////////////////// end of file //////////////////////////// */
+/* ///////////////////////////// end of file //////////////////////////// */
 

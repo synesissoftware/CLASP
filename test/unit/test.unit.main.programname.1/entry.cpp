@@ -4,7 +4,7 @@
  * Purpose: Unit-test program name in failure conditions
  *
  * Created: 9th March 2013
- * Updated: 17th September 2026
+ * Updated: 20th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -136,7 +136,7 @@ static void run_test_(
 ,   int                             line
 ,   int                             argc
 ,   char const* const* const        argv
-,   int (STLSOFT_CDECL*             pfnMain)(clasp::arguments_t const* args)
+,   int (STLSOFT_CDECL*             pfnMain)(clasp::arguments_t const& args)
 ,   char const*                     programNameGlobal
 ,   char const*                     programNameArgument
 ,   clasp::specification_t const    specifications[]
@@ -147,7 +147,9 @@ static void run_test_(
     Test_programName    =   programNameGlobal;
     Test_stderr         =   ::fopen(Test_path, "w");
 
-    /* TODO: enhance xTests such that can pass file/line to (variants of) common test macros */
+    /* TODO: enhance xTests such that can pass file/line to (variants of)
+     * common test macros.
+     */
     STLSOFT_SUPPRESS_UNUSED(file);
     STLSOFT_SUPPRESS_UNUSED(line);
 
@@ -164,9 +166,9 @@ static void run_test_(
     int const r = clasp::main::invoke(
                         argc
                     ,   argv
+                    ,   specifications
                     ,   pfnMain
                     ,   programNameArgument
-                    ,   specifications
                     ,   flags
                     );
 
@@ -175,7 +177,7 @@ static void run_test_(
     ::fflush(Test_stderr);
     ::fclose(Test_stderr);
 
-    platformstl::file_lines     lines(Test_path);
+    platformstl::file_lines lines(Test_path);
 
     REQUIRE(TEST_INT_EQ(1u, lines.size()));
     TEST_MS_EQ(expectedLine0, lines[0]);
@@ -194,9 +196,7 @@ static void test_1_0()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             int o;
 
@@ -229,9 +229,7 @@ static void test_1_1()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             int o;
 
@@ -264,9 +262,7 @@ static void test_1_2()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             int o;
 
@@ -299,9 +295,7 @@ static void test_1_3()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             int o;
 

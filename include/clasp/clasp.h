@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 20th September 2026
+ * Updated: 14th October 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -53,9 +53,9 @@
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
-# define CLASP_VER_CLASP_H_CLASP_MINOR      3
-# define CLASP_VER_CLASP_H_CLASP_REVISION   9
-# define CLASP_VER_CLASP_H_CLASP_EDIT       116
+# define CLASP_VER_CLASP_H_CLASP_MINOR      4
+# define CLASP_VER_CLASP_H_CLASP_REVISION   1
+# define CLASP_VER_CLASP_H_CLASP_EDIT       120
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -71,10 +71,10 @@
  *
  * The patch number of the CLASP library
  *
- * \def CLASP_VER_ALPHABETA
+ * \def CLASP_VER_RELSTATUS
  *
- * The alpha/beta number of the CLASP library, in the range 1-0xFE for
- * prerelease versions, and 0xFF for a released version
+ * Release-status discriminator in the low byte of CLASP_VER
+ * (`0xFF` = full release; otherwise pre-alpha / alpha / beta / rc ranges)
  *
  * \def CLASP_VER
  *
@@ -82,21 +82,22 @@
  */
 
 #define CLASP_VER_MAJOR       0
-#define CLASP_VER_MINOR       15
-#define CLASP_VER_PATCH       3
-#define CLASP_VER_ALPHABETA   0xFF
+#define CLASP_VER_MINOR       16
+#define CLASP_VER_PATCH       0
+#define CLASP_VER_RELSTATUS   0x41
 
 #define CLASP_VER \
     (0\
         |   (   CLASP_VER_MAJOR       << 24   ) \
         |   (   CLASP_VER_MINOR       << 16   ) \
         |   (   CLASP_VER_PATCH       <<  8   ) \
-        |   (   CLASP_VER_ALPHABETA   <<  0   ) \
+        |   (   CLASP_VER_RELSTATUS   <<  0   ) \
     )
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
+# define CLASP_VER_AB                                       CLASP_VER_RELSTATUS
+# define CLASP_VER_ALPHABETA                                CLASP_VER_RELSTATUS
 # define CLASP_VER_REVISION                                 CLASP_VER_PATCH
-# define CLASP_VER_AB                                       CLASP_VER_ALPHABETA
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -628,7 +629,7 @@ enum clasp_argtype_t
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 };
 #ifndef __cplusplus
-typedef enum clasp_argtype_t clasp_argtype_t;
+typedef enum clasp_argtype_t                                clasp_argtype_t;
 #endif /* !__cplusplus */
 
 /** A parsed argument, consisting of the type, given name, resolved name,
@@ -1847,6 +1848,45 @@ namespace clasp {
     typedef ::clasp_specification_t                         specification_t;
     typedef ::clasp_usageinfo_t                             usageinfo_t;
 
+    /** Adaptor that allows C++ API helpers to accept either a (nonmutating)
+     * pointer or a (nonmutating) reference to an arguments structure.
+     *
+     * \note Implicitly constructible from <code>arguments_t const*</code>
+     *   or <code>arguments_t const&</code>, and implicitly convertible to
+     *   <code>arguments_t const*</code> for forwarding to the C API.
+     */
+    struct arguments_adaptor_t
+    {
+    public: // construction
+        /* implicit */
+        arguments_adaptor_t(arguments_t const*  args)
+            : args(args)
+        {}
+        /* implicit */
+        arguments_adaptor_t(arguments_t const&  args)
+            : args(&args)
+        {}
+
+    public: // conversion
+        /** Implicit conversion to a nonmutating pointer to the adapted
+         * arguments structure.
+         */
+        operator arguments_t const* () const
+        {
+            return args;
+        }
+
+        /** Member access to the args pointer. */
+        arguments_t const* operator ->() const
+        {
+            return args;
+        }
+
+
+    public: // fields
+        arguments_t const*  args;   /*!< Pointer to the adapted arguments. */
+    };
+
     inline
     int
     parseArguments(
@@ -1887,7 +1927,7 @@ namespace clasp {
     inline
     int
     showUsage(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   alias_t const*      specifications
     ,   char_t const*       toolName
     ,   char_t const*       summary
@@ -1930,7 +1970,7 @@ namespace clasp {
     inline
     int
     showUsage(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   alias_t const*      specifications
     ,   char_t const*       toolName
     ,   char_t const*       summary
@@ -1969,7 +2009,7 @@ namespace clasp {
     inline
     int
     showUsage(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   alias_t const*      specifications
     ,   char_t const*       toolName
     ,   char_t const*       summary
@@ -2005,7 +2045,7 @@ namespace clasp {
     inline
     int
     showUsage(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   char_t const*       toolName
     ,   char_t const*       summary
     ,   char_t const*       copyright
@@ -2040,7 +2080,7 @@ namespace clasp {
     inline
     int
     showVersion(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   char_t const*       toolName
     ,   int                 major
     ,   int                 minor
@@ -2065,7 +2105,7 @@ namespace clasp {
     inline
     int
     showVersion(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   char_t const*       toolName
     ,   int                 major
     ,   int                 minor
@@ -2089,7 +2129,7 @@ namespace clasp {
     inline
     int
     showVersion(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   char_t const*       toolName
     ,   int                 major
     ,   int                 minor
@@ -2111,7 +2151,7 @@ namespace clasp {
     inline
     int
     showVersion(
-        arguments_t const*  args
+        arguments_adaptor_t args
     ,   int                 major
     ,   int                 minor
     ,   int                 revision
@@ -2168,7 +2208,7 @@ operator <<(
 /** A generic inserter function for arguments_t into output streams
  *
  * \param stm The stream into which to insert;
- * \param arg The arguments to insert;
+ * \param args The arguments to insert;
  */
 template <typename T_stm>
 T_stm&
@@ -2192,6 +2232,20 @@ operator <<(
         ;
 }
 
+/** A generic inserter function for arguments_t into output streams
+ *
+ * \param stm The stream into which to insert;
+ * \param args The arguments to insert;
+ */
+template <typename T_stm>
+T_stm&
+operator <<(
+    T_stm&                      stm
+,   clasp_arguments_t const&    args
+)
+{
+    return operator <<(stm, &args);
+}
 
 # ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 

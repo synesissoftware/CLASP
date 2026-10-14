@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR       0
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    4
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        25
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        26
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -119,9 +119,9 @@ private:
 public:
   /// The value type
   typedef specifications_type_::value_type                  value_type;
-  /// The non-mutating (const) iterator type
+  /// The nonmutating (const) iterator type
   typedef specifications_type_::const_iterator              const_iterator;
-  /// The non-mutating (const) reference type
+  /// The nonmutating (const) reference type
   typedef specifications_type_::const_reference             const_reference;
 
   /// This type
@@ -176,8 +176,8 @@ public:
   }
 
 public: // Operations
-  /** Causes enough internal storage to be allocated such that no more storage
-   * will be required for \c n elements.
+  /** Causes enough internal storage to be allocated such that no more
+   * storage will be required for \c n elements.
    */
   void reserve(size_type n)
   {
@@ -437,7 +437,7 @@ public: // Attributes
     return m_specifications.size();
   }
 
-  /** Obtains a non-mutating (const) reference to the search specification at
+  /** Obtains a nonmutating (const) reference to the search specification at
    * the given index.
    *
    * \param index The index;

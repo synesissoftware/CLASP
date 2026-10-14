@@ -157,7 +157,8 @@ static size_t clasp_find_matching_primary_(
         return firstMatchingIndex;
     }
 
-    /* 2. Use first (non-equal) matching alias with help text and NULL name */
+    /* 2. Use first (non-equal) matching alias with help text and NULL name.
+     */
 
     { size_t i; for (i = firstMatchingIndex; i <= lastMatchingIndex; ++i)
     {

@@ -55,8 +55,8 @@
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
 # define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
-# define CLASP_VER_CLASP_HPP_CLASP_REVISION 2
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     71
+# define CLASP_VER_CLASP_HPP_CLASP_REVISION 3
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     72
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -313,11 +313,11 @@ argument_exception::~argument_exception() stlsoft_throw_0() /* = 0 */
 
 namespace ximpl
 {
-    /* The atoi_helper and atol_helper classes were removed from
-     * STLSoft 1.12+, as they are superceded by the flecxx project's
-     * facilities; but rather than introduce another dependency the original
-     * classes are borrowed into CLASP here with permission (which was easy
-     * to get, since I am the author of both).
+    /* The atoi_helper and atol_helper classes were removed from STLSoft
+     * 1.12+, as they are superceded by the flecxx project's facilities; but
+     * rather than introduce another dependency the original classes are
+     * borrowed into CLASP here with permission (which was easy to get,
+     * since I am the author of both).
      */
 
     struct atoi_helper
@@ -1733,7 +1733,7 @@ namespace ximpl
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   int*                result
 ,   int                 defaultValue
@@ -1770,7 +1770,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   int*                result
 ,   int                 defaultValue
@@ -1808,7 +1808,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   unsigned*           result
 ,   unsigned            defaultValue
@@ -1847,7 +1847,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   unsigned*           result
 ,   unsigned            defaultValue
@@ -1884,7 +1884,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   long*               result
 ,   long                defaultValue
@@ -1921,7 +1921,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   long*               result
 ,   long                defaultValue
@@ -1957,7 +1957,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   size_t*             result
 ,   size_t              defaultValue
@@ -1994,7 +1994,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   size_t*             result
 ,   size_t              defaultValue
@@ -2030,7 +2030,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   double*             result
 ,   double              defaultValue
@@ -2066,7 +2066,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   double*             result
 ,   double              defaultValue
@@ -2102,7 +2102,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   bool*               result
 ,   bool                defaultValue
@@ -2142,7 +2142,7 @@ check_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   bool*               result
 ,   bool                optionNotSpecifiedDefaultValue
@@ -2169,7 +2169,7 @@ check_option(
 template <typename S>
 bool
 check_flags_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   int*                result
 ,   int                 flagValue
@@ -2212,7 +2212,7 @@ check_flags_option(
 template <typename S>
 bool
 check_flags_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   int*                result
 ,   int                 flagValue
@@ -2268,7 +2268,7 @@ check_flags_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   char_t const**      result
 ,   char_t const*       defaultValue
@@ -2305,7 +2305,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   char_t const**      result
 ,   char_t const*       defaultValue
@@ -2339,7 +2339,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   clasp_string_t&     result
 )
@@ -2374,7 +2374,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   clasp_string_t&     result
 )
@@ -2411,7 +2411,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*    args
+    arguments_adaptor_t   args
 ,   S const&              optionName
 ,   clasp_string_t&       result
 ,   clasp_string_t const& defaultValue
@@ -2448,7 +2448,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*      args
+    arguments_adaptor_t     args
 ,   S const&                optionName
 ,   clasp_string_t&         result
 ,   clasp_string_t const&   defaultValue
@@ -2484,7 +2484,7 @@ check_next_option(
 template <typename S>
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   clasp_string_t&     result
 ,   char_t const*       defaultValue
@@ -2521,7 +2521,7 @@ check_option(
 template <typename S>
 bool
 check_next_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   clasp_string_t&     result
 ,   char_t const*       defaultValue
@@ -2558,7 +2558,7 @@ check_next_option(
 template <typename S>
 bool
 check_flag(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            name
 ,   int*                bitmask
 ,   int                 onValue
@@ -2594,7 +2594,7 @@ check_flag(
 template <typename S>
 bool
 check_flag(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            name
 ,   int*                bitmask
 ,   int                 onValue
@@ -2625,7 +2625,7 @@ check_flag(
 template <typename S>
 bool
 check_flag(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            name
 ,   bool*               flagVar
 )
@@ -2677,7 +2677,7 @@ check_flag(
 inline
 int
 check_all_flags(
-    arguments_t const*      args
+    arguments_adaptor_t     args
 ,   specification_t const   specifications[]
 ,   int*                    bitFlags = NULL
 )
@@ -2701,7 +2701,7 @@ check_all_flags(
 template <typename S>
 bool
 flag_specified(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            name
 ,   bool                markUsedIfFound = true
 )
@@ -2731,7 +2731,7 @@ flag_specified(
 template <typename S>
 argument_t const*
 find_flag_or_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            name
 ,   argument_t const*   after
 )
@@ -2798,7 +2798,7 @@ template<
 >
 bool
 check_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   R*                  result
 ,   bool              (*pfn)(
@@ -2860,7 +2860,7 @@ check_option(
 template <typename S, typename R>
 void
 require_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   R*                  result
 )
@@ -2906,7 +2906,7 @@ require_option(
 template <typename S, typename R>
 void
 require_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   S const&            optionName
 ,   R*                  result
 ,   char const*         missingMessage
@@ -2943,7 +2943,7 @@ require_option(
 inline
 bool
 check_value(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   size_t              index
 ,   slice_t*            pslice
 )
@@ -2984,7 +2984,7 @@ check_value(
 inline
 bool
 check_value(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   size_t              index
 ,   char_t const**      pptr
 ,   size_t*             plen
@@ -3021,7 +3021,7 @@ check_value(
 inline
 void
 use_flag_or_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   argument_t const*   usedArg
 )
 {
@@ -3041,7 +3041,7 @@ use_flag_or_option(
 inline
 void
 use_flag_or_option(
-    arguments_t const*  args
+    arguments_adaptor_t args
 ,   argument_t const&   usedArg
 )
 {
@@ -3063,7 +3063,7 @@ use_flag_or_option(
 inline
 void
 verify_all_flags_and_options_are_recognised(
-    arguments_t const*      args
+    arguments_adaptor_t     args
 ,   specification_t const   specifications[]
 )
 {
@@ -3096,7 +3096,7 @@ verify_all_flags_and_options_are_recognised(
 inline
 void
 verify_all_flags_and_options_used(
-    arguments_t const* args
+    arguments_adaptor_t args
 )
 {
     argument_t const*   firstUnusedArg;
@@ -3126,7 +3126,7 @@ verify_all_flags_and_options_used(
 inline
 void
 verify_all_options_used(
-    arguments_t const* args
+    arguments_adaptor_t args
 )
 {
     verify_all_flags_and_options_used(args);

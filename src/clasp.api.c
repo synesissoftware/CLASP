@@ -722,7 +722,9 @@ clasp_calculate_sizes_(
                         {
                             if (!CLASP_STRING_NULL_OR_EMPTY_(spec->mappedArgument))
                             {
-                                /* This will be an additional string, so add */
+                                /* This will be an additional string, so
+                                 * add.
+                                 */
 
                                 const size_t                longLen     =   clasp_strlen_(spec->mappedArgument);
                                 clasp_char_t const* const   equal1_b    =   clasp_strchreq_(spec->mappedArgument, flags);
@@ -755,7 +757,10 @@ clasp_calculate_sizes_(
 
                             if (NULL != equal1_c)
                             {
-                                /* has an '=' (or ':'), so interpret it as an option regardless of what the specifications says */
+                                /* has an '=' (or ':'), so interpret it as
+                                 * an option regardless of what the
+                                 * specifications says.
+                                 */
 
                                 ++*numArgs;
                             }
@@ -798,7 +803,9 @@ clasp_calculate_sizes_(
 
                             if (0u != longLen)
                             {
-                                /* This will be an additional string, so add */
+                                /* This will be an additional string, so
+                                 * add.
+                                 */
 
                                 *cbStrings += 1u + longLen;
                             }
@@ -929,7 +936,9 @@ clasp_calculate_sizes_(
 
                             if (0u != longLen)
                             {
-                                /* This will be an additional string, so add */
+                                /* This will be an additional string, so
+                                 * add.
+                                 */
 
                                 *cbStrings += 1u + longLen;
                             }
@@ -1613,7 +1622,10 @@ clasp_parseArguments_NoWild_(
 
                             if (NULL != equal5_b)
                             {
-                                /* has an '=' (or ':'), so interpret it as an option regardless of what the specifications says */
+                                /* has an '=' (or ':'), so interpret it as
+                                 * an option regardless of what the
+                                 * specifications says.
+                                 */
 
                                 currentArg->resolvedName.len    =   (size_t)(equal5_b - spec->mappedArgument);
                                 currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, spec->mappedArgument, currentArg->resolvedName.len);
@@ -1715,7 +1727,9 @@ clasp_parseArguments_NoWild_(
             }
             else
             {
-                /* single hyphen argument - work out whether option or flag */
+                /* single hyphen argument - work out whether option or
+                 * flag.
+                 */
 
                 if ('\0' == arg[1])
                 {
@@ -1799,7 +1813,9 @@ clasp_parseArguments_NoWild_(
                     }
                     else if (NULL == specifications)
                     {
-                        /* Without any specifications, we must assume a flag */
+                        /* Without any specifications, we must assume a
+                         * flag.
+                         */
 
                         currentArg->resolvedName.len    =   argLen;
                         currentArg->resolvedName.ptr    =   clasp_add_string_to_area_(&currentString, arg, argLen);

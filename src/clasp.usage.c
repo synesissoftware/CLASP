@@ -451,7 +451,9 @@ clasp_invoke_header_expand_usage_(
         '@' != usage[0] &&
         '\0' != usage[1])
     {
-        /* usage is specified, begins with a punctuation character, and has length >= 2 */
+        /* usage is specified, begins with a punctuation character, and has
+         * length >= 2.
+         */
 
         clasp_char_t const          sep =   usage++[0]; /* NOTE: moved past usage[0] */
         size_t const                le_ =   clasp_strlen_(usage);
@@ -459,7 +461,8 @@ clasp_invoke_header_expand_usage_(
 
         if (NULL == l_s)
         {
-            /* no other (non-separator) characters present, so print as is */
+            /* no other (non-separator) characters present, so print as is.
+             */
 
             goto invoke;
         }
@@ -475,7 +478,9 @@ clasp_invoke_header_expand_usage_(
                 goto invoke;
             }
 
-            /* prepare tokenisable buffer (and strip any trailing separators) */
+            /* prepare tokenisable buffer (and strip any trailing
+             * separators).
+             */
 
             memcpy(usage2_, usage, len * sizeof(clasp_char_t));
             usage2_[len] = '\0';
@@ -489,7 +494,9 @@ clasp_invoke_header_expand_usage_(
             }
             else
             {
-                /* calculate whether we have space for string when replacing separators with LF + WS*N */
+                /* calculate whether we have space for string when replacing
+                 * separators with LF + WS*N.
+                 */
 
                 size_t const    req =   len + (n_x * prefixLen);
                 size_t const    s_w =   (req < CCH_USAGE) ? prefixLen : 0;

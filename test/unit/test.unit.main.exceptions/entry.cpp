@@ -4,7 +4,7 @@
  * Purpose: Unit-tests exceptional inputs
  *
  * Created: 7th March 2013
- * Updated: 17th September 2026
+ * Updated: 20th September 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -142,7 +142,7 @@ static void run_test_(
 ,   char const*                     function
 ,   int                             argc
 ,   char const* const* const        argv
-,   int (STLSOFT_CDECL*             pfnMain)(clasp::arguments_t const* args)
+,   int (STLSOFT_CDECL*             pfnMain)(clasp::arguments_t const& args)
 ,   char const*                     programNameGlobal
 ,   char const*                     programNameArgument
 ,   clasp::specification_t const    specifications[]
@@ -165,9 +165,9 @@ static void run_test_(
     int const r = clasp::main::invoke(
                         argc
                     ,   argv
+                    ,   specifications
                     ,   pfnMain
                     ,   programNameArgument
-                    ,   specifications
                     ,   flags
                     );
 
@@ -176,7 +176,7 @@ static void run_test_(
     ::fflush(Test_stderr);
     ::fclose(Test_stderr);
 
-    platformstl::file_lines     lines(Test_path);
+    platformstl::file_lines lines(Test_path);
 
     if (!XTESTS_NS_C_QUAL(xTests_hasRequiredConditionFailed()))
     {
@@ -202,29 +202,30 @@ static void test_1_0()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             int o;
 
             try
             {
                 clasp::require_option(args, "--unknown", &o);
+
                 TEST_FAIL("should not get here");
             }
-            catch(std::bad_alloc&)
+            catch (std::bad_alloc&)
             {
                 throw;
             }
-            catch(clasp::missing_option_exception&)
+            catch (clasp::missing_option_exception&)
             {
                 TEST_PASSED();
+
                 throw;
             }
-            catch(std::exception&)
+            catch (std::exception&)
             {
                 TEST_FAIL("should not get here");
+
                 throw;
             }
 
@@ -257,27 +258,28 @@ static void test_1_1()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             try
             {
                 clasp::verify_all_options_used(args);
+
                 TEST_FAIL("should not get here");
             }
-            catch(std::bad_alloc&)
+            catch (std::bad_alloc&)
             {
                 throw;
             }
-            catch(clasp::unused_argument_exception&)
+            catch (clasp::unused_argument_exception&)
             {
                 TEST_PASSED();
+
                 throw;
             }
-            catch(std::exception&)
+            catch (std::exception&)
             {
                 TEST_FAIL("should not get here");
+
                 throw;
             }
 
@@ -315,27 +317,28 @@ static void test_1_1_unrecognised()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             try
             {
                 clasp::verify_all_flags_and_options_are_recognised(args, s_specifications);
+
                 TEST_FAIL("should not get here");
             }
-            catch(std::bad_alloc&)
+            catch (std::bad_alloc&)
             {
                 throw;
             }
-            catch(clasp::unrecognised_argument_exception&)
+            catch (clasp::unrecognised_argument_exception&)
             {
                 TEST_PASSED();
+
                 throw;
             }
-            catch(std::exception&)
+            catch (std::exception&)
             {
                 TEST_FAIL("should not get here");
+
                 throw;
             }
 
@@ -368,29 +371,30 @@ static void test_1_2()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             int opt;
 
             try
             {
                 clasp::require_option(args, "--opt", &opt);
+
                 TEST_FAIL("should not get here");
             }
-            catch(std::bad_alloc&)
+            catch (std::bad_alloc&)
             {
                 throw;
             }
-            catch(clasp::missing_option_value_exception&)
+            catch (clasp::missing_option_value_exception&)
             {
                 TEST_PASSED();
+
                 throw;
             }
-            catch(std::exception&)
+            catch (std::exception&)
             {
                 TEST_FAIL("should not get here");
+
                 throw;
             }
 
@@ -423,29 +427,30 @@ static void test_1_3()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             int opt;
 
             try
             {
                 clasp::require_option(args, "--opt", &opt);
+
                 TEST_FAIL("should not get here");
             }
-            catch(std::bad_alloc&)
+            catch (std::bad_alloc&)
             {
                 throw;
             }
-            catch(clasp::invalid_option_value_exception&)
+            catch (clasp::invalid_option_value_exception&)
             {
                 TEST_PASSED();
+
                 throw;
             }
-            catch(std::exception&)
+            catch (std::exception&)
             {
                 TEST_FAIL("should not get here");
+
                 throw;
             }
 
@@ -478,9 +483,7 @@ static void test_1_4()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             unsigned opt;
 
@@ -516,9 +519,7 @@ static void test_1_6()
     {
         static
         int
-        fn(
-            clasp::arguments_t const* args
-        )
+        fn(clasp::arguments_t const& args)
         {
             double or1;
             double or2;
@@ -528,11 +529,11 @@ static void test_1_6()
                 clasp::require_option(args, "--opt-real-1", &or1);
                 TEST_FP_EQ(-1.1, or1);
             }
-            catch(std::bad_alloc&)
+            catch (std::bad_alloc&)
             {
                 throw;
             }
-            catch(std::exception&)
+            catch (std::exception&)
             {
                 TEST_FAIL("should not get here");
             }
@@ -540,20 +541,23 @@ static void test_1_6()
             try
             {
                 clasp::require_option(args, "--opt-real-2", &or2);
+
                 TEST_FAIL("should not get here");
             }
-            catch(std::bad_alloc&)
+            catch (std::bad_alloc&)
             {
                 throw;
             }
-            catch(clasp::invalid_option_value_exception&)
+            catch (clasp::invalid_option_value_exception&)
             {
                 TEST_PASSED();
+
                 throw;
             }
-            catch(std::exception&)
+            catch (std::exception&)
             {
                 TEST_FAIL("should not get here");
+
                 throw;
             }
 
