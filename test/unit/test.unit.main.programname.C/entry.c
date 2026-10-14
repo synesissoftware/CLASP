@@ -173,13 +173,13 @@ test_coloured_program_name_passes_through(void)
 
 static int setup_teardown(void* pv)
 {
-    if (NULL != tmpfile_path)
+    if (NULL != pv)
     {
-        char const* tmpfile_path = *(char const**)pv;
+        char const* path = *(char const**)pv;
 
-        remove(tmpfile_path);
+        remove(path);
 
-        tmpfile_path = NULL;
+        path = NULL;
     }
 
     return 0;
