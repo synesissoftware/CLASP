@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for custom type(s).
  *
  * Created: 12th September 2014
- * Updated: 17th September 2026
+ * Updated: 14th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
