@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 20th September 2026
+ * Updated: 14th October 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -55,7 +55,7 @@
 # define CLASP_VER_CLASP_H_CLASP_MAJOR      3
 # define CLASP_VER_CLASP_H_CLASP_MINOR      4
 # define CLASP_VER_CLASP_H_CLASP_REVISION   1
-# define CLASP_VER_CLASP_H_CLASP_EDIT       117
+# define CLASP_VER_CLASP_H_CLASP_EDIT       120
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 /**
@@ -71,10 +71,10 @@
  *
  * The patch number of the CLASP library
  *
- * \def CLASP_VER_ALPHABETA
+ * \def CLASP_VER_RELSTATUS
  *
- * The alpha/beta number of the CLASP library, in the range 1-0xFE for
- * prerelease versions, and 0xFF for a released version
+ * Release-status discriminator in the low byte of CLASP_VER
+ * (`0xFF` = full release; otherwise pre-alpha / alpha / beta / rc ranges)
  *
  * \def CLASP_VER
  *
@@ -84,19 +84,20 @@
 #define CLASP_VER_MAJOR       0
 #define CLASP_VER_MINOR       16
 #define CLASP_VER_PATCH       0
-#define CLASP_VER_ALPHABETA   0x41
+#define CLASP_VER_RELSTATUS   0x41
 
 #define CLASP_VER \
     (0\
         |   (   CLASP_VER_MAJOR       << 24   ) \
         |   (   CLASP_VER_MINOR       << 16   ) \
         |   (   CLASP_VER_PATCH       <<  8   ) \
-        |   (   CLASP_VER_ALPHABETA   <<  0   ) \
+        |   (   CLASP_VER_RELSTATUS   <<  0   ) \
     )
 
 #ifndef CLASP_DOCUMENTATION_SKIP_SECTION
+# define CLASP_VER_AB                                       CLASP_VER_RELSTATUS
+# define CLASP_VER_ALPHABETA                                CLASP_VER_RELSTATUS
 # define CLASP_VER_REVISION                                 CLASP_VER_PATCH
-# define CLASP_VER_AB                                       CLASP_VER_ALPHABETA
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 

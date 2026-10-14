@@ -1,7 +1,7 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
-## 0.16.0-alpha1 - 21st September 2026
+## 0.16.0-alpha1 - 14th October 2026
 
 * Increased flexibility of the C++ API to accept references to CLASP types as well as pointers;
 * Added **`clasp::arguments_adaptor_t`** so C++ helpers accept **`arguments_t`** by (nonmutating) pointer or by (nonmutating) reference;
@@ -9,6 +9,11 @@
 * Added **`clasp::flag_specified()`** overload taking **`arguments_t const&`**;
 * Added stream inserter for **`clasp_arguments_t const&`**;
 * Updated **README.md** C++ example and **examples/C++/minimal_usage_xx** to use reference forms;
+* Added **README.md** **Developer Experience** section;
+* Renamed scratch version reporter target to **`test.scratch.versions`** (Phase **4c**);
+* Synced CMake helpers to **misc-dev-scripts** gold tip (SisClr; examples/scratch allowed-to-fail and scratch **`--skip-interactive`**; unit discovery excludes **`CMakeFiles/`** / **`*.a`** / **`*.d`** / **`*.lib`**);
+* CI: **`.github/actions/install-sis-deps`**; Windows cells dogfood native **`.cmd`** runners; restore execute bits after artifact download; canonical push-branch set;
+* Migrated version low-byte discriminant to **`CLASP_VER_RELSTATUS`** (**`CLASP_VER_ALPHABETA`** / **`CLASP_VER_AB`** remain as documentation-hidden aliases);
 
 
 ## 0.15.3 - 20th September 2026

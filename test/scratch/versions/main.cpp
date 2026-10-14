@@ -1,3 +1,17 @@
+/* /////////////////////////////////////////////////////////////////////////
+ * File:    test/scratch/versions/main.cpp
+ *
+ * Purpose: Scratch-test program for CLASP showing version(s).
+ *
+ * Created: 19th September 2026
+ * Updated: 14th October 2026
+ *
+ * ////////////////////////////////////////////////////////////////////// */
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
 
 #include <clasp/clasp.h>
 
@@ -7,8 +21,9 @@
 #include <stdlib.h>
 
 
-#define PROGRAM_NAME                                        "versions"
-
+/* /////////////////////////////////////////////////////////////////////////
+ * helpers
+ */
 
 template<
     typename T_stream
@@ -46,6 +61,10 @@ version(
 }
 
 
+/* /////////////////////////////////////////////////////////////////////////
+ * main
+ */
+
 int main(int /* argc */, char* /* argv */[])
 {
     {
@@ -56,3 +75,7 @@ int main(int /* argc */, char* /* argv */[])
 
     return EXIT_SUCCESS;
 }
+
+
+/* ///////////////////////////// end of file //////////////////////////// */
+
