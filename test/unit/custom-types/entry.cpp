@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.custom_types/entry.cpp
+ * File:    test/unit/custom-types/entry.cpp
  *
  * Purpose: Unit-tests for custom type(s).
  *
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.custom_types", verbosity))
+    if (XTESTS_START_RUNNER("test.unit.custom-types", verbosity))
     {
         XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_C_style_string);
         XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_std_string);
