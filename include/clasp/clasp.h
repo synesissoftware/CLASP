@@ -4,7 +4,7 @@
  * Purpose: The CLASP library API.
  *
  * Created: 4th June 2008
- * Updated: 14th October 2026
+ * Updated: 15th October 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *

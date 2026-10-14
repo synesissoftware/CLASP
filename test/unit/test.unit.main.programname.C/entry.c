@@ -18,6 +18,9 @@
 /* xTests header files */
 #include <xtests/terse-api.h>
 
+/* STLSoft header files */
+#include <stlsoft/api/internal/stdio.h>
+
 /* Standard C header files */
 #include <stdio.h>
 #include <stdlib.h>
@@ -109,7 +112,7 @@ test_coloured_program_name_passes_through(void)
             NULL,
         };
         clasp_diagnostic_context_t  ctxt;
-        FILE*                       stm_contents;
+        FILE*                       stm_contents = NULL;
 
         clasp_init_diagnostic_context(&ctxt, NULL, failing_malloc, failing_realloc, noop_free, NULL, NULL, NULL);
 
@@ -129,9 +132,7 @@ test_coloured_program_name_passes_through(void)
         fflush(stderr);
         fclose(redirected_stderr);
 
-        stm_contents = fopen(tmpfile_path, "r");
-
-        if (NULL == stm_contents)
+        if (0 != STLSOFT_API_INTERNAL_stdio_fopen_m(tmpfile_path, "r", &stm_contents))
         {
             TEST_FAIL("could not reopen stderr mock file");
 
@@ -172,13 +173,13 @@ test_coloured_program_name_passes_through(void)
 
 static int setup_teardown(void* pv)
 {
-    if (NULL != tmpfile_path)
+    if (NULL != pv)
     {
-        char const* tmpfile_path = *(char const**)pv;
+        char const* path = *(char const**)pv;
 
-        remove(tmpfile_path);
+        remove(path);
 
-        tmpfile_path = NULL;
+        path = NULL;
     }
 
     return 0;
