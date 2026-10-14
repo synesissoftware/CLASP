@@ -16,6 +16,7 @@
 * [ ] optional (opt-in) use of woad;
 * [x] ~~~reference-forms of callbacks in C++ API~~~ - ✅;
 * [ ] non-STLSoft version of C++ API;
+* [ ] search-specs API;
 
 
 ## Performance improvements

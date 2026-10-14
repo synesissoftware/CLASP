@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.parseapi.findflagoroption/entry.cpp
+ * File:    test/unit/parse/findflagoroption/entry.c
  *
  * Purpose: Unit-test(s) for `clasp_findFlagOrOption()`
  *
  * Created: 11th December 2011
- * Updated: 17th September 2026
+ * Updated: 14th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.parseapi.findflagoroption", verbosity))
+    if (XTESTS_START_RUNNER("test.unit.parse.findflagoroption", verbosity))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);

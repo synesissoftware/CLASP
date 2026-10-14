@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.usage/entry.cpp
+ * File:    test/unit/usage/entry.cpp
  *
  * Purpose: Unit-tests usage-width functionality
  *

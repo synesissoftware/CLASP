@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.parseapi.bitflags/entry.cpp
+ * File:    test/unit/parse/bit-flags/entry.c
  *
  * Purpose: Unit-test(s) for CLASP bit-flags functionality
  *
  * Created: 11th December 2011
- * Updated: 17th September 2026
+ * Updated: 14th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.parseapi.bitflags", verbosity))
+    if (XTESTS_START_RUNNER("test/unit/parse/bit-flags", verbosity))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
