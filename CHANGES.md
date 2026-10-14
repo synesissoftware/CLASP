@@ -6,6 +6,7 @@
 * Added **woad** as a test-only dependency;
 * Verified coloured program-name passthrough in C and C++ unit tests;
 * Colourised **test.scratch.versions** with **woad**;
+* Removed dead-files (pch.cpp, pch.hpp, ...);
 
 
 ## 0.16.0-alpha1 - 14th October 2026
