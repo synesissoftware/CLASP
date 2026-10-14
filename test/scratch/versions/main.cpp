@@ -4,7 +4,7 @@
  * Purpose: Scratch-test program for CLASP showing version(s).
  *
  * Created: 19th September 2026
- * Updated: 14th October 2026
+ * Updated: 15th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -14,6 +14,8 @@
  */
 
 #include <clasp/clasp.h>
+
+#include <woad/woad.h>
 
 #include <iomanip>
 #include <iostream>
@@ -40,8 +42,12 @@ version(
 {
     stm
         << prefix
+        << WOAD_FG_BLUE
         << libname
-        << ": v"
+        << WOAD_RESET
+        << ": "
+        << WOAD_FG_GREEN
+        << "v"
         << ((libver >> 24) & 0xff)
         << '.'
         << ((libver >> 16) & 0xff)
@@ -49,12 +55,18 @@ version(
         << ((libver >> 8) & 0xff)
         << '.'
         << ((libver >> 0) & 0xff)
+        << WOAD_RESET
         << " ("
+        << WOAD_FG_CYAN
         << macroname
-        << " = 0x"
+        << WOAD_RESET
+        << " = "
+        << WOAD_FG_GREEN
+        << "0x"
         << std::hex << std::setfill('0') << std::setw(8)
         << static_cast<unsigned>(libver)
         << std::dec
+        << WOAD_RESET
         << ")"
         << std::endl
         ;
