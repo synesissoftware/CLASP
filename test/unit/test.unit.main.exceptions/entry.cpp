@@ -4,7 +4,7 @@
  * Purpose: Unit-tests exceptional inputs
  *
  * Created: 7th March 2013
- * Updated: 20th September 2026
+ * Updated: 15th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -44,7 +44,7 @@ static FILE* Test_stderr = Real_stderr; /* NOTE: this assignment here is solely 
 #include <xtests/terse-api.h>
 
 /* STLSoft header files */
-#include <stlsoft/stlsoft.h>
+#include <stlsoft/api/internal/stdio.h>
 #include <platformstl/filesystem/file_lines.hpp>
 
 /* Standard C header files */
@@ -151,15 +151,16 @@ static void run_test_(
 )
 {
     Test_programName    =   programNameGlobal;
-    Test_stderr         =   ::fopen(Test_path, "w");
 
-    if (NULL == Test_stderr)
     {
-        int const e = errno;
+        int const e = STLSOFT_API_INTERNAL_stdio_fopen_m(Test_path, "w", &Test_stderr);
 
-        TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
+        if (0 != e)
+        {
+            TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
 
-        return;
+            return;
+        }
     }
 
     int const r = clasp::main::invoke(
