@@ -1,6 +1,11 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0-alpha2 - 14th October 2026
+
+
+
+
 ## 0.16.0-alpha1 - 21st September 2026
 
 * Increased flexibility of the C++ API to accept references to CLASP types as well as pointers;

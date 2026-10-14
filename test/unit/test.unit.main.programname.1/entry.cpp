@@ -4,7 +4,7 @@
  * Purpose: Unit-test program name in failure conditions
  *
  * Created: 9th March 2013
- * Updated: 20th September 2026
+ * Updated: 14th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -47,6 +47,8 @@ static FILE* Test_stderr = Real_stderr; /* NOTE: this assignment here is solely 
 #include <stlsoft/stlsoft.h>
 #include <platformstl/filesystem/file_lines.hpp>
 
+#include <woad/woad.h>
+
 /* Standard C header files */
 #include <stdlib.h>
 
@@ -73,6 +75,7 @@ namespace
     static void test_1_1();
     static void test_1_2();
     static void test_1_3();
+    static void test_1_4();
 
 } // anonymous namespace
 
@@ -110,6 +113,7 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_1);
         XTESTS_RUN_CASE(test_1_2);
         XTESTS_RUN_CASE(test_1_3);
+        XTESTS_RUN_CASE(test_1_4);
 
         XTESTS_PRINT_RESULTS();
 
@@ -312,6 +316,44 @@ static void test_1_3()
     ,   NULL
     ,   0
     ,   "test_1_0: invalid command-line: required option is not found: --unknown"
+    );
+}
+
+static void test_1_4()
+{
+    char const* const   args[] =
+    {
+        "test_1_4",
+
+        NULL
+    };
+
+    struct main_
+    {
+        static
+        int
+        fn(clasp::arguments_t const& args)
+        {
+            int o;
+
+            clasp::require_option(args, "--unknown", &o);
+
+            return EXIT_FAILURE;
+        }
+    };
+
+    char const programNameArgument[] =
+        WOAD_FG_RED
+        "program-argument-name-1.4"
+        WOAD_RESET;
+
+    RUN_TEST(
+        int(STLSOFT_NUM_ELEMENTS(args) - 1), args
+    ,   &main_::fn
+    ,   "program-global-name-1.4", programNameArgument
+    ,   NULL
+    ,   0
+    ,   "[31mprogram-argument-name-1.4[0m: invalid command-line: required option is not found: --unknown"
     );
 }
 } // anonymous namespace

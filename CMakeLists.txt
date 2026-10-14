@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for CLASP
 #
 # Created:  8th January 2021
-# Updated:  19th September 2026
+# Updated:  14th October 2026
 #
 # ######################################################################## #
 
@@ -113,6 +113,7 @@ option(BUILD_TESTING "Build tests" ON)
 # optional:
 # - STLSoft - required unless NO_CLASP_CPP_API is specified, and by xTests
 #    (for testing);
+# - woad - required for testing;
 # - xTests - required for testing;
 
 
@@ -164,6 +165,12 @@ endif()
 # xTests
 
 if(BUILD_TESTING)
+
+	set(woad_REQUIRED_VERSION_ 0.1)
+
+	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package woad found (version ${woad_VERSION}; ${woad_REQUIRED_VERSION_} requested)")
 
 	set(xTests_REQUIRED_VERSION_ 0.25)
 
