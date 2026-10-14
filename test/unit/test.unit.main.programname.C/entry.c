@@ -4,7 +4,7 @@
  * Purpose: Unit-test program name in failure conditions for the C API.
  *
  * Created: 8th October 2026
- * Updated: 14th October 2026
+ * Updated: 15th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

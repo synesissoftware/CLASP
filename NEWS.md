@@ -2,8 +2,8 @@
 
 | Date                | News Item                 | Details |
 | ------------------- | ------------------------- | ------- |
-| 14th October 2026   | [Release of 0.16.0-alpha2](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha2) | |
-| 21st September 2026 | [Release of 0.16.0-alpha1](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha1) | C++ API accepts references to CLASP types |
+| 15th October 2026   | [Release of 0.16.0-alpha2](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha2) | Coloured program-name tests; **woad** |
+| 14th October 2026   | [Release of 0.16.0-alpha1](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha1) | C++ refs; gold helpers; `CLASP_VER_RELSTATUS` |
 | 20th September 2026 | [Release of 0.15.3](https://github.com/synesissoftware/CLASP/releases/tag/0.15.3) | Doxygen; C++ API uses namespace type aliases |
 | 19th September 2026 | [Release of 0.15.2](https://github.com/synesissoftware/CLASP/releases/tag/0.15.2) | Terse xTests; `--no-cpp` CMake; restored `CLASP_VER_ALPHABETA` |
 | 2nd September 2026  | [Release of 0.15.1](https://github.com/synesissoftware/CLASP/releases/tag/0.15.1) | Fixed `CLASP_VER` composite; version unit test |

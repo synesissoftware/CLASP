@@ -2,7 +2,7 @@
 
 PROJECT_NAME           = "CLASP"
 PROJECT_BRIEF          = "Command-Line Argument Sorting and Parsing, for C (and C++)"
-PROJECT_NUMBER         = 0.15.2
+PROJECT_NUMBER         = 0.16.0-alpha1
 
 # Prefer SIS_CMAKE_BUILD_DIR-aligned output (same convention as BDUT /
 # cstring / Diagnosticism). ./dox/ remains gitignored for legacy/local runs

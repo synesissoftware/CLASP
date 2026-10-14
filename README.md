@@ -14,6 +14,7 @@
 
 
 - [Introduction](#introduction)
+- [Developer Experience](#developer-experience)
 - [Installation](#installation)
   - [API documentation (Doxygen)](#api-documentation-doxygen)
 - [Components](#components)
@@ -59,6 +60,28 @@ The features of the library are:
 
 
 The design of the library is discussed in detail in the article "_An Introduction to CLASP, part 1: C_", Matthew Wilson, [CVu](http://accu.org/index.php/journals/c77/), January 2012. (For those of you not subscribers to the [ACCU](http://accu.org/)'s [CVu](http://accu.org/index.php/journals/c77/) journal, this article will be made available on the new Synesis Information Systems website before end of 2026.)
+
+
+## Developer Experience
+
+The **C** core needs no non-standard dependencies. For a full tree (C++ API,
+examples, and tests), install [**STLSoft**](https://github.com/synesissoftware/STLSoft)
+(**1.11** or later) and [**xTests**](https://github.com/synesissoftware/xTests)
+(**0.25** or later) via **CMake**, then:
+
+```bash
+./prepare_cmake.sh -m -v
+./run_all_unit_tests.sh
+```
+
+For a **C**-only configure (no **STLSoft** / **xTests**):
+
+```bash
+./prepare_cmake.sh --no-cpp --disable-testing -m -v
+```
+
+Try **examples/C/minimal_usage** or **examples/C++/minimal_usage_xx**. Full
+options: [INSTALL.md](./INSTALL.md); `./prepare_cmake.sh --help`.
 
 
 ## Installation
