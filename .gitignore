@@ -18,7 +18,7 @@ x64/
 __pycache__/
 
 /_analyses/
-/_build-ci/
+/_build-*/
 /_build/
 /_internal/
 

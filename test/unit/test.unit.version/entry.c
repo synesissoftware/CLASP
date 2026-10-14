@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP version macros.
  *
  * Created: 2nd September 2026
- * Updated: 20th September 2026
+ * Updated: 14th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -39,7 +39,7 @@ static void test_CLASP_VER_composite(void);
  * main()
  */
 
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;
@@ -69,11 +69,13 @@ static void test_CLASP_VER_components(void)
     TEST_INT_EQ(0, CLASP_VER_MAJOR);
     TEST_INT_EQ(16, CLASP_VER_MINOR);
     TEST_INT_EQ(0, CLASP_VER_PATCH);
-    TEST_INT_EQ(0x41, CLASP_VER_ALPHABETA);
+    TEST_INT_EQ(0x41, CLASP_VER_RELSTATUS);
     TEST_INT_EQ(0x41, CLASP_VER_AB);
+    TEST_INT_EQ(0x41, CLASP_VER_ALPHABETA);
 
     TEST_INT_EQ(CLASP_VER_PATCH, CLASP_VER_REVISION);
-    TEST_INT_EQ(CLASP_VER_ALPHABETA, CLASP_VER_AB);
+    TEST_INT_EQ(CLASP_VER_RELSTATUS, CLASP_VER_AB);
+    TEST_INT_EQ(CLASP_VER_RELSTATUS, CLASP_VER_ALPHABETA);
 }
 
 static void test_CLASP_VER_composite(void)
@@ -86,15 +88,16 @@ static void test_CLASP_VER_composite(void)
     TEST_INT_EQ(CLASP_VER_MAJOR, (ver >> 24) & 0xff);
     TEST_INT_EQ(CLASP_VER_MINOR, (ver >> 16) & 0xff);
     TEST_INT_EQ(CLASP_VER_PATCH, (ver >>  8) & 0xff);
-    TEST_INT_EQ(CLASP_VER_ALPHABETA, (ver >>  0) & 0xff);
+    TEST_INT_EQ(CLASP_VER_RELSTATUS, (ver >>  0) & 0xff);
     TEST_INT_EQ(CLASP_VER_AB,        (ver >>  0) & 0xff);
+    TEST_INT_EQ(CLASP_VER_ALPHABETA, (ver >>  0) & 0xff);
 
     TEST_INT_EQ(
         (unsigned)(0
             | (CLASP_VER_MAJOR     << 24)
             | (CLASP_VER_MINOR     << 16)
             | (CLASP_VER_PATCH     <<  8)
-            | (CLASP_VER_ALPHABETA <<  0)
+            | (CLASP_VER_RELSTATUS <<  0)
         )
     ,   ver
     );

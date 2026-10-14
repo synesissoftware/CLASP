@@ -26,6 +26,7 @@
 ## Packaging improvements
 
 * [x] ~~~full boilerplate (**README.md** and **INSTALL.md**); modular CI (**ci.yml** / **ci-cell.yml**)~~~ - ✅;
+* [x] ~~~Phase **4c** gold (helpers tip; **`test.scratch.versions`**; **install-sis-deps**; Windows **`.cmd`** + xbit; **Developer Experience**)~~~ - ✅;
 
 
 <!-- ########################### end of file ########################### -->
