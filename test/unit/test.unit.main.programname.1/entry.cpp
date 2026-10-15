@@ -4,7 +4,7 @@
  * Purpose: Unit-test program name in failure conditions
  *
  * Created: 9th March 2013
- * Updated: 20th September 2026
+ * Updated: 15th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -44,8 +44,10 @@ static FILE* Test_stderr = Real_stderr; /* NOTE: this assignment here is solely 
 #include <xtests/terse-api.h>
 
 /* STLSoft header files */
-#include <stlsoft/stlsoft.h>
+#include <stlsoft/api/internal/stdio.h>
 #include <platformstl/filesystem/file_lines.hpp>
+
+#include <woad/woad.h>
 
 /* Standard C header files */
 #include <stdlib.h>
@@ -73,6 +75,7 @@ namespace
     static void test_1_1();
     static void test_1_2();
     static void test_1_3();
+    static void test_1_4();
 
 } // anonymous namespace
 
@@ -110,6 +113,7 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_1);
         XTESTS_RUN_CASE(test_1_2);
         XTESTS_RUN_CASE(test_1_3);
+        XTESTS_RUN_CASE(test_1_4);
 
         XTESTS_PRINT_RESULTS();
 
@@ -145,7 +149,6 @@ static void run_test_(
 )
 {
     Test_programName    =   programNameGlobal;
-    Test_stderr         =   ::fopen(Test_path, "w");
 
     /* TODO: enhance xTests such that can pass file/line to (variants of)
      * common test macros.
@@ -153,14 +156,15 @@ static void run_test_(
     STLSOFT_SUPPRESS_UNUSED(file);
     STLSOFT_SUPPRESS_UNUSED(line);
 
-
-    if (NULL == Test_stderr)
     {
-        int const e = errno;
+        int const e = STLSOFT_API_INTERNAL_stdio_fopen_m(Test_path, "w", &Test_stderr);
 
-        TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
+        if (0 != e)
+        {
+            TEST_FAIL_WITH_QUALIFIER("could not create stderr mock file", stlsoft::error_desc(e));
 
-        return;
+            return;
+        }
     }
 
     int const r = clasp::main::invoke(
@@ -312,6 +316,44 @@ static void test_1_3()
     ,   NULL
     ,   0
     ,   "test_1_0: invalid command-line: required option is not found: --unknown"
+    );
+}
+
+static void test_1_4()
+{
+    char const* const   args[] =
+    {
+        "test_1_4",
+
+        NULL
+    };
+
+    struct main_
+    {
+        static
+        int
+        fn(clasp::arguments_t const& args)
+        {
+            int o;
+
+            clasp::require_option(args, "--unknown", &o);
+
+            return EXIT_FAILURE;
+        }
+    };
+
+    char const programNameArgument[] =
+        WOAD_FG_RED
+        "program-argument-name-1.4"
+        WOAD_RESET;
+
+    RUN_TEST(
+        int(STLSOFT_NUM_ELEMENTS(args) - 1), args
+    ,   &main_::fn
+    ,   "program-global-name-1.4", programNameArgument
+    ,   NULL
+    ,   0
+    ,   "[31mprogram-argument-name-1.4[0m: invalid command-line: required option is not found: --unknown"
     );
 }
 } // anonymous namespace

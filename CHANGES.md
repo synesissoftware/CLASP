@@ -1,6 +1,14 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0-alpha2 - 15th October 2026
+
+* Added **woad** as a test-only dependency;
+* Verified coloured program-name passthrough in C and C++ unit tests;
+* Colourised **test.scratch.versions** with **woad**;
+* Removed dead-files (pch.cpp, pch.hpp, ...);
+
+
 ## 0.16.0-alpha1 - 14th October 2026
 
 * Increased flexibility of the C++ API to accept references to CLASP types as well as pointers;

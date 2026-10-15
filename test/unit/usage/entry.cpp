@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.usage/entry.cpp
+ * File:    test/unit/usage/entry.cpp
  *
  * Purpose: Unit-tests usage-width functionality
  *
  * Created: 3rd April 2014
- * Updated: 17th September 2026
+ * Updated: 15th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -30,8 +30,8 @@
 /* STLSoft header files */
 #include <platformstl/filesystem/file_lines.hpp>
 #include <platformstl/filesystem/path_functions.h>
+#include <stlsoft/api/internal/stdio.h>
 #include <stlsoft/smartptr/scoped_handle.hpp>
-#include <stlsoft/stlsoft.h>
 
 /* Standard C++ header files */
 #include <string>
@@ -189,9 +189,9 @@ namespace
         stlsoft::scoped_handle<clasp::arguments_t const*> scoper_0(args, clasp::releaseArguments);
 
         temp_file   temp(temp_file::DeleteOnOpen | temp_file::DeleteOnClose);
-        FILE* const stm = ::fopen(temp.c_str(), "w");
+        FILE* stm = NULL;
 
-        if (NULL == stm)
+        if (0 != STLSOFT_API_INTERNAL_stdio_fopen_m(temp.c_str(), "w", &stm))
         {
             throw std::runtime_error("could not open file");
         }
@@ -243,9 +243,9 @@ namespace
         using namespace ::xtests::cpp::util;
 
         temp_file   temp(temp_file::DeleteOnOpen | temp_file::DeleteOnClose);
-        FILE* const stm = ::fopen(temp.c_str(), "w");
+        FILE* stm = NULL;
 
-        if (NULL == stm)
+        if (0 != STLSOFT_API_INTERNAL_stdio_fopen_m(temp.c_str(), "w", &stm))
         {
             throw std::runtime_error("could not open file");
         }
@@ -332,9 +332,9 @@ namespace
         stlsoft::scoped_handle<clasp::arguments_t const*> scoper_0(args, clasp::releaseArguments);
 
         temp_file   temp(temp_file::DeleteOnOpen | temp_file::DeleteOnClose);
-        FILE* const stm = ::fopen(temp.c_str(), "w");
+        FILE* stm = NULL;
 
-        if (NULL == stm)
+        if (0 != STLSOFT_API_INTERNAL_stdio_fopen_m(temp.c_str(), "w", &stm))
         {
             throw std::runtime_error("could not open file");
         }
@@ -398,9 +398,9 @@ namespace
         using namespace ::xtests::cpp::util;
 
         temp_file   temp(temp_file::DeleteOnOpen | temp_file::DeleteOnClose);
-        FILE* const stm = ::fopen(temp.c_str(), "w");
+        FILE* stm = NULL;
 
-        if (NULL == stm)
+        if (0 != STLSOFT_API_INTERNAL_stdio_fopen_m(temp.c_str(), "w", &stm))
         {
             throw std::runtime_error("could not open file");
         }
@@ -490,9 +490,9 @@ namespace
         stlsoft::scoped_handle<clasp::arguments_t const*> scoper_0(args, clasp::releaseArguments);
 
         temp_file   temp(temp_file::DeleteOnOpen | temp_file::DeleteOnClose);
-        FILE* const stm = ::fopen(temp.c_str(), "w");
+        FILE* stm = NULL;
 
-        if (NULL == stm)
+        if (0 != STLSOFT_API_INTERNAL_stdio_fopen_m(temp.c_str(), "w", &stm))
         {
             throw std::runtime_error("could not open file");
         }
@@ -560,9 +560,9 @@ namespace
         using namespace ::xtests::cpp::util;
 
         temp_file   temp(temp_file::DeleteOnOpen | temp_file::DeleteOnClose);
-        FILE* const stm = ::fopen(temp.c_str(), "w");
+        FILE* stm = NULL;
 
-        if (NULL == stm)
+        if (0 != STLSOFT_API_INTERNAL_stdio_fopen_m(temp.c_str(), "w", &stm))
         {
             throw std::runtime_error("could not open file");
         }

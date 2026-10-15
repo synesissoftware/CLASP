@@ -4,7 +4,7 @@
  * Purpose: Component test for USAGE by Windows resources
  *
  * Created: 7th March 2012
- * Updated: 17th September 2026
+ * Updated: 14th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
