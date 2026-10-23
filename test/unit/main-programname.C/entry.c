@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.main.programname.C/entry.c
+ * File:    test/unit/main-programname.C/entry.c
  *
  * Purpose: Unit-test program name in failure conditions for the C API.
  *
  * Created: 8th October 2026
- * Updated: 15th October 2026
+ * Updated: 23rd October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.unit.main.programname.C", verbosity, setup_teardown, setup_teardown, &tmpfile_path))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS(__FILE__, verbosity, setup_teardown, setup_teardown, &tmpfile_path))
     {
         XTESTS_RUN_CASE(test_coloured_program_name_passes_through);
 

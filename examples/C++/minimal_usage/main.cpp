@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    examples/C++/minimal_usage_xx/main.cpp
+ * File:    examples/C++/minimal_usage/main.cpp
  *
  * Purpose: Illustrates a minimal use of CLASP in a C++ program.
  *

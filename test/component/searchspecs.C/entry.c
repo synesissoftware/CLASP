@@ -4,7 +4,7 @@
  * Purpose: Component test for search-specs
  *
  * Created: 12th September 2014
- * Updated: 17th September 2026
+ * Updated: 23rd October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

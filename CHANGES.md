@@ -1,6 +1,16 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0-alpha3 - 24th October 2026
+
+* Raised the **woad** floor to **0.2** and the **xTests** floor to **0.28**;
+* Renamed example targets to **`example.C.minimal_usage`**, **`example.C++.minimal_usage`**, **`example.cvu.prg`**, and **`example.cvu.prg.main`** (**examples/C++/minimal_usage_xx** is now **examples/C++/minimal_usage**);
+* Dropped redundant **`test.unit.`** and **`test.component.`** prefixes from test directories;
+* Passed **`__FILE__`** into the xTests runner in place of hardcoded program names;
+* **test.scratch.versions** reports **STLSoft**, **shwild**, and **woad** when those packages are found, and colours its lines with **woad** iostreams inserters;
+* Clarified in **README.md** that **STLSoft** is required for the C++ API, examples, and tests, and grouped related projects under Tools and Libraries;
+
+
 ## 0.16.0-alpha2 - 15th October 2026
 
 * Added **woad** as a test-only dependency;
