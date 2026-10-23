@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.version/entry.c
+ * File:    test/unit/version/entry.c
  *
  * Purpose: Unit-test(s) for CLASP version macros.
  *
  * Created: 2nd September 2026
- * Updated: 14th October 2026
+ * Updated: 23rd October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.version", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(test_CLASP_VER_components);
         XTESTS_RUN_CASE(test_CLASP_VER_composite);
@@ -69,9 +69,9 @@ static void test_CLASP_VER_components(void)
     TEST_INT_EQ(0, CLASP_VER_MAJOR);
     TEST_INT_EQ(16, CLASP_VER_MINOR);
     TEST_INT_EQ(0, CLASP_VER_PATCH);
-    TEST_INT_EQ(0x42, CLASP_VER_RELSTATUS);
-    TEST_INT_EQ(0x42, CLASP_VER_AB);
-    TEST_INT_EQ(0x42, CLASP_VER_ALPHABETA);
+    TEST_INT_EQ(0x43, CLASP_VER_RELSTATUS);
+    TEST_INT_EQ(0x43, CLASP_VER_AB);
+    TEST_INT_EQ(0x43, CLASP_VER_ALPHABETA);
 
     TEST_INT_EQ(CLASP_VER_PATCH, CLASP_VER_REVISION);
     TEST_INT_EQ(CLASP_VER_RELSTATUS, CLASP_VER_AB);

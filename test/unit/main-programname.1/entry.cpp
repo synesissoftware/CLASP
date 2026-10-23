@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.main.programname.1/entry.cpp
+ * File:    test/unit/main-programname.1/entry.cpp
  *
  * Purpose: Unit-test program name in failure conditions
  *
  * Created: 9th March 2013
- * Updated: 15th October 2026
+ * Updated: 23rd October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -107,7 +107,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.unit.main.programname.1", verbosity, setup, teardown, const_cast<char*>(Test_path)))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS(__FILE__, verbosity, setup, teardown, const_cast<char*>(Test_path)))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);

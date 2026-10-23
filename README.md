@@ -27,6 +27,8 @@
   - [Dependencies](#dependencies)
     - [Development Dependencies (required for testing)](#development-dependencies-required-for-testing)
   - [Related projects](#related-projects)
+    - [Tools:](#tools)
+    - [Libraries:](#libraries)
   - [License](#license)
 
 
@@ -245,22 +247,33 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 ### Dependencies
 
-* [STLSoft 1.11](https://github.com/synesissoftware/STLSoft/)
+* [STLSoft](https://github.com/synesissoftware/STLSoft/) - required for examples/testing and for C++ API; not required for core library and using C API;
 
 
 #### Development Dependencies (required for testing)
 
-* [xTests](https://github.com/synesissoftware/xTests/)
+* [woad](https://github.com/synesissoftware/woad/) - optional dependency for a few scratch-/unit-tests;
+* [xTests](https://github.com/synesissoftware/xTests/) - required for automated tests only;
 
 
 ### Related projects
 
 Projects in which **CLASP** is used include:
 
+#### Tools:
+
 * [chomp](https://github.com/sistools/chomp/)
+* [errni](https://github.com/sistools/errni/)
+* [lslocales](https://github.com/sistools/lslocales/)
 * [lstrip](https://github.com/sistools/lstrip/)
+* [mksock](https://github.com/sistools/mksock/)
 * [rstrip](https://github.com/sistools/rstrip/)
+* [woad-cli](https://github.com/sistools/woad-cli/)
+
+#### Libraries:
+
 * [libCLImate](https://github.com/synesissoftware/libCLImate/)
+* [sistools-common-c](https://github.com/sistools/sistools-common-c/)
 
 
 ### License
