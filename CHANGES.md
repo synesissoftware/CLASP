@@ -1,6 +1,11 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0-alpha3 - 27th October 2026
+
+* Defined `HAS_<Pkg>` and `HAS_<PKG>` when a Synesis package other than **STLSoft** is detected;
+
+
 ## 0.16.0-alpha2 - 15th October 2026
 
 * Added **woad** as a test-only dependency;
