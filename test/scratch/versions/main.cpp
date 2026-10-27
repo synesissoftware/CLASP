@@ -46,6 +46,7 @@ version(
 ,   char const* libname
 ,   char const* macroname
 ,   T_integer   libver
+,   char const* version_string = nullptr
 )
 {
     stm
@@ -56,13 +57,26 @@ version(
         << ": "
         << WOAD_FG_GREEN
         << "v"
-        << ((libver >> 24) & 0xff)
-        << '.'
-        << ((libver >> 16) & 0xff)
-        << '.'
-        << ((libver >> 8) & 0xff)
-        << '.'
-        << ((libver >> 0) & 0xff)
+        ;
+
+    if (nullptr != version_string)
+    {
+        stm << version_string;
+    }
+    else
+    {
+        stm
+            << ((libver >> 24) & 0xff)
+            << '.'
+            << ((libver >> 16) & 0xff)
+            << '.'
+            << ((libver >> 8) & 0xff)
+            << '.'
+            << ((libver >> 0) & 0xff)
+            ;
+    }
+
+    stm
         << WOAD_RESET
         << " ("
         << WOAD_FG_CYAN
@@ -117,7 +131,7 @@ int main(int /* argc */, char* /* argv */[])
     {
         unsigned const libver = WOAD_VER;
 
-        version(std::cout, "\t", "woad", "WOAD_VER", libver);
+        version(std::cout, "\t", "woad", "WOAD_VER", libver, woad::version_string());
     }
 
 #ifdef HAS_xTests
