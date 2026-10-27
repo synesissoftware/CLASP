@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for CLASP
 #
 # Created:  8th January 2021
-# Updated:  14th October 2026
+# Updated:  27th October 2026
 #
 # ######################################################################## #
 
@@ -152,6 +152,12 @@ if(BUILD_TESTING OR NOT NO_CLASP_CPP_API)
 
 		include_directories(${STLSOFT_INCLUDE_DIR})
 	endif()
+
+	if(DEFINED STLSOFT_INCLUDE_DIR OR DEFINED STLSoft_FOUND)
+
+		add_compile_definitions(HAS_STLSOFT)
+		add_compile_definitions(HAS_STLSoft)
+	endif()
 else()
 
 	if(NO_CLASP_CPP_API)
@@ -162,21 +168,38 @@ endif()
 
 
 # ############################
-# xTests
+# woad
 
 if(BUILD_TESTING)
 
-	set(woad_REQUIRED_VERSION_ 0.1)
+	set(woad_REQUIRED_VERSION_ 0.2)
 
 	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package woad found (version ${woad_VERSION}; ${woad_REQUIRED_VERSION_} requested)")
 
-	set(xTests_REQUIRED_VERSION_ 0.25)
+	add_compile_definitions(
+		HAS_woad
+		HAS_WOAD
+	)
+endif(BUILD_TESTING)
+
+
+# ############################
+# xTests
+
+if(BUILD_TESTING)
+
+	set(xTests_REQUIRED_VERSION_ 0.28)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(
+		HAS_xTests
+		HAS_XTESTS
+	)
 endif(BUILD_TESTING)
 
 
