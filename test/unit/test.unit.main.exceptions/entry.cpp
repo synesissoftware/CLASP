@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.unit.main.exceptions", verbosity, setup, teardown, const_cast<char*>(Test_path)))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS(__FILE__, verbosity, setup, teardown, const_cast<char*>(Test_path)))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);

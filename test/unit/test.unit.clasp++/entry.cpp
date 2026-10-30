@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.clasp++", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
 #if 0
         XTESTS_RUN_CASE(test_2_04);

@@ -87,7 +87,7 @@ int main_(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER_WITH_SETUP_FNS("test.component.searchspecs.C", verbosity, setup, teardown, setupParam))
+    if (XTESTS_START_RUNNER_WITH_SETUP_FNS(__FILE__, verbosity, setup, teardown, setupParam))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);

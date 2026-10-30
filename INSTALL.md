@@ -13,7 +13,7 @@ as of **0.16.0-alpha1**, C++ helpers such as **`clasp::main::invoke()`**,
 **`clasp::flag_specified()`**, **`clasp::showUsage()`**, and
 **`clasp::showVersion()`** accept **`arguments_t`** by reference as well as
 by pointer. Building the project's tests additionally requires **xTests**
-0.25 (or later).
+0.28.2 (or later).
 
 
 ## Table of Contents <!-- omit in toc -->

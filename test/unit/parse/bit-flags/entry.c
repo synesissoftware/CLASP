@@ -4,7 +4,7 @@
  * Purpose: Unit-test(s) for CLASP bit-flags functionality
  *
  * Created: 11th December 2011
- * Updated: 14th October 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test/unit/parse/bit-flags", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
