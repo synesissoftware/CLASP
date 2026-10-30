@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.main.programname.1/entry.cpp
+ * File:    test/unit/test.unit.main.programname.1/entry.cpp
  *
  * Purpose: Unit-test program name in failure conditions
  *
  * Created: 9th March 2013
- * Updated: 15th October 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

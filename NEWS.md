@@ -2,6 +2,7 @@
 
 | Date                | News Item                 | Details |
 | ------------------- | ------------------------- | ------- |
+| 31st October 2026   | Release of [CLASP 0.16.0-alpha4](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha4) | `File:` labels use the project-relative path |
 | 27th October 2026   | Release of [CLASP 0.16.0-alpha3](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha3) | `HAS_<Pkg>` / `HAS_<PKG>` for detected Synesis packages |
 | 15th October 2026   | [Release of 0.16.0-alpha2](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha2) | Coloured program-name tests; **woad**; removed dead-files |
 | 14th October 2026   | [Release of 0.16.0-alpha1](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha1) | C++ refs; gold helpers; `CLASP_VER_RELSTATUS` |

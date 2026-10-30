@@ -1,6 +1,14 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0-alpha4 - 31st October 2026
+
+* testing:
+  * `File:` labels under **test** name the project-relative path;
+* documentation and boilerplate:
+  * **Doxyfile** `PROJECT_NUMBER` is **0.16.0-alpha4**;
+
+
 ## 0.16.0-alpha3 - 27th October 2026
 
 * Defined `HAS_<Pkg>` and `HAS_<PKG>` when a Synesis package other than **STLSoft** is detected;

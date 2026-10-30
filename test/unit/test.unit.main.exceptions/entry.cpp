@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.main.exceptions/entry.cpp
+ * File:    test/unit/test.unit.main.exceptions/entry.cpp
  *
  * Purpose: Unit-tests exceptional inputs
  *
  * Created: 7th March 2013
- * Updated: 15th October 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

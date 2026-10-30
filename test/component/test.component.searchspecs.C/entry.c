@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.component.searchspecs.C/entry.c
+ * File:    test/component/test.component.searchspecs.C/entry.c
  *
  * Purpose: Component test for search-specs
  *
  * Created: 12th September 2014
- * Updated: 17th September 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
