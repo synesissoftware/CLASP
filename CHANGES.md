@@ -1,7 +1,7 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
-## 0.16.0-alpha4 - 31st October 2026
+## 0.16.0-alpha4 - 1st November 2026
 
 * testing:
   * `File:` labels under **test** name the project-relative path;
