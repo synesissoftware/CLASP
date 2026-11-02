@@ -1,6 +1,12 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0-alpha5 - 2nd November 2026
+
+* build:
+  * **STLSoft** minimum is **1.11.5**;
+  * **woad** minimum is **0.2.1**;
+
 ## 0.16.0-alpha4 - 1st November 2026
 
 * testing:
