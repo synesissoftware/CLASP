@@ -8,7 +8,7 @@ the implementation.
 
 The **C** API / core library has no non-standard dependencies (on Windows,
 wildcard expansion may optionally use **recls**, which is disabled by default
-in the CMake build). The **C++** API depends on **STLSoft** 1.11 (or later);
+in the CMake build). The **C++** API depends on **STLSoft** 1.11.5 (or later);
 as of **0.16.0-alpha1**, C++ helpers such as **`clasp::main::invoke()`**,
 **`clasp::flag_specified()`**, **`clasp::showUsage()`**, and
 **`clasp::showVersion()`** accept **`arguments_t`** by reference as well as
@@ -46,7 +46,7 @@ The primary choice for installation is by use of **CMake**.
    ```
 
    For a full build including the **C++** API, examples, and tests, install
-   **STLSoft** 1.11 (and **xTests** for tests) via their own **CMake**
+   **STLSoft** 1.11.5 (and **xTests** for tests) via their own **CMake**
    scripts first, then:
 
    ```bash
