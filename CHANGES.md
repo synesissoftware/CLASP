@@ -1,7 +1,7 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
-## 0.16.0-alpha3 - 24th October 2026
+## 0.16.0-alpha6 - 4th November 2026
 
 * Raised the **woad** floor to **0.2** and the **xTests** floor to **0.28**;
 * Renamed example targets to **`example.C.minimal_usage`**, **`example.C++.minimal_usage`**, **`example.cvu.prg`**, and **`example.cvu.prg.main`** (**examples/C++/minimal_usage_xx** is now **examples/C++/minimal_usage**);
@@ -9,6 +9,30 @@
 * Passed **`__FILE__`** into the xTests runner in place of hardcoded program names;
 * **test.scratch.versions** reports **STLSoft**, **shwild**, and **woad** when those packages are found, and colours its lines with **woad** iostreams inserters;
 * Clarified in **README.md** that **STLSoft** is required for the C++ API, examples, and tests, and grouped related projects under Tools and Libraries;
+
+
+## 0.16.0-alpha5 - 2nd November 2026
+
+* build:
+  * **STLSoft** minimum is **1.11.5**;
+  * **woad** minimum is **0.2.1**;
+
+## 0.16.0-alpha4 - 1st November 2026
+
+* testing:
+  * `File:` labels under **test** name the project-relative path;
+  * automated-test runners pass `__FILE__` to `XTESTS_START_RUNNER`;
+* build:
+  * the **Check test names** job runs **STLSoft** **check_unit_test_names.rb** over **examples** and **test**;
+  * **xTests** minimum is **0.28.2**;
+* documentation and boilerplate:
+  * **Doxyfile** `PROJECT_NUMBER` is **0.16.0-alpha4**;
+  * documented **xTests** minimum is **0.28.2**;
+
+
+## 0.16.0-alpha3 - 27th October 2026
+
+* Defined `HAS_<Pkg>` and `HAS_<PKG>` when a Synesis package other than **STLSoft** is detected;
 
 
 ## 0.16.0-alpha2 - 15th October 2026

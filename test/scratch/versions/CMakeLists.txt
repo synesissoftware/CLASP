@@ -36,3 +36,11 @@ if(woad_FOUND)
 			woad_FOUND
 	)
 endif()
+
+if(TARGET xTests::core)
+
+	target_link_libraries(test.scratch.versions
+		PRIVATE
+			xTests::core
+	)
+endif()

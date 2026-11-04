@@ -68,8 +68,8 @@ The design of the library is discussed in detail in the article "_An Introductio
 
 The **C** core needs no non-standard dependencies. For a full tree (C++ API,
 examples, and tests), install [**STLSoft**](https://github.com/synesissoftware/STLSoft)
-(**1.11** or later) and [**xTests**](https://github.com/synesissoftware/xTests)
-(**0.25** or later) via **CMake**, then:
+(**1.11.5** or later) and [**xTests**](https://github.com/synesissoftware/xTests)
+(**0.28.2** or later) via **CMake**, then:
 
 ```bash
 ./prepare_cmake.sh -m -v
@@ -247,7 +247,7 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 ### Dependencies
 
-* [STLSoft](https://github.com/synesissoftware/STLSoft/) - required for examples/testing and for C++ API; not required for core library and using C API;
+* [STLSoft (1.11.5+)](https://github.com/synesissoftware/STLSoft/) - required for examples/testing and for C++ API; not required for core library and using C API;
 
 
 #### Development Dependencies (required for testing)
