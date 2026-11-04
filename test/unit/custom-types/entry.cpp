@@ -4,7 +4,7 @@
  * Purpose: Unit-tests for custom type(s).
  *
  * Created: 12th September 2014
- * Updated: 14th October 2026
+ * Updated: 23rd October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.custom-types", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_C_style_string);
         XTESTS_RUN_CASE(test_parse_Colour_missing_option_empty_default_std_string);

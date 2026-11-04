@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test/unit/test.unit.clasp++/entry.cpp
+ * File:    test/unit/clasp++/entry.cpp
  *
  * Purpose: Unit-tests for CLASP C++ API
  *

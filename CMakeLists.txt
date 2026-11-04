@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for CLASP
 #
 # Created:  8th January 2021
-# Updated:  2nd November 2026
+# Updated:  4th November 2026
 #
 # ######################################################################## #
 
@@ -172,7 +172,7 @@ endif()
 
 if(BUILD_TESTING)
 
-	set(woad_REQUIRED_VERSION_ 0.2.1)
+	set(woad_REQUIRED_VERSION_ 0.2.2)
 
 	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
 

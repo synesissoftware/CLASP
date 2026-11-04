@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test/unit/test.unit.main.exceptions/entry.cpp
+ * File:    test/unit/main-exceptions/entry.cpp
  *
  * Purpose: Unit-tests exceptional inputs
  *

@@ -4,7 +4,7 @@
  * Purpose: Unit-tests usage-width functionality
  *
  * Created: 3rd April 2014
- * Updated: 15th October 2026
+ * Updated: 23rd October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.usage", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(TEST_clasp_showHeader_NORMAL);
         XTESTS_RUN_CASE(TEST_clasp_showHeader_MULTILINE_USAGE);

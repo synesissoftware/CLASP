@@ -1,2 +1,2 @@
 list(APPEND X_GCC_CUSTOM_WARNINGS_TO_BE_SUPPRESSED incompatible-pointer-types incompatible-pointer-types-discards-qualifiers)
-define_example_program(cvu_prg prg.c)
+define_example_program(example.cvu.prg prg.c)

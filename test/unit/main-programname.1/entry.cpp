@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test/unit/test.unit.main.programname.1/entry.cpp
+ * File:    test/unit/main-programname.1/entry.cpp
  *
  * Purpose: Unit-test program name in failure conditions
  *

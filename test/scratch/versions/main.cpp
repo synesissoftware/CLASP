@@ -4,7 +4,7 @@
  * Purpose: Scratch-test program for CLASP showing version(s).
  *
  * Created: 19th September 2026
- * Updated: 27th October 2026
+ * Updated: 4th November 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -15,11 +15,21 @@
 
 #include <clasp/clasp.h>
 
-#ifdef HAS_STLSoft
+#ifdef STLSoft_FOUND
 # include <stlsoft/stlsoft.h>
-#endif
+#endif /* STLSoft_FOUND */
 
-#include <woad/woad.h>
+#ifdef shwild_FOUND
+# include <shwild/shwild.h>
+#endif /* shwild_FOUND */
+
+#ifdef woad_FOUND
+# include <woad/woad.h>
+# if (WOAD_VER_MAJOR > 0) || (WOAD_VER_MINOR >= 3)
+#  define CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_
+#  include <woad/iostreams.hpp>
+# endif /* woad 0.3+ IOStreams */
+#endif /* woad_FOUND */
 
 #ifdef HAS_xTests
 # include <xtests/xtests.h>
@@ -51,11 +61,17 @@ version(
 {
     stm
         << prefix
-        << WOAD_FG_BLUE
-        << libname
-        << WOAD_RESET
+#ifdef CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_
+        << woad::blue(libname)
+#else /* ? CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
+        << WOAD_FG_BLUE << libname << WOAD_RESET
+#endif /* CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << ": "
+#ifdef CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_
+        << woad::green
+#else /* ? CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << WOAD_FG_GREEN
+#endif /* CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << "v"
         ;
 
@@ -77,18 +93,32 @@ version(
     }
 
     stm
+#ifdef CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_
+        << woad::reset
+#else /* ? CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << WOAD_RESET
+#endif /* CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << " ("
-        << WOAD_FG_CYAN
-        << macroname
-        << WOAD_RESET
+#ifdef CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_
+        << woad::cyan(macroname)
+#else /* ? CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
+        << WOAD_FG_CYAN << macroname << WOAD_RESET
+#endif /* CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << " = "
+#ifdef CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_
+        << woad::green
+#else /* ? CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << WOAD_FG_GREEN
+#endif /* CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << "0x"
         << std::hex << std::setfill('0') << std::setw(8)
         << static_cast<unsigned>(libver)
         << std::dec
+#ifdef CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_
+        << woad::reset
+#else /* ? CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << WOAD_RESET
+#endif /* CLASP_SCRATCH_VERSIONS_HAVE_WOAD_IOSTREAMS_ */
         << ")"
         << std::endl
         ;
@@ -123,6 +153,22 @@ int main(int /* argc */, char* /* argv */[])
     }
 #endif
 
+#ifdef shwild_FOUND
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = SHWILD_VER;
+
+        version(std::cout, "\t", "shwild", "SHWILD_VER", libver);
+    }
+#endif
+
+#ifdef woad_FOUND
+
     if (0 == efferents_count++)
     {
         std::cout << "\n" << "efferent dependencies:" << std::endl;
@@ -133,6 +179,7 @@ int main(int /* argc */, char* /* argv */[])
 
         version(std::cout, "\t", "woad", "WOAD_VER", libver, woad::version_string());
     }
+#endif /* woad_FOUND */
 
 #ifdef HAS_xTests
 

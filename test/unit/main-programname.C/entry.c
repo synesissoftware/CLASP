@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test/unit/test.unit.main.programname.C/entry.c
+ * File:    test/unit/main-programname.C/entry.c
  *
  * Purpose: Unit-test program name in failure conditions for the C API.
  *
