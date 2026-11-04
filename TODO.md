@@ -17,6 +17,7 @@
 * [x] ~~~reference-forms of callbacks in C++ API~~~ - ✅;
 * [ ] non-STLSoft version of C++ API;
 * [ ] search-specs API;
+* [ ] parse a space-separated option value (`--opt value`) as the option's value when no short form is defined ([#2](https://github.com/synesissoftware/CLASP/issues/2));
 
 
 ## Performance improvements

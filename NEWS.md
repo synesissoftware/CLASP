@@ -2,6 +2,7 @@
 
 | Date                | News Item                 | Details |
 | ------------------- | ------------------------- | ------- |
+| 4th November 2026   | Release of [CLASP 0.16.0](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0) | C++ `arguments_t` by reference; example and test names; **woad** **0.2.2**; **xTests** **0.28.2** |
 | 4th November 2026   | [Release of 0.16.0-alpha6](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha6) | **woad** 0.2; **xTests** 0.28; example and test names; versions efferents |
 | 2nd November 2026   | Release of [CLASP 0.16.0-alpha5](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha5) | **STLSoft** **1.11.5**; **woad** **0.2.1** |
 | 1st November 2026   | Release of [CLASP 0.16.0-alpha4](https://github.com/synesissoftware/CLASP/releases/tag/0.16.0-alpha4) | `File:` labels; `__FILE__` runners (**xTests** 0.28.2); **Check test names** |

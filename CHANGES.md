@@ -1,6 +1,18 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.0 - 4th November 2026
+
+* C++ API accepts `arguments_t` by nonmutating reference as well as by pointer (`clasp::arguments_adaptor_t`; `clasp::main::invoke()` callback overloads; `clasp::flag_specified()`; stream inserter for `clasp_arguments_t const&`);
+* **STLSoft** minimum is **1.11.5**; **woad** minimum is **0.2.2**; **xTests** minimum is **0.28.2**;
+* Defined `HAS_<Pkg>` and `HAS_<PKG>` when a Synesis package other than **STLSoft** is detected;
+* `File:` labels under **test** name the project-relative path, and automated-test runners pass `__FILE__` to `XTESTS_START_RUNNER`;
+* Renamed example targets to **`example.C.minimal_usage`**, **`example.C++.minimal_usage`**, **`example.cvu.prg`**, and **`example.cvu.prg.main`** (**examples/C++/minimal_usage_xx** is now **examples/C++/minimal_usage**);
+* Dropped redundant **`test.unit.`** and **`test.component.`** prefixes from test directories;
+* **test.scratch.versions** reports **STLSoft**, **shwild**, and **woad** when those packages are found, and colours its lines with **woad** iostreams inserters;
+* Clarified in **README.md** that **STLSoft** is required for the C++ API, examples, and tests, and grouped related projects under Tools and Libraries;
+
+
 ## 0.16.0-alpha6 - 4th November 2026
 
 * Raised the **woad** floor to **0.2** and the **xTests** floor to **0.28**;
