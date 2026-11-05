@@ -4,7 +4,7 @@
  * Purpose: Utility class for processing search specifications.
  *
  * Created: 20th May 2010
- * Updated: 20th September 2026
+ * Updated: 6th November 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MAJOR       2
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_MINOR       0
 # define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_REVISION    4
-# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        26
+# define CLASP_VER_CLASP_UTIL_HPP_SEARCH_SPECIFICATIONS_EDIT        27
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -482,7 +482,7 @@ private: // Fields
  * namespace
  */
 
-} /* namespace clasp */
+} // namespace clasp
 
 
 /* /////////////////////////////////////////////////////////////////////////
