@@ -1,6 +1,11 @@
 # CLASP - CHANGES <!-- omit in toc -->
 
 
+## 0.16.1 - 6th November 2026
+
+* C++ namespace closers are spelled `// namespace`;
+
+
 ## 0.16.0 - 4th November 2026
 
 * C++ API accepts `arguments_t` by nonmutating reference as well as by pointer (`clasp::arguments_adaptor_t`; `clasp::main::invoke()` callback overloads; `clasp::flag_specified()`; stream inserter for `clasp_arguments_t const&`);
