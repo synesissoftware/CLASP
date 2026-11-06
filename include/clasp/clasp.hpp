@@ -4,7 +4,7 @@
  * Purpose: C++ layer for the CLASP library.
  *
  * Created: 31st July 2008
- * Updated: 20th September 2026
+ * Updated: 6th November 2026
  *
  * Home:    https://github.com/synesissoftware/CLASP/
  *
@@ -56,7 +56,7 @@
 # define CLASP_VER_CLASP_HPP_CLASP_MAJOR    3
 # define CLASP_VER_CLASP_HPP_CLASP_MINOR    1
 # define CLASP_VER_CLASP_HPP_CLASP_REVISION 3
-# define CLASP_VER_CLASP_HPP_CLASP_EDIT     72
+# define CLASP_VER_CLASP_HPP_CLASP_EDIT     73
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -1706,7 +1706,7 @@ namespace ximpl
     {
     }
 #endif /* 0 */
-} /* namespace ximpl */
+} // namespace ximpl
 #endif /* !CLASP_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -3137,7 +3137,7 @@ verify_all_options_used(
  * namespace
  */
 
-} /* namespace clasp */
+} // namespace clasp
 
 
 /* /////////////////////////////////////////////////////////////////////////
